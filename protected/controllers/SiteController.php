@@ -33,6 +33,12 @@ class SiteController extends Controller
 		$this->render('index');
 	}
 
+    /**
+     *
+     */
+    public function actionLogin(){
+        $this->forward('user/login/login');
+    }
 	/**
 	 * This is the action to handle external exceptions.
 	 */

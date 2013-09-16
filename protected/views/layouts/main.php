@@ -1,4 +1,11 @@
-<?php /* @var $this Controller */ ?>
+<?php
+Asse::addCss('main.css');
+
+Asse::addCss('bootstrap.min.css',Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
+Asse::addCss('bootstrap-theme.min.css',Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
+Asse::addJs('jquery/jquery-1.10.2.min.js');
+Asse::addJs('bootstrap.min.js',Yii::getPathOfAlias('webroot.web.bootstrap_300.js'));
+/* @var $this Controller */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -12,9 +19,8 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
 
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -28,23 +34,7 @@
 		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
 	</div><!-- header -->
 
-
-
-
-
     <nav class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-<!--        <div class="navbar-header">-->
-<!--            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">-->
-<!--                <span class="sr-only">Toggle navigation</span>-->
-<!--                <span class="icon-bar"></span>-->
-<!--                <span class="icon-bar"></span>-->
-<!--                <span class="icon-bar"></span>-->
-<!--            </button>-->
-<!--            <a class="navbar-brand" href="#">Admin</a>-->
-<!--        </div>-->
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
 
 
@@ -52,12 +42,17 @@
                 'items'=>array(
                     array('label'=>'Home',
                         'url'=>array('/site/index'),
+                    ),
+                    array('label'=>'Content',
+                        'url'=>array('/site/index'),
                         'items'=>array(
-                            array('label'=>'Login','itemOptions'=>array('class'=>"dropdown-header")),
-                            array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/user/login/logout'), 'visible'=>!Yii::app()->user->isGuest),
-                            array('label'=>'Register', 'url'=>array('/user/register/register'), 'visible'=>Yii::app()->user->isGuest)
+
+                            array('label'=>'Users'),
+
+                            array(),
                         )
                     ),
+
 
                 )
             )); ?>
@@ -79,21 +74,8 @@
                     array('label'=>'Register', 'url'=>array('/user/register/register'), 'visible'=>Yii::app()->user->isGuest)
                 )
             )); ?>
-<!--            <ul class="nav navbar-nav navbar-right">-->
-<!--                <li><a href="#">Link</a></li>-->
-<!--                <li class="dropdown">-->
-<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>-->
-<!--                    <ul class="dropdown-menu">-->
-<!--                        <li><a href="#">Action</a></li>-->
-<!--                        <li><a href="#">Another action</a></li>-->
-<!--                        <li class="divider"></li>-->
-<!--                        <li class="dropdown-header">Nav header</li>-->
-<!--                        <li><a href="#">Something else here</a></li>-->
-<!--                        <li><a href="#">Separated link</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!--            </ul>-->
-        </div><!-- /.navbar-collapse -->
+
+        </div>
     </nav>
 
 

@@ -1,5 +1,7 @@
 <?php
 
+
+
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
@@ -7,6 +9,10 @@
 // CWebApplication properties can be configured here.
 
 $domain = 'pickupmyhome.com'; //@ChangeIt
+$pgsqlDb = 'pumh';
+$pgsqlUser = 'pumh';
+$pgsqlPassword = '';
+
 
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
@@ -28,6 +34,8 @@ return array(
         'ext.image.Image',
         'ext.yii-mail.YiiMailMessage',
         'ext.ExtendedClientScript.jsmin.*',
+
+        'application.modules.user.models.*'
     ),
 
     'modules' => array(
@@ -56,8 +64,8 @@ return array(
             'compressCss' => true,
             'combineJs' => true,
             'compressJs' => true,
-            'excludeJsFiles' => array(),
-            'excludeCssFiles' => array('font.css', 'jquery-ui-1.8.16.custom.css', 'main.css'),
+            'excludeJsFiles' => array('jquery-1.10.2.min.js','bootstrap.min.js'),
+            'excludeCssFiles' => array('bootstrap-theme.min.css','bootstrap.min.css',),
         ),
         'request' => array(
             'enableCookieValidation' => true,
@@ -102,10 +110,10 @@ return array(
             'class' => 'system.caching.CFileCache',
         ),
         'db' => array(
-            'connectionString' => 'pgsql:host=localhost;dbname=pumh',
+            'connectionString' => "pgsql:host=localhost;dbname=$pgsqlDb",
             'emulatePrepare' => true,
-            'username' => 'postgres',
-            'password' => '',
+            'username' => $pgsqlUser,
+            'password' => $pgsqlPassword,
             'charset' => 'utf8',
         ),
 
@@ -140,5 +148,9 @@ return array(
         'slogan' => 'Slogan for Application', //@ChangeIt
         'captcha_private_key' => '6LdcgucSAAAAAPgfSO8ul_wvBVc9Uc0G-lhjHHV9',
         'captcha_public_key' => '6LdcgucSAAAAAASnIGDjFIFz64SocERXRaVnxa7O',
+        'pgsqlDb'=>"$pgsqlDb",
+        'pgsqlUser'=>"$pgsqlUser",
+        'pgsqlPassword'=>"$pgsqlPassword",
+
     ),
 );
