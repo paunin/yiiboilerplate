@@ -8,10 +8,6 @@ $this->breadcrumbs=array(
     'Login',
 );
 ?>
-
-<h1>Login</h1>
-
-
 <div class="form">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'login-form',
@@ -20,7 +16,6 @@ $this->breadcrumbs=array(
             'validateOnSubmit'=>true,
         ),
     )); ?>
-
 
     <div class="row">
         <?php echo $form->labelEx($model,'username'); ?>

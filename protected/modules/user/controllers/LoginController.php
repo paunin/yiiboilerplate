@@ -19,8 +19,12 @@ class LoginController extends Controller
         {
             $model->attributes=$_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
-            if($model->validate() && $model->login())
+            if($model->validate() && $model->login()){
+                Cut::setFlash($this->getAction()->id." ACTION success",'success');
                 $this->redirect(Yii::app()->user->returnUrl);
+
+            }
+            Cut::setFlash($this->getAction()->id." ACTION error",'error');
         }
         // display the login form
         $this->render('/login/login',array('model'=>$model));
@@ -28,6 +32,7 @@ class LoginController extends Controller
 
     public function actionLogout(){
         Yii::app()->user->logout();
+        Cut::setFlash($this->getAction()->id." ACTION success",'success');
         $this->redirect(Yii::app()->homeUrl);
     }
 

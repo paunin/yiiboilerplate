@@ -8,9 +8,6 @@ $this->breadcrumbs=array(
     'Changed email verify',
 );
 ?>
-
-<h1>Changed email verify</h1>
-
 <div class="form">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'endchangemail-form',
@@ -20,13 +17,11 @@ $this->breadcrumbs=array(
         ),
     )); ?>
 
-
     <div class="row">
         <?php echo $form->labelEx($model,'hash'); ?>
         <?php echo $form->textField($model,'hash'); ?>
         <?php echo $form->error($model,'hash'); ?>
     </div>
-
 
     <div class="row buttons">
         <?php echo CHtml::submitButton('Change'); ?>

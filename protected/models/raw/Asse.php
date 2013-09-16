@@ -43,4 +43,5 @@ class Asse {
     private static function publish($file,$path = null){
         return Yii::app()->getAssetManager()->publish($path.'/'.$file);
     }
+
 }

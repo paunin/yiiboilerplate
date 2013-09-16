@@ -8,9 +8,6 @@ $this->breadcrumbs=array(
     'Registration',
 );
 ?>
-
-<h1>Registration</h1>
-
 <div class="form">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'register-form',
@@ -19,7 +16,6 @@ $this->breadcrumbs=array(
             'validateOnSubmit'=>true,
         ),
     )); ?>
-
 
     <div class="row">
         <?php echo $form->labelEx($model,'username'); ?>
@@ -38,6 +34,7 @@ $this->breadcrumbs=array(
         <?php echo $form->passwordField($model,'password'); ?>
         <?php echo $form->error($model,'password'); ?>
     </div>
+
     <div class="row">
         <?php echo $form->labelEx($model,'password2'); ?>
         <?php echo $form->passwordField($model,'password2'); ?>

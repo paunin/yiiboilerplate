@@ -40,10 +40,10 @@ return CMap::mergeArray(
                         'class' => 'CFileLogRoute',
                         'levels' => 'error, warning, trace',
                     ),
-//                    array(
-//                        'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-//                        'ipFilters'=>array('127.0.0.1','192.168.1.215'),
-//                    ),
+                    array(
+                        'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+                        'ipFilters'=>array('127.0.0.1','192.168.1.215'),
+                    ),
 //                    array( // configuration for the toolbar
 //                        'class' => 'XWebDebugRouter',
 //                        'config' => 'alignRight, opaque, runInDebug, fixedPos,  yamlStyle, collapsed',

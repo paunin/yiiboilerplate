@@ -8,9 +8,6 @@ $this->breadcrumbs=array(
     'Resend verify eMail',
 );
 ?>
-
-<h1>Resend verify eMail</h1>
-
 <div class="form">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'resendmail-form',
@@ -19,14 +16,11 @@ $this->breadcrumbs=array(
             'validateOnSubmit'=>true,
         ),
     )); ?>
-
-
     <div class="row">
         <?php echo $form->labelEx($model,'email'); ?>
         <?php echo $form->textField($model,'email'); ?>
         <?php echo $form->error($model,'email'); ?>
     </div>
-
 
     <div class="row">
         <?php echo $form->labelEx($model,'validacion'); ?>
@@ -36,7 +30,6 @@ $this->breadcrumbs=array(
                 'publicKey'=>Yii::app()->params['captcha_public_key'])) ?>
 
         <?php echo $form->error($model,'validacion'); ?>
-
     </div>
 
     <div class="row buttons">

@@ -1,55 +1,65 @@
 <?php
 Asse::addCss('main.css');
 
-Asse::addCss('bootstrap.min.css',Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
-Asse::addCss('bootstrap-theme.min.css',Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
-Asse::addJs('jquery/jquery-1.10.2.min.js');
-Asse::addJs('bootstrap.min.js',Yii::getPathOfAlias('webroot.web.bootstrap_300.js'));
-/* @var $this Controller */ ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+Asse::addCss('bootstrap.min.css', Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
+Asse::addCss('bootstrap-theme.min.css', Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
+//Asse::addJs('jquery/jquery-1.10.2.js');
+//Asse::addJs('jquery/jquery.cookie.js');
+
+Yii::app()->getClientScript()->registerCoreScript('jquery');
+
+Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.js'));
+/* @var $this Controller */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="language" content="en"/>
 
-	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
-	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
-	<![endif]-->
+    <!-- blueprint CSS framework -->
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css"
+          media="screen, projection"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css"
+          media="print"/>
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css"
+          media="screen, projection"/>
+    <![endif]-->
 
 
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css"/>
 
 
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
 <body>
 
 <div class="container" id="page">
 
-	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-	</div><!-- header -->
+    <div id="header">
+        <div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+    </div>
+    <!-- header -->
 
     <nav class="navbar navbar-default" role="navigation">
         <div class="collapse navbar-collapse navbar-ex1-collapse">
 
 
-            <?php $this->widget('application.widgets.b3menu.b3menuWidget',array(
-                'items'=>array(
-                    array('label'=>'Home',
-                        'url'=>array('/site/index'),
+            <?php $this->widget('application.widgets.b3menu.b3menuWidget', array(
+                'items' => array(
+                    array('label' => 'Home',
+                        'url' => array('/site/index'),
                     ),
-                    array('label'=>'Content',
-                        'url'=>array('/site/index'),
-                        'visible'=>Yii::app()->user->checkAccess('admin'),
-                        'items'=>array(
+                    array('label' => 'Content',
+                        'url' => array('/site/index'),
+                        'visible' => Yii::app()->user->checkAccess('admin'),
+                        'items' => array(
 
-                            array('label'=>'Users'),
-                            array('label'=>'Users','url'=>array('/admin/user')),
+                            array('label' => 'Users'),
+                            array('label' => 'Users', 'url' => array('/admin/user')),
 
                             array(),
                         )
@@ -60,38 +70,39 @@ Asse::addJs('bootstrap.min.js',Yii::getPathOfAlias('webroot.web.bootstrap_300.js
             )); ?>
 
 
-<!--            <form class="navbar-form navbar-left" role="search">-->
-<!--                <div class="form-group">-->
-<!--                    <input type="text" class="form-control" placeholder="Search">-->
-<!--                </div>-->
-<!--                <button type="submit" class="btn btn-default">Submit</button>-->
-<!--            </form>-->
+            <!--            <form class="navbar-form navbar-left" role="search">-->
+            <!--                <div class="form-group">-->
+            <!--                    <input type="text" class="form-control" placeholder="Search">-->
+            <!--                </div>-->
+            <!--                <button type="submit" class="btn btn-default">Submit</button>-->
+            <!--            </form>-->
 
 
-            <?php $this->widget('application.widgets.b3menu.b3menuWidget',array(
-                'htmlOptions' => array('class'=>'nav navbar-nav navbar-right'),
-                'items'=>array(
-                    array('label'=>'Login', 'url'=>array('/user/login/login'), 'visible'=>Yii::app()->user->isGuest),
-                    array('label'=>'Register', 'url'=>array('/user/register/register'), 'visible'=>Yii::app()->user->isGuest),
+            <?php $this->widget('application.widgets.b3menu.b3menuWidget', array(
+                'htmlOptions' => array('class' => 'nav navbar-nav navbar-right'),
+                'items' => array(
+                    array('label' => 'Login', 'url' => array('/user/login/login'), 'visible' => Yii::app()->user->isGuest),
+                    array('label' => 'Register', 'url' => array('/user/register/register'), 'visible' => Yii::app()->user->isGuest),
                     array(
-                        'label'=>'etc',
-                        'visible'=>Yii::app()->user->isGuest,
+                        'label' => 'etc',
+                        'visible' => Yii::app()->user->isGuest,
                         'items' => array(
-                            array('label'=>'Verify email', 'url'=>array('/user/register/endregister')),
-                            array('label'=>'Resend verify email', 'url'=>array('/user/register/resendmail')),
-                            array('label'=>'Recovery password', 'url'=>array('/user/register/recoverypass')),
-                            array('label'=>'Recovery password(new pass)', 'url'=>array('/user/register/endrecoverypass')),
+                            array('label' => 'Verify email', 'url' => array('/user/register/endregister')),
+                            array('label' => 'Resend verify email', 'url' => array('/user/register/resendmail')),
+                            array('label' => 'Recovery password', 'url' => array('/user/register/recoverypass')),
+                            array('label' => 'Recovery password(new pass)', 'url' => array('/user/register/endrecoverypass')),
                         )
 
                     ),
 
-                    array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/user/login/logout'), 'visible'=>!Yii::app()->user->isGuest),
+                    array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/user/login/logout'), 'visible' => !Yii::app()->user->isGuest),
                     array(
-                        'label'=>'profile',
-                        'visible'=>!Yii::app()->user->isGuest,
+                        'label' => 'profile',
+                        'visible' => !Yii::app()->user->isGuest,
                         'items' => array(
-                            array('label'=>'Change email', 'url'=>array('/user/profile/changemail')),
-                            array('label'=>'Changed email verify', 'url'=>array('/user/profile/endchangemail')),
+                            array('label' => 'Simple profile', 'url' => array('/user/profile')),
+                            array('label' => 'Change email', 'url' => array('/user/profile/changemail')),
+                            array('label' => 'Changed email verify', 'url' => array('/user/profile/endchangemail')),
 
                         )
 
@@ -103,28 +114,34 @@ Asse::addJs('bootstrap.min.js',Yii::getPathOfAlias('webroot.web.bootstrap_300.js
         </div>
     </nav>
 
-
-    <?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+    <?php if (isset($this->breadcrumbs)): ?>
+        <?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
+		)); ?>
+    <?php endif ?>
+
+
+    <h1><?php echo $this->breadcrumbs[count($this->breadcrumbs) - 1] ?></h1>
 
     <?php
-    foreach(Yii::app()->user->getFlashes() as $key => $message) {
+    foreach (Yii::app()->user->getFlashes() as $key => $message) {
         echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
     }
     ?>
 
-	<?php echo $content; ?>
 
-	<div class="clear"></div>
 
-	<div id="footer">
-		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
+    <?php echo $content; ?>
 
-</div><!-- page -->
+    <div class="clear"></div>
+
+    <div id="footer">
+        <?php echo Yii::powered(); ?>
+    </div>
+    <!-- footer -->
+
+</div>
+<!-- page -->
 
 </body>
 </html>

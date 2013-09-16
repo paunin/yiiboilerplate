@@ -8,7 +8,7 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 
-$domain = 'pickupmyhome.com'; //@ChangeIt
+$domain = 'yiiboilerplate.paunin.com'; //@ChangeIt
 $pgsqlDb = 'pumh';
 $pgsqlUser = 'pumh';
 $pgsqlPassword = '';
@@ -16,7 +16,7 @@ $pgsqlPassword = '';
 
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'My Web Application', //@ChangeIt
+    'name' => 'Yii Boilerplate App', //@ChangeIt
 
     // preloading 'log' component
     'preload' => array('log'),
@@ -65,7 +65,7 @@ return array(
             'compressCss' => true,
             'combineJs' => true,
             'compressJs' => true,
-            'excludeJsFiles' => array('jquery-1.10.2.min.js','bootstrap.min.js'),
+            'excludeJsFiles' => array('jquery-1.10.2.min.js','bootstrap.min.js','jquery.cookie.js'),
             'excludeCssFiles' => array('bootstrap-theme.min.css','bootstrap.min.css',),
         ),
         'request' => array(
@@ -98,8 +98,6 @@ return array(
                 'gii/<controller:\w+>' => 'gii/<controller>',
                 'gii/<controller:\w+>/<action:\w+>' => 'gii/<controller>/<action>',
 
-                'register' => 'user/register/register',
-                'login' => 'user/login/login',
 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -146,7 +144,7 @@ return array(
         'adminEmail' => "admin@$domain",
         'robotEmail' => "robot@$domain",
         'robotEmailName' => "robot@$domain",
-        'slogan' => 'Slogan for Application', //@ChangeIt
+        'slogan' => 'Slogan for Yii Boilerplate Application', //@ChangeIt
         'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
         'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
         'pgsqlDb'=>"$pgsqlDb",
