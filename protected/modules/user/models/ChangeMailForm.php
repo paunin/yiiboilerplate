@@ -44,7 +44,7 @@ class ChangeMailForm extends User
             'ch_email',
             array(
                 'url' => Cut::createUrl('user/profile/endchangemail', array('key' => $user->key), true),
-                'old_email'=>$user->email
+                'old_email' => $user->email
             )
         );
     }
