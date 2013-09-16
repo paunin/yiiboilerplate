@@ -3,16 +3,18 @@
 class Cut
 {
     /**
-     * @static
      * @param $route
      * @param array $params
      * @param string $ampersand
-     * @return void
+     * @param bool $abs
+     * @return mixed
      */
-    public static function createUrl($route, $params = array(), $ampersand = '&')
+    public static function createUrl($route, $params = array(), $abs = false, $ampersand = '&')
     {
-        return preg_replace('/^protected/', '', Yii::app()->urlManager->createUrl($route, $params, $ampersand));
-
+        $url = Yii::app()->createUrl($route, $params, $ampersand);
+        return  $abs?
+            Yii::app()->params['site_url'].$url:
+            $url;
     }
 
     /**

@@ -134,7 +134,7 @@ ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_id_seq', 2, true);
+SELECT pg_catalog.setval('user_id_seq', 3, true);
 
 
 --
@@ -156,6 +156,8 @@ ALTER TABLE "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 --
 
 COPY "AuthAssignment" (itemname, userid, bizrule, data) FROM stdin;
+admin	2	\N	\N
+user	3	\N	\N
 \.
 
 
@@ -164,6 +166,8 @@ COPY "AuthAssignment" (itemname, userid, bizrule, data) FROM stdin;
 --
 
 COPY "AuthItem" (name, type, description, bizrule, data) FROM stdin;
+admin	2	Admin	\N	N;
+user	2	User	\N	N;
 \.
 
 
@@ -172,6 +176,7 @@ COPY "AuthItem" (name, type, description, bizrule, data) FROM stdin;
 --
 
 COPY "AuthItemChild" (parent, child) FROM stdin;
+admin	user
 \.
 
 
@@ -188,7 +193,8 @@ COPY smtp (id, host, username, password, port, encryption, timeout, "extensionHa
 --
 
 COPY "user" (id, username, email, key, created_at, role, is_active, last_login, password) FROM stdin;
-2	admin	admin@admin.com	\N	2013-09-16 11:47:38.564	admin	t	\N	21232f297a57a5a743894a0e4a801fc3
+2	admin	admin@admin.com	\N	2013-09-16 11:47:38.564	admin	t	\N	1341215dbe9acab4361fd6417b2b11bc
+3	user	user@user.com	\N	2013-09-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 \.
 
 

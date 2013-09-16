@@ -7,6 +7,7 @@
  */
 class UserIdentity extends CUserIdentity
 {
+    private $_id;
     const ERROR_NOT_ACTIVE = 5;
     /**
      * @return bool
@@ -17,7 +18,7 @@ class UserIdentity extends CUserIdentity
         $criteria = new CDbCriteria;
         $criteria->select = '*';
         $criteria->condition = '(email=:email OR username=:username)';
-        $criteria->params = array(':email' => $this->username, ':username' => $this->username, ':parent_id' => 0);
+        $criteria->params = array(':email' => $this->username, ':username' => $this->username);
         $criteria->limit = '1';
         /** @var User $user */
         $user = User::model()->find($criteria);
@@ -30,10 +31,16 @@ class UserIdentity extends CUserIdentity
             $this->errorCode = self::ERROR_NOT_ACTIVE;
         else {
             $this->errorCode = self::ERROR_NONE;
+            $this->_id = $user->id;
+            $user->last_login = date('Y-m-d H:i:s');
+            $user->save();
         }
 
         return $this->errorCode == self::ERROR_NONE;
+    }
 
-
+    public function getId()
+    {
+        return $this->_id;
     }
 }

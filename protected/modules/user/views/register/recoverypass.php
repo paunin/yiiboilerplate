@@ -1,19 +1,19 @@
 <?php
 /* @var $this RegisterController */
-/* @var $model RegisterForm */
+/* @var $model RecoveryPassForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Registration';
+$this->pageTitle=Yii::app()->name . ' - Recovery password';
 $this->breadcrumbs=array(
-    'Registration',
+    'Recovery password',
 );
 ?>
 
-<h1>Registration</h1>
+<h1>Recovery password</h1>
 
 <div class="form">
     <?php $form=$this->beginWidget('CActiveForm', array(
-        'id'=>'register-form',
+        'id'=>'recoverypass-form',
         'enableClientValidation'=>true,
         'clientOptions'=>array(
             'validateOnSubmit'=>true,
@@ -22,30 +22,11 @@ $this->breadcrumbs=array(
 
 
     <div class="row">
-        <?php echo $form->labelEx($model,'username'); ?>
-        <?php echo $form->textField($model,'username'); ?>
-        <?php echo $form->error($model,'username'); ?>
-    </div>
-
-    <div class="row">
         <?php echo $form->labelEx($model,'email'); ?>
         <?php echo $form->textField($model,'email'); ?>
         <?php echo $form->error($model,'email'); ?>
     </div>
 
-    <div class="row">
-        <?php echo $form->labelEx($model,'password'); ?>
-        <?php echo $form->passwordField($model,'password'); ?>
-        <?php echo $form->error($model,'password'); ?>
-    </div>
-    <div class="row">
-        <?php echo $form->labelEx($model,'password2'); ?>
-        <?php echo $form->passwordField($model,'password2'); ?>
-        <?php echo $form->error($model,'password2'); ?>
-        <p class="hint">
-            Hint: Password again.
-        </p>
-    </div>
 
     <div class="row">
         <?php echo $form->labelEx($model,'validacion'); ?>
@@ -59,7 +40,7 @@ $this->breadcrumbs=array(
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Register'); ?>
+        <?php echo CHtml::submitButton('Recovery'); ?>
     </div>
 
     <?php $this->endWidget(); ?>

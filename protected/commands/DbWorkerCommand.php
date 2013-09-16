@@ -25,11 +25,11 @@ class DbWorkerCommand extends CConsoleCommand
             die('Your database can\'t be used by postgres');
         //$this->db->createCommand("DROP OWNED BY $pdu CASCADE")->execute();
         echo "drop...\n";
-        
+
         
         `$command -h localhost -U $pdu -c"DROP OWNED BY $pdu CASCADE;"`;
         echo "load...\n";
-        //$this->
+
         `$command -h localhost -U $pdu $pdd < $path`;
         echo 'ok'."\n";
     }

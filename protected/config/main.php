@@ -56,6 +56,7 @@ return array(
         'user' => array(
             // enable cookie-based authentication
             'allowAutoLogin' => true,
+            'loginUrl'=>array('user/login/login'),
         ),
 
         'clientScript' => array(
@@ -82,9 +83,9 @@ return array(
         'authManager' => array(
             //'class' => 'CPhpAuthManager',
             'class' => 'CDbAuthManager',
-            'itemTable' => 'Auth_Item',
-            'itemChildTable' => 'Auth_ItemChild',
-            'assignmentTable' => 'Auth_Assignment',
+            'itemTable' => 'AuthItem',
+            'itemChildTable' => 'AuthItemChild',
+            'assignmentTable' => 'AuthAssignment',
             'defaultRoles' => array('guest'),
         ),
 
@@ -139,15 +140,15 @@ return array(
     ),
 
     // application-level parameters that can be accessed
-    // using Yii::app()->params['paramName']
+    // using Yii::app()->params['site_url']
     'params' => array(
         'site_url' => "http://$domain",
         'adminEmail' => "admin@$domain",
         'robotEmail' => "robot@$domain",
         'robotEmailName' => "robot@$domain",
         'slogan' => 'Slogan for Application', //@ChangeIt
-        'captcha_private_key' => '6LdcgucSAAAAAPgfSO8ul_wvBVc9Uc0G-lhjHHV9',
-        'captcha_public_key' => '6LdcgucSAAAAAASnIGDjFIFz64SocERXRaVnxa7O',
+        'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
+        'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
         'pgsqlDb'=>"$pgsqlDb",
         'pgsqlUser'=>"$pgsqlUser",
         'pgsqlPassword'=>"$pgsqlPassword",

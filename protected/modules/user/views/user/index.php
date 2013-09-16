@@ -1,2 +1,4 @@
-<?php  echo  Cut::createUrl('user/register/register') ?><br />
-<?php  echo  Cut::createUrl('user/login/login') ?><br />
+Current user roles:<br/>
+<?php
+    echo Yii::app()->user->checkAccess('user')?'User<br/>':'';
+    echo Yii::app()->user->checkAccess('admin')?'Admin<br/>':'';

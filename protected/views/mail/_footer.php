@@ -6,7 +6,7 @@
                         padding-left: 50px;
                         padding-bottom: 50px"
                         >
-                <a href="<?=$site_url?>" style="color: #EE611C" title="<?=Yii::app()->name?>"><?=Yii::app()->name?></a> - <?=Yii::app()->params['slogan']?>
+                <a href="<?php echo $site_url?>" style="color: #EE611C" title="<?php echo Yii::app()->name?>"><?php echo Yii::app()->name?></a> - <?php echo Yii::app()->params['slogan']?>
             </div>
 
         </td></tr></table>

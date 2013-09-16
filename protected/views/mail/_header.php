@@ -1,4 +1,4 @@
-<?
+<?php
 $cid_bg = '%cid_bg%';
 $cid_logo = '%cid_logo%';
 $site_url = Yii::app()->params['site_url']
@@ -9,14 +9,14 @@ $site_url = Yii::app()->params['site_url']
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
 </head>
-<body bgcolor="#fafafa" background="<?=$cid_bg?>"
-      style="padding:0; margin:0; background-color:#fafafa; background-image:url('<?= $cid_bg ?>');">
-<table bgcolor="#fafafa" background="<?=$cid_bg?>" width="100%">
+<body bgcolor="#fafafa" background="<?php echo $cid_bg?>"
+      style="padding:0; margin:0; background-color:#fafafa; background-image:url('<?php echo  $cid_bg ?>');">
+<table bgcolor="#fafafa" background="<?php echo $cid_bg?>" width="100%">
     <tr>
         <td width="100%">
             <div style="max-width: 1024px; margin: 20px 20px 0; padding-left: 50px;">
-                <a href="<?=$site_url?>" title="<?=Yii::app()->name?>">
-                    <img src="<?=$cid_logo?>" alt="<?=Yii::app()->params['site_url']?>">
+                <a href="<?php echo $site_url?>" title="<?php echo Yii::app()->name?>">
+                    <img src="<?php echo $cid_logo?>" alt="<?php echo Yii::app()->params['site_url']?>">
                 </a>
             </div>
             <div style="background: none repeat scroll 0 0 white;

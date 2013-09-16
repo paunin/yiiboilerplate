@@ -45,9 +45,11 @@ Asse::addJs('bootstrap.min.js',Yii::getPathOfAlias('webroot.web.bootstrap_300.js
                     ),
                     array('label'=>'Content',
                         'url'=>array('/site/index'),
+                        'visible'=>Yii::app()->user->checkAccess('admin'),
                         'items'=>array(
 
                             array('label'=>'Users'),
+                            array('label'=>'Users','url'=>array('/admin/user')),
 
                             array(),
                         )
@@ -70,8 +72,31 @@ Asse::addJs('bootstrap.min.js',Yii::getPathOfAlias('webroot.web.bootstrap_300.js
                 'htmlOptions' => array('class'=>'nav navbar-nav navbar-right'),
                 'items'=>array(
                     array('label'=>'Login', 'url'=>array('/user/login/login'), 'visible'=>Yii::app()->user->isGuest),
+                    array('label'=>'Register', 'url'=>array('/user/register/register'), 'visible'=>Yii::app()->user->isGuest),
+                    array(
+                        'label'=>'etc',
+                        'visible'=>Yii::app()->user->isGuest,
+                        'items' => array(
+                            array('label'=>'Verify email', 'url'=>array('/user/register/endregister')),
+                            array('label'=>'Resend verify email', 'url'=>array('/user/register/resendmail')),
+                            array('label'=>'Recovery password', 'url'=>array('/user/register/recoverypass')),
+                            array('label'=>'Recovery password(new pass)', 'url'=>array('/user/register/endrecoverypass')),
+                        )
+
+                    ),
+
                     array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/user/login/logout'), 'visible'=>!Yii::app()->user->isGuest),
-                    array('label'=>'Register', 'url'=>array('/user/register/register'), 'visible'=>Yii::app()->user->isGuest)
+                    array(
+                        'label'=>'profile',
+                        'visible'=>!Yii::app()->user->isGuest,
+                        'items' => array(
+                            array('label'=>'Change email', 'url'=>array('/user/profile/changemail')),
+                            array('label'=>'Changed email verify', 'url'=>array('/user/profile/endchangemail')),
+
+                        )
+
+                    )
+
                 )
             )); ?>
 
@@ -90,8 +115,6 @@ Asse::addJs('bootstrap.min.js',Yii::getPathOfAlias('webroot.web.bootstrap_300.js
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
 
