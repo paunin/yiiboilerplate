@@ -8,7 +8,8 @@ $this->breadcrumbs=array(
     'Login',
 );
 ?>
-<div class="form">
+
+ <div class="form bs3-form">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'login-form',
         'enableClientValidation'=>true,
@@ -19,13 +20,13 @@ $this->breadcrumbs=array(
 
     <div class="row">
         <?php echo $form->labelEx($model,'username'); ?>
-        <?php echo $form->textField($model,'username'); ?>
+        <?php echo $form->textField($model,'username',array('class'=>'form-control')); ?>
         <?php echo $form->error($model,'username'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->labelEx($model,'password'); ?>
-        <?php echo $form->passwordField($model,'password'); ?>
+        <?php echo $form->passwordField($model,'password',array('class'=>'form-control')); ?>
         <?php echo $form->error($model,'password'); ?>
         <p class="hint">
             Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
@@ -39,7 +40,7 @@ $this->breadcrumbs=array(
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Login'); ?>
+        <?php echo CHtml::submitButton('Login',array('class'=>'btn btn-lg btn-primary btn-block')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

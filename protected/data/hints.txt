@@ -1,0 +1,6 @@
+TinyMce Usage (dont foget jquery)
+
+    <script type="text/javascript" src="/js/tinymce4jq/tinymce.min.js"></script>
+    <script type="text/javascript" src="/js/tinymce4jq/jquery.tinymce.min.js"></script>
+    <script type="text/javascript" src="/js/tinymce4jq/big_tiny_init_jq.js"></script>
+    <textarea class="big_tiny_init_jq" ></textarea>

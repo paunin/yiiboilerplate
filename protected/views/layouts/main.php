@@ -44,7 +44,15 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
     </div>
     <!-- header -->
 
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default " role="navigation">
+<!--        <div class="navbar-header">-->
+<!--            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">-->
+<!--                <span class="icon-bar"></span>-->
+<!--                <span class="icon-bar"></span>-->
+<!--                <span class="icon-bar"></span>-->
+<!--            </button>-->
+<!--            <a class="navbar-brand" href="#">--><?php //echo Yii::app()->name ?><!--</a>-->
+<!--        </div>-->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
 
 
@@ -116,19 +124,27 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
 
     <?php if (isset($this->breadcrumbs)): ?>
         <?php $this->widget('zii.widgets.CBreadcrumbs', array(
+            'tagName'=>'ol',
+            'homeLink'=>'<li><a href="/">Home</a></li>',
+            'htmlOptions'=>array('class'=>'breadcrumb'),
+            'activeLinkTemplate'=>'<li><a href="{url}">{label}</a></li>',
+            'inactiveLinkTemplate'=>'<li>{label}</li>',
+            'separator'=>'',
 			'links'=>$this->breadcrumbs,
 		)); ?>
     <?php endif ?>
-
 
     <h1><?php echo $this->breadcrumbs[count($this->breadcrumbs) - 1] ?></h1>
 
     <?php
     foreach (Yii::app()->user->getFlashes() as $key => $message) {
-        echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+        if($key=='error') //bootstrap 3
+            $key = 'danger';
+        elseif($key=='notice')
+            $key = 'warning';
+        echo '<div class="alert alert-' . ($key=='error'?'danger':$key) . '">' . $message . "</div>\n";
     }
     ?>
-
 
 
     <?php echo $content; ?>

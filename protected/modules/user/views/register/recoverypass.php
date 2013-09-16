@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
     'Recovery password',
 );
 ?>
-<div class="form">
+ <div class="form bs3-form">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'recoverypass-form',
         'enableClientValidation'=>true,
@@ -19,7 +19,7 @@ $this->breadcrumbs=array(
 
     <div class="row">
         <?php echo $form->labelEx($model,'email'); ?>
-        <?php echo $form->textField($model,'email'); ?>
+        <?php echo $form->textField($model,'email',array('class'=>'form-control')); ?>
         <?php echo $form->error($model,'email'); ?>
     </div>
 
@@ -34,7 +34,7 @@ $this->breadcrumbs=array(
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Recovery'); ?>
+        <?php echo CHtml::submitButton('Recovery',array('class'=>'btn btn-lg btn-primary btn-block')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

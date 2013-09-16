@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
     'Registration',
 );
 ?>
-<div class="form">
+ <div class="form bs3-form">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'register-form',
         'enableClientValidation'=>true,
@@ -19,25 +19,25 @@ $this->breadcrumbs=array(
 
     <div class="row">
         <?php echo $form->labelEx($model,'username'); ?>
-        <?php echo $form->textField($model,'username'); ?>
+        <?php echo $form->textField($model,'username',array('class'=>'form-control')); ?>
         <?php echo $form->error($model,'username'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->labelEx($model,'email'); ?>
-        <?php echo $form->textField($model,'email'); ?>
+        <?php echo $form->textField($model,'email',array('class'=>'form-control')); ?>
         <?php echo $form->error($model,'email'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->labelEx($model,'password'); ?>
-        <?php echo $form->passwordField($model,'password'); ?>
+        <?php echo $form->passwordField($model,'password',array('class'=>'form-control')); ?>
         <?php echo $form->error($model,'password'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->labelEx($model,'password2'); ?>
-        <?php echo $form->passwordField($model,'password2'); ?>
+        <?php echo $form->passwordField($model,'password2',array('class'=>'form-control')); ?>
         <?php echo $form->error($model,'password2'); ?>
         <p class="hint">
             Hint: Password again.
@@ -56,7 +56,7 @@ $this->breadcrumbs=array(
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Register'); ?>
+        <?php echo CHtml::submitButton('Register',array('class'=>'btn btn-lg btn-primary btn-block')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

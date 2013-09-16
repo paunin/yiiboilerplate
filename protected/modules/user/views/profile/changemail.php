@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
     'Change email',
 );
 ?>
-<div class="form">
+<div class="form  bs3-form">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'changemail-form',
         'enableClientValidation'=>true,
@@ -19,12 +19,12 @@ $this->breadcrumbs=array(
 
     <div class="row">
         <?php echo $form->labelEx($model,'newemail'); ?>
-        <?php echo $form->textField($model,'newemail'); ?>
+        <?php echo $form->textField($model,'newemail',array('class'=>'form-control')); ?>
         <?php echo $form->error($model,'newemail'); ?>
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Change'); ?>
+        <?php echo CHtml::submitButton('Change',array('class'=>'btn btn-lg btn-primary btn-block')); ?>
     </div>
 
     <?php $this->endWidget(); ?>
