@@ -66,6 +66,16 @@ class myMail
 
     }
 
+    /**
+     * @param $mail_to
+     * @param $subject
+     * @param $template
+     * @param $data
+     * @param bool $by_cron
+     * @param null $sender
+     * @param null $smtp
+     * @return bool
+     */
     public static function send($mail_to, $subject, $template, $data, $by_cron = false, $sender = null, $smtp = null)
     {
 
@@ -88,7 +98,7 @@ class myMail
             $cronMail->body_alt = $body_alt;
             $cronMail->from_mail = Yii::app()->params['robotEmail'];
             $cronMail->from_name = Yii::app()->params['robotEmailName'];
-            $cronMail->multiSave($mail_to);
+            return $cronMail->multiSave($mail_to);
         } else {
             return self::nativeSend($mail_to, $subject, $body, $body_alt, array(Yii::app()->params['robotEmail'] => Yii::app()->params['robotEmailName']), $smtp);
         }
@@ -170,7 +180,7 @@ class myMail
     public static function cronSend($limit = 5)
     {
         $criteria = new CDbCriteria();
-        $criteria->addCondition('is_sent = 0');
+        $criteria->addCondition('is_sent = false');
         $criteria->limit = $limit;
         $criteria->order = "id";
         $mails = CronMail::model()->findAll($criteria);

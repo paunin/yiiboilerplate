@@ -1,0 +1,1 @@
+*/5  *    *    *    *          cd !!!!!!!!!!!!!?/protected/ && php yiic CronMail send

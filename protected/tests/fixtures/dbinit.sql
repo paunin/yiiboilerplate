@@ -3,7 +3,7 @@
 --
 
 SET statement_timeout = 0;
-SET client_encoding = 'WIN1251';
+SET client_encoding = 'UTF8';
 SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
@@ -48,6 +48,51 @@ CREATE TABLE "AuthItemChild" (
     parent character varying(64) NOT NULL,
     child character varying(64) NOT NULL
 );
+
+
+--
+-- Name: cron_mail; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cron_mail (
+    id integer NOT NULL,
+    subject character varying(255) DEFAULT NULL::character varying,
+    body text NOT NULL,
+    body_alt text,
+    to_mail character varying(512) NOT NULL,
+    to_name character varying(512) DEFAULT NULL::character varying,
+    from_mail character varying(512) NOT NULL,
+    from_name character varying(512) DEFAULT NULL::character varying,
+    is_sent boolean DEFAULT false NOT NULL,
+    attachment_file character varying(512) DEFAULT NULL::character varying,
+    attachment_name character varying(512) DEFAULT NULL::character varying
+);
+
+
+--
+-- Name: cron_mail_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cron_mail_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- Name: cron_mail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cron_mail_id_seq OWNED BY cron_mail.id;
+
+
+--
+-- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
 
 
 --
@@ -141,6 +186,13 @@ SELECT pg_catalog.setval('user_id_seq', 3, true);
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE cron_mail ALTER COLUMN id SET DEFAULT nextval('cron_mail_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE smtp ALTER COLUMN id SET DEFAULT nextval('smtp_id_seq'::regclass);
 
 
@@ -177,6 +229,14 @@ user	2	User	\N	N;
 
 COPY "AuthItemChild" (parent, child) FROM stdin;
 admin	user
+\.
+
+
+--
+-- Data for Name: cron_mail; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY cron_mail (id, subject, body, body_alt, to_mail, to_name, from_mail, from_name, is_sent, attachment_file, attachment_name) FROM stdin;
 \.
 
 
@@ -220,6 +280,14 @@ ALTER TABLE ONLY "AuthItemChild"
 
 ALTER TABLE ONLY "AuthItem"
     ADD CONSTRAINT "AuthItem_pkey" PRIMARY KEY (name);
+
+
+--
+-- Name: cron_mail_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cron_mail
+    ADD CONSTRAINT cron_mail_pkey PRIMARY KEY (id);
 
 
 --
