@@ -57,11 +57,9 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                         'url' => array('/site/index'),
                         'visible' => Yii::app()->user->checkAccess('admin'),
                         'items' => array(
-
-                            array('label' => 'Users'),
+                            //array('label' => 'Users'),
                             array('label' => 'Users', 'url' => array('/admin/user')),
-
-                            array(),
+                            //array(),
                         )
                     ),
 
@@ -87,8 +85,9 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                         'label' => 'etc',
                         'visible' => Yii::app()->user->isGuest,
                         'items' => array(
-                            array('label' => 'Verify email', 'url' => array('/user/register/endregister')),
                             array('label' => 'Resend verify email', 'url' => array('/user/register/resendmail')),
+                            array('label' => 'Verify email', 'url' => array('/user/register/endregister')),
+                            array(),
                             array('label' => 'Recovery password', 'url' => array('/user/register/recoverypass')),
                             array('label' => 'Recovery password(new pass)', 'url' => array('/user/register/endrecoverypass')),
                         )
@@ -101,6 +100,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                         'visible' => !Yii::app()->user->isGuest,
                         'items' => array(
                             array('label' => 'Simple profile', 'url' => array('/user/profile')),
+                            array(),
                             array('label' => 'Change email', 'url' => array('/user/profile/changemail')),
                             array('label' => 'Changed email verify', 'url' => array('/user/profile/endchangemail')),
 
