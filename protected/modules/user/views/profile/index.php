@@ -6,4 +6,4 @@ $this->breadcrumbs=array(
     'Current user profile',
 );
 ?>
-Hello, <?php echo User::current()?>
+Hello, <?php echo User::current()?> (IP = <?php echo Yii::app()->request->getUserHostAddress() ?>)
