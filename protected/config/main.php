@@ -71,6 +71,8 @@ return array(
         'request' => array(
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
+            'class' => 'HttpRequest',
+            'noCsrfValidationRoutes' => array('user/login/login'),
         ),
         'image' => array(
             'class' => 'ext.image.CImageComponent',
