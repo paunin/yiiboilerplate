@@ -24,5 +24,5 @@ $site_url = Yii::app()->params['site_url']
                     box-shadow: 0 0 10px #AAAAAA;
                     max-width: 1024px;
                     margin: 20px 40px;
-                    padding: 30px 20px 70px;">
+                    padding: 30px 20px 40px;">
 

@@ -1,11 +1,12 @@
-<?php  if(empty($alt) || !$alt)
-    require(dirname(__FILE__).'/_header.php')?>
-Добрый день! <br/><br/>
-Вы получили это письмо, поскольку Ваш адрес электронной почты или логин был указан для восстановления пароля на сайте <?php echo  Yii::app()->name ?><br/>
-Если Вы получили это письмо по ошибке, то проигнорируйте его.<br/><br/>
+<?php  if (empty($alt) || !$alt)
+    require(dirname(__FILE__) . '/_header.php')?>
+    Hello! <br/><br/>
 
-Для завершения восстановления пароля пройдите по ссылке:<br/>
-<a href="<?php echo $url;?>" style="color: #EE611C"><?php echo $url; ?></a>
+    To complete <b>password recovery</b> process click this link:<br/>
+    <a href="<?php echo $url; ?>" style="color: #EE611C"><?php echo $url; ?></a>
+    <br/>
+    <br/>
+    Please ignore this message if you not sure in future actions.<br/><br/>
 
-<?php  if(empty($alt) || !$alt)
-    require(dirname(__FILE__).'/_footer.php')?>
+<?php  if (empty($alt) || !$alt)
+    require(dirname(__FILE__) . '/_footer.php')?>
