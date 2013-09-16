@@ -210,6 +210,18 @@ ALTER TABLE "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 COPY "AuthAssignment" (itemname, userid, bizrule, data) FROM stdin;
 admin	2	\N	\N
 user	3	\N	\N
+user	4	\N	\N
+user	5	\N	\N
+user	6	\N	\N
+user	7	\N	\N
+user	8	\N	\N
+user	9	\N	\N
+user	10	\N	\N
+user	11	\N	\N
+user	12	\N	\N
+user	13	\N	\N
+user	14	\N	\N
+user	15	\N	\N
 \.
 
 
@@ -255,6 +267,18 @@ COPY smtp (id, host, username, password, port, encryption, timeout, "extensionHa
 COPY "user" (id, username, email, key, created_at, role, is_active, last_login, password) FROM stdin;
 2	admin	admin@admin.com	\N	2013-09-16 11:47:38.564	admin	t	\N	1341215dbe9acab4361fd6417b2b11bc
 3	user	user@user.com	\N	2013-09-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+4	user2	user2@user.com	\N	2013-09-16 12:26:14.018	user	f	\N	87dc1e131a1369fdf8f1c824a6a62dff
+5	user3	user3@user.com	\N	2013-08-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+6	user4	user4@user.com	\N	2013-07-16 12:26:14.018	user	f	\N	87dc1e131a1369fdf8f1c824a6a62dff
+7	user5	user5@user.com	\N	2013-06-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+8	user6	user6@user.com	\N	2013-05-16 12:26:14.018	user	f	\N	87dc1e131a1369fdf8f1c824a6a62dff
+9	user7	user7@user.com	\N	2013-04-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+10	user8	user8@user.com	\N	2013-04-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+11	user9	user9@user.com	\N	2013-04-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+12	user10	user10@user.com	\N	2013-04-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+13	user11	user11@user.com	\N	2013-04-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+14	user12	user12@user.com	\N	2013-04-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+15	user13	user13@user.com	\N	2013-04-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 \.
 
 

@@ -19,18 +19,15 @@ $this->breadcrumbs=array(
     )); ?>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'username'); ?>
-        <?php echo $form->textField($model,'username',array('class'=>'form-control')); ?>
+        <?php //echo $form->labelEx($model,'username'); ?>
+        <?php echo $form->textField($model,'username',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('username'))); ?>
         <?php echo $form->error($model,'username'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'password'); ?>
-        <?php echo $form->passwordField($model,'password',array('class'=>'form-control')); ?>
+        <?php //echo $form->labelEx($model,'password'); ?>
+        <?php echo $form->passwordField($model,'password',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('password'))); ?>
         <?php echo $form->error($model,'password'); ?>
-        <p class="hint">
-            Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
-        </p>
     </div>
 
     <div class="row rememberMe">

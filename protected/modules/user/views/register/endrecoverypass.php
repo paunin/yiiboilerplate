@@ -18,20 +18,20 @@ $this->breadcrumbs=array(
     )); ?>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'hash'); ?>
-        <?php echo $form->textField($model,'hash',array('class'=>'form-control')); ?>
+        <?php //echo $form->labelEx($model,'hash'); ?>
+        <?php echo $form->textField($model,'hash',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('hash'))); ?>
         <?php echo $form->error($model,'hash'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'password'); ?>
-        <?php echo $form->passwordField($model,'password',array('class'=>'form-control')); ?>
+        <?php //echo $form->labelEx($model,'password'); ?>
+        <?php echo $form->passwordField($model,'password',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('password'))); ?>
         <?php echo $form->error($model,'password'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'password2'); ?>
-        <?php echo $form->passwordField($model,'password2',array('class'=>'form-control')); ?>
+        <?php //echo $form->labelEx($model,'password2'); ?>
+        <?php echo $form->passwordField($model,'password2',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('password2'))); ?>
         <?php echo $form->error($model,'password2'); ?>
     </div>
 

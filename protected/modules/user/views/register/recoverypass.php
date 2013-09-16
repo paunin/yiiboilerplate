@@ -18,13 +18,13 @@ $this->breadcrumbs=array(
     )); ?>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'email'); ?>
-        <?php echo $form->textField($model,'email',array('class'=>'form-control')); ?>
+        <?php //echo $form->labelEx($model,'email'); ?>
+        <?php echo $form->textField($model,'email',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('email'))); ?>
         <?php echo $form->error($model,'email'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'validacion'); ?>
+        <?php //echo $form->labelEx($model,'validacion'); ?>
         <?php $this->widget('application.extensions.recaptcha.EReCaptcha',
             array('model'=>$user, 'attribute'=>'validacion',
                 'theme'=>'red', 'language'=>'es_ES',

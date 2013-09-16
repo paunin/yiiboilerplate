@@ -18,8 +18,8 @@ $this->breadcrumbs=array(
     )); ?>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'newemail'); ?>
-        <?php echo $form->textField($model,'newemail',array('class'=>'form-control')); ?>
+        <?php //echo $form->labelEx($model,'newemail'); ?>
+        <?php echo $form->textField($model,'newemail',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('newemail'))); ?>
         <?php echo $form->error($model,'newemail'); ?>
     </div>
 

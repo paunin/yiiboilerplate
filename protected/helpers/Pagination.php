@@ -13,10 +13,9 @@ class Pagination extends CPagination
         return $this->_results;
     }
 
-    public function renderHtml($uri = null,$html_anch = '', $params_to_kill = array(), $just_next = false, $numGroup = 3, $backward = 'Назад',$forward="Вперёд")
+    public function renderHtml($uri = null,$html_anch = '', $params_to_kill = array(), $just_next = false, $numGroup = 3, $backward = "&laquo;",$forward="&raquo;")
     {
-        Asse::addCss('paginator.css');
-        Asse::addJs('paginator.js');
+
         $navigation = '';
         $num_pages = $this->getPageCount();
         $currPage = $this->getCurrentPage()+1;
@@ -25,21 +24,12 @@ class Pagination extends CPagination
         if ($num_pages > 1) {
             if ($just_next) {
                 if ($currPage < $num_pages) {
-                    $navigation = '
-                                <a class=""  href="' . Uri::changeParam($page_name, $currPage, $params_to_kill, $uri, $html_anch) . '">
-                                    <span>'.$forward.'</span>
-                                </a>
-                           ';
+                    $navigation = $this->renderItem(Uri::changeParam($page_name, $currPage, $params_to_kill, $uri, $html_anch),$forward,false,false);
                 }
             } else {
                 $count = null;
-                $navigation .= '<div class="paginator"><span class="paginator-header">Страницы:</span>';
-                if ($currPage - 1) {
-                    $navigation .= '<a data-page="'.$page_name.'='.($currPage - 2).'"  class="paginator-prev" href="' . Uri::changeParam($page_name, $currPage - 2, $params_to_kill, $uri, $html_anch) . '"><big>«</big> '.$backward.'</a>';
-                } else {
-                    $navigation .= '<span class="paginator-prev"><big>«</big> '.$backward.'</span>';
-                }
-
+                $navigation .= '<ul class="pagination">';
+                $navigation .= $this->renderItem(Uri::changeParam($page_name, $currPage - 2, $params_to_kill, $uri, $html_anch),$backward,false,!($currPage - 1>0));
 
                 $mt = false;
                 for ($i = 1; $i < $num_pages + 1; $i++)
@@ -54,29 +44,26 @@ class Pagination extends CPagination
                         )
                     ) {
                         if (!$mt)
-                            $navigation .= '<span class="paginator-dots">...</span>';
+                            $navigation .= $this->renderItem("#",'...',false,true);
                         $mt = 'true';
                     } else
                     {
                         $mt = false;
-                        if ($currPage != $i) {
-                            $navigation .= '<a data-page="'.$page_name.'='.($i-1).'" href="' . Uri::changeParam($page_name, $i-1, $params_to_kill, $uri, $html_anch) . '">' . $i . '</a>';
-                        } else {
-                            $navigation .= '<span class="paginator-active">' . $i . '</span>';
-                        }
+                        $navigation .= $this->renderItem(Uri::changeParam($page_name, $i-1, $params_to_kill, $uri, $html_anch),$i,$currPage == $i);
+
                     }
                 }
 
-                if (($num_pages) != $currPage) {
-                    $navigation .= '<a data-page="'.$page_name.'='.$currPage.'" class="paginator-next" href="' . Uri::changeParam($page_name, $currPage, $params_to_kill, $uri, $html_anch) . '">'.$forward.' <big>»</big></a>';
-                } else {
-                    $navigation .= '<span class="paginator-next">'.$forward.' <big>»</big></span>';
-                }
-                $navigation .= '</div>';
+
+                $navigation .= $this->renderItem(Uri::changeParam($page_name, $currPage, $params_to_kill, $uri, $html_anch),$forward,false,$num_pages == $currPage);
+
+                $navigation .= '</ul>';
             }
         }
 
         return $navigation;
-
+    }
+    public function renderItem($url,$label=null,$active=false,$disable=false){
+        return '<li class="'.($disable?'disabled ':'').($active?'active':'').'"><a href="' . $url . '">'.$label.($active?'<span class="sr-only">(current)</span>':'').'</a></li>';
     }
 }
