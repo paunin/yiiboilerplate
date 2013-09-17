@@ -4,6 +4,9 @@ unset($main['components']['clientScript']);
 return CMap::mergeArray(
     $main,
     array(
+        'preload' => array(
+            'debug',
+        ),
         'modules' => array(
             // uncomment the following to enable the Gii tool
             'gii' => array(
@@ -30,6 +33,9 @@ return CMap::mergeArray(
             'db' =>array(
                 'enableProfiling' => true,
                 'enableParamLogging' => true
+            ),
+            'debug' => array(
+                'class' => 'ext.yii2-debug.Yii2Debug',
             ),
 
 
