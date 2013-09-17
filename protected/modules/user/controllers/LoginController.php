@@ -22,7 +22,6 @@ class LoginController extends Controller
             if($model->validate() && $model->login()){
                 Cut::setFlash($this->getAction()->id." ACTION success",'success');
                 $this->redirect(Yii::app()->user->returnUrl);
-
             }
             Cut::setFlash($this->getAction()->id." ACTION error",'error');
         }

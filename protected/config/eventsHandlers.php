@@ -20,6 +20,7 @@
 return array(
     'onSomething' => array(
         array('EmptyModel', 'EmptyFuncForEvent'),
+        array('EmptyModel', 'EmptyFuncForEvent2'),
     ),
 );
 ?>

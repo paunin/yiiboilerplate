@@ -1,5 +1,10 @@
 <?php
+Asse::addCss('screen.css',null,false,'screen, projection');
+Asse::addCss('print.css',null,false,'print');
 Asse::addCss('main.css');
+Asse::addCss('form.css');
+
+
 
 Asse::addCss('bootstrap.min.css', Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
 Asse::addCss('bootstrap-theme.min.css', Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
@@ -18,19 +23,10 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="language" content="en"/>
 
-    <!-- blueprint CSS framework -->
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css"
-          media="screen, projection"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css"
-          media="print"/>
     <!--[if lt IE 8]>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css"
           media="screen, projection"/>
     <![endif]-->
-
-
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css"/>
-
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -54,8 +50,6 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
 <!--            <a class="navbar-brand" href="#">--><?php //echo Yii::app()->name ?><!--</a>-->
 <!--        </div>-->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-
-
             <?php $this->widget('application.widgets.b3menu.b3menuWidget', array(
                 'items' => array(
                     array('label' => 'Home',
@@ -70,8 +64,6 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                             //array(),
                         )
                     ),
-
-
                 )
             )); ?>
 
@@ -99,7 +91,6 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                             array('label' => 'Recovery password', 'url' => array('/user/register/recoverypass')),
                             array('label' => 'Recovery password(new pass)', 'url' => array('/user/register/endrecoverypass')),
                         )
-
                     ),
 
                     array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/user/login/logout'), 'visible' => !Yii::app()->user->isGuest),
@@ -125,7 +116,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
     <?php if (isset($this->breadcrumbs)): ?>
         <?php $this->widget('zii.widgets.CBreadcrumbs', array(
             'tagName'=>'ol',
-            'homeLink'=>'<li><a href="/">Home</a></li>',
+            'homeLink'=>'<li><a href="'.Yii::app()->homeUrl.'">Home</a></li>',
             'htmlOptions'=>array('class'=>'breadcrumb'),
             'activeLinkTemplate'=>'<li><a href="{url}">{label}</a></li>',
             'inactiveLinkTemplate'=>'<li>{label}</li>',
