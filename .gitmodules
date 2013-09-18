@@ -1,6 +1,3 @@
-[submodule "protected/extensions/yii-eauth"]
-	path = protected/extensions/yii-eauth
-	url = https://github.com/Nodge/yii-eauth.git
 [submodule "protected/extensions/yii2-debug"]
 	path = protected/extensions/yii2-debug
 	url = https://github.com/zhuravljov/yii2-debug.git
@@ -10,3 +7,6 @@
 [submodule "yii"]
 	path = yii
 	url = https://github.com/yiisoft/yii.git
+[submodule "protected/extensions/eauth"]
+	path = protected/extensions/eauth
+	url = https://github.com/Nodge/yii-eauth.git
