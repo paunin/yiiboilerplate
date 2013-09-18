@@ -1,55 +1,57 @@
 <?php
-$main = require(dirname(__FILE__) . '/main.php');
-unset($main['components']['clientScript']);
-return CMap::mergeArray(
-    $main,
-    array(
-        'preload' => array(
-            'debug',
+defined('YII_DEBUG') or define('YII_DEBUG',true);
+defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
+
+return  array(
+    'preload' => array(
+        'debug',
+    ),
+    'modules' => array(
+        // uncomment the following to enable the Gii tool
+        'gii' => array(
+            'class' => 'system.gii.GiiModule',
+            'generatorPaths' => array(
+                'ext.giix-core', // giix generators
+            ),
+            'password' => 'root',
+            'ipFilters' => array("*"),
+            'newFileMode' => 0666,
+            'newDirMode' => 0777,
         ),
-        'modules' => array(
-            // uncomment the following to enable the Gii tool
-            'gii' => array(
-                'class' => 'system.gii.GiiModule',
-                'generatorPaths' => array(
-                    'ext.giix-core', // giix generators
+    ),
+    'components' => array(
+        'urlManager' => array(
+            'urlFormat' => 'get',
+            'showScriptName' => true
+        ),
+        'fixture' => array(
+            'class' => 'system.test.CDbFixtureManager',
+        ),
+        'cache' => array(
+            //'class' => 'system.caching.CFileCache',
+            'class' => 'system.caching.CDummyCache',
+        ),
+
+        'db' =>array(
+            'enableProfiling' => true,
+            'enableParamLogging' => true
+        ),
+//        'debug' => array(
+//            'class' => 'ext.yii2-debug.Yii2Debug',
+//        ),
+
+
+        'log' => array(
+            'class' => 'CLogRouter',
+            'routes' => array(
+                array(
+                    'class' => 'CFileLogRoute',
+                    'levels' => 'error, warning, trace',
                 ),
-                'password' => 'root',
-                'ipFilters' => array("*"),
-                'newFileMode' => 0666,
-                'newDirMode' => 0777,
-            ),
-        ),
-        'components' => array(
-            'clientScript' => array(),
-            'fixture' => array(
-                'class' => 'system.test.CDbFixtureManager',
-            ),
-            'cache' => array(
-                //'class' => 'system.caching.CFileCache',
-                'class' => 'system.caching.CDummyCache',
-            ),
-
-            'db' =>array(
-                'enableProfiling' => true,
-                'enableParamLogging' => true
-            ),
-            'debug' => array(
-                'class' => 'ext.yii2-debug.Yii2Debug',
-            ),
-
-
-            'log' => array(
-                'class' => 'CLogRouter',
-                'routes' => array(
-                    array(
-                        'class' => 'CFileLogRoute',
-                        'levels' => 'error, warning, trace',
-                    ),
-                    array(
-                        'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-                        'ipFilters'=>array('127.0.0.1','192.168.1.215'),
-                    ),
+                array(
+                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+                    'ipFilters'=>array('127.0.0.1','192.168.1.215'),
+                ),
 //                    array( // configuration for the toolbar
 //                        'class' => 'XWebDebugRouter',
 //                        'config' => 'alignRight, opaque, runInDebug, fixedPos,  yamlStyle, collapsed',
@@ -59,8 +61,8 @@ return CMap::mergeArray(
 //                    array(
 //                        'class' => 'CWebLogRoute',
 //                    ),
-                ),
             ),
+        ),
 //                    'log' => array(
 //                        'class' => 'CLogRouter',
 //                        'routes' => array(
@@ -77,9 +79,8 @@ return CMap::mergeArray(
 //                        ),
 //                    ),
 
-        ),
-        'params' => array(
+    ),
+    'params' => array(
 
-        )
     )
 );

@@ -1,4 +1,5 @@
 /.idea/*
 /assets/*
 /protected/runtime/*
+/protected/config/example.custom.php
 

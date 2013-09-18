@@ -1,7 +1,7 @@
 <?php
 
 $ret = CMap::mergeArray(
-    require(dirname(__FILE__) . '/main.php'),
+    require(dirname(__FILE__) . '/dev.php'),
     array(
         'params' => array(
 

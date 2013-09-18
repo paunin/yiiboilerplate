@@ -47,3 +47,8 @@ endif;?>
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/tinymce4jq/big_tiny_init_jq.js"></script>
 
 <textarea class="big_tiny" ></textarea>
+
+<h2>Eauth:</h2>
+<?php
+$this->widget('ext.eauth.EAuthWidget', array('action' => '/user/login/login'));
+?>

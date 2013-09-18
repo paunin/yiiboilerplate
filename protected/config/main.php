@@ -1,20 +1,11 @@
 <?php
-
-
-
-// uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
-
-// This is the main Web application configuration. Any writable
-// CWebApplication properties can be configured here.
-
 $domain = 'yiiboilerplate.paunin.com'; //@ChangeIt
 $pgsqlDb = 'pumh';
 $pgsqlUser = 'pumh';
 $pgsqlPassword = '';
 
 
-return array(
+$main = array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Yii Boilerplate App', //@ChangeIt
 
@@ -29,13 +20,24 @@ return array(
         'application.models.forms.*',
         'application.components.*',
         'application.helpers.*',
+        'application.modules.user.models.*',
 
+        //Extensions
         'ext.giix-components.*',
+
         'ext.image.Image',
+
         'ext.yii-mail.YiiMailMessage',
+
         'ext.ExtendedClientScript.jsmin.*',
 
-        'application.modules.user.models.*'
+        'ext.eoauth.*',
+        'ext.eoauth.lib.*',
+        'ext.lightopenid.*',
+        'ext.eauth.*',
+        'ext.eauth.services.*',
+
+
     ),
 
     'modules' => array(
@@ -46,6 +48,10 @@ return array(
 
     // application components
     'components' => array(
+        'loid' => array(
+            'class' => 'application.extensions.lightopenid.loid',
+        ),
+        'eauth' => require(dirname(__FILE__) . '/eauth.php'),
         'mail' => array(
             'class' => 'ext.yii-mail.YiiMail',
             'transportType' => 'php',
@@ -59,15 +65,15 @@ return array(
             'loginUrl'=>array('user/login/login'),
         ),
 
-        'clientScript' => array(
+/*        'clientScript' => array(
             'class' => 'ext.ExtendedClientScript.ExtendedClientScript',
             'combineCss' => true,
             'compressCss' => true,
             'combineJs' => true,
             'compressJs' => true,
-            'excludeJsFiles' => array('jquery-1.10.2.min.js','bootstrap.min.js','jquery.cookie.js'),
+            'excludeJsFiles' => array('jquery-1.10.2.min.js','bootstrap.min.js','jquery.cookie.js','auth.css'),
             'excludeCssFiles' => array('bootstrap-theme.min.css','bootstrap.min.css',),
-        ),
+        ),*/
         'request' => array(
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
@@ -155,3 +161,22 @@ return array(
 
     ),
 );
+
+if(is_file(dirname(__FILE__) . '/custom.php')){
+    $custom = require(dirname(__FILE__) . '/custom.php');
+    $main = CMap::mergeArray(
+        $main,
+        $custom
+    );
+
+    if(defined('PROJECT_CUSTOM_DEBUG') && PROJECT_CUSTOM_DEBUG==true){
+        unset($main['components']['clientScript']);
+        $dev = require(dirname(__FILE__) . '/dev.php');
+        $main = CMap::mergeArray(
+            $main,
+            $dev
+        );
+    }
+}
+
+return $main;
