@@ -9,9 +9,25 @@ class User extends BaseUser
 	}
 
     /**
+     * Returns User model by its email
+     *
+     * @param string $email
+     * @access public
      * @return User
      */
+    public function findByEmail($email)
+    {
+        return self::model()->findByAttributes(array('email' => $email));
+    }
+
+    /**
+     * Return current authorized user
+     *
+     * @return User|null
+     */
     public static function current(){
+        if(Yii::app()->user->isGuest)
+            return null;
         return User::model()->findByPk(Yii::app()->user->getId());
     }
 }
