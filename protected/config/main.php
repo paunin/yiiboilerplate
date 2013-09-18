@@ -1,9 +1,5 @@
 <?php
 $domain = 'yiiboilerplate.paunin.com'; //@ChangeIt
-$pgsqlDb = 'pumh';
-$pgsqlUser = 'pumh';
-$pgsqlPassword = '';
-
 
 $main = array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
@@ -116,14 +112,6 @@ $main = array(
         'cache' => array(
             'class' => 'system.caching.CFileCache',
         ),
-        'db' => array(
-            'connectionString' => "pgsql:host=localhost;dbname=$pgsqlDb",
-            'emulatePrepare' => true,
-            'username' => $pgsqlUser,
-            'password' => $pgsqlPassword,
-            'charset' => 'utf8',
-        ),
-
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'site/error',
@@ -155,10 +143,6 @@ $main = array(
         'slogan' => 'Slogan for Yii Boilerplate Application', //@ChangeIt
         'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
         'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
-        'pgsqlDb'=>"$pgsqlDb",
-        'pgsqlUser'=>"$pgsqlUser",
-        'pgsqlPassword'=>"$pgsqlPassword",
-
     ),
 );
 
