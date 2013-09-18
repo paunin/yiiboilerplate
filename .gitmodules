@@ -1,0 +1,12 @@
+[submodule "protected/extensions/yii-eauth"]
+	path = protected/extensions/yii-eauth
+	url = https://github.com/Nodge/yii-eauth.git
+[submodule "protected/extensions/yii2-debug"]
+	path = protected/extensions/yii2-debug
+	url = https://github.com/zhuravljov/yii2-debug.git
+[submodule "protected/extensions/eoauth"]
+	path = protected/extensions/eoauth
+	url = https://github.com/jorgebg/yii-eoauth.git
+[submodule "yii"]
+	path = yii
+	url = https://github.com/yiisoft/yii.git
