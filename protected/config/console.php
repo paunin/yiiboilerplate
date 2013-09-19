@@ -1,7 +1,8 @@
 <?php
-
+$main = require(dirname(__FILE__) . '/main.php');
+unset ($main['components']['request']);
 $ret = CMap::mergeArray(
-    require(dirname(__FILE__) . '/dev.php'),
+    $main,
     array(
         'params' => array(
 
