@@ -33,8 +33,8 @@ return array(
         'yandex_oauth' => array(
             // register your app here: https://oauth.yandex.ru/client/my
             'class' => 'YandexOAuthService',
-            'client_id' => 'db2b0087b35b45b2b6dcd97cc1d755ea',
-            'client_secret' => '7353f3d8b2da44ec9a892fa2424f3889',
+            'client_id' => '82343d009b4a48cab6a5832e17a7ffa3',
+            'client_secret' => 'bc40e6991b4b4e368af6ce2c55d0e8a9',
             'title' => 'Yandex',
         ),
 /*        'yandex_api' => array(
