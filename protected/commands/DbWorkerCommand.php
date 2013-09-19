@@ -11,7 +11,7 @@ class DbWorkerCommand extends CConsoleCommand
     public function actionLoad($path=null){
 
         if(!$path)
-            $path = __DIR__.'/../tests/fixtures/dbinit.sql';
+            $path = dirname(__FILE__).'/../tests/fixtures/dbinit.sql';
 
         $pdd = Yii::app()->params['pgsqlDb'];
         $pdu = Yii::app()->params['pgsqlUser'];
@@ -36,7 +36,7 @@ class DbWorkerCommand extends CConsoleCommand
 
     public function actionSave($path = null){
         if(!$path)
-            $path = __DIR__.'/../tests/fixtures/dbinit.sql';
+            $path = dirname(__FILE__).'/../tests/fixtures/dbinit.sql';
         $pdd = Yii::app()->params['pgsqlDb'];
         $pdu = Yii::app()->params['pgsqlUser'];
         $pdp = Yii::app()->params['pgsqlPassword'];
