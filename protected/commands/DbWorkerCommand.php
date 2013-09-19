@@ -16,10 +16,7 @@ class DbWorkerCommand extends CConsoleCommand
         $pdd = Yii::app()->params['pgsqlDb'];
         $pdu = Yii::app()->params['pgsqlUser'];
         $pdp = Yii::app()->params['pgsqlPassword'];
-        $command = "set PGPASSWORD=$pdp && psql";
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $command = 'psql';
-        }
+        $command = "env PGPASSWORD=$pdp  psql";
 
         if($pdu =='postgres')
             die('Your database can\'t be used by postgres');
@@ -40,7 +37,7 @@ class DbWorkerCommand extends CConsoleCommand
         $pdd = Yii::app()->params['pgsqlDb'];
         $pdu = Yii::app()->params['pgsqlUser'];
         $pdp = Yii::app()->params['pgsqlPassword'];
-        $command = "set PGPASSWORD=$pdp && pg_dump";
+        $command = "env PGPASSWORD=$pdp pg_dump --encoding=UTF8";
 
         `$command -h localhost -U $pdu -O -x $pdd > $path`;
         echo 'ok'."\n";
