@@ -5,10 +5,8 @@ return array(
     'cache' => false, // Cache component name or false to disable cache. Defaults to 'cache'.
     'cacheExpire' => 0, // Cache lifetime. Defaults to 0 - means unlimited.
     'services' => array( // You can change the providers and their classes.
-        /*  'google' => array(
-              'class' => 'GoogleOpenIDService',
-          ),
-          'yandex' => array(
+
+          /*'yandex' => array(
               'class' => 'YandexOpenIDService',
           ),*/
           'twitter' => array(
@@ -17,6 +15,10 @@ return array(
               'key' => '6Ae8XbMXBb93KDmTG6kaQ',
               'secret' => 'hjq4QWIaZOCeuYFv3DjxWTDTr9dN0HId7iZETKkY',
           ),
+        'google' => array(
+            'class' => 'GoogleOpenIDService',
+            'title' => 'OpenID',
+        ),
         'google_oauth' => array(
             // register your app here: https://code.google.com/apis/console/
             'class' => 'GoogleOAuthService',
@@ -30,12 +32,25 @@ return array(
             'client_id' => '606392652746197',
             'client_secret' => '8208ae757a903d25a1cb18cb15b5da7a',
         ),
+        'vkontakte' => array(
+            // register your app here: https://vk.com/editapp?act=create&site=1
+            'class' => 'VKontakteOAuthService',
+            'client_id' => '3886566',
+            'client_secret' => '8EPeW9B3evETBPCEtsRH',
+        ),
         'yandex_oauth' => array(
             // register your app here: https://oauth.yandex.ru/client/my
             'class' => 'YandexOAuthService',
             'client_id' => '82343d009b4a48cab6a5832e17a7ffa3',
             'client_secret' => 'bc40e6991b4b4e368af6ce2c55d0e8a9',
             'title' => 'Yandex',
+        ),
+        'moikrug' => array(
+            // register your app here: https://oauth.yandex.ru/client/my
+            'class' => 'MoikrugOAuthService',
+            'client_id' => '82343d009b4a48cab6a5832e17a7ffa3',
+            'client_secret' => 'bc40e6991b4b4e368af6ce2c55d0e8a9',
+            'title' => 'Moikrug.ru',
         ),
 
          'linkedin' => array(
@@ -56,12 +71,7 @@ return array(
 //             'client_id' => '...',
 //             'client_secret' => '...',
 //         ),
-        'vkontakte' => array(
-            // register your app here: https://vk.com/editapp?act=create&site=1
-            'class' => 'VKontakteOAuthService',
-            'client_id' => '3886566',
-            'client_secret' => '8EPeW9B3evETBPCEtsRH',
-        ),
+
         'mailru' => array(
             // register your app here: http://api.mail.ru/sites/my/add
             'class' => 'MailruOAuthService',
@@ -69,20 +79,15 @@ return array(
             'client_secret' => '713b38242f9bec9e33bd2c043ad0d823',
         ),
 
-        'moikrug' => array(
-            // register your app here: https://oauth.yandex.ru/client/my
-            'class' => 'MoikrugOAuthService',
-            'client_id' => '4c81260212e14272b2a294ede2cfe53c',
-            'client_secret' => '1f1b50e247ca4a818285f6e8a99b25bc',
-        ),
-        'odnoklassniki' => array(
-            // register your app here: http://dev.odnoklassniki.ru/wiki/pages/viewpage.action?pageId=13992188
-            // ... or here: http://www.odnoklassniki.ru/dk?st.cmd=appsInfoMyDevList&st._aid=Apps_Info_MyDev
-            'class' => 'OdnoklassnikiOAuthService',
-            'client_id' => '...',
-            'client_public' => '...',
-            'client_secret' => '...',
-            'title' => 'Odnokl.',
-        ),
+
+//        'odnoklassniki' => array(
+//            // register your app here: http://dev.odnoklassniki.ru/wiki/pages/viewpage.action?pageId=13992188
+//            // ... or here: http://www.odnoklassniki.ru/dk?st.cmd=appsInfoMyDevList&st._aid=Apps_Info_MyDev
+//            'class' => 'OdnoklassnikiOAuthService',
+//            'client_id' => '...',
+//            'client_public' => '...',
+//            'client_secret' => '...',
+//            'title' => 'Odnokl.',
+//        ),
     ),
 );

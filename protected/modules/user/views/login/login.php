@@ -44,8 +44,9 @@ $this->breadcrumbs=array(
 </div><!-- form -->
 <div style="text-align: center; margin: auto">
     </br>
-    OR USE ONE OF YOUR SOCIAL ACCOUNTS</br></br>
+    </br>
+    OR USE ONE OF YOUR SOCIAL ACCOUNTS</br></br></br>
     <?php
     $this->widget('ext.eauth.EAuthWidget', array('action' => '/user/login/login'));
-    ?>
+    ?></br></br>
 </div>
