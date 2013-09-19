@@ -14,21 +14,21 @@ return array(
           'twitter' => array(
               // register your app here: https://dev.twitter.com/apps/new
               'class' => 'application.components.eauth_custom.TwitterService',
-              'key' => 'v7iP5yonyN7iadI6kxX8HQ',
-              'secret' => '3Uk8OVPWdRnm4T6L2DNxAmwcQrWJlFqyckHKyDGHzZE',
+              'key' => '6Ae8XbMXBb93KDmTG6kaQ',
+              'secret' => 'hjq4QWIaZOCeuYFv3DjxWTDTr9dN0HId7iZETKkY',
           ),
         'google_oauth' => array(
             // register your app here: https://code.google.com/apis/console/
             'class' => 'GoogleOAuthService',
-            'client_id' => '663929834468.apps.googleusercontent.com',
-            'client_secret' => '4YZb24akhesa7o1-Epqlp2Yf',
+            'client_id' => '620690907725.apps.googleusercontent.com',
+            'client_secret' => 'tULdcRqXhDw0N_zMcf5usE4M',
             'title' => 'Google',
         ),
         'facebook' => array(
             // register your app here: https://developers.facebook.com/apps/
             'class' => 'FacebookOAuthService',
-            'client_id' => '134599793355403',
-            'client_secret' => '2e1b87b7737574037d86c8e36ae80e6a',
+            'client_id' => '606392652746197',
+            'client_secret' => '8208ae757a903d25a1cb18cb15b5da7a',
         ),
         'yandex_oauth' => array(
             // register your app here: https://oauth.yandex.ru/client/my
