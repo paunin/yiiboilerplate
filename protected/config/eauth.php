@@ -50,12 +50,12 @@ return array(
              'client_id' => 'b07f27a05c78edda4e74',
              'client_secret' => 'c4356c16360653c6837883db60cd0ca2de06709d',
          ),
-         'live' => array(
-             // register your app here: https://manage.dev.live.com/Applications/Index
-             'class' => 'LiveOAuthService',
-             'client_id' => '...',
-             'client_secret' => '...',
-         ),
+//         'live' => array(
+//             // register your app here: https://manage.dev.live.com/Applications/Index
+//             'class' => 'LiveOAuthService',
+//             'client_id' => '...',
+//             'client_secret' => '...',
+//         ),
         'vkontakte' => array(
             // register your app here: https://vk.com/editapp?act=create&site=1
             'class' => 'VKontakteOAuthService',
