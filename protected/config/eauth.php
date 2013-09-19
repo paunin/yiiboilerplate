@@ -66,7 +66,7 @@ return array(
             // register your app here: http://api.mail.ru/sites/my/add
             'class' => 'MailruOAuthService',
             'client_id' => '710430',
-            'client_secret' => '24e0be987b297f3fed60c59c4d48bcbe',
+            'client_secret' => '713b38242f9bec9e33bd2c043ad0d823',
         ),
 
         'moikrug' => array(
