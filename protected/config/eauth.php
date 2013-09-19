@@ -37,13 +37,7 @@ return array(
             'client_secret' => 'bc40e6991b4b4e368af6ce2c55d0e8a9',
             'title' => 'Yandex',
         ),
-/*        'yandex_api' => array(
-            // register your app here: https://oauth.yandex.ru/client/my
-            'class' => 'YandexOAuthService',
-            'client_id' => '4c81260212e14272b2a294ede2cfe53c',
-            'client_secret' => '1f1b50e247ca4a818285f6e8a99b25bc',
-            'title' => 'Yandex',
-        ),*/
+
          'linkedin' => array(
              // register your app here: https://www.linkedin.com/secure/developer
              'class' => 'LinkedinOAuthService',
@@ -53,8 +47,8 @@ return array(
          'github' => array(
              // register your app here: https://github.com/settings/applications
              'class' => 'GitHubOAuthService',
-             'client_id' => '...',
-             'client_secret' => '...',
+             'client_id' => 'b07f27a05c78edda4e74',
+             'client_secret' => 'c4356c16360653c6837883db60cd0ca2de06709d',
          ),
          'live' => array(
              // register your app here: https://manage.dev.live.com/Applications/Index
@@ -65,8 +59,8 @@ return array(
         'vkontakte' => array(
             // register your app here: https://vk.com/editapp?act=create&site=1
             'class' => 'VKontakteOAuthService',
-            'client_id' => '3232874',
-            'client_secret' => 'BkW7lRbPPpZBnzyNCw5z',
+            'client_id' => '3886566',
+            'client_secret' => '8EPeW9B3evETBPCEtsRH',
         ),
         'mailru' => array(
             // register your app here: http://api.mail.ru/sites/my/add
