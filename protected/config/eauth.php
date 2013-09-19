@@ -15,10 +15,10 @@ return array(
               'key' => '6Ae8XbMXBb93KDmTG6kaQ',
               'secret' => 'hjq4QWIaZOCeuYFv3DjxWTDTr9dN0HId7iZETKkY',
           ),
-        'google' => array(
-            'class' => 'GoogleOpenIDService',
-            'title' => 'OpenID',
-        ),
+//        'google' => array(
+//            'class' => 'GoogleOpenIDService',
+//            'title' => 'OpenID',
+//        ),
         'google_oauth' => array(
             // register your app here: https://code.google.com/apis/console/
             'class' => 'GoogleOAuthService',
@@ -80,14 +80,14 @@ return array(
         ),
 
 
-//        'odnoklassniki' => array(
-//            // register your app here: http://dev.odnoklassniki.ru/wiki/pages/viewpage.action?pageId=13992188
-//            // ... or here: http://www.odnoklassniki.ru/dk?st.cmd=appsInfoMyDevList&st._aid=Apps_Info_MyDev
-//            'class' => 'OdnoklassnikiOAuthService',
-//            'client_id' => '...',
-//            'client_public' => '...',
-//            'client_secret' => '...',
-//            'title' => 'Odnokl.',
-//        ),
+        'odnoklassniki' => array(
+            // register your app here: http://dev.odnoklassniki.ru/wiki/pages/viewpage.action?pageId=13992188
+            // ... or here: http://www.odnoklassniki.ru/dk?st.cmd=appsInfoMyDevList&st._aid=Apps_Info_MyDev
+            'class' => 'OdnoklassnikiOAuthService',
+            'client_id' => '194586624',
+            'client_public' => 'CBAJCKJMABABABABA',
+            'client_secret' => '894AF535396533C8D40374B0',
+            'title' => 'Odnokl.',
+        ),
     ),
 );
