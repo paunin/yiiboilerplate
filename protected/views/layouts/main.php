@@ -103,6 +103,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                             array('label' => 'Change email', 'url' => array('/user/profile/changemail')),
                             array('label' => 'Changed email verify', 'url' => array('/user/profile/endchangemail')),
                             array(),
+                            array('label' => 'Changed username', 'url' => array('/user/profile/changeusername')),
                             array('label' => 'Changed password', 'url' => array('/user/profile/changepassword')),
                         )
 

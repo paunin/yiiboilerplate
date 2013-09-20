@@ -15,7 +15,7 @@ class ProfileController extends Controller
         return array(
 
             array('allow',
-                'actions' => array('changemail', 'endchangemail', 'changepassword', 'index'),
+                'actions' => array('changemail', 'endchangemail', 'changepassword', 'changeusername', 'index'),
                 'users' => array('@'),
             ),
 
@@ -106,4 +106,26 @@ class ProfileController extends Controller
         $this->render('/profile/changepassword', array('model' => $model));
     }
 
+    public function actionChangeUsername()
+    {
+
+        $model = new ChangeUsernameForm();
+
+        // if it is ajax validation request
+        if(isset($_POST['ajax']) && $_POST['ajax'] === 'changeusername-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        // collect user input data
+        if(isset($_POST['ChangeUsernameForm'])) {
+            $model->attributes = $_POST['ChangeUsernameForm'];
+            if($model->validate() && $model->change()) {
+                Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+                $this->redirect(Yii::app()->user->returnUrl);
+            }
+            Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
+        }
+        $this->render('/profile/changeusername', array('model' => $model));
+    }
 }

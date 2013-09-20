@@ -1,6 +1,6 @@
 <?php
 /* @var $this ProfileController */
-/* @var $model ChangeMailForm */
+/* @var $model ChangePasswordForm */
 /* @var $form CActiveForm  */
 
 $this->pageTitle=Yii::app()->name . ' - Change password';
@@ -16,7 +16,7 @@ $this->breadcrumbs=array(
             'validateOnSubmit'=>true,
         ),
     )); ?>
-    <?php echo CHtml::errorSummary($model); ?>
+    <?php //echo CHtml::errorSummary($model); ?>
     <?php if($model->getScenario()=='withpassword'): ?>
         <div class="row">
             <?php //echo $form->labelEx($model,'password'); ?>
