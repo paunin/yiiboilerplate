@@ -3,7 +3,7 @@
 class LoginController extends Controller
 {
 
-    public function filters()
+/*    public function filters()
     {
         return array(
             'accessControl',
@@ -26,7 +26,7 @@ class LoginController extends Controller
                 'users' => array('*'),
             ),
         );
-    }
+    }*/
 
     /**
      * @param $serviceName
@@ -40,15 +40,20 @@ class LoginController extends Controller
         $eauth->cancelUrl = $this->createAbsoluteUrl('site/login');
 
         try {
-            if ($eauth->authenticate()) {
+            if($eauth->authenticate()) {
                 //var_dump($eauth->getIsAuthenticated(), $eauth->getAttributes());
-                $identity = new EAuthUserIdentity($eauth);
+                $soc_identity = new EAuthUserIdentity($eauth);
 
                 // successful authentication
-                if ($identity->authenticate()) {
-                    Yii::app()->user->login($identity);
-                    //var_dump($identity->id, $identity->name, Yii::app()->user->id);exit;
+                if($soc_identity->authenticate()) {
+                    //Yii::app()->user->login($soc_identity);
+                    //var_dump($soc_identity->id, $soc_identity->name, Yii::app()->user->id);exit;
                     //var_dump( $eauth->attributes);
+
+
+                    $identity = new UserSocialIdentity($soc_identity);
+                    if($identity->authenticate() == UserSocialIdentity::ERROR_NONE)
+                        Yii::app()->user->login($identity);
 
                     // special redirect with closing popup window
                     Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
@@ -65,7 +70,7 @@ class LoginController extends Controller
         } catch (EAuthException $e) {
             // save authentication error to session
             Yii::app()->user->setFlash('error', 'EAuthException: ' . $e->getMessage());
-            Cut::setFlash($this->getAction()->id . " ACTION error".'EAuthException: ' . $e->getMessage(), 'error');
+            Cut::setFlash($this->getAction()->id . " ACTION error" . 'EAuthException: ' . $e->getMessage(), 'error');
             // close popup window and redirect to cancelUrl
             $eauth->redirect($eauth->getCancelUrl());
         }
@@ -76,16 +81,16 @@ class LoginController extends Controller
         $model = new LoginForm();
 
         // if it is ajax validation request
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
+        if(isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
 
         // collect user input data
-        if (isset($_POST['LoginForm'])) {
+        if(isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->login()) {
+            if($model->validate() && $model->login()) {
                 Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
@@ -98,7 +103,7 @@ class LoginController extends Controller
     public function actionLogin()
     {
         $serviceName = Yii::app()->request->getQuery('service');
-        if (isset($serviceName)) {
+        if(isset($serviceName)) {
             $this->LoginSocial($serviceName);
         }
         $this->LoginSimple();

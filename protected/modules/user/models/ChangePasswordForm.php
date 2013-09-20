@@ -1,10 +1,11 @@
 <?php
 
-class ChangePasswordForm extends User
+class ChangePasswordForm extends CFormModel
 {
     public $password;
     public $newpassword;
     public $newpassword2;
+
 
     /**
      * @return array
@@ -12,9 +13,10 @@ class ChangePasswordForm extends User
     public function rules()
     {
         return array(
-            // username and password are required
-            array('password, newpassword, newpassword2', 'required'),
-            array('password', 'validatePassword'),
+            array('password', 'required', 'on' => 'withpassword'),
+            array('password', 'validatePassword', 'on' => 'withpassword'),
+
+            array('newpassword, newpassword2', 'required'),
             array('newpassword', 'length', 'min' => 4, 'max' => 32),
             array('newpassword2', 'compare', 'compareAttribute' => 'newpassword'),
         );
@@ -40,7 +42,7 @@ class ChangePasswordForm extends User
     {
         $pass = $this->$attribute;
         if(User::current()->password != User::encPass($pass))
-            $this->addError($attribute, 'Incorrect Password'/*.User::current()->password .'!='. md5($pass).'('.$pass.')'*/);
+            $this->addError($attribute, 'Incorrect Password' /*.User::current()->password .'!='. md5($pass).'('.$pass.')'*/);
     }
 
     /**

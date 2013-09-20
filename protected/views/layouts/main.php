@@ -98,7 +98,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                         'label' => 'profile',
                         'visible' => !Yii::app()->user->isGuest,
                         'items' => array(
-                            array('label' => 'Simple profile', 'url' => array('/user/profile')),
+                            array('label' => 'Simple profile', 'url' => array('/user/profile/index')),
                             array(),
                             array('label' => 'Change email', 'url' => array('/user/profile/changemail')),
                             array('label' => 'Changed email verify', 'url' => array('/user/profile/endchangemail')),

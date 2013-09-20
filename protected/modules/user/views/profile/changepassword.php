@@ -16,12 +16,14 @@ $this->breadcrumbs=array(
             'validateOnSubmit'=>true,
         ),
     )); ?>
-
-    <div class="row">
-        <?php //echo $form->labelEx($model,'password'); ?>
-        <?php echo $form->passwordField($model,'password',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('password'))); ?>
-        <?php echo $form->error($model,'password'); ?>
-    </div>
+    <?php echo CHtml::errorSummary($model); ?>
+    <?php if($model->getScenario()=='withpassword'): ?>
+        <div class="row">
+            <?php //echo $form->labelEx($model,'password'); ?>
+            <?php echo $form->passwordField($model,'password',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('password'))); ?>
+            <?php echo $form->error($model,'password'); ?>
+        </div>
+    <?php endif;?>
     <div class="row">
         <?php //echo $form->labelEx($model,'newpassword'); ?>
         <?php echo $form->passwordField($model,'newpassword',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('newpassword'))); ?>

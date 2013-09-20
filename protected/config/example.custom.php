@@ -1,5 +1,7 @@
 <?php
 //defined('PROJECT_CUSTOM_DEBUG') or define('PROJECT_CUSTOM_DEBUG',true);
+//defined('YII_DEBUG') or define('YII_DEBUG',true);
+defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 $sqlDb = 'pumh';
 $sqlUser = 'pumh';
 $sqlPassword = '';

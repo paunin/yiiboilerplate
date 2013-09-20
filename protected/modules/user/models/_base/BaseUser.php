@@ -7,7 +7,7 @@
  * property or method in class "User".
  *
  * Columns in table "user" available as properties of the model,
- * and there are no model relations.
+ * followed by relations of table "user" available as properties of the model.
  *
  * @property integer $id
  * @property string $username
@@ -19,6 +19,7 @@
  * @property string $last_login
  * @property string $password
  *
+ * @property UserSocial[] $userSocials
  */
 abstract class BaseUser extends GxActiveRecord {
 
@@ -40,16 +41,17 @@ abstract class BaseUser extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('username, email, role', 'required'),
+			array('username', 'required'),
 			array('password', 'length', 'max'=>255),
-			array('key, created_at, is_active, last_login', 'safe'),
-			array('key, created_at, is_active, last_login, password', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('email, key, created_at, role, is_active, last_login', 'safe'),
+			array('email, key, created_at, role, is_active, last_login, password', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('id, username, email, key, created_at, role, is_active, last_login, password', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
+			'userSocials' => array(self::HAS_MANY, 'UserSocial', 'user_id'),
 		);
 	}
 
@@ -69,6 +71,7 @@ abstract class BaseUser extends GxActiveRecord {
 			'is_active' => Yii::t('app', 'Is Active'),
 			'last_login' => Yii::t('app', 'Last Login'),
 			'password' => Yii::t('app', 'Password'),
+			'userSocials' => null,
 		);
 	}
 

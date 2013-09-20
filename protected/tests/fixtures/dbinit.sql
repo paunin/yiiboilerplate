@@ -146,10 +146,10 @@ SELECT pg_catalog.setval('smtp_id_seq', 1, false);
 CREATE TABLE "user" (
     id integer NOT NULL,
     username character varying NOT NULL,
-    email character varying NOT NULL,
+    email character varying,
     key character varying,
     created_at timestamp without time zone DEFAULT now(),
-    role character varying NOT NULL,
+    role character varying NOT NULL DEFAULT 'user',
     is_active boolean DEFAULT false NOT NULL,
     last_login timestamp without time zone,
     password character varying(255)
@@ -179,7 +179,53 @@ ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_id_seq', 3, true);
+SELECT pg_catalog.setval('user_id_seq', 100, true);
+
+
+--
+-- Name: user_social; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_social (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    social_service character varying NOT NULL,
+    user_social_id character varying NOT NULL,
+    additional_data text
+);
+
+
+--
+-- Name: TABLE user_social; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE user_social IS 'users from social accounts linked to users';
+
+
+--
+-- Name: user_social_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_social_id_seq
+    START WITH 100
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_social_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_social_id_seq OWNED BY user_social.id;
+
+
+--
+-- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_social_id_seq', 1, false);
 
 
 --
@@ -201,6 +247,13 @@ ALTER TABLE smtp ALTER COLUMN id SET DEFAULT nextval('smtp_id_seq'::regclass);
 --
 
 ALTER TABLE "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE user_social ALTER COLUMN id SET DEFAULT nextval('user_social_id_seq'::regclass);
 
 
 --
@@ -286,7 +339,7 @@ COPY "user" (id, username, email, key, created_at, role, is_active, last_login, 
 12	user10	user10@user.com	\N	2013-01-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 13	user11	user11@user.com	\N	2012-12-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 14	user12	user12@user.com	\N	2012-11-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-15	user13	user13@user.com	\N	2012-09-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+15	user13	\N	\N	2012-09-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 16	user14	user14@user.com	\N	2012-08-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 17	user15	user15@user.com	\N	2012-07-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 18	user16	user16@user.com	\N	2012-06-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
@@ -295,6 +348,14 @@ COPY "user" (id, username, email, key, created_at, role, is_active, last_login, 
 21	user19	user19@user.com	\N	2012-03-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 22	user20	user20@user.com	\N	2012-02-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 23	user21	user21@user.com	\N	2012-01-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+\.
+
+
+--
+-- Data for Name: user_social; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY user_social (id, user_id, social_service, user_social_id, additional_data) FROM stdin;
 \.
 
 
@@ -354,6 +415,16 @@ ALTER TABLE ONLY "user"
     ADD CONSTRAINT user_pkey PRIMARY KEY (id);
 
 
+ALTER TABLE ONLY "user_social"
+    ADD CONSTRAINT user_social_pkey PRIMARY KEY (id);
+--
+-- Name: user_social_social_service_user_id_unique; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_social
+    ADD CONSTRAINT user_social_social_service_user_id_unique UNIQUE (social_service, user_social_id);
+
+
 --
 -- Name: user_username_unique; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
@@ -384,6 +455,14 @@ ALTER TABLE ONLY "AuthItemChild"
 
 ALTER TABLE ONLY "AuthItemChild"
     ADD CONSTRAINT "AuthItemChild_parent_fkey" FOREIGN KEY (parent) REFERENCES "AuthItem"(name) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: Ref_user_social_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_social
+    ADD CONSTRAINT "Ref_user_social_to_user" FOREIGN KEY (user_id) REFERENCES "user"(id);
 
 
 --

@@ -8,6 +8,7 @@
 class UserIdentity extends CUserIdentity
 {
     private $_id;
+    private $_username;
     const ERROR_NOT_ACTIVE = 5;
     /**
      * @return bool
@@ -31,16 +32,29 @@ class UserIdentity extends CUserIdentity
             $this->errorCode = self::ERROR_NOT_ACTIVE;
         else {
             $this->errorCode = self::ERROR_NONE;
-            $this->_id = $user->id;
-            $user->last_login = date('Y-m-d H:i:s');
-            $user->save();
+            $this->assignDbUser($user);
         }
 
         return $this->errorCode == self::ERROR_NONE;
     }
 
+    /**
+     * @param User $user
+     * @return bool
+     */
+    protected  function assignDbUser(User $user){
+        $this->_id = $user->id;
+        $this->_username = $user->username;
+        $user->last_login = date('Y-m-d H:i:s');
+        return $user->save();
+    }
+
     public function getId()
     {
         return $this->_id;
+    }
+    public function getName()
+    {
+        return $this->_username;
     }
 }

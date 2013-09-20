@@ -82,7 +82,11 @@ class ProfileController extends Controller
 
     public function actionChangePassword()
     {
+
         $model = new ChangePasswordForm();
+        if(User::current()->password)
+            $model->setScenario('withpassword');
+
 
         // if it is ajax validation request
         if(isset($_POST['ajax']) && $_POST['ajax'] === 'changepassword-form') {
