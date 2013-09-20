@@ -93,7 +93,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                         )
                     ),
 
-                    array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/user/login/logout'), 'visible' => !Yii::app()->user->isGuest),
+                    array('label' => 'Logout (' . Yii::app()->user->name . ' '. Yii::app()->user->id .')', 'url' => array('/user/login/logout'), 'visible' => !Yii::app()->user->isGuest),
                     array(
                         'label' => 'profile',
                         'visible' => !Yii::app()->user->isGuest,
@@ -102,7 +102,8 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                             array(),
                             array('label' => 'Change email', 'url' => array('/user/profile/changemail')),
                             array('label' => 'Changed email verify', 'url' => array('/user/profile/endchangemail')),
-
+                            array(),
+                            array('label' => 'Changed password', 'url' => array('/user/profile/changepassword')),
                         )
 
                     )

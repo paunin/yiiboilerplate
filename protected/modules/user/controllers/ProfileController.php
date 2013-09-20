@@ -15,7 +15,7 @@ class ProfileController extends Controller
         return array(
 
             array('allow',
-                'actions' => array('changemail', 'endchangemail','index'),
+                'actions' => array('changemail', 'endchangemail', 'changepassword', 'index'),
                 'users' => array('@'),
             ),
 
@@ -24,7 +24,9 @@ class ProfileController extends Controller
             ),
         );
     }
-    public function actionIndex(){
+
+    public function actionIndex()
+    {
         $this->render('/profile/index');
     }
 
@@ -33,15 +35,15 @@ class ProfileController extends Controller
         $model = new ChangeMailForm();
 
         // if it is ajax validation request
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'changemail-form') {
+        if(isset($_POST['ajax']) && $_POST['ajax'] === 'changemail-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
 
         // collect user input data
-        if (isset($_POST['ChangeMailForm'])) {
+        if(isset($_POST['ChangeMailForm'])) {
             $model->attributes = $_POST['ChangeMailForm'];
-            if ($model->validate() && $model->changemail()) {
+            if($model->validate() && $model->changemail()) {
                 Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
@@ -57,25 +59,47 @@ class ProfileController extends Controller
         $model = new EndChangeMailForm();
 
         // if it is ajax validation request
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'endchangemail-form') {
+        if(isset($_POST['ajax']) && $_POST['ajax'] === 'endchangemail-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
         $key = Yii::app()->request->getParam('key');
-        if ($key && !isset($_POST['EndChangeMailForm'])) {
+        if($key && !isset($_POST['EndChangeMailForm'])) {
             $model->hash = $key;
         }
 
         // collect user input data
-        if (isset($_POST['EndChangeMailForm'])) {
+        if(isset($_POST['EndChangeMailForm'])) {
             $model->attributes = $_POST['EndChangeMailForm'];
-            if ($model->validate() && $model->endchange()) {
+            if($model->validate() && $model->endchange()) {
                 Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
             Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
         }
         $this->render('/profile/endchangemail', array('model' => $model));
+    }
+
+    public function actionChangePassword()
+    {
+        $model = new ChangePasswordForm();
+
+        // if it is ajax validation request
+        if(isset($_POST['ajax']) && $_POST['ajax'] === 'changepassword-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        // collect user input data
+        if(isset($_POST['ChangePasswordForm'])) {
+            $model->attributes = $_POST['ChangePasswordForm'];
+            if($model->validate() && $model->change()) {
+                Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+                $this->redirect(Yii::app()->user->returnUrl);
+            }
+            Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
+        }
+        $this->render('/profile/changepassword', array('model' => $model));
     }
 
 }

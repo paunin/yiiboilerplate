@@ -25,7 +25,7 @@ class UserIdentity extends CUserIdentity
 
         if (!$user)
             $this->errorCode = self::ERROR_USERNAME_INVALID;
-        else if (($user->password !== md5($this->password)))
+        else if (($user->password !== User::encPass($this->password)))
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
         else if (!$user->is_active)
             $this->errorCode = self::ERROR_NOT_ACTIVE;

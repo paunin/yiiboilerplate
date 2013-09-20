@@ -30,4 +30,13 @@ class User extends BaseUser
             return null;
         return User::model()->findByPk(Yii::app()->user->getId());
     }
+
+    /**
+     * @param $password
+     * @param string $method
+     * @return string
+     */
+    public static function encPass($password,$method='md5'){
+        return md5($password);
+    }
 }
