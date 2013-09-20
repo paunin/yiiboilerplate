@@ -19,7 +19,7 @@ class LoginController extends Controller
                 'users' => array('@'),
             ),
             array('allow',
-                'actions' => array('login'),
+                'actions' => array('login')
                 'users' => array('?'),
             ),
             array('deny',
@@ -42,7 +42,7 @@ class LoginController extends Controller
         try {
             if($eauth->authenticate()) {
                 //var_dump($eauth->getIsAuthenticated(), $eauth->getAttributes());
-                $soc_identity = new EAuthUserIdentity($eauth);
+                $soc_identity = new ExtEAuthUserIdentity($eauth);
 
                 // successful authentication
                 if($soc_identity->authenticate()) {
