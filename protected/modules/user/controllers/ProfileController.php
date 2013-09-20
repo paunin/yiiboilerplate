@@ -27,7 +27,8 @@ class ProfileController extends Controller
 
     public function actionIndex()
     {
-        $this->render('/profile/index');
+        $social_accounts = User::current()->userSocials;
+        $this->render('/profile/index',array('social_accounts'=>$social_accounts));
     }
 
     public function actionChangeMail()

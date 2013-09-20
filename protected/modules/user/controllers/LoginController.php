@@ -115,4 +115,8 @@ class LoginController extends Controller
         Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
         $this->redirect(Yii::app()->homeUrl);
     }
+
+    public function unbindSocial(){
+        die($this->getAction()->id);
+    }
 }
