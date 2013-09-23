@@ -159,11 +159,10 @@ class myMail
 
         foreach($files as $file){
             $cid = $message->embed(Swift_Image::fromPath($img_dir.'/'.$file));
-            array_push($search,"%cid_{$file}%");
+            array_push($search,"$file");
             array_push($replace,$cid);
         }
         $body = str_replace($search,$replace,$body);
-        
         return $body;
     }
 
