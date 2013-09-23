@@ -13,6 +13,3 @@
 [submodule "protected/extensions/eauth"]
 	path = protected/extensions/eauth
 	url = https://github.com/paunin/yii-eauth.git
-[submodule "web/responsive_filemanager"]
-	path = web/responsive_filemanager
-	url = https://github.com/trippo/ResponsiveFilemanager.git
