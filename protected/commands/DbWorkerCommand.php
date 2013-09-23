@@ -17,8 +17,7 @@ class DbWorkerCommand extends CConsoleCommand
         if(!$path)
             $path = $this->getDefaultFile();
 
-        `{$this->getPreCommand()}`;
-        $command = "psql";
+        $command = $this->getPreCommand()." psql";
         if($this->pdu =='postgres')
             die('Your database can\'t be used by postgres');
 
@@ -38,8 +37,7 @@ class DbWorkerCommand extends CConsoleCommand
         if(!$path)
             $path = $this->getDefaultFile();
 
-        `{$this->getPreCommand()}`;
-        $command = "pg_dump --encoding=UTF8";
+        $command = $this->getPreCommand()."pg_dump --encoding=UTF8";
 
         `$command -h localhost -U {$this->pdu} -O -x {$this->pdd} > $path`;
         echo 'ok'."\n";
@@ -49,14 +47,18 @@ class DbWorkerCommand extends CConsoleCommand
         return dirname(__FILE__).'/../tests/fixtures/dbinit.sql';
     }
 
-    private function getPreCommand(){
-        if(empty($this->pdp))
+    private function getPreCommand()
+    {
+        if (empty($this->pdp))
             return '';
 
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $command = "set PGPASSWORD={$this->pdp}";
-        else
+            `$command`;
+            return '';
+        } else {
             $command = "env PGPASSWORD={$this->pdp}";
+        }
         return $command;
     }
 }
