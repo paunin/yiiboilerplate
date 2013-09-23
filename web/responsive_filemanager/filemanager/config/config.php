@@ -1,5 +1,7 @@
 <?php
-die('AUTH?');
+require_once(dirname(__FILE__).'/../../../../norun.php');
+if(!Yii::app()->user->checkAccess('filemanager'))
+    die('403');
 session_start();
 
 //------------------------------------------------------------------------------

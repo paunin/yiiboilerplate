@@ -149,7 +149,7 @@ CREATE TABLE "user" (
     email character varying,
     key character varying,
     created_at timestamp without time zone DEFAULT now(),
-    role character varying NOT NULL DEFAULT 'user',
+    role character varying DEFAULT 'user'::character varying NOT NULL,
     is_active boolean DEFAULT false NOT NULL,
     last_login timestamp without time zone,
     password character varying(255)
@@ -293,6 +293,7 @@ user	23	\N	\N
 COPY "AuthItem" (name, type, description, bizrule, data) FROM stdin;
 admin	2	Admin	\N	N;
 user	2	User	\N	N;
+filemanager	2	Filemanager	\N	N;
 \.
 
 
@@ -302,6 +303,7 @@ user	2	User	\N	N;
 
 COPY "AuthItemChild" (parent, child) FROM stdin;
 admin	user
+admin	filemanager
 \.
 
 
@@ -415,8 +417,14 @@ ALTER TABLE ONLY "user"
     ADD CONSTRAINT user_pkey PRIMARY KEY (id);
 
 
-ALTER TABLE ONLY "user_social"
+--
+-- Name: user_social_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_social
     ADD CONSTRAINT user_social_pkey PRIMARY KEY (id);
+
+
 --
 -- Name: user_social_social_service_user_id_unique; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
