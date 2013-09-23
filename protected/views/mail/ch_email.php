@@ -2,7 +2,7 @@
     require(dirname(__FILE__) . '/_header.php')?>
     <?php echo Yii::t('email','Hello!');?> <br/><br/>
 
-    <?php echo Yii::t('email','To complete <b>email change</b> process click this link');?><?php if(!empty($old_email)): ?>(<?php echo Yii::t('email','old email');?> <?php echo  $old_email ?>) <?php endif; ?>:<br/>
+    <?php echo Yii::t('email','To complete <b>email change</b> process click this link');?><?php if(!empty($old_email)): ?>(<?php echo Yii::t('email','old email');?> <?php echo  $old_email ?>)<?php endif; ?>:<br/>
     <a href="<?php echo $url; ?>"><?php echo $url; ?></a>
     <br/>
     <br/>
