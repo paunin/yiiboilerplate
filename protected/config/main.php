@@ -4,6 +4,7 @@ $domain = 'yiiboilerplate.paunin.com'; //@ChangeIt
 $main = array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Yii Boilerplate App', //@ChangeIt
+    'language'=>'ru',
 
     // preloading 'log' component
     'preload' => array('log'),

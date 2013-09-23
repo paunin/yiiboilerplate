@@ -39,4 +39,8 @@ class User extends BaseUser
     public static function encPass($password,$method='md5'){
         return md5($password);
     }
+
+    public function __toString(){
+        return $this->username.'('.$this->email.')';
+    }
 }

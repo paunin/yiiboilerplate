@@ -116,7 +116,26 @@ class LoginController extends Controller
         $this->redirect(Yii::app()->homeUrl);
     }
 
-    public function unbindSocial(){
-        die($this->getAction()->id);
+    public function actionUnbindSocial(){
+        $bind_id = Yii::app()->getRequest()->getParam('bind_id',null);
+        if(empty($bind_id))
+            throw new CHttpException(404,'bind_id is empty');
+        /* @var $social_account UserSocial */
+        $social_account = UserSocial::model()->findByPk($bind_id);
+        if(empty($social_account))
+            throw new CHttpException(404,'social_account not found');
+        if($social_account->user_id != User::current()->id)
+            throw new CHttpException(403,'social_account not for current user');
+
+        try{
+            $social_account->unbind();
+            Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+        }catch(Exception $e){
+            Cut::setFlash($e->getMessage(), 'error');
+        }
+
+
+        $this->redirect(Yii::app()->getRequest()->getUrlReferrer());
+
     }
 }

@@ -40,6 +40,6 @@ class RecoveryPassForm extends User
             $user->key = 'recoverypassword|'.md5(rand(1,99999).$this->username.date('Y-m-d H:i:s'));
             $user->save();
         }
-        return myMail::send($user->email,Yii::t('registration','Recovery password'),'recovery_pass',array('url'=>Cut::createUrl('user/register/endrecoverypass',array('key'=>$user->key),true)));
+        return myMail::send($user->email,Yii::t('user_module','Recovery password'),'recovery_pass',array('url'=>Cut::createUrl('user/register/endrecoverypass',array('key'=>$user->key),true)));
 	}
 }

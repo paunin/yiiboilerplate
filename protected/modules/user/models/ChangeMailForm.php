@@ -39,8 +39,8 @@ class ChangeMailForm extends User
         $user->save();
 
         return myMail::send(
-            $user->email,
-            Yii::t('registration', 'Change email address'),
+            $this->newemail,
+            Yii::t('user_module', 'Change email address'),
             'ch_email',
             array(
                 'url' => Cut::createUrl('user/profile/endchangemail', array('key' => $user->key), true),
