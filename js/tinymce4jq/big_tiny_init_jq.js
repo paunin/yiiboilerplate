@@ -2,6 +2,19 @@ $(document).ready(function () {
     $('.big_tiny').tinymce({
 
         theme: "modern",
-        plugins: " anchor, charmap, hr, image, link, emoticons, code, textcolor, pagebreak,layer,table,save,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,template,advlist",
+        plugins: [
+            "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen",
+            "insertdatetime media nonbreaking save table contextmenu directionality",
+            "emoticons template paste textcolor moxiemanager responsivefilemanager"
+        ],
+        toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+        toolbar2: "responsivefilemanager  print preview code media | forecolor backcolor emoticons",
+        image_advtab: true ,
+        external_filemanager_path:"/js/responsive_filemanager/filemanager/",
+        filemanager_title:"Responsive Filemanager" ,
+        external_plugins: { "filemanager" : "/js/responsive_filemanager/filemanager/plugin.min.js"}
+
+
     });
 });
