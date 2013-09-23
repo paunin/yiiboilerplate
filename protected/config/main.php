@@ -1,6 +1,4 @@
 <?php
-$domain = 'yiiboilerplate.paunin.com'; //@ChangeIt
-
 $main = array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Yii Boilerplate App', //@ChangeIt
@@ -137,10 +135,6 @@ $main = array(
     // application-level parameters that can be accessed
     // using Yii::app()->params['site_url']
     'params' => array(
-        'site_url' => "http://$domain",
-        'adminEmail' => "admin@$domain",
-        'robotEmail' => "robot@$domain",
-        'robotEmailName' => "robot@$domain",
         'slogan' => 'Slogan for Yii Boilerplate Application', //@ChangeIt
         'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
         'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
