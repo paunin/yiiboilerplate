@@ -2,4 +2,5 @@
 /assets/*
 /protected/runtime/*
 /protected/config/custom.php
-
+/uploads/*
+/thumbs/*
