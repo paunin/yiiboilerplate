@@ -117,14 +117,7 @@ class myMail
     {
         /** @var $message Swift_Message */
         $message = new YiiMailMessage;
-
-        $img_dir = Yii::getPathOfAlias('application.views.mail.images');
-
-        $cid_logo = $message->embed(Swift_Image::fromPath($img_dir.'/logo.png'));
-        $cid_bg = $message->embed(Swift_Image::fromPath($img_dir.'/background.png'));
-
-        $body = str_replace('%cid_logo%',$cid_logo,$body);
-        $body = str_replace('%cid_bg%',$cid_bg,$body);
+        $body = self::embedAllImages($message,$body);
 
         $message->setBody($body, 'text/html');
         $message->addPart($body_alt, 'text/plain');
@@ -148,6 +141,30 @@ class myMail
                 ;
         }
         return $res;
+    }
+
+    /**
+     * Embed all images from Yii::getPathOfAlias('application.views.mail.images') to &$message and replace `cid`s in $body
+     *
+     * @param $message
+     * @param $body
+     * @return mixed
+     */
+    private static function embedAllImages(&$message,$body){
+        $img_dir = Yii::getPathOfAlias('application.views.mail.images');
+
+        $files = array_diff(scandir($img_dir), array('..', '.'));
+        $search = array();
+        $replace = array();
+
+        foreach($files as $file){
+            $cid = $message->embed(Swift_Image::fromPath($img_dir.'/'.$file));
+            array_push($search,"%cid_{$file}%");
+            array_push($replace,$cid);
+        }
+        $body = str_replace($search,$replace,$body);
+        die($body);
+        return $body;
     }
 
 
