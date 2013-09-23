@@ -16,7 +16,7 @@ $site_url = Yii::app()->params['site_url']
         <td width="100%">
             <div style="max-width: 1024px; margin: 20px 20px 0; padding-left: 50px;">
                 <a href="<?php echo $site_url?>" title="<?php echo Yii::app()->name?>">
-                    <img src="<?php echo $cid_logo?>" alt="<?php echo Yii::app()->params['site_url']?>">
+                    <img src="<?php echo $cid_logo?>" style="border: 0;" alt="<?php echo Yii::app()->params['site_url']?>">
                 </a>
             </div>
             <div style="background: none repeat scroll 0 0 white;

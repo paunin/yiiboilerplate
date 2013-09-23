@@ -117,10 +117,15 @@ class myMail
     {
         /** @var $message Swift_Message */
         $message = new YiiMailMessage;
-//        $cid_bg = $message->embed(Swift_Image::fromPath(dirname(__FILE__).'/../../../'.'/images/bg_dotted.png'));
-//        $cid_logo = $message->embed(Swift_Image::fromPath(dirname(__FILE__).'/../../../'.'/images/logo.png'));
-//        $body = str_replace('%cid_logo%',$cid_logo,$body);
-//        $body = str_replace('%cid_bg%',$cid_bg,$body);
+
+        $img_dir = Yii::getPathOfAlias('application.views.mail.images');
+
+        $cid_logo = $message->embed(Swift_Image::fromPath($img_dir.'/logo.png'));
+        $cid_bg = $message->embed(Swift_Image::fromPath($img_dir.'/background.png'));
+
+        $body = str_replace('%cid_logo%',$cid_logo,$body);
+        $body = str_replace('%cid_bg%',$cid_bg,$body);
+
         $message->setBody($body, 'text/html');
         $message->addPart($body_alt, 'text/plain');
         $message->subject = $subject;
