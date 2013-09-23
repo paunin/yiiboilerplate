@@ -163,7 +163,7 @@ class myMail
             array_push($replace,$cid);
         }
         $body = str_replace($search,$replace,$body);
-        die($body);
+        
         return $body;
     }
 
