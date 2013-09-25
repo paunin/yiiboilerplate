@@ -59,6 +59,9 @@ $main = array(
             'allowAutoLogin' => true,
             'loginUrl'=>array('user/login/login'),
         ),
+        'db' =>array(
+            'pdoClass' => 'NestedPDO',
+        ),
 
 /*        'clientScript' => array(
             'class' => 'ext.ExtendedClientScript.ExtendedClientScript',
