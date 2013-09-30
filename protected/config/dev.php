@@ -47,7 +47,7 @@ return  array(
                 ),
                 array(
                     'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-                    'ipFilters'=>array('127.0.0.1','192.168.1.215'),
+                    'ipFilters'=>array('*'),
                 ),
 //                    array( // configuration for the toolbar
 //                        'class' => 'XWebDebugRouter',
