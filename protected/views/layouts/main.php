@@ -126,9 +126,9 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
 			'links'=>$this->breadcrumbs,
 		)); ?>
     <?php endif ?>
-
-    <h1><?php echo $this->breadcrumbs[count($this->breadcrumbs) - 1] ?></h1>
-
+    <?php if(count($this->breadcrumbs)>0):?>
+        <h1><?php echo $this->breadcrumbs[count($this->breadcrumbs) - 1] ?></h1>
+    <?php endif; ?>
     <?php
     foreach (Yii::app()->user->getFlashes() as $key => $message) {
         if($key=='error') //bootstrap 3
