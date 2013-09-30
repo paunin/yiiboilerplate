@@ -12,7 +12,7 @@ return array(
     'components' => array(
         'db' => array(
             'connectionString' => "pgsql:host=$sqlHost;dbname=$sqlDb",
-            'emulatePrepare' => true,
+            //'emulatePrepare' => true,
             'username' => $sqlUser,
             'password' => $sqlPassword,
             'charset' => 'utf8',
