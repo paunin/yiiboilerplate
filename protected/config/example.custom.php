@@ -7,10 +7,11 @@ $domain = 'example.com'; //@ChangeIt
 $sqlDb = 'pumh';
 $sqlUser = 'pumh';
 $sqlPassword = '';
+$sqlHost = 'localhost';
 return array(
     'components' => array(
         'db' => array(
-            'connectionString' => "pgsql:host=localhost;dbname=$sqlDb",
+            'connectionString' => "pgsql:host=$sqlHost;dbname=$sqlDb",
             'emulatePrepare' => true,
             'username' => $sqlUser,
             'password' => $sqlPassword,
