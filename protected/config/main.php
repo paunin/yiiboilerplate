@@ -61,7 +61,7 @@ $main = array(
         ),
         'db' =>array(
             'pdoClass' => 'NestedPDO',
-            'emulatePrepare' => true
+            'emulatePrepare' => false
         ),
 
 /*        'clientScript' => array(
