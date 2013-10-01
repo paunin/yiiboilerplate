@@ -77,7 +77,7 @@ $main = array(
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'class' => 'HttpRequest',
-            'noCsrfValidationRoutes' => array(),
+            'noCsrfValidationRoutes' => array('admin'),
         ),
         'image' => array(
             'class' => 'ext.image.CImageComponent',

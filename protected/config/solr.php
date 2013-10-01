@@ -5,7 +5,7 @@ return array(
         "packages" => Yii::getPathOfAlias('packages'),
     ),
     'import' => array(
-        'application.models.solr.*', //solr
+        'application.solr.models.*', //solr
         'packages.solr.*'
     ),
     'components' => array(

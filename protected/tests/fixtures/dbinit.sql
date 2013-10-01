@@ -349,7 +349,7 @@ COPY content (id, title, slug, text, created_at, updated_at) FROM stdin;
 -- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('content_id_seq', 1, false);
+SELECT pg_catalog.setval('content_id_seq', 100, false);
 
 
 --

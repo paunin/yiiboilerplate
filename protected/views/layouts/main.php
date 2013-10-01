@@ -61,6 +61,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                         'items' => array(
                             //array('label' => 'Users'),
                             array('label' => 'Users', 'url' => array('/admin/user')),
+                            array('label' => 'Content', 'url' => array('/admin/content')),
                             //array(),
                         )
                     ),
@@ -126,8 +127,9 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
 			'links'=>$this->breadcrumbs,
 		)); ?>
     <?php endif ?>
-    <?php if(count($this->breadcrumbs)>0):?>
-        <h1><?php echo $this->breadcrumbs[count($this->breadcrumbs) - 1] ?></h1>
+    <?php
+    if(!empty($this->breadcrumbs) && count($this->breadcrumbs)>0):?>
+        <h1><?php echo array_pop($this->breadcrumbs); ?></h1>
     <?php endif; ?>
     <?php
     foreach (Yii::app()->user->getFlashes() as $key => $message) {
