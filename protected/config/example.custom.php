@@ -22,6 +22,7 @@ return array(
         'pgsqlDb'=>"$sqlDb",
         'pgsqlUser'=>"$sqlUser",
         'pgsqlPassword'=>"$sqlPassword",
+        'sqlHost'=>"$sqlHost",
 
         'site_url' => "http://$domain",
         'adminEmail' => "admin@$domain",
