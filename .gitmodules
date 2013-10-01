@@ -16,3 +16,6 @@
 [submodule "protected/extensions/behaviors/SolrBehavior"]
 	path = protected/extensions/behaviors/SolrBehavior
 	url = https://github.com/paunin/YiiSolrBehavior.git
+[submodule "protected/packages/solr"]
+	path = protected/packages/solr
+	url = https://github.com/phpnode/YiiSolr.git
