@@ -19,9 +19,9 @@ return array(
         ),
     ),
     'params' => array(
-        'pgsqlDb'=>"$sqlDb",
-        'pgsqlUser'=>"$sqlUser",
-        'pgsqlPassword'=>"$sqlPassword",
+        'sqlDb'=>"$sqlDb",
+        'sqlUser'=>"$sqlUser",
+        'sqlPassword'=>"$sqlPassword",
         'sqlHost'=>"$sqlHost",
 
         'site_url' => "http://$domain",
