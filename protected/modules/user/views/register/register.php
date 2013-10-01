@@ -44,7 +44,7 @@ $this->breadcrumbs=array(
     <div class="row">
         <?php //echo $form->labelEx($model,'validacion'); ?>
         <?php $this->widget('application.extensions.recaptcha.EReCaptcha',
-            array('model'=>$user, 'attribute'=>'validacion',
+            array('model'=>$model, 'attribute'=>'validacion',
                 'theme'=>'red', 'language'=>'es_ES',
                 'publicKey'=>Yii::app()->params['captcha_public_key'])) ?>
 
