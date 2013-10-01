@@ -1,14 +1,15 @@
 <?php
 class DbWorkerCommand extends CConsoleCommand
 {
-    private $pdd, $pdu, $pdp;
+    private $pdd, $pdu, $pdp, $pdh;
 
     /** @var $db CDbConnection */
     private $db = null;
     public function init(){
-        $this->pdd = Yii::app()->params['pgsqlDb'];
-        $this->pdu = Yii::app()->params['pgsqlUser'];
-        $this->pdp = Yii::app()->params['pgsqlPassword'];
+        $this->pdd = Yii::app()->params['sqlDb'];
+        $this->pdu = Yii::app()->params['sqlUser'];
+        $this->pdp = Yii::app()->params['sqlPassword'];
+        $this->pdh = Yii::app()->params['sqlHost'];
         $this->db = Yii::app()->db;
     }
 
@@ -23,11 +24,11 @@ class DbWorkerCommand extends CConsoleCommand
 
 
         echo "droping...";
-        `$command -h localhost -U {$this->pdu} -c"DROP OWNED BY {$this->pdu} CASCADE;"`;
+        `$command -h {$this->pdh} -U {$this->pdu} -c"DROP OWNED BY {$this->pdu} CASCADE;"`;
         echo "done\n";
 
         echo "loading...";
-        `$command -h localhost -U {$this->pdu} {$this->pdd} < $path`;
+        `$command -h {$this->pdh} -U {$this->pdu} {$this->pdd} < $path`;
         echo "done\n";
 
         echo 'ok'."\n";
@@ -39,7 +40,7 @@ class DbWorkerCommand extends CConsoleCommand
 
         $command = $this->getPreCommand()."pg_dump --encoding=UTF8";
 
-        `$command -h localhost -U {$this->pdu} -O -x {$this->pdd} > $path`;
+        `$command -h {$this->pdh} -U {$this->pdu} -O -x {$this->pdd} > $path`;
         echo 'ok'."\n";
     }
 
@@ -53,11 +54,11 @@ class DbWorkerCommand extends CConsoleCommand
             return '';
 
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $command = "set PGPASSWORD={$this->pdp}";
+            $command = "set PGPASSWORD={$this->pdp} ";
             `$command`;
             return '';
         } else {
-            $command = "env PGPASSWORD={$this->pdp}";
+            $command = "env PGPASSWORD={$this->pdp} ";
         }
         return $command;
     }
