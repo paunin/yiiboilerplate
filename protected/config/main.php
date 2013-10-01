@@ -1,8 +1,6 @@
 <?php
 $main = array(
-    'aliases' => array(
-        "packages" => dirname(__FILE__) . '/../packages/',
-    ),
+
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Yii Boilerplate App', //@ChangeIt
     'language'=>'ru',
@@ -35,7 +33,6 @@ $main = array(
         'ext.eauth.*',
         'ext.eauth.services.*',
 
-
     ),
 
     'modules' => array(
@@ -46,13 +43,6 @@ $main = array(
 
     // application components
     'components' => array(
-        'solr' => array(
-            "class" => "packages.solr.ASolrConnection",
-            "clientOptions" => array(
-                "hostname" => "localhost",
-                "port" => 8983,
-            ),
-        ),
         'loid' => array(
             'class' => 'application.extensions.lightopenid.loid',
         ),
@@ -154,6 +144,14 @@ $main = array(
         'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
     ),
 );
+
+if(is_file(dirname(__FILE__) . '/solr.php')){
+    $solr = require(dirname(__FILE__) . '/solr.php');
+    $main = CMap::mergeArray(
+        $main,
+        $solr
+    );
+}
 
 if(is_file(dirname(__FILE__) . '/custom.php')){
     $custom = require(dirname(__FILE__) . '/custom.php');
