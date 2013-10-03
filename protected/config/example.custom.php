@@ -7,20 +7,22 @@ $domain = 'example.com'; //@ChangeIt
 $sqlDb = 'pumh';
 $sqlUser = 'pumh';
 $sqlPassword = '';
+$sqlHost = 'localhost';
 return array(
     'components' => array(
         'db' => array(
-            'connectionString' => "pgsql:host=localhost;dbname=$sqlDb",
-            'emulatePrepare' => true,
+            'connectionString' => "pgsql:host=$sqlHost;dbname=$sqlDb",
+            //'emulatePrepare' => true,
             'username' => $sqlUser,
             'password' => $sqlPassword,
             'charset' => 'utf8',
         ),
     ),
     'params' => array(
-        'pgsqlDb'=>"$sqlDb",
-        'pgsqlUser'=>"$sqlUser",
-        'pgsqlPassword'=>"$sqlPassword",
+        'sqlDb'=>"$sqlDb",
+        'sqlUser'=>"$sqlUser",
+        'sqlPassword'=>"$sqlPassword",
+        'sqlHost'=>"$sqlHost",
 
         'site_url' => "http://$domain",
         'adminEmail' => "admin@$domain",

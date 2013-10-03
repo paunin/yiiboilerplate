@@ -1,5 +1,6 @@
 <?php
 $main = array(
+
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Yii Boilerplate App', //@ChangeIt
     'language'=>'ru',
@@ -32,7 +33,6 @@ $main = array(
         'ext.eauth.*',
         'ext.eauth.services.*',
 
-
     ),
 
     'modules' => array(
@@ -59,6 +59,10 @@ $main = array(
             'allowAutoLogin' => true,
             'loginUrl'=>array('user/login/login'),
         ),
+        'db' =>array(
+            'pdoClass' => 'NestedPDO',
+            'emulatePrepare' => false
+        ),
 
 /*        'clientScript' => array(
             'class' => 'ext.ExtendedClientScript.ExtendedClientScript',
@@ -73,7 +77,7 @@ $main = array(
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'class' => 'HttpRequest',
-            'noCsrfValidationRoutes' => array(),
+            'noCsrfValidationRoutes' => array('admin'),
         ),
         'image' => array(
             'class' => 'ext.image.CImageComponent',
@@ -140,6 +144,14 @@ $main = array(
         'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
     ),
 );
+
+if(is_file(dirname(__FILE__) . '/solr.php')){
+    $solr = require(dirname(__FILE__) . '/solr.php');
+    $main = CMap::mergeArray(
+        $main,
+        $solr
+    );
+}
 
 if(is_file(dirname(__FILE__) . '/custom.php')){
     $custom = require(dirname(__FILE__) . '/custom.php');

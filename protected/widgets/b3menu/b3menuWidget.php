@@ -17,7 +17,7 @@ class b3menuWidget extends CMenu
     {
 
         if(!empty($item['items']))
-            $item['linkOptions'] = (array)$item['linkOptions'] + array('class'=>"dropdown-toggle", 'data-toggle'=>"dropdown");
+            $item['linkOptions'] = (!empty($item['linkOptions'])?(array)$item['linkOptions']:array())+ array('class'=>"dropdown-toggle", 'data-toggle'=>"dropdown");
         if(empty($item['label']))
             $item['label'] = '';
 
