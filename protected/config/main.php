@@ -2,7 +2,7 @@
 $main = array(
 
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'Yii Boilerplate App', //@ChangeIt
+    'name' => 'PlaceMeUp',
     'language'=>'ru',
 
     // preloading 'log' component
@@ -139,7 +139,7 @@ $main = array(
     // application-level parameters that can be accessed
     // using Yii::app()->params['site_url']
     'params' => array(
-        'slogan' => 'Slogan for Yii Boilerplate Application', //@ChangeIt
+        'slogan' => 'You place in Web', 
         'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
         'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
     ),
