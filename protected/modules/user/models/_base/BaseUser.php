@@ -14,12 +14,14 @@
  * @property string $email
  * @property string $key
  * @property string $created_at
+ * @property string $updated_at
  * @property string $role
  * @property boolean $is_active
  * @property string $last_login
  * @property string $password
  *
  * @property UserSocial[] $userSocials
+ * @property UserSettings[] $userSettings
  */
 abstract class BaseUser extends GxActiveRecord {
 
@@ -43,15 +45,16 @@ abstract class BaseUser extends GxActiveRecord {
 		return array(
 			array('username', 'required'),
 			array('password', 'length', 'max'=>255),
-			array('email, key, created_at, role, is_active, last_login', 'safe'),
-			array('email, key, created_at, role, is_active, last_login, password', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, username, email, key, created_at, role, is_active, last_login, password', 'safe', 'on'=>'search'),
+			array('email, key, created_at, updated_at, role, is_active, last_login', 'safe'),
+			array('email, key, created_at, updated_at, role, is_active, last_login, password', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, username, email, key, created_at, updated_at, role, is_active, last_login, password', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
 			'userSocials' => array(self::HAS_MANY, 'UserSocial', 'user_id'),
+			'userSettings' => array(self::HAS_MANY, 'UserSettings', 'user_id'),
 		);
 	}
 
@@ -67,11 +70,13 @@ abstract class BaseUser extends GxActiveRecord {
 			'email' => Yii::t('app', 'Email'),
 			'key' => Yii::t('app', 'Key'),
 			'created_at' => Yii::t('app', 'Created At'),
+			'updated_at' => Yii::t('app', 'Updated At'),
 			'role' => Yii::t('app', 'Role'),
 			'is_active' => Yii::t('app', 'Is Active'),
 			'last_login' => Yii::t('app', 'Last Login'),
 			'password' => Yii::t('app', 'Password'),
 			'userSocials' => null,
+			'userSettings' => null,
 		);
 	}
 
@@ -83,6 +88,7 @@ abstract class BaseUser extends GxActiveRecord {
 		$criteria->compare('email', $this->email, true);
 		$criteria->compare('key', $this->key, true);
 		$criteria->compare('created_at', $this->created_at, true);
+		$criteria->compare('updated_at', $this->updated_at, true);
 		$criteria->compare('role', $this->role, true);
 		$criteria->compare('is_active', $this->is_active);
 		$criteria->compare('last_login', $this->last_login, true);

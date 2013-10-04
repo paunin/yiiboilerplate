@@ -78,7 +78,7 @@ $main = array(
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'class' => 'HttpRequest',
-            'noCsrfValidationRoutes' => array('admin'),
+            'noCsrfValidationRoutes' => array('admin','apiV0','apiOauth','apiUser'),
         ),
         'image' => array(
             'class' => 'ext.image.CImageComponent',
@@ -102,7 +102,18 @@ $main = array(
             'showScriptName' => false,
             'rules' => array(
 
-                'api_v0' => 'apiV0/index',
+
+                //<<< REST patterns
+
+                array('apiV0/index', 'pattern'=>'api_v0', 'verb'=>'GET,POST'),
+                //array('api_v0/XXX', 'pattern'=>'apiOauth/tokenGet', 'verb'=>'GET[[[,POST],PUT],DELETE]'),
+                array('apiOauth/tokenGet', 'pattern'=>'api_v0/token', 'verb'=>'GET'),
+
+                array('apiUser/get', 'pattern'=>'api_v0/user', 'verb'=>'GET'),
+                array('apiUser/radiusGet', 'pattern'=>'api_v0/user/radius', 'verb'=>'GET'),
+                array('apiUser/radiusPost', 'pattern'=>'api_v0/user/radius', 'verb'=>'POST'),
+
+                //>>>REST patterns
 
 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
@@ -136,11 +147,15 @@ $main = array(
     ),
 
     // application-level parameters that can be accessed
-    // using Yii::app()->params['site_url']
+    // using Yii::app()->params['radiusDefault']
     'params' => array(
         'slogan' => 'You place in Web', 
         'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
         'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
+
+        'radius_min' => 5,
+        'radius_max' => 50,
+        'radius_default' => 50
     ),
 );
 

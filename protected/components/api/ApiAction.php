@@ -6,5 +6,4 @@
  */
 
 class ApiAction extends CAction {
-
-} 
+}

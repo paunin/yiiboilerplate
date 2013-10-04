@@ -181,6 +181,7 @@ CREATE TABLE "user" (
     email character varying,
     key character varying,
     created_at timestamp without time zone DEFAULT now(),
+    updated_at timestamp without time zone,
     role character varying DEFAULT 'user'::character varying NOT NULL,
     is_active boolean DEFAULT false NOT NULL,
     last_login timestamp without time zone,
@@ -205,6 +206,43 @@ CREATE SEQUENCE user_id_seq
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
+
+
+--
+-- Name: user_settings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_settings (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    radius bigint
+);
+
+
+--
+-- Name: COLUMN user_settings.radius; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN user_settings.radius IS 'user area radius';
+
+
+--
+-- Name: user_settings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_settings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_settings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_settings_id_seq OWNED BY user_settings.id;
 
 
 --
@@ -278,6 +316,13 @@ ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY user_settings ALTER COLUMN id SET DEFAULT nextval('user_settings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY user_social ALTER COLUMN id SET DEFAULT nextval('user_social_id_seq'::regclass);
 
 
@@ -344,7 +389,6 @@ COPY content (id, title, slug, text, created_at, updated_at) FROM stdin;
 \.
 
 
-
 --
 -- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -386,29 +430,29 @@ SELECT pg_catalog.setval('smtp_id_seq', 1, false);
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY "user" (id, username, email, key, created_at, role, is_active, last_login, password) FROM stdin;
-2	admin	admin@admin.com	\N	2013-09-16 11:47:38.564	admin	t	\N	1341215dbe9acab4361fd6417b2b11bc
-3	user	user@user.com	\N	2013-09-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-4	user2	user2@user.com	\N	2013-09-16 12:26:14.018	user	f	\N	87dc1e131a1369fdf8f1c824a6a62dff
-5	user3	user3@user.com	\N	2013-08-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-6	user4	user4@user.com	\N	2013-07-16 12:26:14.018	user	f	\N	87dc1e131a1369fdf8f1c824a6a62dff
-7	user5	user5@user.com	\N	2013-06-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-8	user6	user6@user.com	\N	2013-05-16 12:26:14.018	user	f	\N	87dc1e131a1369fdf8f1c824a6a62dff
-9	user7	user7@user.com	\N	2013-04-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-10	user8	user8@user.com	\N	2013-03-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-11	user9	user9@user.com	\N	2013-02-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-12	user10	user10@user.com	\N	2013-01-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-13	user11	user11@user.com	\N	2012-12-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-14	user12	user12@user.com	\N	2012-11-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-15	user13	\N	\N	2012-09-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-16	user14	user14@user.com	\N	2012-08-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-17	user15	user15@user.com	\N	2012-07-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-18	user16	user16@user.com	\N	2012-06-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-19	user17	user17@user.com	\N	2012-05-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-20	user18	user18@user.com	\N	2012-04-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-21	user19	user19@user.com	\N	2012-03-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-22	user20	user20@user.com	\N	2012-02-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-23	user21	user21@user.com	\N	2012-01-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, last_login, password) FROM stdin;
+2	admin	admin@admin.com	\N	2013-09-16 11:47:38.564	\N	admin	t	\N	1341215dbe9acab4361fd6417b2b11bc
+3	user	user@user.com	\N	2013-09-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+4	user2	user2@user.com	\N	2013-09-16 12:26:14.018	\N	user	f	\N	87dc1e131a1369fdf8f1c824a6a62dff
+5	user3	user3@user.com	\N	2013-08-16 12:26:14.018	2013-08-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+6	user4	user4@user.com	\N	2013-07-16 12:26:14.018	\N	user	f	\N	87dc1e131a1369fdf8f1c824a6a62dff
+7	user5	user5@user.com	\N	2013-06-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+8	user6	user6@user.com	\N	2013-05-16 12:26:14.018	\N	user	f	\N	87dc1e131a1369fdf8f1c824a6a62dff
+9	user7	user7@user.com	\N	2013-04-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+10	user8	user8@user.com	\N	2013-03-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+11	user9	user9@user.com	\N	2013-02-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+12	user10	user10@user.com	\N	2013-01-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+13	user11	user11@user.com	\N	2012-12-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+14	user12	user12@user.com	\N	2012-11-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+15	user13	\N	\N	2012-09-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+16	user14	user14@user.com	\N	2012-08-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+17	user15	user15@user.com	\N	2012-07-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+18	user16	user16@user.com	\N	2012-06-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+19	user17	user17@user.com	\N	2012-05-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+20	user18	user18@user.com	\N	2012-04-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+21	user19	user19@user.com	\N	2012-03-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+22	user20	user20@user.com	\N	2012-02-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+23	user21	user21@user.com	\N	2012-01-16 12:26:14.018	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 \.
 
 
@@ -417,6 +461,27 @@ COPY "user" (id, username, email, key, created_at, role, is_active, last_login, 
 --
 
 SELECT pg_catalog.setval('user_id_seq', 100, true);
+
+
+--
+-- Data for Name: user_settings; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY user_settings (id, user_id, radius) FROM stdin;
+1	2	2
+2	3	3
+3	4	4
+4	8	8
+5	9	9
+6	20	20
+\.
+
+
+--
+-- Name: user_settings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_settings_id_seq', 6, true);
 
 
 --
@@ -507,6 +572,14 @@ ALTER TABLE ONLY "user"
 
 
 --
+-- Name: user_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_settings
+    ADD CONSTRAINT user_settings_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: user_social_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -555,13 +628,22 @@ ALTER TABLE ONLY "AuthItemChild"
 
 
 --
+-- Name: Ref_user_settings_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_settings
+    ADD CONSTRAINT "Ref_user_settings_to_user" FOREIGN KEY (user_id) REFERENCES "user"(id);
+
+
+--
 -- Name: Ref_user_social_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY user_social
     ADD CONSTRAINT "Ref_user_social_to_user" FOREIGN KEY (user_id) REFERENCES "user"(id);
 
-
+ALTER TABLE ONLY "user_settings"
+    ADD CONSTRAINT user_settings_user_id_unique UNIQUE (user_id);
 --
 -- PostgreSQL database dump complete
 --
