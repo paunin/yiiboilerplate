@@ -7,11 +7,13 @@ class ApiUserController extends ApiController
      */
     protected $_actions = array('get','radiusGet','radiusPost');
 
+
     public function filters()
     {
         return array(
-            'accessControl',
+             'apiAccessControl'
         );
+
     }
 
     public function accessRules()

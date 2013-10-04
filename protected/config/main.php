@@ -106,12 +106,14 @@ $main = array(
                 //<<< REST patterns
 
                 array('apiV0/index', 'pattern'=>'api_v0', 'verb'=>'GET,POST'),
-                //array('api_v0/XXX', 'pattern'=>'apiOauth/tokenGet', 'verb'=>'GET[[[,POST],PUT],DELETE]'),
+
                 array('apiOauth/tokenGet', 'pattern'=>'api_v0/token', 'verb'=>'GET'),
 
                 array('apiUser/get', 'pattern'=>'api_v0/user', 'verb'=>'GET'),
                 array('apiUser/radiusGet', 'pattern'=>'api_v0/user/radius', 'verb'=>'GET'),
                 array('apiUser/radiusPost', 'pattern'=>'api_v0/user/radius', 'verb'=>'POST'),
+
+                array('apiV0/error404', 'pattern'=>'api<whartever:.*>'),
 
                 //>>>REST patterns
 
@@ -147,7 +149,7 @@ $main = array(
     ),
 
     // application-level parameters that can be accessed
-    // using Yii::app()->params['radiusDefault']
+    // using Yii::app()->params['radius_max']
     'params' => array(
         'slogan' => 'You place in Web', 
         'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',

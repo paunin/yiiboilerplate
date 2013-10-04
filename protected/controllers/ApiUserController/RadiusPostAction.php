@@ -12,23 +12,15 @@ class RadiusPostAction extends ApiAction
 
         $user_settings = User::current()->getOrCreateUserSettings();
         $radius = Yii::app()->getRequest()->getParam('radius');
-        if(
-            empty($radius)
-            ||
-            $radius > Yii::app()->params['radius_max']
-            ||
-            $radius < Yii::app()->params['radius_min']
-        ){
-            $this->controller->out(
-                false,200,true,1,Yii::t('api','Incorrect radius')
-            );
-            return;
+        if(empty($radius)){
+            $this->controller->forward('apiV0/error400');
         }
 
         $user_settings->radius = $radius;
-        $user_settings->save();
-        $this->controller->out(
-            true
-        );
+        if($user_settings->validate()){
+            $this->controller->out($user_settings->save());
+        }else{
+            $this->controller->outError($user_settings->getErrors(),ApiController::ERROR_VALIDATION,Yii::t('api','Validation error'));
+        }
     }
 }

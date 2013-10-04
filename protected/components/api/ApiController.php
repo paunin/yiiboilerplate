@@ -1,6 +1,9 @@
 <?php
 class ApiController extends Controller
 {
+
+    const ERROR_VALIDATION = 701;
+
     /**
      * @param $in
      * @param $http_status int
@@ -20,10 +23,10 @@ class ApiController extends Controller
      * @throws ApiException
      * @return bool
      */
-    public function out($in, $http_status = 200, $standart = true, $status = 0, $message = "", $type = 'auto')
+    public static function out($in, $http_status = 200, $standart = true, $status = 0, $message = "", $type = 'auto')
     {
         // set the status
-        $status_header = 'HTTP/1.1 ' . $http_status .' '.$this->_getStatusCodeMessage($http_status);
+        $status_header = 'HTTP/1.1 ' . $http_status .' '.self::_getStatusCodeMessage($http_status);
         header($status_header);
 
 
@@ -52,15 +55,28 @@ class ApiController extends Controller
                 break;
 
         }
+    }
 
-
+    /**
+     * Wrapper for self::out
+     *
+     * @see ApiController::out
+     *
+     * @param $in
+     * @param $status
+     * @param $message
+     * @param $type
+     * @return bool
+     */
+    public static function outError($in,$status,$message,$type = 'auto'){
+        return self::out($in,200,true,$status,$message,$type);
     }
 
     /**
      * @param $status
      * @return string
      */
-    private function _getStatusCodeMessage($status)
+    private static function _getStatusCodeMessage($status)
     {
         // these could be stored in a .ini file and loaded
         // via parse_ini_file()... however, this will suffice
@@ -145,4 +161,21 @@ class ApiController extends Controller
 //            parent::run($actionID);
 //    }
 
+    public static function actionError404(){
+        self::out(null,404,true,'404',Yii::t('api','Check REST method, and parameters'),'json');
+    }
+
+    public static function actionError400(){
+        self::out(null,400,true,'400',Yii::t('api','Check REST method, and parameters'),'json');
+    }
+    public static function actionError403(){
+        self::out(null,403,true,'403', Yii::t('api','You are not authorized to perform this action.'),'json');
+    }
+
+    public function filterApiAccessControl($filterChain)
+    {
+        $filter=new ApiAccessControlFilter();
+        $filter->setRules($this->accessRules());
+        $filter->filter($filterChain);
+    }
 }
