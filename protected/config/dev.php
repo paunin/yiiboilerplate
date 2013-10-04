@@ -18,8 +18,13 @@ return  array(
     ),
     'components' => array(
         'urlManager' => array(
-            'urlFormat' => 'get',
-            'showScriptName' => true
+            //'urlFormat' => 'get',
+            //'showScriptName' => true,
+            'rules' => array(
+                'gii' => 'gii',
+                'gii/<controller:\w+>' => 'gii/<controller>',
+                'gii/<controller:\w+>/<action:\w+>' => 'gii/<controller>/<action>',
+            ),
         ),
         'fixture' => array(
             'class' => 'system.test.CDbFixtureManager',

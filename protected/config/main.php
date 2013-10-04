@@ -15,6 +15,7 @@ $main = array(
         'application.models.raw.*',
         'application.models.forms.*',
         'application.components.*',
+        'application.components.api.*',
         'application.helpers.*',
         'application.modules.user.models.*',
 
@@ -101,9 +102,7 @@ $main = array(
             'showScriptName' => false,
             'rules' => array(
 
-                'gii' => 'gii',
-                'gii/<controller:\w+>' => 'gii/<controller>',
-                'gii/<controller:\w+>/<action:\w+>' => 'gii/<controller>/<action>',
+                'api_v0' => 'apiV0/index',
 
 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
