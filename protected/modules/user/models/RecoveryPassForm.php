@@ -13,7 +13,7 @@ class RecoveryPassForm extends User
 			// username and password are required
 			array('email', 'required'),
             array('email', 'exist', 'className'=>'User', 'attributeName'=>'email'),
-            array('validacion', 'application.extensions.recaptcha.EReCaptchaValidator', 'privateKey'=>Yii::app()->params['captcha_private_key'], 'on' => 'registerwcaptcha'),
+            array('validacion', 'application.extensions.recaptcha.EReCaptchaValidator', 'privateKey'=>Yii::app()->params['private']['captcha_private_key'], 'on' => 'registerwcaptcha'),
 
 		);
 	}

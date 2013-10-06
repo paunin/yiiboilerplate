@@ -2,6 +2,7 @@
 
 Yii::import('application.modules.user.models._base.BaseUser');
 /**
+ * @method array toArray
  * @property UserSettings $userSettings
  */
 class User extends BaseUser
@@ -34,7 +35,6 @@ class User extends BaseUser
             )
 
         );
-
     }
 
     /**
@@ -88,5 +88,4 @@ class User extends BaseUser
         }
         return $user_settings;
     }
-
 }

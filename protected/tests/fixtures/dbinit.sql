@@ -4,23 +4,10 @@
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
+SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
+SET escape_string_warning = off;
 
 SET search_path = public, pg_catalog;
 
@@ -84,8 +71,8 @@ CREATE TABLE content (
 CREATE SEQUENCE content_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -94,6 +81,13 @@ CREATE SEQUENCE content_id_seq
 --
 
 ALTER SEQUENCE content_id_seq OWNED BY content.id;
+
+
+--
+-- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('content_id_seq', 100, false);
 
 
 --
@@ -122,8 +116,8 @@ CREATE TABLE cron_mail (
 CREATE SEQUENCE cron_mail_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -132,6 +126,13 @@ CREATE SEQUENCE cron_mail_id_seq
 --
 
 ALTER SEQUENCE cron_mail_id_seq OWNED BY cron_mail.id;
+
+
+--
+-- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
 
 
 --
@@ -159,8 +160,8 @@ CREATE TABLE smtp (
 CREATE SEQUENCE smtp_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -169,6 +170,13 @@ CREATE SEQUENCE smtp_id_seq
 --
 
 ALTER SEQUENCE smtp_id_seq OWNED BY smtp.id;
+
+
+--
+-- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('smtp_id_seq', 1, false);
 
 
 --
@@ -196,8 +204,8 @@ CREATE TABLE "user" (
 CREATE SEQUENCE user_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -206,6 +214,70 @@ CREATE SEQUENCE user_id_seq
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
+
+
+--
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_id_seq', 100, true);
+
+
+--
+-- Name: user_place; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_place (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    name character varying(512) DEFAULT 'Some place...'::character varying,
+    cx bigint NOT NULL,
+    cy bigint NOT NULL,
+    cx_p_cy bigint NOT NULL,
+    cx_m_cy bigint NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone,
+    radius integer,
+    permissions integer NOT NULL,
+    is_spirit boolean DEFAULT true NOT NULL
+);
+
+
+--
+-- Name: COLUMN user_place.permissions; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN user_place.permissions IS 'bits
+1 = ?
+10 = r
+100 = w
+1000 = ...';
+
+
+--
+-- Name: user_place_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_place_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_place_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_place_id_seq OWNED BY user_place.id;
+
+
+--
+-- Name: user_place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_place_id_seq', 1, false);
 
 
 --
@@ -233,8 +305,8 @@ COMMENT ON COLUMN user_settings.radius IS 'user area radius';
 CREATE SEQUENCE user_settings_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -243,6 +315,13 @@ CREATE SEQUENCE user_settings_id_seq
 --
 
 ALTER SEQUENCE user_settings_id_seq OWNED BY user_settings.id;
+
+
+--
+-- Name: user_settings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_settings_id_seq', 6, true);
 
 
 --
@@ -272,8 +351,8 @@ COMMENT ON TABLE user_social IS 'users from social accounts linked to users';
 CREATE SEQUENCE user_social_id_seq
     START WITH 100
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -285,45 +364,59 @@ ALTER SEQUENCE user_social_id_seq OWNED BY user_social.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY content ALTER COLUMN id SET DEFAULT nextval('content_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY cron_mail ALTER COLUMN id SET DEFAULT nextval('cron_mail_id_seq'::regclass);
+SELECT pg_catalog.setval('user_social_id_seq', 1, false);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY smtp ALTER COLUMN id SET DEFAULT nextval('smtp_id_seq'::regclass);
+ALTER TABLE content ALTER COLUMN id SET DEFAULT nextval('content_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
+ALTER TABLE cron_mail ALTER COLUMN id SET DEFAULT nextval('cron_mail_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY user_settings ALTER COLUMN id SET DEFAULT nextval('user_settings_id_seq'::regclass);
+ALTER TABLE smtp ALTER COLUMN id SET DEFAULT nextval('smtp_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY user_social ALTER COLUMN id SET DEFAULT nextval('user_social_id_seq'::regclass);
+ALTER TABLE "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE user_place ALTER COLUMN id SET DEFAULT nextval('user_place_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE user_settings ALTER COLUMN id SET DEFAULT nextval('user_settings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE user_social ALTER COLUMN id SET DEFAULT nextval('user_social_id_seq'::regclass);
 
 
 --
@@ -390,13 +483,6 @@ COPY content (id, title, slug, text, created_at, updated_at) FROM stdin;
 
 
 --
--- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('content_id_seq', 100, false);
-
-
---
 -- Data for Name: cron_mail; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -405,25 +491,11 @@ COPY cron_mail (id, subject, body, body_alt, to_mail, to_name, from_mail, from_n
 
 
 --
--- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
-
-
---
 -- Data for Name: smtp; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY smtp (id, host, username, password, port, encryption, timeout, "extensionHandlers", using_count, banned) FROM stdin;
 \.
-
-
---
--- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('smtp_id_seq', 1, false);
 
 
 --
@@ -457,10 +529,11 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Data for Name: user_place; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_id_seq', 100, true);
+COPY user_place (id, user_id, name, cx, cy, cx_p_cy, cx_m_cy, created_at, radius, permissions, is_spirit) FROM stdin;
+\.
 
 
 --
@@ -478,25 +551,11 @@ COPY user_settings (id, user_id, radius) FROM stdin;
 
 
 --
--- Name: user_settings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_settings_id_seq', 6, true);
-
-
---
 -- Data for Name: user_social; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY user_social (id, user_id, social_service, user_social_id, additional_data) FROM stdin;
 \.
-
-
---
--- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_social_id_seq', 1, false);
 
 
 --
@@ -572,11 +631,27 @@ ALTER TABLE ONLY "user"
 
 
 --
+-- Name: user_place_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_place
+    ADD CONSTRAINT user_place_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: user_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY user_settings
     ADD CONSTRAINT user_settings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_settings_user_id_unique; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_settings
+    ADD CONSTRAINT user_settings_user_id_unique UNIQUE (user_id);
 
 
 --
@@ -604,6 +679,20 @@ ALTER TABLE ONLY "user"
 
 
 --
+-- Name: _idx_user_place_cx_cy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX _idx_user_place_cx_cy ON user_place USING btree (cx, cy);
+
+
+--
+-- Name: _idx_user_place_cx_p_cy_cx_m_cy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX _idx_user_place_cx_p_cy_cx_m_cy ON user_place USING btree (cx_p_cy, cx_m_cy);
+
+
+--
 -- Name: AuthAssignment_itemname_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -628,6 +717,14 @@ ALTER TABLE ONLY "AuthItemChild"
 
 
 --
+-- Name: Ref_user_place_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_place
+    ADD CONSTRAINT "Ref_user_place_to_user" FOREIGN KEY (user_id) REFERENCES "user"(id);
+
+
+--
 -- Name: Ref_user_settings_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -642,8 +739,7 @@ ALTER TABLE ONLY user_settings
 ALTER TABLE ONLY user_social
     ADD CONSTRAINT "Ref_user_social_to_user" FOREIGN KEY (user_id) REFERENCES "user"(id);
 
-ALTER TABLE ONLY "user_settings"
-    ADD CONSTRAINT user_settings_user_id_unique UNIQUE (user_id);
+
 --
 -- PostgreSQL database dump complete
 --

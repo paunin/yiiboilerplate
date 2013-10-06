@@ -20,8 +20,9 @@
  * @property string $last_login
  * @property string $password
  *
- * @property UserSocial[] $userSocials
  * @property UserSettings[] $userSettings
+ * @property UserPlace[] $userPlaces
+ * @property UserSocial[] $userSocials
  */
 abstract class BaseUser extends GxActiveRecord {
 
@@ -53,8 +54,9 @@ abstract class BaseUser extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'userSocials' => array(self::HAS_MANY, 'UserSocial', 'user_id'),
 			'userSettings' => array(self::HAS_MANY, 'UserSettings', 'user_id'),
+			'userPlaces' => array(self::HAS_MANY, 'UserPlace', 'user_id'),
+			'userSocials' => array(self::HAS_MANY, 'UserSocial', 'user_id'),
 		);
 	}
 
@@ -75,8 +77,9 @@ abstract class BaseUser extends GxActiveRecord {
 			'is_active' => Yii::t('app', 'Is Active'),
 			'last_login' => Yii::t('app', 'Last Login'),
 			'password' => Yii::t('app', 'Password'),
-			'userSocials' => null,
 			'userSettings' => null,
+			'userPlaces' => null,
+			'userSocials' => null,
 		);
 	}
 

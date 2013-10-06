@@ -1,6 +1,6 @@
 <?php
 /**
- * Class RadiusGetAction
+ * Class RadiusPostAction
  * Set User RADIUS
  *
  * @property ApiUserController $controller
@@ -12,11 +12,10 @@ class RadiusPostAction extends ApiAction
 
         $user_settings = User::current()->getOrCreateUserSettings();
         $radius = Yii::app()->getRequest()->getParam('radius');
-        if(empty($radius)){
-            $this->controller->forward('apiV0/error400');
-        }
 
-        $user_settings->radius = $radius;
+        $user_settings->setScenario('radius_post');
+
+        $user_settings->setAttribute('radius',$radius);
         if($user_settings->validate()){
             $this->controller->out($user_settings->save());
         }else{

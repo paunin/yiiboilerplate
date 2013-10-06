@@ -3,7 +3,7 @@ $main = array(
 
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'PlaceMeUp',
-    'language'=>'ru',
+    'language'=>'en',
 
     // preloading 'log' component
     'preload' => array('log'),
@@ -11,6 +11,7 @@ $main = array(
     // autoloading model and component classes
     'import' => array(
 
+        'application.validators.*',
         'application.models.*',
         'application.models.raw.*',
         'application.models.forms.*',
@@ -112,6 +113,9 @@ $main = array(
                 array('apiUser/get', 'pattern'=>'api_v0/user', 'verb'=>'GET'),
                 array('apiUser/radiusGet', 'pattern'=>'api_v0/user/radius', 'verb'=>'GET'),
                 array('apiUser/radiusPost', 'pattern'=>'api_v0/user/radius', 'verb'=>'POST'),
+                array('apiUser/placeGet', 'pattern'=>'api_v0/user/place', 'verb'=>'GET'),
+                array('apiUser/placePost', 'pattern'=>'api_v0/user/place', 'verb'=>'POST'),
+                array('apiUser/placePut', 'pattern'=>'api_v0/user/place/<id:\d+>', 'verb'=>'PUT'),
 
                 array('apiV0/error404', 'pattern'=>'api<whartever:.*>'),
 
@@ -149,15 +153,21 @@ $main = array(
     ),
 
     // application-level parameters that can be accessed
-    // using Yii::app()->params['radius_max']
+    // using Yii::app()->params['coordinate_min']
     'params' => array(
         'slogan' => 'You place in Web', 
         'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
-        'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
+
 
         'radius_min' => 5,
         'radius_max' => 50,
-        'radius_default' => 50
+        'radius_default' => 50,
+        'places_count_max' => 100,
+        'coordinate_max' => 900000000000000000,
+        'coordinate_min' => -900000000000000000,
+        'private' => array(
+            'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
+        )
     ),
 );
 

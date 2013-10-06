@@ -15,9 +15,11 @@ class ToArrayBehavior extends CActiveRecordBehavior
         $result = array();
         /** @var CActiveRecord $record */
         $record = $this->getOwner();
-        foreach($this->fields as $field){
+        foreach($this->fields as $key => $field){
+          if(is_numeric($key))
+              $key = $field;
           if($record->hasAttribute($field)){
-              $result[$field] = $record->getAttribute($field);
+              $result[$key] = $record->getAttribute($field);
           }
         }
         return $result;
