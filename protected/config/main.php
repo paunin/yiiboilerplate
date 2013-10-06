@@ -167,6 +167,9 @@ $main = array(
         'coordinate_max' => 900000000000000000,
         'coordinate_min' => -900000000000000000,
 
+        'map_scale_max'=>1000,
+        'map_resolution_max'=>300,
+
         'limit_feed_max'=>200,
         'limit_feed_default'=>20,
         'private' => array(
