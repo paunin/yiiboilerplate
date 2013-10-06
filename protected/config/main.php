@@ -116,6 +116,7 @@ $main = array(
                 array('apiUser/placeGet', 'pattern'=>'api_v0/user/place', 'verb'=>'GET'),
                 array('apiUser/placePost', 'pattern'=>'api_v0/user/place', 'verb'=>'POST'),
                 array('apiUser/placePut', 'pattern'=>'api_v0/user/place/<id:\d+>', 'verb'=>'PUT'),
+                array('apiUser/placeDelete', 'pattern'=>'api_v0/user/place/<id:\d+>', 'verb'=>'DELETE'),
 
                 array('apiV0/error404', 'pattern'=>'api<whartever:.*>'),
 
@@ -165,6 +166,9 @@ $main = array(
         'places_count_max' => 100,
         'coordinate_max' => 900000000000000000,
         'coordinate_min' => -900000000000000000,
+
+        'limit_feed_max'=>200,
+        'limit_feed_default'=>20,
         'private' => array(
             'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
         )

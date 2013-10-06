@@ -5,7 +5,7 @@ class ApiUserController extends ApiController
     /**
      * Declares class-based actions.
      */
-    protected $_actions = array('get','radiusGet','radiusPost','placeGet','placePost','placePut');
+    protected $_actions = array('get','radiusGet','radiusPost','placeGet','placePost','placePut','placeDelete');
 
 
     public function filters()
@@ -21,7 +21,7 @@ class ApiUserController extends ApiController
         return array(
 
             array('allow',
-                'actions' => array('radiusGet', 'radiusPost','placeGet','placePost','placePut'),
+                'actions' => array('radiusGet', 'radiusPost','placeGet','placePost','placePut','placeDelete'),
                 'users' => array('@'),
             ),
 
