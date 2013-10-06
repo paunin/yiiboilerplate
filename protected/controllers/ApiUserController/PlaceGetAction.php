@@ -12,7 +12,7 @@ class PlaceGetAction extends ApiAction
         $result = array();
 
         $user_places = User::current()->userPlaces;
-        foreach($user_places as $user_place){
+        foreach((array)$user_places as $user_place){
             $result[] = $user_place->toArray();
         }
 
