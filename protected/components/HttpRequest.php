@@ -115,6 +115,21 @@ class HttpRequest extends CHttpRequest
     }
 
     /**
+     * @param string $name
+     * @param null $defaultValue
+     * @param bool $rest
+     * @return mixed
+     */
+    public function getParam($name,$defaultValue=null,$rest = false){
+        if(!$rest){
+            return parent::getParam($name,$defaultValue);
+        }else{
+            $rest_params = $this->getRestParams();
+            return isset($rest_params[$name]) ? $rest_params[$name] : parent::getParam($name,$defaultValue);
+        }
+    }
+
+    /**
      * @param str|null $type POST|GET|null, if NULL POST will merge with GET
      * @param bool $rest
      * @return array

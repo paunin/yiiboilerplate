@@ -2,10 +2,22 @@
 
 class CoordinatePointValidator extends CoordinateValidator
 {
+    /**
+     * @var string field for X coordinate
+     */
     public $cx_field = 'cx';
+    /**
+     * @var string field for Y coordinate
+     */
     public $cy_field = 'cy';
 
-    public $makeCoordinates = false;
+    /**
+     * @var bool make two coordinates in $cx_field and $cy_field
+     */
+    public $makeCoordinates = true;
+    /**
+     * @var bool reanimate coordinates from $cx_field and $cy_field
+     */
     public $reanimateCoordinates = false;
 
     /**

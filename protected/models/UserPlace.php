@@ -14,8 +14,8 @@ class UserPlace extends BaseUserPlace
             array(
                 array('created_at', 'default', 'setOnEmpty' => true, 'value' => date("y-m-d H:i:s")),
                 array('cxy', 'required', 'on' => 'place_post'),
-                array('cxy', 'application.validators.CoordinatePointValidator', 'makeCoordinates' => true, 'on' => 'place_post'),
-                array('cxy', 'application.validators.CoordinatePointValidator', 'reanimateCoordinates' => true, 'makeCoordinates' => true, 'on' => 'place_put'),
+                array('cxy', 'application.validators.CoordinatePointValidator', 'on' => 'place_post'),
+                array('cxy', 'application.validators.CoordinatePointValidator', 'reanimateCoordinates' => true, 'on' => 'place_put'),
                 array('cxy', 'checkOccupied'),
 
             ),

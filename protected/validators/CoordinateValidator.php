@@ -2,6 +2,10 @@
 
 class CoordinateValidator extends CValidator
 {
+    /**
+     * @param CModel $object
+     * @param string $attribute
+     */
     protected function validateAttribute($object, $attribute)
     {
         $value = $object->getAttribute($attribute);
@@ -10,6 +14,10 @@ class CoordinateValidator extends CValidator
         }
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     protected function validateCoordinate($value)
     {
        return (is_numeric($value) && $value > Yii::app()->params['coordinate_min'] && $value < Yii::app()->params['coordinate_max'])?true:false;
