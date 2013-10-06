@@ -12,16 +12,12 @@ class PlacePutAction extends ApiAction
      */
     public function run($id)
     {
-        $user_place = UserPlace::model()->findByPk(
-            $id,
-            'user_id = :user_id',
-            array(':user_id' => User::current()->id)
-        );
+        $user_place = UserPlace::findByPkForUser($id,User::current()->id);
 
         if (!$user_place)
             $this->controller->forward('apiV0/error404');
 
-        $user_place->setAttributes(Yii::app()->getRequest()->getRestParams());
+        $user_place->setAttributes(Yii::app()->getRequest()->getAllParams());;
         $user_place->setScenario('place_put');
 
 

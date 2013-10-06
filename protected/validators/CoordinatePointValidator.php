@@ -18,6 +18,7 @@ class CoordinatePointValidator extends CoordinateValidator
         $value = $object->getAttribute($attribute);
 
         if (empty($value) && $this->reanimateCoordinates) {
+            die('sd');
             $object->setAttribute($attribute, $object->getAttribute($this->cx_field) . ':' . $object->getAttribute($this->cy_field));
         }
 

@@ -509,7 +509,7 @@ abstract class CApplication extends CModule
 
 	/**
 	 * Returns the request component.
-	 * @return CHttpRequest the request component
+	 * @return HttpRequest the request component
 	 */
 	public function getRequest()
 	{

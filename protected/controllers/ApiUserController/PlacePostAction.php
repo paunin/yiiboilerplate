@@ -13,11 +13,7 @@ class PlacePostAction extends ApiAction
         $user_place = new UserPlace();
         $user_place->user_id = User::current()->id;
 
-        $user_place->cxy = Yii::app()->getRequest()->getParam('cxy');
-        $user_place->is_spirit = Yii::app()->getRequest()->getParam('is_spirit');
-        $user_place->name = Yii::app()->getRequest()->getParam('name');
-        $user_place->radius = Yii::app()->getRequest()->getParam('radius');
-
+        $user_place->setAttributes(Yii::app()->getRequest()->getAllParams());
 
         $user_place->permissions = $user_place->is_spirit ? 2 : 6;
         $user_place->setScenario('place_post');

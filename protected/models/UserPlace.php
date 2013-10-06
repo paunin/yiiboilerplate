@@ -15,7 +15,7 @@ class UserPlace extends BaseUserPlace
                 array('created_at', 'default', 'setOnEmpty' => true, 'value' => date("y-m-d H:i:s")),
                 array('cxy', 'required', 'on' => 'place_post'),
                 array('cxy', 'application.validators.CoordinatePointValidator', 'makeCoordinates' => true, 'on' => 'place_post'),
-                array('cxy', 'application.validators.CoordinatePointValidator', 'reanimateCoordinates' => true, 'on' => 'place_put'),
+                array('cxy', 'application.validators.CoordinatePointValidator', 'reanimateCoordinates' => true, 'makeCoordinates' => true, 'on' => 'place_put'),
                 array('cxy', 'checkOccupied'),
 
             ),
@@ -133,7 +133,9 @@ class UserPlace extends BaseUserPlace
         return $criteria;
     }
 
-
+    /**
+     * @return bool
+     */
     public function beforeSave()
     {
         if ($this->getIsNewRecord()) {
@@ -153,6 +155,19 @@ class UserPlace extends BaseUserPlace
         }
 
         return parent::beforeSave();
+    }
+
+    /**
+     * @param int $id
+     * @param int $user_id
+     * @return CActiveRecord|null
+     */
+    public static function findByPkForUser($id,$user_id){
+        return UserPlace::model()->findByPk(
+            $id,
+            'user_id = :user_id',
+            array(':user_id' => $user_id)
+        );
     }
 
 }

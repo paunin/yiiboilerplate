@@ -114,5 +114,34 @@ class HttpRequest extends CHttpRequest
         return !empty($_SERVER['HTTP_HTTPS']) && strcasecmp($_SERVER['HTTP_HTTPS'],'off');
     }
 
+    /**
+     * @param str|null $type POST|GET|null, if NULL POST will merge with GET
+     * @param bool $rest
+     * @return array
+     */
+    public function getAllParams($type = null,$rest = true){
+        $result = array();
+        switch($type){
+            case 'POST':
+                if(!empty($_POST))
+                    $result = CMap::mergeArray($result,$_POST);
+                break;
+            case 'GET':
+                if(!empty($_GET))
+                    $result = CMap::mergeArray($result,$_GET);
+                break;
+            default:
+                if(!empty($_POST))
+                    $result = CMap::mergeArray($result,$_POST);
+                if(!empty($_GET))
+                    $result = CMap::mergeArray($result,$_GET);
+                break;
+        }
+
+        if($rest)
+            $result = CMap::mergeArray($result,$this->getRestParams());
+        return $result;
+    }
+
 
 }
