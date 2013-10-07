@@ -1,0 +1,26 @@
+{
+    "status": 0,
+    "message": "",
+    "result": {
+        "41:41": {
+            "real_cxyxy": "124:127::127:124",
+            "scale_cxy": "41:41",
+            "profiles": {
+                "125:125": [
+                    %PROFILE_FORMAT%
+                ]
+            },
+            "spirits": {
+                "125:125": [
+                    %PROFILE_FORMAT%,%PROFILE_FORMAT%,...
+                ]
+            }
+        },
+        "3333:9999": {
+            "real_cxyxy": "10000:30001::10003:29998",
+            "scale_cxy": "3333:9999",
+            ...
+        },
+        ...
+    }
+}

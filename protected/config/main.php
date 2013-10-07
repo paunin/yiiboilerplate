@@ -14,6 +14,7 @@ $main = array(
         'application.validators.*',
         'application.models.*',
         'application.models.raw.*',
+        'application.models.virtual.*',
         'application.models.forms.*',
         'application.components.*',
         'application.components.api.*',
@@ -118,6 +119,8 @@ $main = array(
                 array('apiUser/placePut', 'pattern'=>'api_v0/user/place/<id:\d+>', 'verb'=>'PUT'),
                 array('apiUser/placeDelete', 'pattern'=>'api_v0/user/place/<id:\d+>', 'verb'=>'DELETE'),
 
+                array('apiLocation/mapGet', 'pattern'=>'api_v0/location/map', 'verb'=>'GET'),
+
                 array('apiV0/error404', 'pattern'=>'api<whartever:.*>'),
 
                 //>>>REST patterns
@@ -154,7 +157,7 @@ $main = array(
     ),
 
     // application-level parameters that can be accessed
-    // using Yii::app()->params['coordinate_min']
+    // using Yii::app()->params['map_scale_max']
     'params' => array(
         'slogan' => 'You place in Web', 
         'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
@@ -167,8 +170,9 @@ $main = array(
         'coordinate_max' => 900000000000000000,
         'coordinate_min' => -900000000000000000,
 
+        'map_scale_min'=>1,
         'map_scale_max'=>1000,
-        'map_resolution_max'=>300,
+        'map_resolution_max'=>100,
 
         'limit_feed_max'=>200,
         'limit_feed_default'=>20,

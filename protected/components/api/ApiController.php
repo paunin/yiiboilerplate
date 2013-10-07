@@ -40,6 +40,7 @@ class ApiController extends Controller
         if(Yii::app()->getRequest()->getParam('_debug')) {
             header('Content-Type: text/html');
             Yii::app()->controller->render('application.views.api.debug', array('debug' => print_r($in, true)));
+            return;
         }
         if($type == 'auto')
             $type = Yii::app()->getRequest()->getParam('_ans','json');

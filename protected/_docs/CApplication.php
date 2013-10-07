@@ -79,6 +79,7 @@
  * @property string $homeUrl The homepage URL.
  *
  * @property CWebUser $user
+ * @property HttpRequest $request
  *
  *
  * @author Qiang Xue <qiang.xue@gmail.com>

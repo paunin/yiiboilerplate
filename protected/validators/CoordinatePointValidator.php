@@ -30,7 +30,6 @@ class CoordinatePointValidator extends CoordinateValidator
         $value = $object->getAttribute($attribute);
 
         if (empty($value) && $this->reanimateCoordinates) {
-            die('sd');
             $object->setAttribute($attribute, $object->getAttribute($this->cx_field) . ':' . $object->getAttribute($this->cy_field));
         }
 
@@ -51,13 +50,7 @@ class CoordinatePointValidator extends CoordinateValidator
      */
     protected function genCoordinate($value, $asix)
     {
-        $xy = explode(':', $value, 2);
-        if (!is_array($xy) || count($xy) != 2) {
-            return null;
-        }
-        $result = array();
-        $result['x'] = $xy[0];
-        $result['y'] = $xy[1];
+        $result = LocationPoint::toCoordinates($value);
         return $result[$asix];
     }
 
