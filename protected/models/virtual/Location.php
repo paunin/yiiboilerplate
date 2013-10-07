@@ -3,7 +3,7 @@
 class Location extends CModel
 {
     /** @var  int scale for map */
-    public $scale;
+    public $scale = 1;
 
     public function attributeNames()
     {
@@ -14,8 +14,7 @@ class Location extends CModel
 
     public function rules(){
         return array(
-            array('scale, vector', 'required'),
-            array('scale', 'application.validators.MapScaleValidator'),
+            array('scale', 'application.validators.MapScaleValidator', 'integerOnly'=>true),
         );
     }
 }

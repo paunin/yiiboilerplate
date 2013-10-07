@@ -3,6 +3,7 @@
 class LocationVector extends LocationPoint {
     /** @var  LocationPoint  */
     public $pa, $pb;
+
     /**
      * @param $vector_str
      * @return array|null
@@ -38,10 +39,14 @@ class LocationVector extends LocationPoint {
         return "{$this->pa}::{$this->pb}";
     }
 
+    /** @var bool already optimized */
+    private $optimized = false;
     /**
-     *
+     * '-5:5::-10:-10' will transform to '-10:5::-5:-10'  from left-top to right-bottom
      */
     public function optimize(){
+        if($this->optimized)
+            return;
         $cx0 = $this->pa->cx;
         $cx1 = $this->pb->cx;
 
@@ -60,5 +65,23 @@ class LocationVector extends LocationPoint {
 
         $this->pa = new LocationPoint("$cx0:$cy0");
         $this->pb = new LocationPoint("$cx1:$cy1");
+        $this->optimized = true;
+    }
+
+    /**
+     * @return int
+     */
+    public function deltaX(){
+        $this->optimize();
+        return $this->pb->cx - $this->pa->cx;
+
+    }
+
+    /**
+     * @return int
+     */
+    public function deltaY(){
+        $this->optimize();
+        return $this->pa->cy - $this->pb->cy;
     }
 } 

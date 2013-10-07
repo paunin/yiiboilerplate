@@ -4,7 +4,10 @@ class LocationMap extends Location
 {
     /** @var string in format '-5:5::5:5' is ok '-5:5::-10:-10' will transform to '-10:5::-5:-10' */
     public $vector;
+
+    /** @var  bool */
     public $with_spirits;
+    public $just_count;
 
     /** @var  int Coordinates */
     public $cx0, $cy0, $cx1, $cy1;
@@ -28,11 +31,27 @@ class LocationMap extends Location
                 parent::rules(),
                 array(
                     array('vector', 'application.validators.CoordinateVectorValidator', 'optimize' => true, 'makeCoordinates' => true),
-                    array('with_spirits','boolean'),
+                    array('with_spirits, just_count','boolean'),
+                    array('scale','checkResolution')
                 )
             );
     }
 
+    /**
+     * @param string $attribute
+     * @param array $params
+     */
+    public function checkResolution($attribute, $params)
+    {
+        //%ШИРИНА КАРТЫ% / scale <= config.map_resolution_max AND %ВЫСОТА КАРТЫ% / scale <= config.map_resolution_max
+        $vector = new LocationVector($this->vector);
+        if(
+            $vector->deltaX()/$this->$attribute > Yii::app()->params['map_resolution_max'] ||
+            $vector->deltaY()/$this->$attribute > Yii::app()->params['map_resolution_max']
+        )
+            $this->addError('scale', Yii::t('app', 'Resolution is too high (maximum resolution - {max_resolution})',array('{max_resolution}'=>Yii::app()->params['map_resolution_max'])));
+
+    }
     /**
      * @return array
      */
@@ -46,7 +65,7 @@ class LocationMap extends Location
             FROM
                 user_place t
             JOIN "user" u ON t.user_id = u.id
-            WHERE true ' . (!$this->with_spirits ? ' AND t.is_spirit = false' : '') . '
+            WHERE ('.$this->limitByVector(new LocationVector($this->vector)).') ' . (!$this->with_spirits ? ' AND t.is_spirit = false' : '') . '
             ORDER BY t.cx, t.cy
         ');
 
@@ -65,13 +84,10 @@ class LocationMap extends Location
             if(empty($result["$scaledPoint"])) {
                 $result["$scaledPoint"] =
                     array(
-
                         "real_cxyxy" => "$scaledVector",
                         "scale_cxy" => "$scaledPoint",
                         'profiles' => array(),
                         'spirits' => array()
-
-                    
                 );
             }
 
@@ -96,14 +112,25 @@ class LocationMap extends Location
                 }
                 $result["$scaledPoint"]['spirits']["$point"][] = $profile;
             }
-
-
-
-
         }
         return $result;
     }
 
+    /**
+     * limitation by vector
+     *
+     * @param LocationVector $vector
+     * @return string
+     */
+    public function limitByVector(LocationVector $vector){
+        $vector->optimize();
+        return "cx >= {$vector->pa->cx} AND cx < {$vector->pb->cx} AND cy >= {$vector->pb->cy} AND cy < {$vector->pa->cy}";
+    }
+
+    /**
+     * @param LocationPoint $point
+     * @return LocationPoint
+     */
     public function scalePoint(LocationPoint $point)
     {
         $x = floor(($point->cx - $this->cx0) / $this->scale);
@@ -112,6 +139,10 @@ class LocationMap extends Location
         return new LocationPoint("$x:$y");
     }
 
+    /**
+     * @param LocationPoint $point
+     * @return LocationPoint
+     */
     public function unscalePoint(LocationPoint $point){
         $x = $point->cx * $this->scale + $this->cx0;
         $y = $point->cy * $this->scale + $this->cy0;
@@ -119,6 +150,10 @@ class LocationMap extends Location
         return new LocationPoint("$x:$y");
     }
 
+    /**
+     * @param LocationPoint $point
+     * @return LocationVector
+     */
     public function scaledVector(LocationPoint $point){
         $scalePoint = $this->scalePoint($point);
         $a = $this->unscalePoint($scalePoint);
