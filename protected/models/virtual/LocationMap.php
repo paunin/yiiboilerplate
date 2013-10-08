@@ -88,31 +88,39 @@ class LocationMap extends Location
                     array(
                         "real_cxyxy" => "$scaledVector",
                         "scale_cxy" => "$scaledPoint",
-                        'profiles' => array(),
-                        'spirits' => array()
+                        'profiles' => $this->just_count?0:array(),
+                        'spirits' => $this->just_count?0:array()
                 );
             }
 
-            $profile = array(
-                'id' => $row['id'],
-                'username' => $row['username'],
-                'name' => null,
-                'avatar' => null,
-                'created_at' => $row['created_at'],
-                'last_login' => $row['last_login'],
-                'user_social' => Array()
-            );
 
-            if(!$row['is_spirit']) {
-                if(empty($result["$scaledPoint"]['profiles']["$point"])) {
-                    $result["$scaledPoint"]['profiles']["$point"] = array();
+            if(!$this->just_count){
+                $profile = array(
+                    'id' => $row['id'],
+                    'username' => $row['username'],
+                    'name' => null,
+                    'avatar' => null,
+                    'created_at' => $row['created_at'],
+                    'last_login' => $row['last_login'],
+                );
+                if(!$row['is_spirit']) {
+                    if(empty($result["$scaledPoint"]['profiles']["$point"])) {
+                        $result["$scaledPoint"]['profiles']["$point"] = array();
+                    }
+                    $result["$scaledPoint"]['profiles']["$point"][] = $profile;
+                } else {
+                    if(empty($result["$scaledPoint"]['spirits']["$point"])) {
+                        $result["$scaledPoint"]['spirits']["$point"] = array();
+                    }
+                    $result["$scaledPoint"]['spirits']["$point"][] = $profile;
                 }
-                $result["$scaledPoint"]['profiles']["$point"][] = $profile;
             } else {
-                if(empty($result["$scaledPoint"]['spirits']["$point"])) {
-                    $result["$scaledPoint"]['spirits']["$point"] = array();
+                if(!$row['is_spirit']) {
+                    $result["$scaledPoint"]['profiles'] += 1;
+                }else{
+                    $result["$scaledPoint"]['spirits'] += 1;
                 }
-                $result["$scaledPoint"]['spirits']["$point"][] = $profile;
+
             }
         }
         return $result;

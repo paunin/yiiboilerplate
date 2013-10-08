@@ -6,10 +6,10 @@ Asse::addJs('jquery.flot.symbol.js', Yii::getPathOfAlias('webroot.web.flot'));
 
 
 ?>
-
+<b>In js varible `apiResult` you can found result of real api method</b><br/><br/><br/>
 <script type="text/javascript">
 
-    var profilePointsInfo = <?php echo json_encode($result) ?>;
+    var apiResult = <?php echo json_encode($result) ?>;
 
     $(function () {
 
@@ -82,8 +82,8 @@ Asse::addJs('jquery.flot.symbol.js', Yii::getPathOfAlias('webroot.web.flot'));
             $("<div id='tooltip'>" + contents + "</div>").css({
                 position: "absolute",
                 display: "none",
-                top: y + 5,
-                left: x + 5,
+                top: y + 20,
+                left: x + 20,
                 border: "1px solid #fdd",
                 padding: "2px",
                 "background-color": "#fee",
@@ -104,13 +104,9 @@ Asse::addJs('jquery.flot.symbol.js', Yii::getPathOfAlias('webroot.web.flot'));
                         var x = item.datapoint[0],
                             y = item.datapoint[1];
 
-
-
                         showTooltip(item.pageX, item.pageY,
                             x + ":" + y+ "<br/>" +
-//                        "spirits points: " + profilePointsInfo[""+x+":"+y]['spirits'].length + "<br/>" +
-//                        "profiles points: " + profilePointsInfo[""+x+":"+y]['profiles'].length + "<br/>" +
-//                        "real_cxyxy: " + profilePointsInfo[""+x+":"+y]['real_cxyxy'] + "<br/>" +
+                            "real_cxyxy: " + apiResult[""+x+":"+y]['real_cxyxy'] + "<br/>" +
                             ""
                         );
                     }
@@ -123,5 +119,5 @@ Asse::addJs('jquery.flot.symbol.js', Yii::getPathOfAlias('webroot.web.flot'));
     });
 
 </script>
-<div id="plot" style="width: 800px; height: 800px;"></div>
+<div id="plot" style="width: 870px; height: 870px;"></div>
 <div id="plotpan"></div>
