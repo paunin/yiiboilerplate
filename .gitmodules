@@ -19,3 +19,6 @@
 [submodule "protected/packages/solr"]
 	path = protected/packages/solr
 	url = https://github.com/phpnode/YiiSolr.git
+[submodule "web/flot"]
+	path = web/flot
+	url = https://github.com/flot/flot.git
