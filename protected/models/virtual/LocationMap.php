@@ -80,7 +80,6 @@ class LocationMap extends Location
             WHERE (' . $this->makeLimits() . ') ' . (!$this->with_spirits ? ' AND t.is_spirit = false' : '') . '
             ORDER BY t.cx, t.cy
         ';
-        die($sql);
         $command = Yii::app()->db->createCommand($sql);
 
         $dataReader = $command->query();
