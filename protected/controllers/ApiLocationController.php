@@ -5,5 +5,5 @@ class ApiLocationController extends ApiController
     /**
      * Declares class-based actions.
      */
-    protected $_actions = array('mapGet');
+    protected $_actions = array('mapGet','mapGetTest');
 }

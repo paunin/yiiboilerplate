@@ -73,8 +73,8 @@ class LocationVector extends LocationPoint {
      */
     public function deltaX(){
         $this->optimize();
-        return $this->pb->cx - $this->pa->cx;
-
+        $result = $this->pb->cx - $this->pa->cx;
+        return $result;
     }
 
     /**
@@ -82,6 +82,7 @@ class LocationVector extends LocationPoint {
      */
     public function deltaY(){
         $this->optimize();
-        return $this->pa->cy - $this->pb->cy;
+        $result = $this->pa->cy - $this->pb->cy;
+        return $result;
     }
 } 

@@ -121,10 +121,11 @@ $main = array(
 
                 array('apiLocation/mapGet', 'pattern'=>'api_v0/location/map', 'verb'=>'GET'),
 
+                //Tests
+                array('apiLocation/mapGetTest', 'pattern'=>'api_v0/location/map/test'),
+                //404
                 array('apiV0/error404', 'pattern'=>'api<whartever:.*>'),
-
                 //>>>REST patterns
-
 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

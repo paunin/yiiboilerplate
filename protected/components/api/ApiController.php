@@ -20,6 +20,7 @@ class ApiController extends Controller
      *              if $_GET['_ans'] empty use 'json'
      *      json  - json/jsonp
      *      xml - xml document
+     *      php - php array
      * @throws ApiException
      * @return bool
      */
@@ -50,6 +51,9 @@ class ApiController extends Controller
                 break;
             case 'json':
                 echo self::makeJson($in);
+                break;
+            case 'php':
+                echo self::makePhp($in);
                 break;
             default:
                 throw new ApiException('Wrong answer type'.(string)$type);
@@ -104,6 +108,16 @@ class ApiController extends Controller
         //header('Content-Type: text/xml');
         header('Content-Type: text/plain');
         die('@TODO');
+    }
+
+    /**
+     * @param $in
+     * @return mixed
+     */
+    public static function makePhp($in)
+    {
+        header('Content-Type: text/plain');
+        return var_export($in,true);
     }
 
     /**

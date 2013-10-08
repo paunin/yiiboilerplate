@@ -43,13 +43,15 @@ class LocationMap extends Location
      */
     public function checkResolution($attribute, $params)
     {
-        //%ШИРИНА КАРТЫ% / scale <= config.map_resolution_max AND %ВЫСОТА КАРТЫ% / scale <= config.map_resolution_max
-        $vector = new LocationVector($this->vector);
-        if(
-            $vector->deltaX()/$this->$attribute > Yii::app()->params['map_resolution_max'] ||
-            $vector->deltaY()/$this->$attribute > Yii::app()->params['map_resolution_max']
-        )
-            $this->addError('scale', Yii::t('app', 'Resolution is too high (maximum resolution - {max_resolution})',array('{max_resolution}'=>Yii::app()->params['map_resolution_max'])));
+        if(!$this->hasErrors('vector') && !$this->hasErrors('scale')){
+            //%ШИРИНА КАРТЫ% / scale <= config.map_resolution_max AND %ВЫСОТА КАРТЫ% / scale <= config.map_resolution_max
+            $vector = new LocationVector($this->vector);
+            if(
+                $vector->deltaX()/$this->$attribute > Yii::app()->params['map_resolution_max'] ||
+                $vector->deltaY()/$this->$attribute > Yii::app()->params['map_resolution_max']
+            )
+                $this->addError('scale', Yii::t('app', 'Resolution is too high (maximum resolution - {max_resolution})',array('{max_resolution}'=>Yii::app()->params['map_resolution_max'])));
+        }
 
     }
     /**

@@ -1,26 +1,171 @@
-{
-    "status": 0,
-    "message": "",
-    "result": {
-        "41:41": {
-            "real_cxyxy": "124:127::127:124",
-            "scale_cxy": "41:41",
-            "profiles": {
-                "125:125": [
-                    %PROFILE_FORMAT%
-                ]
-            },
-            "spirits": {
-                "125:125": [
-                    %PROFILE_FORMAT%,%PROFILE_FORMAT%,...
-                ]
+{"0:-2": {
+    "real_cxyxy": "0:9::1:8",
+    "scale_cxy": "0:-2",
+    "profiles": [],
+    "spirits": {
+        "0:8": [
+            {
+                "id": 724,
+                "username": "user724",
+                "name": null,
+                "avatar": null,
+                "created_at": "2011-09-14 19:37:20",
+                "last_login": "2011-10-29 19:37:20",
+                "user_social": []
             }
-        },
-        "3333:9999": {
-            "real_cxyxy": "10000:30001::10003:29998",
-            "scale_cxy": "3333:9999",
-            ...
-        },
-        ...
+        ]
     }
-}
+}, "1:-9": {
+    "real_cxyxy": "1:2::2:1",
+    "scale_cxy": "1:-9",
+    "profiles": {
+        "1:1": [
+            {
+                "id": 2,
+                "username": "admin",
+                "name": null,
+                "avatar": null,
+                "created_at": "2013-09-16 11:47:38",
+                "last_login": "2013-10-07 12:42:38",
+                "user_social": []
+            }
+        ]
+    },
+    "spirits": []
+}, "1:-8": {
+    "real_cxyxy": "1:3::2:2",
+    "scale_cxy": "1:-8",
+    "profiles": [],
+    "spirits": {
+        "1:2": [
+            {
+                "id": 4,
+                "username": "user4",
+                "name": null,
+                "avatar": null,
+                "created_at": "2013-10-04 07:37:20",
+                "last_login": "2013-11-18 07:37:20",
+                "user_social": []
+            }
+        ]
+    }
+}, "2:-6": {
+    "real_cxyxy": "2:5::3:4",
+    "scale_cxy": "2:-6",
+    "profiles": [],
+    "spirits": {
+        "2:4": [
+            {
+                "id": 171,
+                "username": "user171",
+                "name": null,
+                "avatar": null,
+                "created_at": "2013-04-13 05:50:20",
+                "last_login": null,
+                "user_social": []
+            }
+        ]
+    }
+}, "3:-7": {
+    "real_cxyxy": "3:4::4:3",
+    "scale_cxy": "3:-7",
+    "profiles": {
+        "3:3": [
+            {
+                "id": 518,
+                "username": "user518",
+                "name": null,
+                "avatar": null,
+                "created_at": "2012-04-16 13:03:20",
+                "last_login": "2012-05-31 13:03:20",
+                "user_social": []
+            }
+        ]
+    },
+    "spirits": []
+}, "6:-1": {
+    "real_cxyxy": "6:10::7:9",
+    "scale_cxy": "6:-1",
+    "profiles": {
+        "6:9": [
+            {
+                "id": 539,
+                "username": "user539",
+                "name": null,
+                "avatar": null,
+                "created_at": "2012-03-25 15:42:20",
+                "last_login": "2012-05-09 15:42:20",
+                "user_social": []
+            }
+        ]
+    },
+    "spirits": []
+}, "7:-7": {
+    "real_cxyxy": "7:4::8:3",
+    "scale_cxy": "7:-7",
+    "profiles": [],
+    "spirits": {
+        "7:3": [
+            {
+                "id": 932,
+                "username": "user932",
+                "name": null,
+                "avatar": null,
+                "created_at": "2011-02-10 00:09:20",
+                "last_login": "2011-03-27 00:09:20",
+                "user_social": []
+            }
+        ]
+    }
+}, "8:-5": {
+    "real_cxyxy": "8:6::9:5",
+    "scale_cxy": "8:-5",
+    "profiles": [],
+    "spirits": {
+        "8:5": [
+            {
+                "id": 73,
+                "username": "user73",
+                "name": null,
+                "avatar": null,
+                "created_at": "2013-07-24 09:28:20",
+                "last_login": "2013-09-07 09:28:20",
+                "user_social": []
+            }
+        ]
+    }
+}, "8:-2": {
+    "real_cxyxy": "8:9::9:8",
+    "scale_cxy": "8:-2",
+    "profiles": {
+        "8:8": [
+            {
+                "id": 316,
+                "username": "user316",
+                "name": null,
+                "avatar": null,
+                "created_at": "2012-11-13 02:25:20",
+                "last_login": "2012-12-28 02:25:20",
+                "user_social": []
+            }
+        ]
+    },
+    "spirits": []
+}, "9:-9": {
+    "real_cxyxy": "9:2::10:1",
+    "scale_cxy": "9:-9",
+    "profiles": {
+        "9:1": [
+            {
+                "id": 659,
+                "username": "user659",
+                "name": null,
+                "avatar": null,
+                "created_at": "2011-11-21 13:42:20",
+                "last_login": "2012-01-05 13:42:20",
+                "user_social": []
+            }
+        ]
+    },
+    "spirits": []
+}};
