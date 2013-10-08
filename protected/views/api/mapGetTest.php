@@ -8,8 +8,48 @@ Asse::addJs('jquery.flot.symbol.js', Yii::getPathOfAlias('webroot.web.flot'));
 ?>
 <b>In js varible `apiResult` you can found result of real api method</b><br/><br/><br/>
 <script type="text/javascript">
+    Object.size = function (obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    };
+
+
 
     var apiResult = <?php echo json_encode($result) ?>;
+
+    var getPointInfo = function (x, y) {
+        var spirits = [],
+        profiles = [];
+
+        $.each(apiResult["" + x + ":" + y]['spirits'], function (point, arr) {
+            var profs = [];
+            $.each(arr, function (point, profile){
+                profs.push(profile.id +'-'+ profile.username)
+            });
+            spirits.push(point + " => " + profs.join(', '))
+        })
+
+
+        $.each(apiResult["" + x + ":" + y]['profiles'], function (point, arr) {
+            var profs = [];
+            $.each(arr, function (point, profile){
+                profs.push(profile.id +'-'+ profile.username)
+            });
+            profiles.push(point + " => " + profs.join(', '))
+        })
+
+
+        return x + ":" + y + "<br/>" +
+            "real_cxyxy: " + apiResult["" + x + ":" + y]['real_cxyxy'] + "<br/>" +
+            "<b>profiles:</b><br/> " + /*Object.size(apiResult["" + x + ":" + y]['spirits']) +*/ "" + profiles.join('<br/>') + "" + "<br/>" +
+            "<b>spirits:</b><br/> " + /*Object.size(apiResult["" + x + ":" + y]['profiles']) +*/ "" + spirits.join('<br/>') + "" + "<br/>" +
+            ""
+    }
+
+
 
     $(function () {
 
@@ -95,25 +135,23 @@ Asse::addJs('jquery.flot.symbol.js', Yii::getPathOfAlias('webroot.web.flot'));
         $("#plot").bind("plothover", function (event, pos, item) {
 
 
-                if (item) {
-                    if (previousPoint != item.dataIndex) {
+            if (item) {
+                if (previousPoint != item.dataIndex) {
 
-                        previousPoint = item.dataIndex;
+                    previousPoint = item.dataIndex;
 
-                        $("#tooltip").remove();
-                        var x = item.datapoint[0],
-                            y = item.datapoint[1];
-
-                        showTooltip(item.pageX, item.pageY,
-                            x + ":" + y+ "<br/>" +
-                            "real_cxyxy: " + apiResult[""+x+":"+y]['real_cxyxy'] + "<br/>" +
-                            ""
-                        );
-                    }
-                } else {
                     $("#tooltip").remove();
-                    previousPoint = null;
+                    var x = item.datapoint[0],
+                        y = item.datapoint[1];
+
+                    showTooltip(item.pageX, item.pageY,
+                        getPointInfo(x, y)
+                    );
                 }
+            } else {
+                $("#tooltip").remove();
+                previousPoint = null;
+            }
 
         });
     });

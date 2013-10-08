@@ -3637,15 +3637,17 @@ ALTER TABLE ONLY "user"
 --
 -- Name: _idx_user_place_cx_cy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
-
 CREATE INDEX _idx_user_place_cx_cy ON user_place USING btree (cx, cy);
+CREATE INDEX _idx_user_place_cx ON user_place USING btree (cx);
+CREATE INDEX _idx_user_place_cy ON user_place USING btree (cy);
 
 
 --
 -- Name: _idx_user_place_cx_p_cy_cx_m_cy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
-
 CREATE INDEX _idx_user_place_cx_p_cy_cx_m_cy ON user_place USING btree (cx_p_cy, cx_m_cy);
+CREATE INDEX _idx_user_place_cx_p_cy ON user_place USING btree (cx_p_cy);
+CREATE INDEX _idx_user_place_cx_m_cy ON user_place USING btree (cx_m_cy);
 
 
 --

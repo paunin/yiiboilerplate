@@ -8,7 +8,7 @@ class CoordinateValidator extends CValidator
      */
     protected function validateAttribute($object, $attribute)
     {
-        $value = $object->getAttribute($attribute);
+        $value = $object->$attribute;
         if (!$this->validateCoordinate($value)) {
             $this->addError($object, $attribute, !empty($this->message)?$this->message:Yii::t('app', 'Wrong coordinate'));
         }

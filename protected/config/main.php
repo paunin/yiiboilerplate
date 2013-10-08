@@ -121,8 +121,13 @@ $main = array(
 
                 array('apiLocation/mapGet', 'pattern'=>'api_v0/location/map', 'verb'=>'GET'),
 
+                array('apiProfile/get', 'pattern'=>'api_v0/profile', 'verb'=>'GET'),
+
                 //Tests
                 array('apiLocation/mapGetTest', 'pattern'=>'api_v0/location/map/test'),
+                array('apiProfile/getTest', 'pattern'=>'api_v0/profile/test'),
+
+
                 //404
                 array('apiV0/error404', 'pattern'=>'api<whartever:.*>'),
                 //>>>REST patterns
@@ -164,8 +169,8 @@ $main = array(
         'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
 
 
-        'radius_min' => 5,
-        'radius_max' => 50,
+        'radius_min' => 1,
+        'radius_max' => 100,
         'radius_default' => 50,
         'places_count_max' => 100,
         'coordinate_max' => 900000000000000000,

@@ -9,6 +9,7 @@ class MapScaleValidator extends CNumberValidator
      */
     protected function validateAttribute($object, $attribute)
     {
+        $this->integerOnly = true;
         if(empty($this->max))
             $this->max = Yii::app()->params['map_scale_max'];
         if(empty($this->min))

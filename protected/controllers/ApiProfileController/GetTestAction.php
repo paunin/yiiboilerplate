@@ -1,17 +1,18 @@
 <?php
 /**
- * Class Map GetAction
- * Get Map action
+ * Class GetAction
+ * Get Profiles action
  *
  * @property ApiLocationController $controller
  */
-class MapGetTestAction extends ApiAction
+class GetTestAction extends ApiAction
 {
     public function run()
     {
         $map = new LocationMap();
-        $map->setScenario('vector_limit');
+        $map->setScenario('radius_limit');
         $map->setAttributes(Yii::app()->request->getAllParams());
+
         if ($map->validate()) {
             $this->controller->render('application.views.api.mapGetTest',array('result' => $map->buildProfileMap()));
         } else {

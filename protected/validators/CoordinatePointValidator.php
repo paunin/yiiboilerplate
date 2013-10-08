@@ -14,7 +14,7 @@ class CoordinatePointValidator extends CoordinateValidator
     /**
      * @var bool make two coordinates in $cx_field and $cy_field
      */
-    public $makeCoordinates = true;
+    public $makeCoordinates = false;
     /**
      * @var bool reanimate coordinates from $cx_field and $cy_field
      */
@@ -27,19 +27,19 @@ class CoordinatePointValidator extends CoordinateValidator
     protected function validateAttribute($object, $attribute)
     {
 
-        $value = $object->getAttribute($attribute);
+        $value = $object->$attribute;
 
         if (empty($value) && $this->reanimateCoordinates) {
-            $object->setAttribute($attribute, $object->getAttribute($this->cx_field) . ':' . $object->getAttribute($this->cy_field));
+            $object->$attribute = $object->{$this->cx_field} . ':' . $object->{$this->cy_field};
         }
 
-        $value = $object->getAttribute($attribute);
+        $value = $object->$attribute;
 
         if (!$this->validatePoint($value, $object)) {
             $this->addError($object, $attribute, !empty($this->message) ? $this->message : Yii::t('app', 'Wrong point coordinates'));
         } else if ($this->makeCoordinates) {
-            $object->setAttribute($this->cx_field, $this->genCoordinate($value, 'x'));
-            $object->setAttribute($this->cy_field, $this->genCoordinate($value, 'y'));
+            $object->{$this->cx_field} = $this->genCoordinate($value, 'x');
+            $object->{$this->cy_field} = $this->genCoordinate($value, 'y');
         }
     }
 

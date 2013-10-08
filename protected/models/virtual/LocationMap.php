@@ -2,22 +2,27 @@
 
 class LocationMap extends Location
 {
+
+    /** FOR VECTOR LIMITATION */
     /** @var string in format '-5:5::5:5' is ok '-5:5::-10:-10' will transform to '-10:5::-5:-10' */
     public $vector;
+
+    /** FOR RADIUS LIMITATION */
+    /** @var  string */
+    public $point;
+    /** @var  int */
+    public $radius;
 
     /** @var  bool */
     public $with_spirits;
     public $just_count;
 
-    /** @var  int Coordinates */
-    public $cx0, $cy0, $cx1, $cy1;
-    /** @var  string A and B points coordinates */
-    public $pa, $pb;
-
     public function attributeNames()
     {
         return array(
             'vector',
+            'point',
+            'radius',
             'scale',
             'with_spirits'
         );
@@ -30,9 +35,13 @@ class LocationMap extends Location
             array_merge(
                 parent::rules(),
                 array(
-                    array('vector', 'application.validators.CoordinateVectorValidator', 'optimize' => true, 'makeCoordinates' => true),
-                    array('with_spirits, just_count','boolean'),
-                    array('scale','checkResolution')
+                    array('with_spirits, just_count', 'boolean'),
+
+                    array('point', 'application.validators.CoordinatePointValidator', 'on' => 'radius_limit'),
+                    array('radius', 'application.validators.RadiusValidator', 'on' => 'radius_limit'),
+
+                    array('vector', 'application.validators.CoordinateVectorValidator', 'optimize' => true, 'makeCoordinates' => false, 'on' => 'vector_limit'),
+                    array('scale', 'checkResolution', 'on' => 'vector_limit')
                 )
             );
     }
@@ -43,33 +52,36 @@ class LocationMap extends Location
      */
     public function checkResolution($attribute, $params)
     {
-        if(!$this->hasErrors('vector') && !$this->hasErrors('scale')){
+        if (!$this->hasErrors('vector') && !$this->hasErrors('scale')) {
             //%ШИРИНА КАРТЫ% / scale <= config.map_resolution_max AND %ВЫСОТА КАРТЫ% / scale <= config.map_resolution_max
             $vector = new LocationVector($this->vector);
-            if(
-                $vector->deltaX()/$this->$attribute > Yii::app()->params['map_resolution_max'] ||
-                $vector->deltaY()/$this->$attribute > Yii::app()->params['map_resolution_max']
+            if (
+                $vector->deltaX() / $this->$attribute > Yii::app()->params['map_resolution_max'] ||
+                $vector->deltaY() / $this->$attribute > Yii::app()->params['map_resolution_max']
             )
-                $this->addError('scale', Yii::t('app', 'Resolution is too high (maximum resolution - {max_resolution})',array('{max_resolution}'=>Yii::app()->params['map_resolution_max'])));
+                $this->addError('scale', Yii::t('app', 'Resolution is too high (maximum resolution - {max_resolution})', array('{max_resolution}' => Yii::app()->params['map_resolution_max'])));
         }
 
     }
+
     /**
      * @return array
      */
     public function buildProfileMap()
     {
-
-        $command = Yii::app()->db->createCommand('
+        $base_vector = $this->getBaseVector();
+        $sql = '
             SELECT
                 t.cx, t.cy, t.is_spirit,
                 u.id,u.username,u.email, u.created_at,u.last_login
             FROM
                 user_place t
             JOIN "user" u ON t.user_id = u.id
-            WHERE ('.$this->limitByVector(new LocationVector($this->vector)).') ' . (!$this->with_spirits ? ' AND t.is_spirit = false' : '') . '
+            WHERE (' . $this->makeLimits() . ') ' . (!$this->with_spirits ? ' AND t.is_spirit = false' : '') . '
             ORDER BY t.cx, t.cy
-        ');
+        ';
+        die($sql);
+        $command = Yii::app()->db->createCommand($sql);
 
         $dataReader = $command->query();
         $result = array();
@@ -77,24 +89,23 @@ class LocationMap extends Location
         while (($row = $dataReader->read()) !== false) {
 
             $point = new LocationPoint("{$row['cx']}:{$row['cy']}");
-            $scaledPoint = $this->scalePoint($point);
+            $scaledPoint = $this->scalePoint($point, $base_vector->pa);
 
-            $scaledVector = $this->scaledVector($point);
+            $scaledVector = $this->scaledVector($point, $base_vector->pa);
 
 
-
-            if(empty($result["$scaledPoint"])) {
+            if (empty($result["$scaledPoint"])) {
                 $result["$scaledPoint"] =
                     array(
                         "real_cxyxy" => "$scaledVector",
                         "scale_cxy" => "$scaledPoint",
-                        'profiles' => $this->just_count?0:array(),
-                        'spirits' => $this->just_count?0:array()
-                );
+                        'profiles' => $this->just_count ? 0 : array(),
+                        'spirits' => $this->just_count ? 0 : array()
+                    );
             }
 
 
-            if(!$this->just_count){
+            if (!$this->just_count) {
                 $profile = array(
                     'id' => $row['id'],
                     'username' => $row['username'],
@@ -103,21 +114,21 @@ class LocationMap extends Location
                     'created_at' => $row['created_at'],
                     'last_login' => $row['last_login'],
                 );
-                if(!$row['is_spirit']) {
-                    if(empty($result["$scaledPoint"]['profiles']["$point"])) {
+                if (!$row['is_spirit']) {
+                    if (empty($result["$scaledPoint"]['profiles']["$point"])) {
                         $result["$scaledPoint"]['profiles']["$point"] = array();
                     }
                     $result["$scaledPoint"]['profiles']["$point"][] = $profile;
                 } else {
-                    if(empty($result["$scaledPoint"]['spirits']["$point"])) {
+                    if (empty($result["$scaledPoint"]['spirits']["$point"])) {
                         $result["$scaledPoint"]['spirits']["$point"] = array();
                     }
                     $result["$scaledPoint"]['spirits']["$point"][] = $profile;
                 }
             } else {
-                if(!$row['is_spirit']) {
+                if (!$row['is_spirit']) {
                     $result["$scaledPoint"]['profiles'] += 1;
-                }else{
+                } else {
                     $result["$scaledPoint"]['spirits'] += 1;
                 }
 
@@ -127,52 +138,38 @@ class LocationMap extends Location
     }
 
     /**
-     * limitation by vector
-     *
-     * @param LocationVector $vector
      * @return string
      */
-    public function limitByVector(LocationVector $vector){
-        $vector->optimize();
-        return "cx >= {$vector->pa->cx} AND cx < {$vector->pb->cx} AND cy >= {$vector->pb->cy} AND cy < {$vector->pa->cy}";
-    }
-
-    /**
-     * @param LocationPoint $point
-     * @return LocationPoint
-     */
-    public function scalePoint(LocationPoint $point)
+    private function makeLimits()
     {
-        $x = floor(($point->cx - $this->cx0) / $this->scale);
-        $y = floor(($point->cy - $this->cy0) / $this->scale);
+        switch ($this->getScenario()) {
+            case 'vector_limit':
+                $conditions = $this->limitByVector(new LocationVector($this->vector));
+                break;
+            case 'radius_limit':
 
-        return new LocationPoint("$x:$y");
+                $conditions = $this->limitByRadius(new LocationPoint($this->point), $this->radius);
+                break;
+        }
+        return $conditions;
     }
 
-    /**
-     * @param LocationPoint $point
-     * @return LocationPoint
-     */
-    public function unscalePoint(LocationPoint $point){
-        $x = $point->cx * $this->scale + $this->cx0;
-        $y = $point->cy * $this->scale + $this->cy0;
+    private function getBaseVector()
+    {
+        switch ($this->getScenario()) {
+            case 'vector_limit':
+                $v = new LocationVector($this->vector);
+                break;
+            case 'radius_limit':
+                $p = new LocationPoint($this->point);
+                $pa = new LocationPoint(($p->cx - $this->radius) . ':' . ($p->cy - $this->radius));
+                $pb = new LocationPoint(($p->cx + $this->radius) . ':' . ($p->cy + $this->radius));
 
-        return new LocationPoint("$x:$y");
-    }
-
-    /**
-     * @param LocationPoint $point
-     * @return LocationVector
-     */
-    public function scaledVector(LocationPoint $point){
-        $scalePoint = $this->scalePoint($point);
-        $a = $this->unscalePoint($scalePoint);
-
-        $bcx = $scalePoint->cx * $this->scale + $this->cx0 + $this->scale;
-        $bcy = $scalePoint->cy * $this->scale + $this->cy0 + $this->scale;
-        $vector = new LocationVector("$a::$bcx:$bcy");
-        $vector->optimize();
-        return $vector;
+                $v = new LocationVector("$pa::$pb");
+                break;
+        }
+        $v->optimize();
+        return $v;
     }
 
 } 

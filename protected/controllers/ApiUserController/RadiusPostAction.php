@@ -9,13 +9,10 @@ class RadiusPostAction extends ApiAction
 {
     public function run()
     {
-
         $user_settings = User::current()->getOrCreateUserSettings();
-        $radius = Yii::app()->getRequest()->getParam('radius');
-
         $user_settings->setScenario('radius_post');
+        $user_settings->setAttributes(Yii::app()->getRequest()->getAllParams());
 
-        $user_settings->setAttribute('radius',$radius);
         if($user_settings->validate()){
             $this->controller->out($user_settings->save());
         }else{
