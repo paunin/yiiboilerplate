@@ -2,7 +2,7 @@
 
 <DBMODEL Version="1.3" TYPE="PostgreSQL">
 
-<MODELSETTINGS MDDVERSION="1.2.8 (build 524)" ModelProject="" ModelName="MicroOLap_project" ModelCompany="" ModelAuthor="" ModelCopyright="" ModelVersion="" ModelVersionAI="0" ModelCreated="2013-10-09 12:01:56" ModelUpdated="2013-10-09 12:06:56" Description="" Annotation="" ZoomFac="100.00" XPos="0" YPos="0" PrintLink="" GenSettings="object TGenSettings\n  TextCharCase = tccMixed\n  ModelCheck = True\n  DropIfExists = True\n  ISQL = False\n  DBOptions = [dbgoCreate, dbgoBeginScript, dbgoEndScript]\n  ViewOptions = [viewgoCreate, viewgoCreateRule]\n  SPOptions = [spgoCreate]\n  TableOptions = [tblgoCreate, tblgoBeginScript, tblgoEndScript, tblgoComment, tblgoCreatePK, tblgoCreateFK, tblgoCreateIndex, tblgoCreateRule, tblgoCreateTrigger]\n  RoleCreate = True\n  RoleWhenCreate = rocrInScript\n  SQLTypeNames = False\nend\n" WorkspaceColor="16777215" SnapGrid="1" DisplaySnap="1" SnapSize="10" ShowPages="1" ShowIcons="1" ShowTableColumns="1" ShowTableInhColumns="1" ShowTableIndeces="1" ShowTableConstraints="1" ShowTableRules="1" ShowColumnTypes="1" ShowDomains="0" ShowIndexInd="0" ShowNullInd="0" ShowForeignKeys="1" EntityFillColor="16777215" EntityLineColor="8388608" ShowRefName="1" ShowCardinality="0" ShowJoin="0" Notation="0" RefColor="8388608" RefLabelColor="16777215" DefaultDelete="3" DefaultUpdate="3" DefaultDataType="23" DefaultSchemaID="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="\A" EncloseNames="1" HPageCount="5" VPageCount="5" SPFillColor="13499135" SPLineColor="8388608" ViewFillColor="3329434" ViewLineColor="8388608" MinimapBackColor="16777215" MinimapShapesStyle="2" MinimapVisibleAreaStyle="2" />
+<MODELSETTINGS MDDVERSION="1.2.8 (build 524)" ModelProject="" ModelName="MicroOLap_project" ModelCompany="" ModelAuthor="" ModelCopyright="" ModelVersion="" ModelVersionAI="0" ModelCreated="2013-10-09 12:01:56" ModelUpdated="2013-10-09 18:03:49" Description="" Annotation="" ZoomFac="100.00" XPos="0" YPos="0" PrintLink="" GenSettings="object TGenSettings\n  TextCharCase = tccMixed\n  ModelCheck = True\n  DropIfExists = True\n  ISQL = False\n  DBOptions = [dbgoCreate, dbgoBeginScript, dbgoEndScript]\n  ViewOptions = [viewgoCreate, viewgoCreateRule]\n  SPOptions = [spgoCreate]\n  TableOptions = [tblgoCreate, tblgoBeginScript, tblgoEndScript, tblgoComment, tblgoCreatePK, tblgoCreateFK, tblgoCreateIndex, tblgoCreateRule, tblgoCreateTrigger]\n  RoleCreate = True\n  RoleWhenCreate = rocrInScript\n  SQLTypeNames = False\nend\n" WorkspaceColor="16777215" SnapGrid="1" DisplaySnap="1" SnapSize="10" ShowPages="1" ShowIcons="1" ShowTableColumns="1" ShowTableInhColumns="1" ShowTableIndeces="1" ShowTableConstraints="1" ShowTableRules="1" ShowColumnTypes="1" ShowDomains="0" ShowIndexInd="0" ShowNullInd="0" ShowForeignKeys="1" EntityFillColor="16777215" EntityLineColor="8388608" ShowRefName="1" ShowCardinality="0" ShowJoin="0" Notation="0" RefColor="8388608" RefLabelColor="16777215" DefaultDelete="3" DefaultUpdate="3" DefaultDataType="23" DefaultSchemaID="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="\A" EncloseNames="1" HPageCount="5" VPageCount="5" SPFillColor="13499135" SPLineColor="8388608" ViewFillColor="3329434" ViewLineColor="8388608" MinimapBackColor="16777215" MinimapShapesStyle="2" MinimapVisibleAreaStyle="2" />
 
 <DATABASE Name="Database_1" CharacterSet="" Tablespace="" Owner="" Template="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="0" />
 
@@ -95,6 +95,14 @@
 	<COLUMNS>
 	</COLUMNS>
 </COMPOSITE>
+<COMPOSITE ID="138203" Name="application" SchemaName="public" Comments="" MasterTableOID="22265">
+	<COLUMNS>
+	</COLUMNS>
+</COMPOSITE>
+<COMPOSITE ID="138204" Name="token" SchemaName="public" Comments="" MasterTableOID="22299">
+	<COLUMNS>
+	</COLUMNS>
+</COMPOSITE>
 </COMPOSITES>
 
 <SCALARS>
@@ -125,7 +133,7 @@
 
 <METADATA>
 <ENTITIES>
-<ENTITY ID="21983" Name="AuthAssignment" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="740" YPos="20" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="21983" Name="AuthAssignment" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="750" YPos="20" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="241" Name="itemname" Pos="1" Datatype="1043" Type="varchar" Width="64" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="1" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="242" Name="userid" Pos="2" Datatype="1043" Type="varchar" Width="64" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -136,7 +144,7 @@
 		<REFERENCE_END ID="22176" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22120" Name="AuthAssignment_pkey" Kind="2" Expression="" ReferenceIndex="22120" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22120" Name="AuthAssignment_pkey" Kind="2" Expression="" ReferenceIndex="22300" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="241" />
 					<CONSTRAINTCOLUMN ID="242" />
@@ -144,14 +152,14 @@
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22119" Name="AuthAssignment_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22120" FillFactor="0" Comments="">
+		<INDEX ID="22300" Name="AuthAssignment_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22120" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="itemname,userid"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="21989" Name="AuthItem" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="760" YPos="150" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="21989" Name="AuthItem" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="770" YPos="150" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="245" Name="name" Pos="1" Datatype="1043" Type="varchar" Width="64" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="246" Name="type" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -165,21 +173,21 @@
 		<REFERENCE_BEGIN ID="22186" />
 	</REFERENCES_BEGIN>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22124" Name="AuthItem_pkey" Kind="2" Expression="" ReferenceIndex="22124" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22124" Name="AuthItem_pkey" Kind="2" Expression="" ReferenceIndex="22267" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="245" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22123" Name="AuthItem_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22124" FillFactor="0" Comments="">
+		<INDEX ID="22267" Name="AuthItem_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22124" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="name"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="21995" Name="AuthItemChild" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="1020" YPos="20" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="21995" Name="AuthItemChild" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="1030" YPos="20" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="250" Name="parent" Pos="1" Datatype="1043" Type="varchar" Width="64" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="1" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="251" Name="child" Pos="2" Datatype="1043" Type="varchar" Width="64" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="1" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -189,7 +197,7 @@
 		<REFERENCE_END ID="22186" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22122" Name="AuthItemChild_pkey" Kind="2" Expression="" ReferenceIndex="22122" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22122" Name="AuthItemChild_pkey" Kind="2" Expression="" ReferenceIndex="22268" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="250" />
 					<CONSTRAINTCOLUMN ID="251" />
@@ -197,14 +205,14 @@
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22121" Name="AuthItemChild_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22122" FillFactor="0" Comments="">
+		<INDEX ID="22268" Name="AuthItemChild_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22122" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="parent,child"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="21998" Name="content" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="1040" YPos="130" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="21998" Name="content" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="1050" YPos="130" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="252" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="253" Name="title" Pos="2" Datatype="1043" Type="varchar" Width="512" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -238,7 +246,7 @@
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22007" Name="cron_mail" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="1200" YPos="30" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22007" Name="cron_mail" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="1210" YPos="30" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="258" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="259" Name="subject" Pos="2" Datatype="1043" Type="varchar" Width="255" Prec="0" NotNull="0" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="NULL::character varying" QuoteDefault="0" Comments=""></COLUMN>
@@ -267,7 +275,7 @@
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22021" Name="favorite" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="720" YPos="460" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22021" Name="favorite" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="720" YPos="470" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="269" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="270" Name="user_id" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -280,12 +288,12 @@
 		<REFERENCE_END ID="22191" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22132" Name="favorite_pkey" Kind="2" Expression="" ReferenceIndex="22132" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22132" Name="favorite_pkey" Kind="2" Expression="" ReferenceIndex="22874" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="269" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="22162" Name="vavorite_user_id_favorit_id_type_unique" Kind="1" Expression="" ReferenceIndex="22162" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22162" Name="vavorite_user_id_favorit_id_type_unique" Kind="1" Expression="" ReferenceIndex="22271" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="270" />
 					<CONSTRAINTCOLUMN ID="272" />
@@ -294,19 +302,19 @@
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22131" Name="favorite_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22132" FillFactor="0" Comments="">
-			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
+		<INDEX ID="22271" Name="vavorite_user_id_favorit_id_type_unique_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22162" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="user_id,type,favorite_id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
-		<INDEX ID="22161" Name="vavorite_user_id_favorit_id_type_unique" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22162" FillFactor="0" Comments="">
-			<INDEXCOLUMNS COMMATEXT="user_id,type,favorite_id"></INDEXCOLUMNS>
+		<INDEX ID="22874" Name="favorite_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22132" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22026" Name="message" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="0" YPos="620" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22026" Name="message" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="10" YPos="620" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="275" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="276" Name="to_user_id" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -325,18 +333,13 @@
 		<REFERENCE_END ID="22201" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22134" Name="message_pkey" Kind="2" Expression="" ReferenceIndex="22134" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22134" Name="message_pkey" Kind="2" Expression="" ReferenceIndex="22880" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="275" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22133" Name="message_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22134" FillFactor="0" Comments="">
-			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
-			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
-			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
-		</INDEX>
 		<INDEX ID="22170" Name="message_from_user_id_idx" Unique="0" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="0" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="from_user_id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
@@ -347,9 +350,14 @@
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
+		<INDEX ID="22880" Name="message_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22134" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
+			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
+			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
+		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22038" Name="post" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="0" YPos="290" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="Users post" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22038" Name="post" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="10" YPos="290" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="Users post" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="286" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="287" Name="user_id" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="0" AutoInc="0" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -374,18 +382,13 @@
 		<REFERENCE_END ID="22221" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22138" Name="post_pkey" Kind="2" Expression="" ReferenceIndex="22138" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22138" Name="post_pkey" Kind="2" Expression="" ReferenceIndex="22891" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="286" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22137" Name="post_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22138" FillFactor="0" Comments="">
-			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
-			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
-			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
-		</INDEX>
 		<INDEX ID="22172" Name="post_cx_cy_idx" Unique="0" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="0" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="cx,cy"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
@@ -406,9 +409,14 @@
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
+		<INDEX ID="22891" Name="post_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22138" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
+			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
+			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
+		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22048" Name="post_name_user" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="270" YPos="470" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22048" Name="post_name_user" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="280" YPos="470" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="298" Name="post_id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="1" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="299" Name="user_id" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="1" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -418,7 +426,7 @@
 		<REFERENCE_END ID="22211" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22136" Name="post_name_user_pkey" Kind="2" Expression="" ReferenceIndex="22136" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22136" Name="post_name_user_pkey" Kind="2" Expression="" ReferenceIndex="22284" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="298" />
 					<CONSTRAINTCOLUMN ID="299" />
@@ -426,14 +434,14 @@
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22135" Name="post_name_user_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22136" FillFactor="0" Comments="">
+		<INDEX ID="22284" Name="post_name_user_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22136" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="post_id,user_id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22051" Name="smtp" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="1220" YPos="270" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22051" Name="smtp" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="1230" YPos="270" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="300" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="301" Name="host" Pos="2" Datatype="1043" Type="varchar" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -461,7 +469,7 @@
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22061" Name="tag" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="30" YPos="10" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22061" Name="tag" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="40" YPos="10" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="310" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="311" Name="name" Pos="2" Datatype="1043" Type="varchar" Width="512" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -473,21 +481,21 @@
 		<REFERENCE_BEGIN ID="22231" />
 	</REFERENCES_BEGIN>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22142" Name="tag_pkey" Kind="2" Expression="" ReferenceIndex="22142" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22142" Name="tag_pkey" Kind="2" Expression="" ReferenceIndex="22289" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="310" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22141" Name="tag_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22142" FillFactor="0" Comments="">
+		<INDEX ID="22289" Name="tag_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22142" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22254" Name="tag_place" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="240" YPos="150" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22254" Name="tag_place" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="250" YPos="150" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="314" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="315" Name="user_id" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -504,21 +512,21 @@
 		<REFERENCE_END ID="22266" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22260" Name="tag_place_pkey" Kind="2" Expression="" ReferenceIndex="22260" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22260" Name="tag_place_pkey" Kind="2" Expression="" ReferenceIndex="22287" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="314" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22259" Name="tag_place_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22260" FillFactor="0" Comments="">
+		<INDEX ID="22287" Name="tag_place_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22260" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22070" Name="tag_post" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="30" YPos="170" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22070" Name="tag_post" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="40" YPos="170" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="323" Name="post_id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="1" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="324" Name="tag_id" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="1" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -528,7 +536,7 @@
 		<REFERENCE_END ID="22231" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22144" Name="tag_post_pkey" Kind="2" Expression="" ReferenceIndex="22144" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22144" Name="tag_post_pkey" Kind="2" Expression="" ReferenceIndex="22290" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="323" />
 					<CONSTRAINTCOLUMN ID="324" />
@@ -536,14 +544,14 @@
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22143" Name="tag_post_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22144" FillFactor="0" Comments="">
+		<INDEX ID="22290" Name="tag_post_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22144" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="post_id,tag_id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22073" Name="user" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="420" YPos="570" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22073" Name="user" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="430" YPos="570" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="325" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="326" Name="username" Pos="2" Datatype="1043" Type="varchar" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -566,43 +574,44 @@
 		<REFERENCE_BEGIN ID="22236" />
 		<REFERENCE_BEGIN ID="22241" />
 		<REFERENCE_BEGIN ID="22246" />
+		<REFERENCE_BEGIN ID="22303" />
 	</REFERENCES_BEGIN>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22148" Name="user_pkey" Kind="2" Expression="" ReferenceIndex="22148" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22148" Name="user_pkey" Kind="2" Expression="" ReferenceIndex="22269" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="325" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="22146" Name="user_email_unique" Kind="1" Expression="" ReferenceIndex="22146" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22146" Name="user_email_unique" Kind="1" Expression="" ReferenceIndex="22902" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="327" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="22160" Name="user_username_unique" Kind="1" Expression="" ReferenceIndex="22160" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22160" Name="user_username_unique" Kind="1" Expression="" ReferenceIndex="22903" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="326" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22145" Name="user_email_unique" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22146" FillFactor="0" Comments="">
-			<INDEXCOLUMNS COMMATEXT="email"></INDEXCOLUMNS>
-			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
-			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
-		</INDEX>
-		<INDEX ID="22147" Name="user_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22148" FillFactor="0" Comments="">
+		<INDEX ID="22269" Name="user_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22148" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
-		<INDEX ID="22159" Name="user_username_unique" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22160" FillFactor="0" Comments="">
+		<INDEX ID="22902" Name="user_email_unique_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22146" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="email"></INDEXCOLUMNS>
+			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
+			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
+		</INDEX>
+		<INDEX ID="22903" Name="user_username_unique_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22160" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="username"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22084" Name="user_place" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="420" YPos="10" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22084" Name="user_place" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="430" YPos="10" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="335" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="336" Name="user_id" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -621,18 +630,13 @@
 		<REFERENCE_END ID="22236" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22150" Name="user_place_pkey" Kind="2" Expression="" ReferenceIndex="22150" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22150" Name="user_place_pkey" Kind="2" Expression="" ReferenceIndex="22894" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="335" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22149" Name="user_place_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22150" FillFactor="0" Comments="">
-			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
-			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
-			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
-		</INDEX>
 		<INDEX ID="22163" Name="_idx_user_place_cx" Unique="0" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="0" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="cx"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
@@ -668,9 +672,14 @@
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
+		<INDEX ID="22894" Name="user_place_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22150" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
+			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
+			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
+		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22095" Name="user_settings" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="690" YPos="760" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22095" Name="user_settings" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="720" YPos="760" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="347" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="348" Name="user_id" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -680,31 +689,31 @@
 		<REFERENCE_END ID="22241" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22152" Name="user_settings_pkey" Kind="2" Expression="" ReferenceIndex="22152" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22152" Name="user_settings_pkey" Kind="2" Expression="" ReferenceIndex="22897" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="347" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="22154" Name="user_settings_user_id_unique" Kind="1" Expression="" ReferenceIndex="22154" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22154" Name="user_settings_user_id_unique" Kind="1" Expression="" ReferenceIndex="22295" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="348" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22151" Name="user_settings_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22152" FillFactor="0" Comments="">
-			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
+		<INDEX ID="22295" Name="user_settings_user_id_unique_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22154" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="user_id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
-		<INDEX ID="22153" Name="user_settings_user_id_unique" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22154" FillFactor="0" Comments="">
-			<INDEXCOLUMNS COMMATEXT="user_id"></INDEXCOLUMNS>
+		<INDEX ID="22897" Name="user_settings_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22152" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
 	</INDEXES>
 </ENTITY>
-<ENTITY ID="22100" Name="user_social" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="690" YPos="620" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="users from social accounts linked to users" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="22100" Name="user_social" SchemaOID="0" SchemaName="public" OwnerID="0" OwnerName="" TablespaceID="0" XPos="720" YPos="620" Temporary="0" OnCommit="" WithOIDsSpecified="1" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="users from social accounts linked to users" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 	<COLUMNS>
 			<COLUMN ID="350" Name="id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
 			<COLUMN ID="351" Name="user_id" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
@@ -716,12 +725,12 @@
 		<REFERENCE_END ID="22246" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="22156" Name="user_social_pkey" Kind="2" Expression="" ReferenceIndex="22156" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22156" Name="user_social_pkey" Kind="2" Expression="" ReferenceIndex="22900" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="350" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="22158" Name="user_social_social_service_user_id_unique" Kind="1" Expression="" ReferenceIndex="22158" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="22158" Name="user_social_social_service_user_id_unique" Kind="1" Expression="" ReferenceIndex="22298" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="352" />
 					<CONSTRAINTCOLUMN ID="353" />
@@ -729,13 +738,74 @@
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="22155" Name="user_social_pkey" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22156" FillFactor="0" Comments="">
+		<INDEX ID="22298" Name="user_social_social_service_user_id_unique_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22158" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="social_service,user_social_id"></INDEXCOLUMNS>
+			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
+			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
+		</INDEX>
+		<INDEX ID="22900" Name="user_social_pkey_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22156" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
-		<INDEX ID="22157" Name="user_social_social_service_user_id_unique" Unique="1" Method="1" Predicate="" TablespaceID="0" ReferenceConstraint="22158" FillFactor="0" Comments="">
-			<INDEXCOLUMNS COMMATEXT="social_service,user_social_id"></INDEXCOLUMNS>
+	</INDEXES>
+</ENTITY>
+<ENTITY ID="22265" Name="application" SchemaOID="0" SchemaName="public" OwnerID="17646" OwnerName="placemeup" TablespaceID="0" XPos="10" YPos="880" Temporary="0" OnCommit="" WithOIDsSpecified="0" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+	<COLUMNS>
+			<COLUMN ID="355" Name="id" Pos="0" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="356" Name="slug" Pos="1" Datatype="1043" Type="varchar" Width="128" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="357" Name="name" Pos="2" Datatype="1043" Type="varchar" Width="512" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="358" Name="description" Pos="3" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="0" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="359" Name="secret_key" Pos="4" Datatype="1043" Type="varchar" Width="128" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="360" Name="publick_key" Pos="5" Datatype="1043" Type="varchar" Width="128" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="394" Name="return_uri" Pos="6" Datatype="1043" Type="varchar" Width="512" Prec="0" NotNull="0" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="392" Name="access_control_allow_origin" Pos="7" Datatype="1043" Type="varchar" Width="0" Prec="0" NotNull="0" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="365" Name="created_at" Pos="8" Datatype="1114" Type="timestamp" Width="-1" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="NOW()" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="366" Name="updated_at" Pos="9" Datatype="1114" Type="timestamp" Width="-1" Prec="0" NotNull="0" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="367" Name="is_active" Pos="10" Datatype="16" Type="bool" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="True" QuoteDefault="0" Comments=""></COLUMN>
+	</COLUMNS>
+	<REFERENCES_BEGIN>
+		<REFERENCE_BEGIN ID="22300" />
+	</REFERENCES_BEGIN>
+	<CONSTRAINTS>
+			<CONSTRAINT ID="22295" Name="" Kind="2" Expression="" ReferenceIndex="22869" FillFactor="0" Comments="" TablespaceID="0">
+				<CONSTRAINTCOLUMNS>
+					<CONSTRAINTCOLUMN ID="355" />
+				</CONSTRAINTCOLUMNS>
+		</CONSTRAINT>
+	</CONSTRAINTS>
+	<INDEXES>
+		<INDEX ID="22869" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22295" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
+			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
+			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
+		</INDEX>
+	</INDEXES>
+</ENTITY>
+<ENTITY ID="22299" Name="token" SchemaOID="0" SchemaName="public" OwnerID="17646" OwnerName="placemeup" TablespaceID="0" XPos="410" YPos="910" Temporary="0" OnCommit="" WithOIDsSpecified="0" WithOIDs="0" FillFactor="0" Inherits="" DelayKeyTblUpdates="0" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+	<COLUMNS>
+			<COLUMN ID="385" Name="id" Pos="0" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="386" Name="application_id" Pos="1" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="387" Name="user_id" Pos="2" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="1" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="388" Name="token" Pos="3" Datatype="1043" Type="varchar" Width="128" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="389" Name="expire_at" Pos="4" Datatype="1114" Type="timestamp" Width="-1" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="390" Name="created_at" Pos="5" Datatype="1114" Type="timestamp" Width="-1" Prec="0" NotNull="1" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="NOW()" QuoteDefault="0" Comments=""></COLUMN>
+			<COLUMN ID="391" Name="updated_at" Pos="6" Datatype="1114" Type="timestamp" Width="-1" Prec="0" NotNull="0" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+	</COLUMNS>
+	<REFERENCES_END>
+		<REFERENCE_END ID="22300" />
+		<REFERENCE_END ID="22303" />
+	</REFERENCES_END>
+	<CONSTRAINTS>
+			<CONSTRAINT ID="22299" Name="" Kind="2" Expression="" ReferenceIndex="22901" FillFactor="0" Comments="" TablespaceID="0">
+				<CONSTRAINTCOLUMNS>
+					<CONSTRAINTCOLUMN ID="385" />
+				</CONSTRAINTCOLUMNS>
+		</CONSTRAINT>
+	</CONSTRAINTS>
+	<INDEXES>
+		<INDEX ID="22901" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="22299" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="id"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXCOLUMNS>
 			<INDEXNULLS COMMATEXT=""></INDEXCOLUMNS>
 		</INDEX>
@@ -761,6 +831,8 @@
 <REFERENCE ID="22236" Name="Ref_user_place_to_user" SOURCE="22073" DESTINATION="22084" FKIDS="325=336\n" Direction="0" RefColor="8388608" RefLabelColor="16777215" OnDelete="3" OnUpdate="3" Deferrable="0" MatchType="0" Comments="" Description="" Annotation="" Generate="1" FKConstraint_ID="22148" />
 <REFERENCE ID="22241" Name="Ref_user_settings_to_user" SOURCE="22073" DESTINATION="22095" FKIDS="325=348\n" Direction="0" RefColor="8388608" RefLabelColor="16777215" OnDelete="3" OnUpdate="3" Deferrable="0" MatchType="0" Comments="" Description="" Annotation="" Generate="1" FKConstraint_ID="22148" />
 <REFERENCE ID="22246" Name="Ref_user_social_to_user" SOURCE="22073" DESTINATION="22100" FKIDS="325=351\n" Direction="0" RefColor="8388608" RefLabelColor="16777215" OnDelete="3" OnUpdate="3" Deferrable="0" MatchType="0" Comments="" Description="" Annotation="" Generate="1" FKConstraint_ID="22148" />
+<REFERENCE ID="22300" Name="Ref_token_to_application" SOURCE="22265" DESTINATION="22299" FKIDS="355=386\n" Direction="0" RefColor="8388608" RefLabelColor="16777215" OnDelete="3" OnUpdate="3" Deferrable="0" MatchType="0" Comments="" Description="" Annotation="" Generate="1" FKConstraint_ID="22295" />
+<REFERENCE ID="22303" Name="Ref_token_to_user" SOURCE="22073" DESTINATION="22299" FKIDS="325=387\n" Direction="0" RefColor="8388608" RefLabelColor="16777215" OnDelete="3" OnUpdate="3" Deferrable="0" MatchType="0" Comments="" Description="" Annotation="" Generate="1" FKConstraint_ID="22148" />
 </REFERENCES>
 
 <NOTES>

@@ -64,6 +64,25 @@ CREATE TABLE "AuthItemChild" (
 
 
 --
+-- Name: application; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE application (
+    id integer NOT NULL,
+    slug character varying(128) NOT NULL,
+    name character varying(512) NOT NULL,
+    description integer,
+    secret_key character varying(128) NOT NULL,
+    publick_key character varying(128) NOT NULL,
+    return_uri character varying(512),
+    access_control_allow_origin character varying,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone,
+    is_active boolean DEFAULT true NOT NULL
+);
+
+
+--
 -- Name: content; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -390,6 +409,40 @@ CREATE TABLE tag_post (
 
 
 --
+-- Name: token; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE token (
+    id integer NOT NULL,
+    application_id integer NOT NULL,
+    user_id integer NOT NULL,
+    token character varying(128) NOT NULL,
+    expire_at timestamp without time zone NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: token_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE token_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: token_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE token_id_seq OWNED BY token.id;
+
+
+--
 -- Name: user; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -612,6 +665,13 @@ ALTER TABLE ONLY tag_place ALTER COLUMN id SET DEFAULT nextval('tag_place_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY token ALTER COLUMN id SET DEFAULT nextval('token_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 
 
@@ -684,6 +744,14 @@ filemanager	2	Filemanager	\N	N;
 COPY "AuthItemChild" (parent, child) FROM stdin;
 admin	user
 admin	filemanager
+\.
+
+
+--
+-- Data for Name: application; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY application (id, slug, name, description, secret_key, publick_key, return_uri, access_control_allow_origin, created_at, updated_at, is_active) FROM stdin;
 \.
 
 
@@ -825,6 +893,21 @@ SELECT pg_catalog.setval('tag_place_id_seq', 1, false);
 
 COPY tag_post (post_id, tag_id) FROM stdin;
 \.
+
+
+--
+-- Data for Name: token; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY token (id, application_id, user_id, token, expire_at, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('token_id_seq', 1, false);
 
 
 --
@@ -3883,6 +3966,14 @@ ALTER TABLE ONLY "AuthItem"
 
 
 --
+-- Name: application_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY application
+    ADD CONSTRAINT application_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: content_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3968,6 +4059,14 @@ ALTER TABLE ONLY tag_place
 
 ALTER TABLE ONLY tag_post
     ADD CONSTRAINT tag_post_pkey PRIMARY KEY (post_id, tag_id);
+
+
+--
+-- Name: token_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY token
+    ADD CONSTRAINT token_pkey PRIMARY KEY (id);
 
 
 --
@@ -4243,6 +4342,22 @@ ALTER TABLE ONLY tag_post
 
 ALTER TABLE ONLY tag_post
     ADD CONSTRAINT "Ref_tag_post_to_tag" FOREIGN KEY (tag_id) REFERENCES tag(id);
+
+
+--
+-- Name: Ref_token_to_application; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY token
+    ADD CONSTRAINT "Ref_token_to_application" FOREIGN KEY (application_id) REFERENCES application(id);
+
+
+--
+-- Name: Ref_token_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY token
+    ADD CONSTRAINT "Ref_token_to_user" FOREIGN KEY (user_id) REFERENCES "user"(id);
 
 
 --

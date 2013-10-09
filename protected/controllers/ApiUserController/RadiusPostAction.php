@@ -9,7 +9,7 @@ class RadiusPostAction extends ApiAction
 {
     public function run()
     {
-        $user_settings = User::current()->getOrCreateUserSettings();
+        $user_settings = User::current()->getUserSettings();
         $user_settings->setScenario('radius_post');
         $user_settings->setAttributes(Yii::app()->getRequest()->getAllParams());
 

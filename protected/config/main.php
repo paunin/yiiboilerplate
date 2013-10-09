@@ -58,9 +58,16 @@ $main = array(
             'dryRun' => false,
         ),
         'user' => array(
-            // enable cookie-based authentication
+            'class'=>'application.components.WebUser',
             'allowAutoLogin' => true,
             'loginUrl'=>array('user/login/login'),
+            'stateKeyPrefix'    => 'frontend_',
+        ),
+        'apiUser' => array(
+            'class'=>'application.components.api.ApiUser',
+            'allowAutoLogin' => false,
+            'stateKeyPrefix'    => 'api_',
+            'authTimeout'       => 60
         ),
         'db' =>array(
             'pdoClass' => 'NestedPDO',
@@ -175,6 +182,8 @@ $main = array(
         'places_count_max' => 100,
         'coordinate_max' => 900000000000000000,
         'coordinate_min' => -900000000000000000,
+
+        'post_edit_time_limit' =>300,
 
         'map_scale_min'=>1,
         'map_scale_max'=>1000,

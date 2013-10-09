@@ -2,6 +2,10 @@
 class ApiController extends Controller
 {
 
+    public function init(){
+        Yii::app()->setComponent('siteUser', Yii::app()->user);
+        Yii::app()->setComponent('user', Yii::app()->apiUser);
+    }
     const ERROR_VALIDATION = 701;
 
     /**

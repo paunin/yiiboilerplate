@@ -3,7 +3,14 @@ class ApiAccessControlFilter extends CAccessControlFilter{
 
     protected function preFilter($filterChain)
     {
-        //@todo: check $_GET['token']
+        if(Yii::app()->getRequest()->getParam('token',null)){
+            $identity = new ApiIdentity(Yii::app()->getRequest()->getParam('token',null));
+            if($identity->authenticate()){
+                Yii::app()->user->login($identity);
+            }else{
+                Yii::app()->user->logout();
+            }
+        }
         return parent::preFilter($filterChain);
     }
 

@@ -52,7 +52,7 @@ class LoginController extends Controller
 
 
                     $identity = new UserSocialIdentity($soc_identity);
-                    if($identity->authenticate() == UserSocialIdentity::ERROR_NONE)
+                    if($identity->authenticate())
                         Yii::app()->user->login($identity);
 
                     // special redirect with closing popup window

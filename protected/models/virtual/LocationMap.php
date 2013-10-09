@@ -38,7 +38,7 @@ class LocationMap extends Location
                     array('with_spirits, just_count', 'boolean'),
 
                     array('point', 'application.validators.CoordinatePointValidator', 'on' => 'radius_limit'),
-                    array('radius', 'application.validators.RadiusValidator', 'on' => 'radius_limit'),
+                    array('radius', 'application.validators.RadiusValidator', 'createOnEmpty'=>true, 'on' => 'radius_limit'),
 
                     array('vector', 'application.validators.CoordinateVectorValidator', 'optimize' => true, 'makeCoordinates' => false, 'on' => 'vector_limit'),
                     array('scale', 'checkResolution', 'on' => 'vector_limit')
@@ -91,7 +91,6 @@ class LocationMap extends Location
             $scaledPoint = $this->scalePoint($point, $base_vector->pa);
 
             $scaledVector = $this->scaledVector($point, $base_vector->pa);
-
 
             if (empty($result["$scaledPoint"])) {
                 $result["$scaledPoint"] =

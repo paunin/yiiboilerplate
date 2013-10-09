@@ -12,7 +12,8 @@ class User extends BaseUser
         return parent::model($className);
     }
 
-    public function relations() {
+    public function relations()
+    {
         $relations = parent::relations();
         $relations['userSettings'] = array(self::HAS_ONE, 'UserSettings', 'user_id');
         return $relations;
@@ -50,6 +51,11 @@ class User extends BaseUser
     }
 
     /**
+     * @var User
+     */
+    private static $current_user = null;
+
+    /**
      * Return current authorized user
      *
      * @return User|null
@@ -58,7 +64,11 @@ class User extends BaseUser
     {
         if(Yii::app()->user->isGuest)
             return null;
-        return User::model()->findByPk(Yii::app()->user->getId());
+
+        if(!User::$current_user)
+            User::$current_user = User::model()->findByPk(Yii::app()->user->getId());
+
+        return User::$current_user;
     }
 
     /**
@@ -77,15 +87,27 @@ class User extends BaseUser
     }
 
     /**
-     * @return UserSettings
+     * @var UserSettings|null
      */
-    public function getOrCreateUserSettings(){
-        $user_settings = $this->userSettings;
-        if(empty($user_settings)){
-            $user_settings = new UserSettings();
-            $user_settings->user_id = $this->id;
-            $user_settings->save();
+    private static $user_settings = null;
+
+    /**
+     * @param null|string $attr
+     * @return mixed|null|UserSettings
+     */
+    public function getUserSettings($attr = null)
+    {
+        if(!User::$user_settings) {
+            User::$user_settings = $this->userSettings;
+            if(empty(User::$user_settings)) {
+                User::$user_settings = new UserSettings();
+                User::$user_settings->user_id = $this->id;
+                User::$user_settings->save();
+            }
         }
-        return $user_settings;
+        if($attr){
+            return User::$user_settings->hasAttribute($attr)?User::$user_settings->getAttribute($attr):null;
+        }
+        return User::$user_settings;
     }
 }

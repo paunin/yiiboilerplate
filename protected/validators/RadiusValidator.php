@@ -1,6 +1,10 @@
 <?php
 class RadiusValidator extends CNumberValidator
 {
+    /**
+     * @var bool
+     */
+    public $createOnEmpty = false;
 
     /**
      * @param CActiveRecord $object
@@ -8,6 +12,17 @@ class RadiusValidator extends CNumberValidator
      */
     protected function validateAttribute($object, $attribute)
     {
+
+        if(empty($object->$attribute) && $this->createOnEmpty){
+            $user = User::current();
+            if($user && $user->getUserSettings('radius')){
+                $object->$attribute = $user->getUserSettings('radius');
+            }else{
+                $object->$attribute = Yii::app()->params['radius_default'];
+            }
+        }
+
+
         $this->integerOnly = true;
         if(empty($this->max))
             $this->max = Yii::app()->params['radius_max'];
