@@ -20,9 +20,16 @@
  * @property string $last_login
  * @property string $password
  *
+ * @property Post[] $posts
+ * @property Message[] $messages
+ * @property Message[] $messages1
+ * @property Favorite[] $favorites
+ * @property Token[] $tokens
+ * @property TagPlace[] $tagPlaces
+ * @property Post[] $posts1
  * @property UserSettings[] $userSettings
- * @property UserPlace[] $userPlaces
  * @property UserSocial[] $userSocials
+ * @property UserPlace[] $userPlaces
  */
 abstract class BaseUser extends GxActiveRecord {
 
@@ -54,14 +61,22 @@ abstract class BaseUser extends GxActiveRecord {
 
 	public function relations() {
 		return array(
+			'posts' => array(self::MANY_MANY, 'Post', 'post_name_user(user_id, post_id)'),
+			'messages' => array(self::HAS_MANY, 'Message', 'to_user_id'),
+			'messages1' => array(self::HAS_MANY, 'Message', 'from_user_id'),
+			'favorites' => array(self::HAS_MANY, 'Favorite', 'user_id'),
+			'tokens' => array(self::HAS_MANY, 'Token', 'user_id'),
+			'tagPlaces' => array(self::HAS_MANY, 'TagPlace', 'user_id'),
+			'posts1' => array(self::HAS_MANY, 'Post', 'user_id'),
 			'userSettings' => array(self::HAS_MANY, 'UserSettings', 'user_id'),
-			'userPlaces' => array(self::HAS_MANY, 'UserPlace', 'user_id'),
 			'userSocials' => array(self::HAS_MANY, 'UserSocial', 'user_id'),
+			'userPlaces' => array(self::HAS_MANY, 'UserPlace', 'user_id'),
 		);
 	}
 
 	public function pivotModels() {
 		return array(
+			'posts' => 'PostNameUser',
 		);
 	}
 
@@ -77,9 +92,16 @@ abstract class BaseUser extends GxActiveRecord {
 			'is_active' => Yii::t('app', 'Is Active'),
 			'last_login' => Yii::t('app', 'Last Login'),
 			'password' => Yii::t('app', 'Password'),
+			'posts' => null,
+			'messages' => null,
+			'messages1' => null,
+			'favorites' => null,
+			'tokens' => null,
+			'tagPlaces' => null,
+			'posts1' => null,
 			'userSettings' => null,
-			'userPlaces' => null,
 			'userSocials' => null,
+			'userPlaces' => null,
 		);
 	}
 

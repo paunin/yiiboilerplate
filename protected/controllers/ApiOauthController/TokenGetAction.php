@@ -8,6 +8,12 @@ class TokenGetAction extends ApiAction
 {
     public function run()
     {
-        $this->controller->out(Yii::app()->user->isGuest?'GUEST_TOKEN':md5(Yii::app()->user->getId()).'_TOKEN');
+        $result = null;
+        if(!Yii::app()->user->isGuest){
+            //User::
+        }else{
+            $result = 'gg';
+        }
+        $this->controller->out($result);
     }
 }

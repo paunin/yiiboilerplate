@@ -2,9 +2,14 @@
 class ApiController extends Controller
 {
 
-    public function init(){
+    protected function changeUsers(){
         Yii::app()->setComponent('siteUser', Yii::app()->user);
         Yii::app()->setComponent('user', Yii::app()->apiUser);
+    }
+
+    public function init(){
+        $this->changeUsers();
+        return parent::init();
     }
     const ERROR_VALIDATION = 701;
 

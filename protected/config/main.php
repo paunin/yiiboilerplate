@@ -116,7 +116,7 @@ $main = array(
 
                 array('apiV0/index', 'pattern'=>'api_v0', 'verb'=>'GET,POST'),
 
-                array('apiOauth/tokenGet', 'pattern'=>'api_v0/token', 'verb'=>'GET'),
+                array('apiOauth/tokenGet', 'pattern'=>'api_v0/oauth/token', 'verb'=>'GET'),
 
                 array('apiUser/get', 'pattern'=>'api_v0/user', 'verb'=>'GET'),
                 array('apiUser/radiusGet', 'pattern'=>'api_v0/user/radius', 'verb'=>'GET'),

@@ -1,36 +1,36 @@
-DROP TYPE _tag_place;
 
-DROP TYPE _user_place;
 
-DROP TYPE _user_settings;
 
-DROP TYPE _user_social;
 
-DROP TYPE "_AuthAssignment";
 
-DROP TYPE "_AuthItem";
 
-DROP TYPE "_AuthItemChild";
 
-DROP TYPE _content;
 
-DROP TYPE _cron_mail;
 
-DROP TYPE _favorite;
 
-DROP TYPE _message;
 
-DROP TYPE _post;
 
-DROP TYPE _post_name_user;
 
-DROP TYPE _smtp;
 
-DROP TYPE _tag;
 
-DROP TYPE _tag_post;
 
-DROP TYPE _user;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ALTER TABLE "token"
 	SET TABLESPACE pg_default;
