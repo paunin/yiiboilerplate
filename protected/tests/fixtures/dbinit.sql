@@ -135,6 +135,147 @@ ALTER SEQUENCE cron_mail_id_seq OWNED BY cron_mail.id;
 
 
 --
+-- Name: favorite; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE favorite (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    favorite_id integer,
+    type character varying(128),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: COLUMN favorite.type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN favorite.type IS 'type of user favorite - users, posts, messages, etc';
+
+
+--
+-- Name: favorite_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE favorite_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: favorite_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE favorite_id_seq OWNED BY favorite.id;
+
+
+--
+-- Name: message; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE message (
+    id integer NOT NULL,
+    to_user_id integer NOT NULL,
+    from_user_id integer,
+    is_new boolean DEFAULT true NOT NULL,
+    subject character varying(1024),
+    text text NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone,
+    read_at integer,
+    to_deleted boolean DEFAULT false NOT NULL,
+    from_deleted boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: message_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE message_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: message_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE message_id_seq OWNED BY message.id;
+
+
+--
+-- Name: post; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE post (
+    id integer NOT NULL,
+    user_id integer,
+    subject character varying(2048),
+    text text NOT NULL,
+    is_media boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone,
+    cx bigint,
+    cy bigint,
+    cx_p_cy bigint,
+    cx_m_cy bigint,
+    post_id integer
+);
+
+
+--
+-- Name: TABLE post; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE post IS 'Users post';
+
+
+--
+-- Name: COLUMN post.post_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN post.post_id IS 'only two level tree';
+
+
+--
+-- Name: post_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE post_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: post_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE post_id_seq OWNED BY post.id;
+
+
+--
+-- Name: post_name_user; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE post_name_user (
+    post_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+--
 -- Name: smtp; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -169,6 +310,83 @@ CREATE SEQUENCE smtp_id_seq
 --
 
 ALTER SEQUENCE smtp_id_seq OWNED BY smtp.id;
+
+
+--
+-- Name: tag; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag (
+    id integer NOT NULL,
+    name character varying(512) NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE tag_id_seq OWNED BY tag.id;
+
+
+--
+-- Name: tag_place; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag_place (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    tag_id integer NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone,
+    cx bigint NOT NULL,
+    cy bigint NOT NULL,
+    cx_p_cy bigint NOT NULL,
+    cx_m_cy bigint NOT NULL
+);
+
+
+--
+-- Name: tag_place_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tag_place_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tag_place_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE tag_place_id_seq OWNED BY tag_place.id;
+
+
+--
+-- Name: tag_post; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag_post (
+    post_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
 
 
 --
@@ -352,7 +570,42 @@ ALTER TABLE ONLY cron_mail ALTER COLUMN id SET DEFAULT nextval('cron_mail_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY favorite ALTER COLUMN id SET DEFAULT nextval('favorite_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY message ALTER COLUMN id SET DEFAULT nextval('message_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY post ALTER COLUMN id SET DEFAULT nextval('post_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY smtp ALTER COLUMN id SET DEFAULT nextval('smtp_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tag ALTER COLUMN id SET DEFAULT nextval('tag_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tag_place ALTER COLUMN id SET DEFAULT nextval('tag_place_id_seq'::regclass);
 
 
 --
@@ -469,6 +722,59 @@ SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
 
 
 --
+-- Data for Name: favorite; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY favorite (id, user_id, favorite_id, type, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: favorite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('favorite_id_seq', 1, false);
+
+
+--
+-- Data for Name: message; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY message (id, to_user_id, from_user_id, is_new, subject, text, created_at, updated_at, read_at, to_deleted, from_deleted) FROM stdin;
+\.
+
+
+--
+-- Name: message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('message_id_seq', 1, false);
+
+
+--
+-- Data for Name: post; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY post (id, user_id, subject, text, is_media, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id) FROM stdin;
+\.
+
+
+--
+-- Name: post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('post_id_seq', 1, false);
+
+
+--
+-- Data for Name: post_name_user; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY post_name_user (post_id, user_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: smtp; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -481,6 +787,44 @@ COPY smtp (id, host, username, password, port, encryption, timeout, "extensionHa
 --
 
 SELECT pg_catalog.setval('smtp_id_seq', 1, false);
+
+
+--
+-- Data for Name: tag; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY tag (id, name, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('tag_id_seq', 1, false);
+
+
+--
+-- Data for Name: tag_place; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY tag_place (id, user_id, tag_id, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy) FROM stdin;
+\.
+
+
+--
+-- Name: tag_place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('tag_place_id_seq', 1, false);
+
+
+--
+-- Data for Name: tag_post; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY tag_post (post_id, tag_id) FROM stdin;
+\.
 
 
 --
@@ -3563,11 +3907,67 @@ ALTER TABLE ONLY cron_mail
 
 
 --
+-- Name: favorite_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY favorite
+    ADD CONSTRAINT favorite_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: message_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY message
+    ADD CONSTRAINT message_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: post_name_user_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY post_name_user
+    ADD CONSTRAINT post_name_user_pkey PRIMARY KEY (post_id, user_id);
+
+
+--
+-- Name: post_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY post
+    ADD CONSTRAINT post_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: smtp_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY smtp
     ADD CONSTRAINT smtp_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tag_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT tag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tag_place_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_place
+    ADD CONSTRAINT tag_place_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tag_post_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_post
+    ADD CONSTRAINT tag_post_pkey PRIMARY KEY (post_id, tag_id);
 
 
 --
@@ -3635,19 +4035,53 @@ ALTER TABLE ONLY "user"
 
 
 --
+-- Name: vavorite_user_id_favorit_id_type_unique; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY favorite
+    ADD CONSTRAINT vavorite_user_id_favorit_id_type_unique UNIQUE (user_id, type, favorite_id);
+
+
+--
+-- Name: _idx_user_place_cx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX _idx_user_place_cx ON user_place USING btree (cx);
+
+
+--
 -- Name: _idx_user_place_cx_cy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
+
 CREATE INDEX _idx_user_place_cx_cy ON user_place USING btree (cx, cy);
-CREATE INDEX _idx_user_place_cx ON user_place USING btree (cx);
-CREATE INDEX _idx_user_place_cy ON user_place USING btree (cy);
+
+
+--
+-- Name: _idx_user_place_cx_m_cy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX _idx_user_place_cx_m_cy ON user_place USING btree (cx_m_cy);
+
+
+--
+-- Name: _idx_user_place_cx_p_cy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX _idx_user_place_cx_p_cy ON user_place USING btree (cx_p_cy);
 
 
 --
 -- Name: _idx_user_place_cx_p_cy_cx_m_cy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
+
 CREATE INDEX _idx_user_place_cx_p_cy_cx_m_cy ON user_place USING btree (cx_p_cy, cx_m_cy);
-CREATE INDEX _idx_user_place_cx_p_cy ON user_place USING btree (cx_p_cy);
-CREATE INDEX _idx_user_place_cx_m_cy ON user_place USING btree (cx_m_cy);
+
+
+--
+-- Name: _idx_user_place_cy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX _idx_user_place_cy ON user_place USING btree (cy);
 
 
 --
@@ -3655,6 +4089,48 @@ CREATE INDEX _idx_user_place_cx_m_cy ON user_place USING btree (cx_m_cy);
 --
 
 CREATE INDEX _idx_user_place_is_spirit ON user_place USING btree (is_spirit);
+
+
+--
+-- Name: message_from_user_id_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX message_from_user_id_idx ON message USING btree (from_user_id);
+
+
+--
+-- Name: message_to_user_id_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX message_to_user_id_idx ON message USING btree (to_user_id);
+
+
+--
+-- Name: post_cx_cy_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX post_cx_cy_idx ON post USING btree (cx, cy);
+
+
+--
+-- Name: post_cx_m_cy_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX post_cx_m_cy_idx ON post USING btree (cx_m_cy);
+
+
+--
+-- Name: post_cx_p_cy_cx_m_cy_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX post_cx_p_cy_cx_m_cy_idx ON post USING btree (cx_p_cy, cx_m_cy);
+
+
+--
+-- Name: post_cy_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX post_cy_idx ON post USING btree (cy);
 
 
 --
@@ -3679,6 +4155,94 @@ ALTER TABLE ONLY "AuthItemChild"
 
 ALTER TABLE ONLY "AuthItemChild"
     ADD CONSTRAINT "AuthItemChild_parent_fkey" FOREIGN KEY (parent) REFERENCES "AuthItem"(name) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: Ref_favorite_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY favorite
+    ADD CONSTRAINT "Ref_favorite_to_user" FOREIGN KEY (user_id) REFERENCES "user"(id);
+
+
+--
+-- Name: Ref_message_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY message
+    ADD CONSTRAINT "Ref_message_to_user" FOREIGN KEY (to_user_id) REFERENCES "user"(id);
+
+
+--
+-- Name: Ref_message_to_user0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY message
+    ADD CONSTRAINT "Ref_message_to_user0" FOREIGN KEY (from_user_id) REFERENCES "user"(id);
+
+
+--
+-- Name: Ref_post_name_user_to_post; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY post_name_user
+    ADD CONSTRAINT "Ref_post_name_user_to_post" FOREIGN KEY (post_id) REFERENCES post(id);
+
+
+--
+-- Name: Ref_post_name_user_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY post_name_user
+    ADD CONSTRAINT "Ref_post_name_user_to_user" FOREIGN KEY (user_id) REFERENCES "user"(id);
+
+
+--
+-- Name: Ref_post_to_post; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY post
+    ADD CONSTRAINT "Ref_post_to_post" FOREIGN KEY (post_id) REFERENCES post(id);
+
+
+--
+-- Name: Ref_post_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY post
+    ADD CONSTRAINT "Ref_post_to_user" FOREIGN KEY (user_id) REFERENCES "user"(id);
+
+
+--
+-- Name: Ref_tag_place_to_tag; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tag_place
+    ADD CONSTRAINT "Ref_tag_place_to_tag" FOREIGN KEY (tag_id) REFERENCES tag(id);
+
+
+--
+-- Name: Ref_tag_place_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tag_place
+    ADD CONSTRAINT "Ref_tag_place_to_user" FOREIGN KEY (user_id) REFERENCES "user"(id);
+
+
+--
+-- Name: Ref_tag_post_to_post; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tag_post
+    ADD CONSTRAINT "Ref_tag_post_to_post" FOREIGN KEY (post_id) REFERENCES post(id);
+
+
+--
+-- Name: Ref_tag_post_to_tag; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tag_post
+    ADD CONSTRAINT "Ref_tag_post_to_tag" FOREIGN KEY (tag_id) REFERENCES tag(id);
 
 
 --
