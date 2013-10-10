@@ -53,4 +53,11 @@ class FixtureCommand extends CConsoleCommand
                 }
             }
     }
+
+    public function actionMakeTagPlaces(){
+        $tags = array("tg","Taggg_with_maximal_length","Русский_тэг","Simple_tag","porno_is_here","666");
+        foreach($tags as $tag){
+
+        }
+    }
 }

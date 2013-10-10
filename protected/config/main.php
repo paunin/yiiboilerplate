@@ -88,7 +88,7 @@ $main = array(
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'class' => 'HttpRequest',
-            'noCsrfValidationRoutes' => array('admin', 'apiV0', 'apiOauth', 'apiUser'),
+            'noCsrfValidationRoutes' => array('admin', 'apiV0', 'apiOauth', 'apiUser','apiTag'),
         ),
         'image' => array(
             'class' => 'ext.image.CImageComponent',
@@ -131,6 +131,10 @@ $main = array(
                 array('apiLocation/mapGet', 'pattern' => 'api_v0/location/map', 'verb' => 'GET'),
 
                 array('apiProfile/get', 'pattern' => 'api_v0/profile', 'verb' => 'GET'),
+
+                array('apiTag/get', 'pattern' => 'api_v0/tag', 'verb' => 'GET'),
+                array('apiTag/post', 'pattern' => 'api_v0/tag', 'verb' => 'POST'),
+                array('apiTag/delete', 'pattern' => 'api_v0/tag', 'verb' => 'DELETE'),
 
                 //Tests
                 array('apiLocation/mapGetTest', 'pattern' => 'api_v0/location/map/test'),
@@ -193,6 +197,10 @@ $public_params = array(
     'map_scale_min' => 1,
     'map_scale_max' => 1000,
     'map_resolution_max' => 100,
+
+    'tag_length_min'=>'2',
+    'tag_length_max'=>'25',
+    'tag_one_user_radius_allow'=>17,
 
     'limit_feed_max' => 200,
     'limit_feed_default' => 20,

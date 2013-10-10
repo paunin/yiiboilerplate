@@ -17,7 +17,6 @@ class PlaceDeleteAction extends ApiAction
 
         if (!$user_place)
             throw new CHttpException(404,Yii::t('api','Place not found'));
-        
         $this->controller->out($user_place->delete());
     }
 }
