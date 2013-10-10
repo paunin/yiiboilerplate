@@ -11,11 +11,8 @@ class Token extends BaseToken
     public function behaviors()
     {
         return array(
-            'CTimestampBehavior' => array(
-                'class' => 'zii.behaviors.CTimestampBehavior',
-                'createAttribute' => 'created_at',
-                'updateAttribute' => 'updated_at',
-                'timestampExpression' => "date('Y-m-d H:i:s')"
+            'TimestampBehavior' => array(
+                'class' => 'ext.behaviors.TimestampBehavior'
             ),
             'to_array' => array(
                 'class' => 'ext.behaviors.ToArrayBehavior.ToArrayBehavior',
@@ -23,14 +20,6 @@ class Token extends BaseToken
                     'token', 'expire_at'
                 )
             )
-        );
-    }
-    public function rules(){
-        return array_merge(
-            array(
-                array('created_at', 'default', 'setOnEmpty' => true, 'value' => date("Y-m-d H:i:s")),
-            ),
-            parent::rules()
         );
     }
 }

@@ -12,7 +12,6 @@ class UserPlace extends BaseUserPlace
     {
         return array_merge(
             array(
-                array('created_at', 'default', 'setOnEmpty' => true, 'value' => date("Y-m-d H:i:s")),
                 array('cxy', 'required', 'on' => 'place_post'),
                 array('cxy', 'application.validators.CoordinatePointValidator', 'on' => 'place_post','makeCoordinates' => true),
                 array('cxy', 'application.validators.CoordinatePointValidator', 'reanimateCoordinates' => true,'makeCoordinates' => true, 'on' => 'place_put'),
@@ -22,13 +21,7 @@ class UserPlace extends BaseUserPlace
             parent::rules(),
             array(
                 array('user_id', 'exist', 'attributeName' => 'id', 'className' => 'User'),
-                array(
-                    'radius', 'numerical', 'integerOnly' => true,
-                    'min' => Yii::app()->params['radius_min'],
-                    'tooSmall' => Yii::t('app', 'Radius should be more than or equal {radius_min}', array('{radius_min}' => Yii::app()->params['radius_min'])),
-                    'max' => Yii::app()->params['radius_max'],
-                    'tooBig' => Yii::t('app', 'Radius should be less than or equal {radius_max}', array('{radius_max}' => Yii::app()->params['radius_max']))
-                )
+                array('radius', 'application.validators.RadiusValidator', 'createOnEmpty'=>true),
             )
         );
     }
@@ -36,11 +29,8 @@ class UserPlace extends BaseUserPlace
     public function behaviors()
     {
         return array(
-            'CTimestampBehavior' => array(
-                'class' => 'zii.behaviors.CTimestampBehavior',
-                'createAttribute' => 'created_at',
-                'updateAttribute' => 'updated_at',
-                'timestampExpression' => "date('Y-m-d H:i:s')"
+            'TimestampBehavior' => array(
+                'class' => 'ext.behaviors.TimestampBehavior',
             ),
             'to_array' => array(
                 'class' => 'ext.behaviors.ToArrayBehavior.ToArrayBehavior',

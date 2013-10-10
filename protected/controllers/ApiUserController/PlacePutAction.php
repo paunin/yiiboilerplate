@@ -15,7 +15,8 @@ class PlacePutAction extends ApiAction
         $user_place = UserPlace::findByPkForUser($id,User::current()->id);
 
         if (!$user_place)
-            $this->controller->forward('apiV0/error404');
+            throw new CHttpException(404,Yii::t('api','Place not found'));
+
 
         $user_place->setAttributes(Yii::app()->getRequest()->getAllParams());;
         $user_place->setScenario('place_put');
