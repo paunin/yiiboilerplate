@@ -2,15 +2,24 @@
 class ApiController extends Controller
 {
 
-    protected function changeUsers(){
+    protected function changeUsers()
+    {
         Yii::app()->setComponent('siteUser', Yii::app()->user);
         Yii::app()->setComponent('user', Yii::app()->apiUser);
+
+        Yii::app()->setComponents(array(
+            'errorHandler'=>array(
+                'errorAction'=>'apiV0/error',
+            ),
+        ));
     }
 
-    public function init(){
+    public function init()
+    {
         $this->changeUsers();
         return parent::init();
     }
+
     const ERROR_VALIDATION = 701;
 
     /**
@@ -30,13 +39,13 @@ class ApiController extends Controller
      *      json  - json/jsonp
      *      xml - xml document
      *      php - php array
-     * @throws ApiException
+     * @throws CException
      * @return bool
      */
     public static function out($in, $http_status = 200, $standart = true, $status = 0, $message = "", $type = 'auto')
     {
         // set the status
-        $status_header = 'HTTP/1.1 ' . $http_status .' '.self::_getStatusCodeMessage($http_status);
+        $status_header = 'HTTP/1.1 ' . $http_status . ' ' . self::_getStatusCodeMessage($http_status);
         header($status_header);
 
 
@@ -52,8 +61,9 @@ class ApiController extends Controller
             Yii::app()->controller->render('application.views.api.debug', array('debug' => print_r($in, true)));
             return;
         }
+
         if($type == 'auto')
-            $type = Yii::app()->getRequest()->getParam('_ans','json');
+            $type = Yii::app()->getRequest()->getParam('_ans', 'json');
         switch ($type) {
             case 'xml':
                 echo self::makeXml($in);
@@ -65,7 +75,7 @@ class ApiController extends Controller
                 echo self::makePhp($in);
                 break;
             default:
-                throw new ApiException('Wrong answer type'.(string)$type);
+                throw new CHttpException(400,'Wrong answer type - ' . (string)$type);
                 break;
 
         }
@@ -82,8 +92,9 @@ class ApiController extends Controller
      * @param $type
      * @return bool
      */
-    public static function outError($in,$status,$message,$type = 'auto'){
-        return self::out($in,200,true,$status,$message,$type);
+    public static function outError($in, $status, $message, $type = 'auto')
+    {
+        return self::out($in, 200, true, $status, $message, $type);
     }
 
     /**
@@ -126,7 +137,7 @@ class ApiController extends Controller
     public static function makePhp($in)
     {
         header('Content-Type: text/plain');
-        return var_export($in,true);
+        return var_export($in, true);
     }
 
     /**
@@ -166,7 +177,7 @@ class ApiController extends Controller
     {
         header('Content-Type: text/plain');
         return (Yii::app()->getRequest()->getParam('callback'))
-            ? (Yii::app()->getRequest()->getParam('callback')."($json)")
+            ? (Yii::app()->getRequest()->getParam('callback') . "($json)")
             : $json;
     }
 
@@ -185,20 +196,34 @@ class ApiController extends Controller
 //            parent::run($actionID);
 //    }
 
-    public static function actionError404(){
-        self::out(null,404,true,'404',Yii::t('api','Check REST method, and parameters'),'json');
+    public static function actionError404()
+    {
+        throw new CHttpException(404);
     }
 
-    public static function actionError400(){
-        self::out(null,400,true,'400',Yii::t('api','Check REST method, and parameters'),'json');
-    }
-    public static function actionError403(){
-        self::out(null,403,true,'403', Yii::t('api','You are not authorized to perform this action.'),'json');
+    public function actionError()
+    {
+        if($error = Yii::app()->errorHandler->error) {
+            switch ($error['code']) {
+                case '404':
+                    $msg = Yii::t('api', 'Check REST method, and parameters');
+                    break;
+                case '400':
+                    $msg = Yii::t('api', 'Check REST method, and parameters');
+                    break;
+                case '403':
+                    $msg = Yii::t('api', 'You are not authorized to perform this action');
+                    break;
+            }
+
+            self::out(null, $error['code'], true, $error['code'], $msg . "({$error['message']})");
+        }
+
     }
 
     public function filterApiAccessControl($filterChain)
     {
-        $filter=new ApiAccessControlFilter();
+        $filter = new ApiAccessControlFilter();
         $filter->setRules($this->accessRules());
         $filter->filter($filterChain);
     }

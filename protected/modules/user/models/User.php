@@ -105,9 +105,33 @@ class User extends BaseUser
                 User::$user_settings->save();
             }
         }
-        if($attr){
-            return User::$user_settings->hasAttribute($attr)?User::$user_settings->getAttribute($attr):null;
+        if($attr) {
+            return User::$user_settings->hasAttribute($attr) ? User::$user_settings->getAttribute($attr) : null;
         }
         return User::$user_settings;
+    }
+
+    /**
+     * @param Application $app
+     * @param bool $force_create
+     * @return Token
+     */
+    public function getToken(Application $app, $force_create = false)
+    {
+        $now = date('Y-m-d H:i:s');
+        $token = Token::model()->find(
+            "user_id = :user_id AND application_id = :application_id AND expire_at > :now",
+            array(':user_id' => $this->id, ':application_id' => $app->id, ':now' => $now)
+        );
+        if(!$token && $force_create){
+            $token = new Token();
+            $token->user_id = $this->id;
+            $token->application_id = $app->id;
+            $token->token = md5(rand(0,9999).$now.Yii::app()->params['private']['rand_key']);
+            $token->expire_at = date("Y-m-d H:i:s",strtotime("+".Yii::app()->params['private']['app_token_ttl']));
+            $token->save();
+        }
+
+        return $token;
     }
 }

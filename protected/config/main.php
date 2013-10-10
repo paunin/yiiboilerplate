@@ -3,7 +3,7 @@ $main = array(
 
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'PlaceMeUp',
-    'language'=>'en',
+    'language' => 'en',
 
     // preloading 'log' component
     'preload' => array('log'),
@@ -58,36 +58,37 @@ $main = array(
             'dryRun' => false,
         ),
         'user' => array(
-            'class'=>'application.components.WebUser',
+            'class' => 'application.components.WebUser',
             'allowAutoLogin' => true,
-            'loginUrl'=>array('user/login/login'),
-            'stateKeyPrefix'    => 'frontend_',
+            'loginUrl' => array('user/login/login'),
+            'stateKeyPrefix' => 'frontend_',
         ),
         'apiUser' => array(
-            'class'=>'application.components.api.ApiUser',
+            'class' => 'application.components.api.ApiUser',
             'allowAutoLogin' => false,
-            'stateKeyPrefix'    => 'api_',
-            'authTimeout'       => 60
+            'stateKeyPrefix' => 'api_',
+            'loginUrl' => array('user/login/login'),
+            'authTimeout' => 60
         ),
-        'db' =>array(
+        'db' => array(
             'pdoClass' => 'NestedPDO',
             'emulatePrepare' => false
         ),
 
-/*        'clientScript' => array(
-            'class' => 'ext.ExtendedClientScript.ExtendedClientScript',
-            'combineCss' => true,
-            'compressCss' => true,
-            'combineJs' => true,
-            'compressJs' => true,
-            'excludeJsFiles' => array('jquery-1.10.2.min.js','bootstrap.min.js','jquery.cookie.js','auth.css'),
-            'excludeCssFiles' => array('bootstrap-theme.min.css','bootstrap.min.css',),
-        ),*/
+        /*        'clientScript' => array(
+                    'class' => 'ext.ExtendedClientScript.ExtendedClientScript',
+                    'combineCss' => true,
+                    'compressCss' => true,
+                    'combineJs' => true,
+                    'compressJs' => true,
+                    'excludeJsFiles' => array('jquery-1.10.2.min.js','bootstrap.min.js','jquery.cookie.js','auth.css'),
+                    'excludeCssFiles' => array('bootstrap-theme.min.css','bootstrap.min.css',),
+                ),*/
         'request' => array(
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'class' => 'HttpRequest',
-            'noCsrfValidationRoutes' => array('admin','apiV0','apiOauth','apiUser'),
+            'noCsrfValidationRoutes' => array('admin', 'apiV0', 'apiOauth', 'apiUser'),
         ),
         'image' => array(
             'class' => 'ext.image.CImageComponent',
@@ -114,29 +115,30 @@ $main = array(
 
                 //<<< REST patterns
 
-                array('apiV0/index', 'pattern'=>'api_v0', 'verb'=>'GET,POST'),
+                array('apiV0/index', 'pattern' => 'api_v0', 'verb' => 'GET,POST'),
 
-                array('apiOauth/tokenGet', 'pattern'=>'api_v0/oauth/token', 'verb'=>'GET'),
+                array('apiOauth/tokenGet', 'pattern' => 'api_v0/oauth/token', 'verb' => 'GET'),
 
-                array('apiUser/get', 'pattern'=>'api_v0/user', 'verb'=>'GET'),
-                array('apiUser/radiusGet', 'pattern'=>'api_v0/user/radius', 'verb'=>'GET'),
-                array('apiUser/radiusPost', 'pattern'=>'api_v0/user/radius', 'verb'=>'POST'),
-                array('apiUser/placeGet', 'pattern'=>'api_v0/user/place', 'verb'=>'GET'),
-                array('apiUser/placePost', 'pattern'=>'api_v0/user/place', 'verb'=>'POST'),
-                array('apiUser/placePut', 'pattern'=>'api_v0/user/place/<id:\d+>', 'verb'=>'PUT'),
-                array('apiUser/placeDelete', 'pattern'=>'api_v0/user/place/<id:\d+>', 'verb'=>'DELETE'),
 
-                array('apiLocation/mapGet', 'pattern'=>'api_v0/location/map', 'verb'=>'GET'),
+                array('apiUser/get', 'pattern' => 'api_v0/user', 'verb' => 'GET'),
+                array('apiUser/radiusGet', 'pattern' => 'api_v0/user/radius', 'verb' => 'GET'),
+                array('apiUser/radiusPost', 'pattern' => 'api_v0/user/radius', 'verb' => 'POST'),
+                array('apiUser/placeGet', 'pattern' => 'api_v0/user/place', 'verb' => 'GET'),
+                array('apiUser/placePost', 'pattern' => 'api_v0/user/place', 'verb' => 'POST'),
+                array('apiUser/placePut', 'pattern' => 'api_v0/user/place/<id:\d+>', 'verb' => 'PUT'),
+                array('apiUser/placeDelete', 'pattern' => 'api_v0/user/place/<id:\d+>', 'verb' => 'DELETE'),
 
-                array('apiProfile/get', 'pattern'=>'api_v0/profile', 'verb'=>'GET'),
+                array('apiLocation/mapGet', 'pattern' => 'api_v0/location/map', 'verb' => 'GET'),
+
+                array('apiProfile/get', 'pattern' => 'api_v0/profile', 'verb' => 'GET'),
 
                 //Tests
-                array('apiLocation/mapGetTest', 'pattern'=>'api_v0/location/map/test'),
-                array('apiProfile/getTest', 'pattern'=>'api_v0/profile/test'),
+                array('apiLocation/mapGetTest', 'pattern' => 'api_v0/location/map/test'),
+                array('apiProfile/getTest', 'pattern' => 'api_v0/profile/test'),
 
 
                 //404
-                array('apiV0/error404', 'pattern'=>'api<whartever:.*>'),
+                array('apiV0/error404', 'pattern' => 'api<whartever:.*>'),
                 //>>>REST patterns
 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
@@ -171,33 +173,45 @@ $main = array(
 
     // application-level parameters that can be accessed
     // using Yii::app()->params['map_scale_max']
-    'params' => array(
-        'slogan' => 'You place in Web', 
-        'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
-
-
-        'radius_min' => 1,
-        'radius_max' => 100,
-        'radius_default' => 50,
-        'places_count_max' => 100,
-        'coordinate_max' => 900000000000000000,
-        'coordinate_min' => -900000000000000000,
-
-        'post_edit_time_limit' =>300,
-
-        'map_scale_min'=>1,
-        'map_scale_max'=>1000,
-        'map_resolution_max'=>100,
-
-        'limit_feed_max'=>200,
-        'limit_feed_default'=>20,
-        'private' => array(
-            'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
-        )
-    ),
+    'params' => null //,
 );
 
-if(is_file(dirname(__FILE__) . '/solr.php')){
+$public_params = array(
+    'slogan' => 'Your place in Web',
+    'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
+
+
+    'radius_min' => 1,
+    'radius_max' => 100,
+    'radius_default' => 50,
+    'places_count_max' => 100,
+    'coordinate_max' => 900000000000000000,
+    'coordinate_min' => -900000000000000000,
+
+    'post_edit_time_limit' => 300,
+
+    'map_scale_min' => 1,
+    'map_scale_max' => 1000,
+    'map_resolution_max' => 100,
+
+    'limit_feed_max' => 200,
+    'limit_feed_default' => 20,
+);
+
+$main['params'] = array_merge(
+    $public_params,
+    array(
+        'public' => $public_params,
+        'private' => array(
+            'rand_key' => 'S4DF5^$#fv^*32F{}sAdtKdtyHh%#6($35H3as',
+            'app_own_slug' => 'placemeup',
+            'app_token_ttl' => '6 hours',
+            'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
+        )
+    )
+);
+
+if(is_file(dirname(__FILE__) . '/solr.php')) {
     $solr = require(dirname(__FILE__) . '/solr.php');
     $main = CMap::mergeArray(
         $main,
@@ -205,14 +219,14 @@ if(is_file(dirname(__FILE__) . '/solr.php')){
     );
 }
 
-if(is_file(dirname(__FILE__) . '/custom.php')){
+if(is_file(dirname(__FILE__) . '/custom.php')) {
     $custom = require(dirname(__FILE__) . '/custom.php');
     $main = CMap::mergeArray(
         $main,
         $custom
     );
 
-    if(defined('PROJECT_CUSTOM_DEBUG') && PROJECT_CUSTOM_DEBUG==true){
+    if(defined('PROJECT_CUSTOM_DEBUG') && PROJECT_CUSTOM_DEBUG == true) {
         unset($main['components']['clientScript']);
         $dev = require(dirname(__FILE__) . '/dev.php');
         $main = CMap::mergeArray(

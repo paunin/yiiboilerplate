@@ -9,11 +9,8 @@ class TokenGetAction extends ApiAction
     public function run()
     {
         $result = null;
-        if(!Yii::app()->user->isGuest){
-            //User::
-        }else{
-            $result = 'gg';
-        }
-        $this->controller->out($result);
+        $app = Application::model()->findByAttributes(array('slug'=>Yii::app()->params['private']['app_own_slug']));
+        $token = User::current()->getToken($app,true);
+        $this->controller->out($token->toArray());
     }
 }

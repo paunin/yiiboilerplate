@@ -1,5 +1,5 @@
 <?php
-class ApiException extends CException
+class ApiException extends CHttpException
 {
 
     public function getHash() {

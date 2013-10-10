@@ -27,21 +27,23 @@ class ApiIdentity extends UserIdentity
             $this->errorCode = self::ERROR_TOKEN_INCORRECT;
             return false;
         }
-        $criteria = new CDbCriteria;
-        $criteria->select = '*';
-        $criteria->condition = '(id=:token)';
-        $criteria->params = array(':token' => $this->token);
-        $criteria->limit = '1';
-        /** @var User $user */
-        $user = User::model()->find($criteria);
 
-        if (!$user)
+        $now = date('Y-m-d H:i:s');
+        /** @var Token $token */
+        $token = Token::model()->find(
+            "token = :token",
+            array(':token' => $this->token)
+        );
+
+        if (!$token)
             $this->errorCode = self::ERROR_TOKEN_INCORRECT;
-        else if (!$user->is_active)
+        else if($token->expire_at <= $now)
+            $this->errorCode = self::ERROR_TOKEN_EXPIRED;
+        else if (!$token->user->is_active)
             $this->errorCode = self::ERROR_NOT_ACTIVE;
         else {
             $this->errorCode = self::ERROR_NONE;
-            $this->assignDbUser($user);
+            $this->assignDbUser($token->user);
         }
 
         return ($this->errorCode == self::ERROR_NONE)?true:false;
