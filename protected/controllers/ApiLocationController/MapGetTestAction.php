@@ -9,7 +9,7 @@ class MapGetTestAction extends ApiAction
 {
     public function run()
     {
-        $map = new LocationMap();
+        $map = new ProfileLocationMap();
         $map->setScenario('vector_limit');
         $map->setAttributes(Yii::app()->request->getAllParams());
         if ($map->validate()) {

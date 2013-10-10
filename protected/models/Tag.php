@@ -1,7 +1,12 @@
 <?php
 
 Yii::import('application.models._base.BaseTag');
-
+/**
+ * Class Tag
+ *
+ * @method string errorsAgg
+ * @method array toArray
+ */
 class Tag extends BaseTag
 {
     public static function model($className = __CLASS__)
@@ -26,11 +31,14 @@ class Tag extends BaseTag
             'TimestampBehavior' => array(
                 'class' => 'ext.behaviors.TimestampBehavior',
             ),
-            'to_array' => array(
+            'ToArrayBehavior' => array(
                 'class' => 'ext.behaviors.ToArrayBehavior.ToArrayBehavior',
                 'fields' => array(
                     'id', 'name'
                 )
+            ),
+            'ErrorsAggBehavior' => array(
+                'class' => 'ext.behaviors.ErrorsAggBehavior'
             )
         );
     }

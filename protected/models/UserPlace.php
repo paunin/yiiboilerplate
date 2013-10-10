@@ -10,18 +10,19 @@ class UserPlace extends BaseUserPlace
 
     public function rules()
     {
+
         return array_merge(
             array(
                 array('cxy', 'required', 'on' => 'place_post'),
                 array('cxy', 'application.validators.CoordinatePointValidator', 'on' => 'place_post','makeCoordinates' => true),
                 array('cxy', 'application.validators.CoordinatePointValidator', 'reanimateCoordinates' => true,'makeCoordinates' => true, 'on' => 'place_put'),
                 array('cxy', 'checkOccupied'),
-
             ),
             parent::rules(),
             array(
+                array('cx,cy','unsafe'),
                 array('user_id', 'exist', 'attributeName' => 'id', 'className' => 'User'),
-                array('radius', 'application.validators.RadiusValidator', 'createOnEmpty'=>true),
+                array('radius', 'application.validators.RadiusValidator'),
             )
         );
     }

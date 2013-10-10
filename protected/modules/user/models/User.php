@@ -62,10 +62,10 @@ class User extends BaseUser
      */
     public static function current()
     {
-        if(Yii::app()->user->isGuest)
+        if (Yii::app()->user->isGuest)
             return null;
 
-        if(!User::$current_user)
+        if (!User::$current_user)
             User::$current_user = User::model()->findByPk(Yii::app()->user->getId());
 
         return User::$current_user;
@@ -97,15 +97,15 @@ class User extends BaseUser
      */
     public function getUserSettings($attr = null)
     {
-        if(!User::$user_settings) {
+        if (!User::$user_settings) {
             User::$user_settings = $this->userSettings;
-            if(empty(User::$user_settings)) {
+            if (empty(User::$user_settings)) {
                 User::$user_settings = new UserSettings();
                 User::$user_settings->user_id = $this->id;
                 User::$user_settings->save();
             }
         }
-        if($attr) {
+        if ($attr) {
             return User::$user_settings->hasAttribute($attr) ? User::$user_settings->getAttribute($attr) : null;
         }
         return User::$user_settings;
@@ -123,15 +123,25 @@ class User extends BaseUser
             "user_id = :user_id AND application_id = :application_id AND expire_at > :now",
             array(':user_id' => $this->id, ':application_id' => $app->id, ':now' => $now)
         );
-        if(!$token && $force_create){
+        if (!$token && $force_create) {
             $token = new Token();
             $token->user_id = $this->id;
             $token->application_id = $app->id;
-            $token->token = md5(rand(0,9999).$now.Yii::app()->params['private']['rand_key']);
-            $token->expire_at = date("Y-m-d H:i:s",strtotime("+".Yii::app()->params['private']['app_token_ttl']));
+            $token->token = md5(rand(0, 9999) . $now . Yii::app()->params['private']['rand_key']);
+            $token->expire_at = date("Y-m-d H:i:s", strtotime("+" . Yii::app()->params['private']['app_token_ttl']));
             $token->save();
         }
 
         return $token;
+    }
+
+    /**
+     * @param LocationPoint $point
+     * @return UserPlace|null
+     */
+    public function getPlace(LocationPoint $point)
+    {
+        return UserPlace::model()->findByAttributes(array('cx' => $point->cx, 'cy' => $point->cy, 'user_id' => $this->id));
+
     }
 }

@@ -9,10 +9,7 @@ class RadiusGetAction extends ApiAction
 {
     public function run()
     {
-        $user_settings = User::current()->getUserSettings();
-        $result = $user_settings->radius ? $user_settings->radius : Yii::app()->params['radius_default'];
-
-
+        $result = Radius::getUserRadius();
         $this->controller->out(
             $result
         );

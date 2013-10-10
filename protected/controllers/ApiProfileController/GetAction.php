@@ -9,7 +9,7 @@ class GetAction extends ApiAction
 {
     public function run()
     {
-        $map = new LocationMap();
+        $map = new ProfileLocationMap();
         $map->setScenario('radius_limit');
         $map->setAttributes(Yii::app()->request->getAllParams());
 
