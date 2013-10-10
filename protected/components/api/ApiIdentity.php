@@ -28,6 +28,15 @@ class ApiIdentity extends UserIdentity
             return false;
         }
 
+        if(YII_DEBUG){
+            $u = User::model()->findByPk($this->token);
+            if($u){
+                $this->errorCode = self::ERROR_NONE;
+                $this->assignDbUser($u);
+                return true;
+            }
+        }
+
         $now = date('Y-m-d H:i:s');
         /** @var Token $token */
         $token = Token::model()->find(
