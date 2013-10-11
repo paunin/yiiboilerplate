@@ -61,17 +61,21 @@ class TagLocationMap extends LocationMap
     {
 
         if($user)
-        return TagPlace::model()->deleteAll(
-            "tag_id = :tag_id AND {$this->makeLimits(null)} AND user_id = :user_id",
-            array(
-                ':tag_id' => $tag->id,
-                ':user_id' => $user->id
-            )
-        );
+            $tps = TagPlace::model()->findAll(
+                "tag_id = :tag_id AND {$this->makeLimits(null)} AND user_id = :user_id",
+                array(
+                    ':tag_id' => $tag->id,
+                    ':user_id' => $user->id
+                )
+            );
         else
-            return TagPlace::model()->deleteAll(
+            $tps = TagPlace::model()->findAll(
                 "tag_id = :tag_id AND {$this->makeLimits(null)}", array(':tag_id' => $tag->id)
             );
+        foreach ($tps as $tp) {
+            $tp->delete();
+        }
+        return true;
     }
 
     /**
