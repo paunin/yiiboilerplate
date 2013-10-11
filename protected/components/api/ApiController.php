@@ -214,6 +214,9 @@ class ApiController extends Controller
                 case '403':
                     $msg = Yii::t('api', 'You are not authorized to perform this action');
                     break;
+                default:
+                    $msg = Yii::t('api', 'An error occurred');
+                    break;
             }
 
             self::out(null, $error['code'], true, $error['code'], $msg . "({$error['message']})");

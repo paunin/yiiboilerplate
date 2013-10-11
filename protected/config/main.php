@@ -88,7 +88,7 @@ $main = array(
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'class' => 'HttpRequest',
-            'noCsrfValidationRoutes' => array('admin', 'apiV0', 'apiOauth', 'apiUser','apiTag'),
+            'noCsrfValidationRoutes' => array('admin', 'apiV0', 'apiOauth', 'apiUser','apiTag','apiProfile'),
         ),
         'image' => array(
             'class' => 'ext.image.CImageComponent',
@@ -132,6 +132,10 @@ $main = array(
 
                 array('apiProfile/get', 'pattern' => 'api_v0/profile', 'verb' => 'GET'),
                 array('apiProfile/getById', 'pattern' => 'api_v0/profile/<id:\d+>', 'verb' => 'GET'),
+
+                array('apiProfile/favoriteGet', 'pattern' => 'api_v0/profile/favorite', 'verb' => 'GET'),
+                array('apiProfile/favoritePost', 'pattern' => 'api_v0/profile/favorite/<id:\d+>', 'verb' => 'POST'),
+                array('apiProfile/favoriteDelete', 'pattern' => 'api_v0/profile/favorite/<id:\d+>', 'verb' => 'DELETE'),
 
                 array('apiTag/get', 'pattern' => 'api_v0/tag', 'verb' => 'GET'),
                 array('apiTag/post', 'pattern' => 'api_v0/tag', 'verb' => 'POST'),

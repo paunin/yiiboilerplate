@@ -5,6 +5,7 @@ Yii::import('application.modules.user.models._base.BaseUser');
  * @method array toArray
  * @property UserSettings $userSettings
  * @property UserPlace $userCurrentPlace
+ * @property Favorite[] $favoriteUsers
  */
 class User extends BaseUser
 {
@@ -21,7 +22,8 @@ class User extends BaseUser
         $relations = array_merge(
             $relations,
             array(
-                'userCurrentPlace' => array(self::HAS_ONE,'UserPlace','user_id','condition' => 'is_spirit = false')
+                'userCurrentPlace' => array(self::HAS_ONE,'UserPlace','user_id','condition' => 'is_spirit = false'),
+                'favoriteUsers' => array(self::HAS_MANY, 'Favorite', 'user_id','condition' => 'type = \''.Favorite::TYPE_USER.'\'' ),
             )
         );
         return $relations;

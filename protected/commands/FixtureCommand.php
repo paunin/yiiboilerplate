@@ -74,10 +74,25 @@ class FixtureCommand extends CConsoleCommand
             } else {
                 echo "skip\n";
             }
-
-
         }
+    }
 
+    public function actionMakeFavUsers(){
+        for ($i = 3; $i < 500; $i++) {
+            if($i % 3)
+                continue;
+            $count = rand(1,5);
+            for($j=1;$j<$count;$j++){
+                try{
+                    $fav = new Favorite();
+                    $fav->user_id = $i;
+                    $fav->type = 'user';
+                    $fav->favorite_id = rand(350,900);
+                    $fav->save();
+                }catch (Exception $e){
 
+                }
+            }
+        }
     }
 }

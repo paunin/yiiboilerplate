@@ -36,7 +36,7 @@ class UserPlace extends BaseUserPlace
             'to_array' => array(
                 'class' => 'ext.behaviors.ToArrayBehavior.ToArrayBehavior',
                 'fields' => array(
-                    'id', 'name', 'cx', 'cy', 'created_at', 'updated_at', 'radius', 'permissions_mask' => 'permissions', 'is_spirit'
+                    'id', 'name', 'cx', 'cy', 'created_at', 'updated_at', 'radius', 'is_spirit'
                 )
             ),
             'coordinate' => array(
