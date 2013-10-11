@@ -56,14 +56,6 @@ ALTER TABLE "tag_post"
 ALTER TABLE "tag_place"
 	SET TABLESPACE pg_default;
 
-CREATE TABLE "public"."_pgmdd_backup_tag_2013-10-10_16:43" AS
-	SELECT * FROM public.tag;
-
-CREATE UNIQUE INDEX "tag_name_unique" ON "tag" (
-	"name"
-);
-
-
 ALTER TABLE "tag"
 	SET TABLESPACE pg_default;
 
