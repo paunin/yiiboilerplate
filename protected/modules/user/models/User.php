@@ -4,6 +4,7 @@ Yii::import('application.modules.user.models._base.BaseUser');
 /**
  * @method array toArray
  * @property UserSettings $userSettings
+ * @property UserPlace $userCurrentPlace
  */
 class User extends BaseUser
 {
@@ -12,10 +13,17 @@ class User extends BaseUser
         return parent::model($className);
     }
 
+
     public function relations()
     {
         $relations = parent::relations();
         $relations['userSettings'] = array(self::HAS_ONE, 'UserSettings', 'user_id');
+        $relations = array_merge(
+            $relations,
+            array(
+                'userCurrentPlace' => array(self::HAS_ONE,'UserPlace','user_id','condition' => 'is_spirit = false')
+            )
+        );
         return $relations;
     }
 
@@ -143,5 +151,19 @@ class User extends BaseUser
     {
         return UserPlace::model()->findByAttributes(array('cx' => $point->cx, 'cy' => $point->cy, 'user_id' => $this->id));
 
+    }
+
+    public function toFullProfile(){
+        $profile = array(
+            'id' => $this->id,
+            'username' => $this->username,
+            'name' => null,
+            'avatar' => UserAvatar::getAllSize($this->id),
+            'created_at' => $this->created_at,
+            'last_login' => $this->last_login,
+            'current_point' => $this->userCurrentPlace?$this->userCurrentPlace->toArray():null,
+            'social' => null,
+        );
+        return $profile;
     }
 }

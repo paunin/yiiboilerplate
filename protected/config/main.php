@@ -131,6 +131,7 @@ $main = array(
                 array('apiLocation/mapGet', 'pattern' => 'api_v0/location/map', 'verb' => 'GET'),
 
                 array('apiProfile/get', 'pattern' => 'api_v0/profile', 'verb' => 'GET'),
+                array('apiProfile/getById', 'pattern' => 'api_v0/profile/<id:\d+>', 'verb' => 'GET'),
 
                 array('apiTag/get', 'pattern' => 'api_v0/tag', 'verb' => 'GET'),
                 array('apiTag/post', 'pattern' => 'api_v0/tag', 'verb' => 'POST'),

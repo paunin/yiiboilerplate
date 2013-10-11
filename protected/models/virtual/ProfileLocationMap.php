@@ -75,7 +75,7 @@ class ProfileLocationMap extends LocationMap
                     'id' => $row['id'],
                     'username' => $row['username'],
                     'name' => null,
-                    'avatar' => null,
+                    'avatar' => UserAvatar::getAllSize($row['id']),
                     'created_at' => $row['created_at'],
                     'last_login' => $row['last_login'],
                 );
