@@ -133,9 +133,11 @@ $main = array(
                 array('apiProfile/get', 'pattern' => 'api_v0/profile', 'verb' => 'GET'),
 
                 array('apiTag/get', 'pattern' => 'api_v0/tag', 'verb' => 'GET'),
-                array('apiTag/myGet', 'pattern' => 'api_v0/tag/my', 'verb' => 'GET'),
                 array('apiTag/post', 'pattern' => 'api_v0/tag', 'verb' => 'POST'),
-                array('apiTag/delete', 'pattern' => 'api_v0/tag', 'verb' => 'DELETE'),
+
+                array('apiTag/myGet', 'pattern' => 'api_v0/tag/my', 'verb' => 'GET'),
+                array('apiTag/myDelete', 'pattern' => 'api_v0/tag/my/<id:\d+>', 'verb' => 'DELETE'),
+
 
                 //Tests
                 array('apiLocation/mapGetTest', 'pattern' => 'api_v0/location/map/test'),

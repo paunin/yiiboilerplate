@@ -74,10 +74,10 @@ class Location extends CModel
         $cy0 = $point->cy;
         $r = $radius;
         $r2 = ceil($radius * 1.4);
-
-        $conditions = " ($table_alias.cx >= " . ($cx0 - $r) . " AND $table_alias.cx < " . ($cx0 + $r) . " AND $table_alias.cy >= " . ($cy0 - $r) . " AND $table_alias.cy < " . ($cy0 + $r) . ") " .
+        $table_alias_dot = $table_alias?"$table_alias.":'';
+        $conditions = " ({$table_alias_dot}cx >= " . ($cx0 - $r) . " AND {$table_alias_dot}cx < " . ($cx0 + $r) . " AND {$table_alias_dot}cy >= " . ($cy0 - $r) . " AND {$table_alias_dot}cy < " . ($cy0 + $r) . ") " .
             ' AND ' .
-            " ($table_alias.cx_p_cy >=  " . ($cx0 + $cy0 - $r2) . " AND $table_alias.cx_p_cy <=  " . ($cx0 + $cy0 + $r2) . " AND $table_alias.cx_m_cy >=  " . ($cx0 - $cy0 - $r2) . " AND $table_alias.cx_m_cy <=  " . ($cx0 - $cy0 + $r2) . " ) ";
+            " ({$table_alias_dot}cx_p_cy >=  " . ($cx0 + $cy0 - $r2) . " AND {$table_alias_dot}cx_p_cy <=  " . ($cx0 + $cy0 + $r2) . " AND {$table_alias_dot}cx_m_cy >=  " . ($cx0 - $cy0 - $r2) . " AND {$table_alias_dot}cx_m_cy <=  " . ($cx0 - $cy0 + $r2) . " ) ";
 
         return $conditions;
     }
@@ -90,6 +90,7 @@ class Location extends CModel
     public function limitByVector(LocationVector $vector, $table_alias = "t")
     {
         $vector->optimize();
-        return " ($table_alias.cx >= {$vector->pa->cx} AND $table_alias.cx < {$vector->pb->cx} AND $table_alias.cy >= {$vector->pb->cy} AND $table_alias.cy < {$vector->pa->cy}) ";
+        $table_alias_dot = $table_alias?"$table_alias.":'';
+        return " ({$table_alias_dot}cx >= {$vector->pa->cx} AND {$table_alias_dot}cx < {$vector->pb->cx} AND {$table_alias_dot}cy >= {$vector->pb->cy} AND {$table_alias_dot}cy < {$vector->pa->cy}) ";
     }
 }

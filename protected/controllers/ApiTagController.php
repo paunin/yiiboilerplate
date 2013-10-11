@@ -5,7 +5,7 @@ class ApiTagController extends ApiController
     /**
      * Declares class-based actions.
      */
-    protected $_actions = array('get', 'post', 'delete','myGet');
+    protected $_actions = array('get', 'post', 'myDelete','myGet');
 
     public function filters()
     {
@@ -19,7 +19,7 @@ class ApiTagController extends ApiController
     {
         return array(
             array('deny',
-                'actions' => array('post', 'delete', 'myGet'),
+                'actions' => array('post', 'myDelete', 'myGet'),
                 'users' => array('?'),
             ),
         );

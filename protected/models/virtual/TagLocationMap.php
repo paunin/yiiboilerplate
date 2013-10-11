@@ -9,6 +9,7 @@ class TagLocationMap extends LocationMap
 
     public $limit;
     public $only_my;
+    public $tag_name;
 
     public function attributeNames()
     {
@@ -16,7 +17,8 @@ class TagLocationMap extends LocationMap
             parent::attributeNames(),
             array(
                 'limit',
-                'my_first'
+                'my_first',
+                'tag_name'
             )
         );
     }
@@ -50,6 +52,27 @@ class TagLocationMap extends LocationMap
         );
     }
 
+    /**
+     * @param Tag $tag
+     * @param User $user
+     * @return int
+     */
+    public function deleteTag(Tag $tag, User $user = null)
+    {
+
+        if($user)
+        return TagPlace::model()->deleteAll(
+            "tag_id = :tag_id AND {$this->makeLimits(null)} AND user_id = :user_id",
+            array(
+                ':tag_id' => $tag->id,
+                ':user_id' => $user->id
+            )
+        );
+        else
+            return TagPlace::model()->deleteAll(
+                "tag_id = :tag_id AND {$this->makeLimits(null)}", array(':tag_id' => $tag->id)
+            );
+    }
 
     /**
      * @return array

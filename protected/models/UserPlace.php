@@ -149,11 +149,17 @@ class UserPlace extends BaseUserPlace
     }
 
     /**
-     * @param int $id
-     * @param int $user_id
-     * @return CActiveRecord|null
+     * @param $id
+     * @param null $user_id
+     * @return CActiveRecord
+     * @throws CException
      */
-    public static function findByPkForUser($id,$user_id){
+    public static function findByPkForUser($id,$user_id = null){
+        if(!$user_id && User::current())
+            $user_id = User::current()->id;
+        else
+            throw new CException('user_id undefined');
+
         return UserPlace::model()->findByPk(
             $id,
             'user_id = :user_id',
