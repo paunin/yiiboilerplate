@@ -7,7 +7,8 @@ class ApiOauthController extends ApiController
      */
     protected $_actions = array('tokenGet');
 
-    public function init(){
+    public function init()
+    {
         //
     }
 
@@ -23,14 +24,10 @@ class ApiOauthController extends ApiController
     {
         return array(
 
-            array('allow',
-                'actions' => array('tokenGet'),
-                'users' => array('@'),
-            ),
-
             array('deny',
-                'users' => array('*'),
-            ),
+                'actions' => array('tokenGet'),
+                'users' => array('?'),
+            )
         );
     }
 

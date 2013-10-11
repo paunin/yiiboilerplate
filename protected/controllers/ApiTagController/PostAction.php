@@ -11,7 +11,7 @@ class PostAction extends ApiAction{
         $model = new TagPlace();
         $model->user_id = User::current()->id;
         $model->setScenario('tag_place_post');
-        $model->setAttributes(Yii::app()->request->getAllParams());
+        $model->setAttributes(Yii::app()->getRequest()->getAllParams());
 
         if ($model->validate() && $model->save()) {
             $this->controller->out($model->tag->toArray());

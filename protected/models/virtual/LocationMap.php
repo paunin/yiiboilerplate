@@ -60,17 +60,17 @@ class LocationMap extends Location
     }
 
     /**
+     * @param string $table_alias
      * @return string
      */
-    protected function makeLimits()
+    protected function makeLimits($table_alias = "t")
     {
         switch ($this->getScenario()) {
             case 'vector_limit':
-                $conditions = $this->limitByVector(new LocationVector($this->vector));
+                $conditions = $this->limitByVector(new LocationVector($this->vector),$table_alias);
                 break;
             case 'radius_limit':
-
-                $conditions = $this->limitByRadius(new LocationPoint($this->point), $this->radius);
+                $conditions = $this->limitByRadius(new LocationPoint($this->point), $this->radius,$table_alias);
                 break;
         }
         return $conditions;

@@ -5,7 +5,7 @@ class ApiTagController extends ApiController
     /**
      * Declares class-based actions.
      */
-    protected $_actions = array('get','post','delete');
+    protected $_actions = array('get', 'post', 'delete','myGet');
 
     public function filters()
     {
@@ -18,14 +18,9 @@ class ApiTagController extends ApiController
     public function accessRules()
     {
         return array(
-
-            array('allow',
-                'actions' => array('post','delete'),
-                'users' => array('@'),
-            ),
-
             array('deny',
-                'users' => array('*'),
+                'actions' => array('post', 'delete', 'myGet'),
+                'users' => array('?'),
             ),
         );
     }

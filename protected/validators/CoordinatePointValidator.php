@@ -45,13 +45,13 @@ class CoordinatePointValidator extends CoordinateValidator
 
     /**
      * @param $value
-     * @param $asix
+     * @param $axis
      * @return null
      */
-    protected function genCoordinate($value, $asix)
+    protected function genCoordinate($value, $axis)
     {
         $result = LocationPoint::toCoordinates($value);
-        return $result[$asix];
+        return $result[$axis];
     }
 
     /**

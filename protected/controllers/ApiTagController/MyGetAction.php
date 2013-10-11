@@ -1,17 +1,18 @@
 <?php
 /**
- * Class GetAction
+ * Class MyGetAction
  * Get tags action
  *
  * @property ApiTagController $controller
  */
-class GetAction extends ApiAction{
+class MyGetAction extends ApiAction{
     public function run()
     {
         $model = new TagLocationMap();
         $model->setScenario('radius_limit');
 
         $model->setAttributes(Yii::app()->request->getAllParams());
+        $model->only_my = 1;
 
         if ($model->validate()) {
             $this->controller->out($model->buildTagMap());

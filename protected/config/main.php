@@ -133,6 +133,7 @@ $main = array(
                 array('apiProfile/get', 'pattern' => 'api_v0/profile', 'verb' => 'GET'),
 
                 array('apiTag/get', 'pattern' => 'api_v0/tag', 'verb' => 'GET'),
+                array('apiTag/myGet', 'pattern' => 'api_v0/tag/my', 'verb' => 'GET'),
                 array('apiTag/post', 'pattern' => 'api_v0/tag', 'verb' => 'POST'),
                 array('apiTag/delete', 'pattern' => 'api_v0/tag', 'verb' => 'DELETE'),
 
@@ -201,6 +202,9 @@ $public_params = array(
     'tag_length_min'=>'2',
     'tag_length_max'=>'25',
     'tag_one_user_radius_allow'=>17,
+    'tag_get_limit_default'=>10,
+    'tag_get_limit_max'=>30,
+    'tag_get_limit_min'=>1,
 
     'limit_feed_max' => 200,
     'limit_feed_default' => 20,

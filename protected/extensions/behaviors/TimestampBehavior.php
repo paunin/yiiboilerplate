@@ -1,4 +1,5 @@
 <?php
+Yii::import('zii.behaviors.CTimestampBehavior');
 
 class TimestampBehavior extends CTimestampBehavior {
     public $createAttribute = 'created_at';

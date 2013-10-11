@@ -19,7 +19,6 @@ class TagPlace extends BaseTagPlace
                 array('point', 'required', 'on' => 'tag_place_post'),
                 array('point', 'application.validators.CoordinatePointValidator', 'on' => 'tag_place_post', 'makeCoordinates' => true),
                 array('tag_name', 'application.validators.TagValidator', 'on' => 'tag_place_post', 'createIfNotFound' => true, 'makeId' => true),
-                array('tag_name', 'checkAround', 'on' => 'tag_place_post'),
             ),
             parent::rules(),
             array(
