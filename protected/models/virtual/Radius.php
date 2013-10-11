@@ -3,6 +3,12 @@
 class Radius extends CModel
 {
     /**
+     * @return int
+     */
+    public static function getTagRadius(){
+        return Yii::app()->params['tag_one_name_radius_weight'];
+    }
+    /**
      * @return string
      */
     public static function getUserRadius(){

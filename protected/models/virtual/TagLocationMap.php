@@ -86,7 +86,7 @@ class TagLocationMap extends LocationMap
 
         $sql = <<<SQL
             SELECT
-                tp.tag_id, COUNT(tp.id) as tag_count, ARRAY_AGG(tp.user_id) as user_ids, tg.name
+                tp.tag_id, COUNT(tp.id) as tag_count, SUM(weight) as weight_sum, ARRAY_AGG(tp.user_id) as user_ids, tg.name
             FROM
                 tag_place tp
             JOIN
@@ -94,7 +94,7 @@ class TagLocationMap extends LocationMap
 
             WHERE ({$this->makeLimits("tp")})
             GROUP BY tp.tag_id, tg.name
-            ORDER BY COUNT(tp.id)
+            ORDER BY SUM(weight) DESC, COUNT(tp.id) DESC, tg.name
             LIMIT {$this->limit}
 SQL;
 
@@ -111,6 +111,7 @@ SQL;
                 "id" => $tag_place['tag_id'],
                 "name" => $tag_place['name'],
                 "count" => $tag_place['tag_count'],
+                "weight_sum" => $tag_place['weight_sum'],
                 "my" => $my
             );
         }
@@ -125,6 +126,15 @@ SQL;
      */
     public function findForUser($user_id, $tag_name)
     {
-        return array();
+        $tag = Tag::model()->findByAttributes(array('name'=>$tag_name));
+        if(!$tag)
+            return null;
+
+
+        $tp = TagPlace::model()->findByAttributes(
+            array('tag_id'=>$tag->id,'user_id'=>$user_id),
+            $this->makeLimits(null)
+        );
+        return $tp;
     }
 } 

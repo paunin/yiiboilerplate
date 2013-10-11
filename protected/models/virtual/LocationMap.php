@@ -63,7 +63,7 @@ class LocationMap extends Location
      * @param string $table_alias
      * @return string
      */
-    protected function makeLimits($table_alias = "t")
+    public function makeLimits($table_alias = "t")
     {
         switch ($this->getScenario()) {
             case 'vector_limit':

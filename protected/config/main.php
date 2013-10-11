@@ -143,7 +143,6 @@ $main = array(
                 array('apiLocation/mapGetTest', 'pattern' => 'api_v0/location/map/test'),
                 array('apiProfile/getTest', 'pattern' => 'api_v0/profile/test'),
 
-
                 //404
                 array('apiV0/error404', 'pattern' => 'api<whartever:.*>'),
                 //>>>REST patterns
@@ -203,7 +202,8 @@ $public_params = array(
 
     'tag_length_min'=>'2',
     'tag_length_max'=>'25',
-    'tag_one_user_radius_allow'=>17,
+    'tag_one_user_radius_allow'=>20,
+    'tag_one_name_radius_weight'=>30,
     'tag_get_limit_default'=>10,
     'tag_get_limit_max'=>30,
     'tag_get_limit_min'=>1,

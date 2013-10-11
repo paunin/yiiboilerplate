@@ -18,6 +18,7 @@
  * @property string $cy
  * @property string $cx_p_cy
  * @property string $cx_m_cy
+ * @property integer $weight
  *
  * @property Tag $tag
  * @property User $user
@@ -43,10 +44,10 @@ abstract class BaseTagPlace extends GxActiveRecord {
 	public function rules() {
 		return array(
 			array('user_id, tag_id, created_at, cx, cy, cx_p_cy, cx_m_cy', 'required'),
-			array('user_id, tag_id', 'numerical', 'integerOnly'=>true),
+			array('user_id, tag_id, weight', 'numerical', 'integerOnly'=>true),
 			array('updated_at', 'safe'),
-			array('updated_at', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, user_id, tag_id, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy', 'safe', 'on'=>'search'),
+			array('updated_at, weight', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, user_id, tag_id, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy, weight', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,6 +74,7 @@ abstract class BaseTagPlace extends GxActiveRecord {
 			'cy' => Yii::t('app', 'Cy'),
 			'cx_p_cy' => Yii::t('app', 'Cx P Cy'),
 			'cx_m_cy' => Yii::t('app', 'Cx M Cy'),
+			'weight' => Yii::t('app', 'Weight'),
 			'tag' => null,
 			'user' => null,
 		);
@@ -90,6 +92,7 @@ abstract class BaseTagPlace extends GxActiveRecord {
 		$criteria->compare('cy', $this->cy, true);
 		$criteria->compare('cx_p_cy', $this->cx_p_cy, true);
 		$criteria->compare('cx_m_cy', $this->cx_m_cy, true);
+		$criteria->compare('weight', $this->weight);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

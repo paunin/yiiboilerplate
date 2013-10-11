@@ -53,6 +53,14 @@ ALTER TABLE "user"
 ALTER TABLE "tag_post"
 	SET TABLESPACE pg_default;
 
+CREATE TABLE "public"."_pgmdd_backup_tag_place_2013-11-10_14:40" AS
+	SELECT * FROM public.tag_place;
+
+ALTER TABLE "tag_place" 
+	ADD COLUMN "weight" int4
+		NOT NULL
+		DEFAULT 1;
+
 ALTER TABLE "tag_place"
 	SET TABLESPACE pg_default;
 

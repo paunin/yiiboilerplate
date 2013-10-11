@@ -54,10 +54,30 @@ class FixtureCommand extends CConsoleCommand
             }
     }
 
-    public function actionMakeTagPlaces(){
-        $tags = array("tg","Taggg_with_maximal_length","Русский_тэг","Simple_tag","porno_is_here","666");
-        foreach($tags as $tag){
+    public function actionMakeTagPlaces()
+    {
+
+        $tags = array("tg2", "Taggg_with_max_length", "Русский_тэг_мой", "Simple_very_tag", "porno_is_666");
+        for ($i = 300; $i < 900; $i++) {
+            if($i % 3)
+                continue;
+            $tag = $tags[rand(0, 4)];
+            $model = new TagPlace();
+            $model->user_id = $i;
+            $model->setScenario('tag_place_post');
+            $model->tag_name = $tag;
+            $model->created_at = date("Y-m-d H:i:s", strtotime("-$i days -$i hours -$i minutes"));
+            $model->point = rand(-150, 550) . ':' . rand(-150, 550);
+            if($model->validate()) {
+                $model->save();
+
+            } else {
+                echo "skip\n";
+            }
+
 
         }
+
+
     }
 }

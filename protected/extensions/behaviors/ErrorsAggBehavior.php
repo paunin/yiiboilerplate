@@ -1,6 +1,6 @@
 <?php
 
-class ErrorsAggBehavior extends CBehavior
+class ErrorsAggBehavior extends CActiveRecordBehavior
 {
 
     public function errorsAgg()
