@@ -1,5 +1,6 @@
 /.idea/*
 /assets/*
+/external/*
 /protected/runtime/*
 /protected/config/custom.php
 /uploads/*
