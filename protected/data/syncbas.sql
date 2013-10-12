@@ -47,12 +47,6 @@ ALTER TABLE "user_settings"
 ALTER TABLE "user_place"
 	SET TABLESPACE pg_default;
 
-CREATE TABLE "public"."_pgmdd_backup_user_2013-12-10_20:57" AS
-	SELECT * FROM public.user;
-
-ALTER TABLE "user" 
-	RENAME COLUMN "avatar_hash" TO "avatar_name";
-
 ALTER TABLE "user"
 	SET TABLESPACE pg_default;
 

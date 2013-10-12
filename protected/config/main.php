@@ -215,6 +215,9 @@ $public_params = array(
 
     'limit_feed_max' => 200,
     'limit_feed_default' => 20,
+
+    'post_allow_edit_time' => 300,
+
     'user_avatars_sizes' => array(
         's'=>array('w'=>50,'h'=>50),
         'm'=>array('w'=>150,'h'=>150),

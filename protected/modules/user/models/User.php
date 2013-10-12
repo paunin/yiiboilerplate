@@ -201,6 +201,4 @@ class User extends BaseUser
         }
         return $result;
     }
-
-
 }
