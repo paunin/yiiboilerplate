@@ -215,18 +215,27 @@ $public_params = array(
 
     'limit_feed_max' => 200,
     'limit_feed_default' => 20,
+    'user_avatars_sizes' => array(
+        's'=>array('w'=>50,'h'=>50),
+        'm'=>array('w'=>150,'h'=>150),
+        'l'=>array('w'=>300,'h'=>300),
+        //'xl'=>array('w'=>400,'h'=>400),
+        //'xxl'=>array('w'=>550,'h'=>550),
+    )
 );
 
 $main['params'] = array_merge(
     $public_params,
+
     array(
         'public' => $public_params,
-        'private' => array(
-            'rand_key' => 'S4DF5^$#fv^*32F{}sAdtKdtyHh%#6($35H3as',
-            'app_own_slug' => 'placemeup',
-            'app_token_ttl' => '6 hours',
-            'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
-        )
+        'path_avatars' => "external/user/avatars",
+        'path_img_cache' => 'assets/img_cache',
+        'rand_key' => 'S4DF5^$#fv^*32F{}sAdtKdtyHh%#6($35H3as',
+        'app_own_slug' => 'placemeup',
+        'app_token_ttl' => '6 hours',
+        'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
+
     )
 );
 

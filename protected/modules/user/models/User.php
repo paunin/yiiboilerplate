@@ -15,15 +15,20 @@ class User extends BaseUser
     }
 
 
+
     public function relations()
     {
+
+
         $relations = parent::relations();
         $relations['userSettings'] = array(self::HAS_ONE, 'UserSettings', 'user_id');
         $relations = array_merge(
             $relations,
             array(
+
                 'userCurrentPlace' => array(self::HAS_ONE,'UserPlace','user_id','condition' => 'is_spirit = false'),
                 'favoriteUsers' => array(self::HAS_MANY, 'Favorite', 'user_id','condition' => 'type = \''.Favorite::TYPE_USER.'\'' ),
+                'messagesCountNew' => array(self::STAT, 'Message', 'to_user', 'condition' => 'is_new = true'),
             )
         );
         return $relations;
@@ -137,8 +142,8 @@ class User extends BaseUser
             $token = new Token();
             $token->user_id = $this->id;
             $token->application_id = $app->id;
-            $token->token = md5(rand(0, 9999) . $now . Yii::app()->params['private']['rand_key']);
-            $token->expire_at = date("Y-m-d H:i:s", strtotime("+" . Yii::app()->params['private']['app_token_ttl']));
+            $token->token = md5(rand(0, 9999) . $now . Yii::app()->params['rand_key']);
+            $token->expire_at = date("Y-m-d H:i:s", strtotime("+" . Yii::app()->params['app_token_ttl']));
             $token->save();
         }
 
@@ -160,7 +165,7 @@ class User extends BaseUser
             'id' => $this->id,
             'username' => $this->username,
             'name' => null,
-            'avatar' => UserAvatar::getAllSize($this->id),
+            'avatar' => $this->getAvatarsPaths(),
             'created_at' => $this->created_at,
             'last_login' => $this->last_login,
             'current_point' => $this->userCurrentPlace?$this->userCurrentPlace->toArray():null,
@@ -168,4 +173,34 @@ class User extends BaseUser
         );
         return $profile;
     }
+
+    /**
+     * @param $img
+     * @param bool $emulate_resize
+     * @return array
+     */
+    public static function  getAvatarsPathsByImg($img,$emulate_resize = true){
+        $result = array();
+        $img = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . Yii::app()->params['path_avatars']. DIRECTORY_SEPARATOR . $img;
+        foreach(Yii::app()->params['user_avatars_sizes'] as $name => $size){
+            $result[$name] = $emulate_resize?
+                Img::getSizedPath($img, $size['w'], $size['h'],true,true)
+                :Img::getSizedPath($img, $size['w'], $size['h'],true,true);
+        }
+        return $result;
+    }
+    /**
+     * @param bool $emulate_resize
+     * @return array
+     */
+    public function getAvatarsPaths($emulate_resize = true)
+    {
+        $result = array();
+        if($this->avatar_name){
+            $result = User::getAvatarsPathsByImg($this->avatar_name,$emulate_resize);
+        }
+        return $result;
+    }
+
+
 }

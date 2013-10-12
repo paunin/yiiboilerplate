@@ -40,7 +40,7 @@ class ProfileLocationMap extends LocationMap
         $sql = '
             SELECT
                 t.cx, t.cy, t.is_spirit,
-                u.id,u.username,u.email, u.created_at,u.last_login
+                u.id,u.username,u.email, u.created_at,u.last_login, u.avatar_name
             FROM
                 user_place t
             JOIN "user" u ON t.user_id = u.id
@@ -75,7 +75,7 @@ class ProfileLocationMap extends LocationMap
                     'id' => $row['id'],
                     'username' => $row['username'],
                     'name' => null,
-                    'avatar' => UserAvatar::getAllSize($row['id']),
+                    'avatar' => User::getAvatarsPathsByImg($row['avatar_name']),
                     'created_at' => $row['created_at'],
                     'last_login' => $row['last_login'],
                 );

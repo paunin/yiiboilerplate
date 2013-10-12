@@ -21,7 +21,7 @@ class RegisterForm extends User
 			array('username', 'match', 'pattern'=>'/^[a-zA-Z0-9_]{4,12}$/'),
 			array('password2', 'compare', 'compareAttribute'=>'password'),
 			array('email', 'email'),
-            array('validacion', 'application.extensions.recaptcha.EReCaptchaValidator', 'privateKey'=>Yii::app()->params['private']['captcha_private_key'], 'on' => 'registerwcaptcha'),
+            array('validacion', 'application.extensions.recaptcha.EReCaptchaValidator', 'privateKey'=>Yii::app()->params['captcha_private_key'], 'on' => 'registerwcaptcha'),
 
 		);
 	}

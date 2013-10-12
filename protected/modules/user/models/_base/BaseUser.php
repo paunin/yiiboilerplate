@@ -19,17 +19,18 @@
  * @property boolean $is_active
  * @property string $last_login
  * @property string $password
+ * @property string $avatar_name
  *
- * @property Post[] $posts
- * @property Message[] $messages
- * @property Message[] $messages1
+ * @property UserPlace[] $userPlaces
+ * @property UserSettings[] $userSettings
  * @property Favorite[] $favorites
  * @property Token[] $tokens
+ * @property Message[] $messages
+ * @property Message[] $messages1
+ * @property Post[] $posts
  * @property TagPlace[] $tagPlaces
  * @property Post[] $posts1
- * @property UserSettings[] $userSettings
  * @property UserSocial[] $userSocials
- * @property UserPlace[] $userPlaces
  */
 abstract class BaseUser extends GxActiveRecord {
 
@@ -53,24 +54,25 @@ abstract class BaseUser extends GxActiveRecord {
 		return array(
 			array('username', 'required'),
 			array('password', 'length', 'max'=>255),
+			array('avatar_name', 'length', 'max'=>128),
 			array('email, key, created_at, updated_at, role, is_active, last_login', 'safe'),
-			array('email, key, created_at, updated_at, role, is_active, last_login, password', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, username, email, key, created_at, updated_at, role, is_active, last_login, password', 'safe', 'on'=>'search'),
+			array('email, key, created_at, updated_at, role, is_active, last_login, password, avatar_name', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, username, email, key, created_at, updated_at, role, is_active, last_login, password, avatar_name', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
-			'posts' => array(self::MANY_MANY, 'Post', 'post_name_user(user_id, post_id)'),
-			'messages' => array(self::HAS_MANY, 'Message', 'to_user_id'),
-			'messages1' => array(self::HAS_MANY, 'Message', 'from_user_id'),
+			'userPlaces' => array(self::HAS_MANY, 'UserPlace', 'user_id'),
+			'userSettings' => array(self::HAS_MANY, 'UserSettings', 'user_id'),
 			'favorites' => array(self::HAS_MANY, 'Favorite', 'user_id'),
 			'tokens' => array(self::HAS_MANY, 'Token', 'user_id'),
+			'messages' => array(self::HAS_MANY, 'Message', 'to_user_id'),
+			'messages1' => array(self::HAS_MANY, 'Message', 'from_user_id'),
+			'posts' => array(self::MANY_MANY, 'Post', 'post_name_user(user_id, post_id)'),
 			'tagPlaces' => array(self::HAS_MANY, 'TagPlace', 'user_id'),
 			'posts1' => array(self::HAS_MANY, 'Post', 'user_id'),
-			'userSettings' => array(self::HAS_MANY, 'UserSettings', 'user_id'),
 			'userSocials' => array(self::HAS_MANY, 'UserSocial', 'user_id'),
-			'userPlaces' => array(self::HAS_MANY, 'UserPlace', 'user_id'),
 		);
 	}
 
@@ -92,16 +94,17 @@ abstract class BaseUser extends GxActiveRecord {
 			'is_active' => Yii::t('app', 'Is Active'),
 			'last_login' => Yii::t('app', 'Last Login'),
 			'password' => Yii::t('app', 'Password'),
-			'posts' => null,
-			'messages' => null,
-			'messages1' => null,
+			'avatar_name' => Yii::t('app', 'Avatar Name'),
+			'userPlaces' => null,
+			'userSettings' => null,
 			'favorites' => null,
 			'tokens' => null,
+			'messages' => null,
+			'messages1' => null,
+			'posts' => null,
 			'tagPlaces' => null,
 			'posts1' => null,
-			'userSettings' => null,
 			'userSocials' => null,
-			'userPlaces' => null,
 		);
 	}
 
@@ -118,6 +121,7 @@ abstract class BaseUser extends GxActiveRecord {
 		$criteria->compare('is_active', $this->is_active);
 		$criteria->compare('last_login', $this->last_login, true);
 		$criteria->compare('password', $this->password, true);
+		$criteria->compare('avatar_name', $this->avatar_name, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
