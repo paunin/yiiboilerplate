@@ -21,6 +21,7 @@
  * @property string $cx_p_cy
  * @property string $cx_m_cy
  * @property integer $post_id
+ * @property string $deleted_at
  *
  * @property User[] $users
  * @property Tag[] $tags
@@ -51,9 +52,9 @@ abstract class BasePost extends GxActiveRecord {
 			array('text, created_at', 'required'),
 			array('user_id, post_id', 'numerical', 'integerOnly'=>true),
 			array('subject', 'length', 'max'=>2048),
-			array('is_media, updated_at, cx, cy, cx_p_cy, cx_m_cy', 'safe'),
-			array('user_id, subject, is_media, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, user_id, subject, text, is_media, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id', 'safe', 'on'=>'search'),
+			array('is_media, updated_at, cx, cy, cx_p_cy, cx_m_cy, deleted_at', 'safe'),
+			array('user_id, subject, is_media, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id, deleted_at', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, user_id, subject, text, is_media, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id, deleted_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -88,6 +89,7 @@ abstract class BasePost extends GxActiveRecord {
 			'cx_p_cy' => Yii::t('app', 'Cx P Cy'),
 			'cx_m_cy' => Yii::t('app', 'Cx M Cy'),
 			'post_id' => null,
+			'deleted_at' => Yii::t('app', 'Deleted At'),
 			'users' => null,
 			'tags' => null,
 			'post' => null,
@@ -111,6 +113,7 @@ abstract class BasePost extends GxActiveRecord {
 		$criteria->compare('cx_p_cy', $this->cx_p_cy, true);
 		$criteria->compare('cx_m_cy', $this->cx_m_cy, true);
 		$criteria->compare('post_id', $this->post_id);
+		$criteria->compare('deleted_at', $this->deleted_at, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

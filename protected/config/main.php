@@ -155,8 +155,8 @@ $public_params = array(
     'map_scale_max' => 1000,
     'map_resolution_max' => 100,
 
-    'tag_length_min' => '2',
-    'tag_length_max' => '25',
+    'tag_length_min' => 2,
+    'tag_length_max' => 25,
     'tag_one_user_radius_allow' => 20,
     'tag_one_name_radius_weight' => 30,
     'tag_get_limit_default' => 10,

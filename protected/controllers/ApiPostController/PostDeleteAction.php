@@ -1,11 +1,11 @@
 <?php
 /**
- * Class PostPutAction
+ * Class PostDeleteAction
  * Get tags action
  *
  * @property ApiTagController $controller
  */
-class PostPutAction extends ApiAction
+class PostDeleteAction extends ApiAction
 {
     public function run($id)
     {
@@ -15,11 +15,7 @@ class PostPutAction extends ApiAction
         if(!$model)
             throw new CHttpException(404,Yii::t('api','Post not found'));
 
-        $model->setScenario('post_put');
-
-        $model->setAttributes(Yii::app()->getRequest()->getAllParams());
-
-        if ($model->validate() && $model->save()) {
+        if ($model->delete()) {
             $this->controller->out($model->toArray());
         } else {
             $this->controller->outError($model->getErrors(), ApiController::ERROR_VALIDATION, Yii::t('api', 'Validation error'));

@@ -13,7 +13,9 @@ class TimeLimitValidator extends CValidator
     {
         if($this->timeLimit){
             $value = $object->$attribute;
-
+            if(date('Y-m-d H:i:s',strtotime($value)+$this->timeLimit) < date('Y-m-d H:i:s')){
+                $this->addError($object, $attribute, $this->message?$this->message:Yii::t('app','Too late to edit this record'));
+            }
         }
     }
 

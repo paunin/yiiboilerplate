@@ -65,6 +65,12 @@ ALTER TABLE "smtp"
 ALTER TABLE "post_name_user"
 	SET TABLESPACE pg_default;
 
+CREATE TABLE "public"."_pgmdd_backup_post_2013-13-10_20:57" AS
+	SELECT * FROM public.post;
+
+ALTER TABLE "post" 
+	ADD COLUMN "deleted_at" timestamp;
+
 ALTER TABLE "post"
 	SET TABLESPACE pg_default;
 

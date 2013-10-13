@@ -288,7 +288,8 @@ CREATE TABLE post (
     cy bigint,
     cx_p_cy bigint,
     cx_m_cy bigint,
-    post_id integer
+    post_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -912,7 +913,7 @@ COPY message (id, to_user_id, from_user_id, is_new, subject, text, created_at, u
 -- Data for Name: post; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY post (id, user_id, subject, text, is_media, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id) FROM stdin;
+COPY post (id, user_id, subject, text, is_media, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id, deleted_at) FROM stdin;
 \.
 
 
