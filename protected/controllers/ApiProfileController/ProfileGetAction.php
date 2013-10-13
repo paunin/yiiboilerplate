@@ -1,11 +1,11 @@
 <?php
 /**
- * Class GetByIdAction
+ * Class ProfileGetAction
  * Get Profiles action
  *
  * @property ApiLocationController $controller
  */
-class GetByIdAction extends ApiAction
+class ProfileGetAction extends ApiAction
 {
     public function run($id)
     {

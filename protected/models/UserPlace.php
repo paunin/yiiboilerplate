@@ -20,7 +20,7 @@ class UserPlace extends BaseUserPlace
             ),
             parent::rules(),
             array(
-                array('cx,cy','unsafe'),
+                array('id, user_id, cx, cy, cx_p_cy, cx_m_cy, created_at, updated_at, permissions', 'unsafe', 'on'=>array('place_put','place_post')),
                 array('user_id', 'exist', 'attributeName' => 'id', 'className' => 'User'),
                 array('radius', 'application.validators.RadiusValidator'),
             )
@@ -33,7 +33,7 @@ class UserPlace extends BaseUserPlace
             'TimestampBehavior' => array(
                 'class' => 'ext.behaviors.TimestampBehavior',
             ),
-            'to_array' => array(
+            'ToArrayBehavior' => array(
                 'class' => 'ext.behaviors.ToArrayBehavior.ToArrayBehavior',
                 'fields' => array(
                     'id', 'name', 'cx', 'cy', 'created_at', 'updated_at', 'radius', 'is_spirit'

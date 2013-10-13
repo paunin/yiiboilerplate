@@ -88,7 +88,7 @@ $main = array(
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'class' => 'HttpRequest',
-            'noCsrfValidationRoutes' => array('admin', 'apiV0', 'apiOauth', 'apiUser','apiTag','apiProfile'),
+            'noCsrfValidationRoutes' => array('admin', 'apiV0', 'apiOauth', 'apiUser', 'apiTag', 'apiProfile', 'apiPost'),
         ),
         'image' => array(
             'class' => 'ext.image.CImageComponent',
@@ -107,57 +107,7 @@ $main = array(
             'defaultRoles' => array('guest'),
         ),
 
-        'urlManager' => array(
-            'urlFormat' => 'path',
-            'showScriptName' => false,
-            'rules' => array(
-
-
-                //<<< REST patterns
-
-                array('apiV0/index', 'pattern' => 'api_v0', 'verb' => 'GET,POST'),
-
-                array('apiOauth/tokenGet', 'pattern' => 'api_v0/oauth/token', 'verb' => 'GET'),
-
-
-                array('apiUser/get', 'pattern' => 'api_v0/user', 'verb' => 'GET'),
-                array('apiUser/radiusGet', 'pattern' => 'api_v0/user/radius', 'verb' => 'GET'),
-                array('apiUser/radiusPost', 'pattern' => 'api_v0/user/radius', 'verb' => 'POST'),
-                array('apiUser/placeGet', 'pattern' => 'api_v0/user/place', 'verb' => 'GET'),
-                array('apiUser/placePost', 'pattern' => 'api_v0/user/place', 'verb' => 'POST'),
-                array('apiUser/placePut', 'pattern' => 'api_v0/user/place/<id:\d+>', 'verb' => 'PUT'),
-                array('apiUser/placeDelete', 'pattern' => 'api_v0/user/place/<id:\d+>', 'verb' => 'DELETE'),
-
-                array('apiLocation/mapGet', 'pattern' => 'api_v0/location/map', 'verb' => 'GET'),
-
-                array('apiProfile/get', 'pattern' => 'api_v0/profile', 'verb' => 'GET'),
-                array('apiProfile/getById', 'pattern' => 'api_v0/profile/<id:\d+>', 'verb' => 'GET'),
-
-                array('apiProfile/favoriteGet', 'pattern' => 'api_v0/profile/favorite', 'verb' => 'GET'),
-                array('apiProfile/favoritePost', 'pattern' => 'api_v0/profile/favorite/<id:\d+>', 'verb' => 'POST'),
-                array('apiProfile/favoriteDelete', 'pattern' => 'api_v0/profile/favorite/<id:\d+>', 'verb' => 'DELETE'),
-
-                array('apiTag/get', 'pattern' => 'api_v0/tag', 'verb' => 'GET'),
-                array('apiTag/post', 'pattern' => 'api_v0/tag', 'verb' => 'POST'),
-
-                array('apiTag/myGet', 'pattern' => 'api_v0/tag/my', 'verb' => 'GET'),
-                array('apiTag/myDelete', 'pattern' => 'api_v0/tag/my/<id:\d+>', 'verb' => 'DELETE'),
-
-
-                //Tests
-                array('apiLocation/mapGetTest', 'pattern' => 'api_v0/location/map/test'),
-                array('apiProfile/getTest', 'pattern' => 'api_v0/profile/test'),
-
-                //404
-                array('apiV0/error404', 'pattern' => 'api<whartever:.*>'),
-                //>>>REST patterns
-
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                '<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
-            ),
-        ),
+        'urlManager' => require(dirname(__FILE__) . '/urlManager.php'),
         'cache' => array(
             'class' => 'system.caching.CFileCache',
         ),
@@ -205,13 +155,13 @@ $public_params = array(
     'map_scale_max' => 1000,
     'map_resolution_max' => 100,
 
-    'tag_length_min'=>'2',
-    'tag_length_max'=>'25',
-    'tag_one_user_radius_allow'=>20,
-    'tag_one_name_radius_weight'=>30,
-    'tag_get_limit_default'=>10,
-    'tag_get_limit_max'=>30,
-    'tag_get_limit_min'=>1,
+    'tag_length_min' => '2',
+    'tag_length_max' => '25',
+    'tag_one_user_radius_allow' => 20,
+    'tag_one_name_radius_weight' => 30,
+    'tag_get_limit_default' => 10,
+    'tag_get_limit_max' => 30,
+    'tag_get_limit_min' => 1,
 
     'limit_feed_max' => 200,
     'limit_feed_default' => 20,
@@ -219,9 +169,9 @@ $public_params = array(
     'post_allow_edit_time' => 300,
 
     'user_avatars_sizes' => array(
-        's'=>array('w'=>50,'h'=>50),
-        'm'=>array('w'=>150,'h'=>150),
-        'l'=>array('w'=>300,'h'=>300),
+        's' => array('w' => 50, 'h' => 50),
+        'm' => array('w' => 150, 'h' => 150),
+        'l' => array('w' => 300, 'h' => 300),
         //'xl'=>array('w'=>400,'h'=>400),
         //'xxl'=>array('w'=>550,'h'=>550),
     )
@@ -242,7 +192,7 @@ $main['params'] = array_merge(
     )
 );
 
-if(is_file(dirname(__FILE__) . '/solr.php')) {
+if (is_file(dirname(__FILE__) . '/solr.php')) {
     $solr = require(dirname(__FILE__) . '/solr.php');
     $main = CMap::mergeArray(
         $main,
@@ -250,14 +200,14 @@ if(is_file(dirname(__FILE__) . '/solr.php')) {
     );
 }
 
-if(is_file(dirname(__FILE__) . '/custom.php')) {
+if (is_file(dirname(__FILE__) . '/custom.php')) {
     $custom = require(dirname(__FILE__) . '/custom.php');
     $main = CMap::mergeArray(
         $main,
         $custom
     );
 
-    if(defined('PROJECT_CUSTOM_DEBUG') && PROJECT_CUSTOM_DEBUG == true) {
+    if (defined('PROJECT_CUSTOM_DEBUG') && PROJECT_CUSTOM_DEBUG == true) {
         unset($main['components']['clientScript']);
         $dev = require(dirname(__FILE__) . '/dev.php');
         $main = CMap::mergeArray(

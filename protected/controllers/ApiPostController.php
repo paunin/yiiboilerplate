@@ -1,11 +1,12 @@
 <?php
 
-class ApiProfileController extends ApiController
+class ApiPostController extends ApiController
 {
     /**
      * Declares class-based actions.
      */
-    protected $_actions = array('get','getTest','profileGet','favoriteGet','favoritePost','favoriteDelete');
+    protected $_actions = array('post', 'postPut', 'postDelete');
+
 
     public function filters()
     {
@@ -18,11 +19,11 @@ class ApiProfileController extends ApiController
     public function accessRules()
     {
         return array(
+
             array('deny',
-                'actions' => array('favoriteGet','favoritePost','favoriteDelete'),
+                'actions' => array('post', 'postPut', 'postDelete'),
                 'users' => array('?'),
-            ),
+            )
         );
     }
-
 }
