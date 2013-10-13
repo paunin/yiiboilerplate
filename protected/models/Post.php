@@ -1,7 +1,11 @@
 <?php
 
 Yii::import('application.models._base.BasePost');
-
+/**
+ * Class Post
+ *
+ * @method array toArray
+ */
 class Post extends BasePost
 {
     public $point;
@@ -19,7 +23,7 @@ class Post extends BasePost
                 array('point', 'application.validators.CoordinatePointValidator', 'on' => 'post_post', 'makeCoordinates' => true),
                 array('point', 'application.validators.CoordinatePointValidator', 'reanimateCoordinates' => true, 'makeCoordinates' => true, 'on' => 'post_put'),
                 array('user_id', 'exist', 'className' => 'User', 'attributeName' => 'id'),
-                array('id, user_id, is_media, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id', 'unsafe', 'on' => array('post_post','post_put')),
+                array('id, user_id, is_media, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id, point', 'unsafe', 'on' => array('post_post','post_put')),
             )
         );
     }
@@ -38,7 +42,7 @@ class Post extends BasePost
             'ToArrayBehavior' => array(
                 'class' => 'ext.behaviors.ToArrayBehavior.ToArrayBehavior',
                 'fields' => array(
-                    'id', 'subject', 'user_id', 'cx', 'cy', 'created_at', 'updated_at', 'post_id'
+                    'id', 'subject','text' , 'user_id', 'cx', 'cy', 'created_at', 'updated_at', 'post_id'
                 )
             ),
             'coordinate' => array(

@@ -104,7 +104,7 @@ SQL;
         $result = array();
         while (($tag_place = $dataReader->read()) !== false) {
             $user_ids = str_getcsv(trim($tag_place['user_ids'], '{}'));
-            $my = (User::current() && in_array(User::current()->id, $user_ids)) ? true : false;
+            $my = (!Yii::app()->user->getIsGuest() && in_array(Yii::app()->user->getId(), $user_ids)) ? true : false;
             if($this->only_my && !$my)
                 continue;
             $result[$tag_place['name']] = array(

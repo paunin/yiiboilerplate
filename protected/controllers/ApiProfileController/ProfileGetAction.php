@@ -12,7 +12,7 @@ class ProfileGetAction extends ApiAction
         /** @var User $user */
         $user = User::model()->findByPk($id);
         if(!$user)
-            throw new CHttpException(404,Yii::t('api','User not found'));
+            throw new CHttpException(404,Yii::t('app','User not found'));
         $this->controller->out($user->toFullProfile());
     }
 }

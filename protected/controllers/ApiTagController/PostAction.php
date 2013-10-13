@@ -9,7 +9,7 @@ class PostAction extends ApiAction{
     public function run()
     {
         $model = new TagPlace();
-        $model->user_id = User::current()->id;
+        $model->user_id = Yii::app()->user->getId();
         $model->setScenario('tag_place_post');
         $model->setAttributes(Yii::app()->getRequest()->getAllParams());
 

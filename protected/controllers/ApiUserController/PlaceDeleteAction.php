@@ -13,10 +13,10 @@ class PlaceDeleteAction extends ApiAction
      */
     public function run($id)
     {
-        $user_place = UserPlace::findByPkForUser($id,User::current()->id);
+        $user_place = UserPlace::findByPkForUser($id,Yii::app()->user->getId());
 
         if (!$user_place)
-            throw new CHttpException(404,Yii::t('api','Place not found'));
+            throw new CHttpException(404,Yii::t('app','Place not found'));
         $this->controller->out($user_place->delete());
     }
 }

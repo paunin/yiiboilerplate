@@ -13,7 +13,7 @@ class FavoritePostAction extends ApiAction
      */
     public function run($id)
     {
-        if($id == User::current()->id)
+        if($id == Yii::app()->user->getId())
             throw new CHttpException(701,Yii::t('app',"You can't add yourself to favorites"));
 
         /** @var User $favUser */
@@ -22,7 +22,7 @@ class FavoritePostAction extends ApiAction
             throw new CHttpException(404,Yii::t('app',"User not found"));
 
         $fav = new Favorite();
-        $fav->user_id = User::current()->id;
+        $fav->user_id = Yii::app()->user->getId();
         $fav->type = Favorite::TYPE_USER;
         $fav->favorite_id = $favUser->id;
 

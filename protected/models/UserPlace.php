@@ -155,8 +155,8 @@ class UserPlace extends BaseUserPlace
      * @throws CException
      */
     public static function findByPkForUser($id,$user_id = null){
-        if(!$user_id && User::current())
-            $user_id = User::current()->id;
+        if(!$user_id && !Yii::app()->user->getIsGuest())
+            $user_id = Yii::app()->user->getId();
         else
             throw new CException('user_id undefined');
 

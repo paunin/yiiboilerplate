@@ -13,15 +13,15 @@ class FavoriteDeleteAction extends ApiAction
      */
     public function run($id)
     {
-        if($id == User::current()->id)
-            throw new CHttpException(701,Yii::t('app',"You can't delete yourself from favorites"));
+        if ($id == YYii::app()->user->getId())
+            throw new CHttpException(701, Yii::t('app', "You can't delete yourself from favorites"));
 
         /** @var User $favUser */
         $favUser = User::model()->findByPk($id);
-        if(!$favUser)
-            throw new CHttpException(404,Yii::t('app',"User not found"));
+        if (!$favUser)
+            throw new CHttpException(404, Yii::t('app', "User not found"));
 
-        Favorite::model()->deleteAllByAttributes(array('type'=>Favorite::TYPE_USER,'user_id'=>User::current()->id,'favorite_id'=>$id));
+        Favorite::model()->deleteAllByAttributes(array('type' => Favorite::TYPE_USER, 'user_id' => Yii::app()->user->getId(), 'favorite_id' => $id));
 
 
         $this->controller->out(true);

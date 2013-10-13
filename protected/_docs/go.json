@@ -1,27 +1,10 @@
-{"status": 0, "message": "", "result": {
-    "id": 11,
-    "username": "user11",
-    "name": null,
-    "avatar": {
-        "small": "http://placemeup.com/todoavatar",
-        "medium": "http://placemeup.com/todoavatar",
-        "big": "http://placemeup.com/todoavatar",
-        "by_size": {
-            "90x90": "http://placemeup.com/todoavatar",
-            "200x200": "http://placemeup.com/todoavatar"
-        }
-    },
-    "created_at": "2013-09-27 00:30:20",
-    "last_login": "2013-11-11 00:30:20",
-    "current_point": {
-        "id": 13,
-        "name": "Place for user 11",
-        "cx": 5,
-        "cy": 38,
-        "created_at": "2013-10-08 11:58:15",
-        "updated_at": "2013-10-27 00:47:15",
-        "radius": 36,
-        "permissions_mask": 6,
-        "is_spirit": false
-    }
-}}
+{
+    "id": "4",
+    "subject": "sdfsdfsdfsdf",
+    "user_id": 56,
+    "cx": "56",
+    "cy": "44",
+    "created_at": "2013-10-13 16:09:26",
+    "updated_at": null,
+    "post_id": null
+}

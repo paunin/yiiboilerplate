@@ -11,7 +11,7 @@ class PlacePostAction extends ApiAction
     {
 
         $user_place = new UserPlace();
-        $user_place->user_id = User::current()->id;
+        $user_place->user_id = Yii::app()->user->getId();
 
         $user_place->setAttributes(Yii::app()->getRequest()->getAllParams());
 

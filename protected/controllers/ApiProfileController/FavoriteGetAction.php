@@ -22,7 +22,7 @@ class FavoriteGetAction extends ApiAction
                 array(
                     'order'=>'t.created_at DESC',
                     'condition'=>'t.user_id = :user_id',
-                    'params'=>array(':user_id' => User::current()->id))
+                    'params'=>array(':user_id' => Yii::app()->user->getId()))
             );
         foreach ($favorites as $favUser) {
             /**@var Favorite $favUser */
