@@ -33,6 +33,19 @@ class Post extends BasePost
         );
     }
 
+    public function relations()
+    {
+        $relations = parent::relations();
+
+        $relations = array_merge(
+            $relations,
+            array(
+                'favoritePosts' => array(self::HAS_MANY, 'Favorite', 'user_id','condition' => 'type = \''.Favorite::TYPE_POST.'\'' ),
+            )
+        );
+        return $relations;
+    }
+
     public function behaviors()
     {
         return array(
@@ -55,6 +68,8 @@ class Post extends BasePost
             ),
         );
     }
+
+
 
     public function delete(){
         $this->deleted_at = date('Y-m-d H:i:s');

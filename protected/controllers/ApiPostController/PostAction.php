@@ -3,7 +3,7 @@
  * Class PostAction
  * Get tags action
  *
- * @property ApiTagController $controller
+ * @property ApiPostController $controller
  */
 class PostAction extends ApiAction{
     public function run()

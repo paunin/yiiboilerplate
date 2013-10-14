@@ -188,7 +188,6 @@ $main['params'] = array_merge(
         'app_own_slug' => 'placemeup',
         'app_token_ttl' => '6 hours',
         'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
-
     )
 );
 

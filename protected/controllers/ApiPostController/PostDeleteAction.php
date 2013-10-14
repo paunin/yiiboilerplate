@@ -3,7 +3,7 @@
  * Class PostDeleteAction
  * Get tags action
  *
- * @property ApiTagController $controller
+ * @property ApiPostController $controller
  */
 class PostDeleteAction extends ApiAction
 {
