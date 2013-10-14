@@ -37,10 +37,12 @@ return array(
 
         array('apiPost/post', 'pattern' => 'api_v0/post', 'verb' => 'POST'),
 
+        array('apiPost/postGet', 'pattern' => 'api_v0/post/<id:\d+>', 'verb' => 'GET'),
         array('apiPost/postPut', 'pattern' => 'api_v0/post/<id:\d+>', 'verb' => 'PUT'),
         array('apiPost/postDelete', 'pattern' => 'api_v0/post/<id:\d+>', 'verb' => 'DELETE'),
         array('apiPost/likePost', 'pattern' => 'api_v0/post/<id:\d+>/like', 'verb' => 'POST'),
         array('apiPost/likeDelete', 'pattern' => 'api_v0/post/<id:\d+>/like', 'verb' => 'DELETE'),
+        array('apiPost/commentPost', 'pattern' => 'api_v0/post/<id:\d+>/comment', 'verb' => 'POST'),
 
 
 

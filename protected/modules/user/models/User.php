@@ -6,6 +6,7 @@ Yii::import('application.modules.user.models._base.BaseUser');
  * @property UserSettings $userSettings
  * @property UserPlace $userCurrentPlace
  * @property Favorite[] $favoriteUsers
+ * @property int $messagesCountNew
  */
 class User extends BaseUser
 {
