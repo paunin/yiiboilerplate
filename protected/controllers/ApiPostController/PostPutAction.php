@@ -15,7 +15,7 @@ class PostPutAction extends ApiAction
         if(!$model)
             throw new CHttpException(404,Yii::t('api','Post not found'));
 
-        $model->setScenario('post_put');
+        $model->setScenario($model->post_id?'comment_put':'post_put');
 
         $model->setAttributes(Yii::app()->getRequest()->getAllParams());
 
