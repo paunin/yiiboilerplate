@@ -3,7 +3,7 @@
  * Class PostPutAction
  * Get tags action
  *
- * @property ApiTagController $controller
+ * @property ApiPostController $controller
  */
 class PostPutAction extends ApiAction
 {

@@ -15,7 +15,7 @@ class FavoriteGetAction extends ApiAction
             ->with(
                 array(
                     'favoriteUser' => array('together' => true),
-                    'favoriteUser.userCurrentPlace' => array('alias' => 'u_place')
+                    'favoriteUser.userCurrentPlace' => array('alias' => 'u_place','together' => true)
                 )
             )
             ->findAll(

@@ -5,7 +5,7 @@ class ApiPostController extends ApiController
     /**
      * Declares class-based actions.
      */
-    protected $_actions = array('post', 'postPut', 'postDelete');
+    protected $_actions = array('post', 'postGet', 'postPut', 'postDelete', 'likePost', 'likeDelete', 'commentPost');
 
 
     public function filters()
@@ -19,9 +19,8 @@ class ApiPostController extends ApiController
     public function accessRules()
     {
         return array(
-
             array('deny',
-                'actions' => array('post', 'postPut', 'postDelete'),
+                'actions' => array('post', 'postPut', 'postDelete', 'likePost', 'likeDelete', 'commentPost'),
                 'users' => array('?'),
             )
         );

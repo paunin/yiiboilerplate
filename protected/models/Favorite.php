@@ -38,6 +38,7 @@ class Favorite extends BaseFavorite
             parent::relations(),
             array(
                 'favoriteUser' => array(self::BELONGS_TO, 'User','favorite_id','condition'=>'type=\''.Favorite::TYPE_USER.'\''),
+                'favoritePost' => array(self::BELONGS_TO, 'Post','favorite_id','condition'=>'type=\''.Favorite::TYPE_POST.'\''),
             )
         );
     }

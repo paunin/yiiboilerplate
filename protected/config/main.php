@@ -167,6 +167,7 @@ $public_params = array(
     'limit_feed_default' => 20,
 
     'post_allow_edit_time' => 300,
+    'post_limit_max' => 50,
 
     'user_avatars_sizes' => array(
         's' => array('w' => 50, 'h' => 50),
@@ -188,7 +189,6 @@ $main['params'] = array_merge(
         'app_own_slug' => 'placemeup',
         'app_token_ttl' => '6 hours',
         'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
-
     )
 );
 

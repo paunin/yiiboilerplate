@@ -1,22 +1,17 @@
 <?php
 /**
- * Class PostAction
+ * Class CommentPostAction
  * Get tags action
  *
  * @property ApiPostController $controller
  */
-class PostAction extends ApiAction{
-    public function run()
+class CommentPostAction extends ApiAction{
+    public function run($id)
     {
         $model = new Post();
-        $model->setScenario('post_post');
+        $model->setScenario('comment_post');
+        $model->post_id = $id;
 
-        $place = User::current()->userCurrentPlace;
-        if(!$place){
-            $model->addError('_overall',Yii::t('app','You have no place for post'));
-        }else{
-            $model->point = $place->cx.":".$place->cy;
-        }
         $model->setAttributes(Yii::app()->request->getAllParams());
 
         if ($model->validate(null,false) && $model->save()) {
