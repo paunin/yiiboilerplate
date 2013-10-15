@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Europe/London");
 $main = array(
 
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
