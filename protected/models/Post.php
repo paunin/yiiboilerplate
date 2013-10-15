@@ -32,6 +32,8 @@ class Post extends BasePost
 
                 array('created_at', 'application.validators.TimeLimitValidator', 'message' => Yii::t('app', 'Too late to edit this post'), 'timeLimit' => Yii::app()->params['post_allow_edit_time'], 'on' => array('post_put', 'comment_put')),
 
+                array('text', 'filter', 'filter' => array('HtmlTextFilter', 'filterRtf'), 'on' => array('post_post', 'post_put', 'comment_put', 'comment_post')),
+
                 array('id, user_id, is_media, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id, point, deleted_at', 'unsafe', 'on' => array('post_post', 'post_put', 'comment_put', 'comment_post')),
                 array('post_id', 'exist', 'className' => 'Post', 'allowEmpty' => false, 'attributeName' => 'id', 'on' => 'comment_post'),
             )
@@ -98,10 +100,10 @@ class Post extends BasePost
         $result['comment_count'] = $this->post_id ? 0 : $this->childrenCount;
         $result['comments'] = array();
 
-        if ($comments_limit && !$this->post_id) {
+        if($comments_limit && !$this->post_id) {
             $comments_offset = (int)$comments_offset;
 
-            if (!is_numeric($comments_limit) || $comments_limit > Yii::app()->params['post_limit_max'])
+            if(!is_numeric($comments_limit) || $comments_limit > Yii::app()->params['post_limit_max'])
                 $comments_limit = Yii::app()->params['post_limit_max'];
             $cr = Post::getBaseCriteria();
             $cr->addCondition('post_id = :parent_id');
