@@ -1,36 +1,36 @@
+DROP TYPE _tag_place;
 
+DROP TYPE _user_place;
 
+DROP TYPE _user_settings;
 
+DROP TYPE _user_social;
 
+DROP TYPE "_AuthAssignment";
 
+DROP TYPE "_AuthItem";
 
+DROP TYPE "_AuthItemChild";
 
+DROP TYPE _content;
 
+DROP TYPE _cron_mail;
 
+DROP TYPE _favorite;
 
+DROP TYPE _message;
 
+DROP TYPE _post;
 
+DROP TYPE _post_name_user;
 
+DROP TYPE _smtp;
 
+DROP TYPE _tag;
 
+DROP TYPE _tag_post;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+DROP TYPE _user;
 
 ALTER TABLE "token"
 	SET TABLESPACE pg_default;
@@ -64,12 +64,6 @@ ALTER TABLE "smtp"
 
 ALTER TABLE "post_name_user"
 	SET TABLESPACE pg_default;
-
-CREATE TABLE "public"."_pgmdd_backup_post_2013-13-10_20:57" AS
-	SELECT * FROM public.post;
-
-ALTER TABLE "post" 
-	ADD COLUMN "deleted_at" timestamp;
 
 ALTER TABLE "post"
 	SET TABLESPACE pg_default;
