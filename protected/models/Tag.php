@@ -31,6 +31,9 @@ class Tag extends BaseTag
             'TimestampBehavior' => array(
                 'class' => 'ext.behaviors.TimestampBehavior',
             ),
+            'ErrorsAggBehavior' => array(
+                'class' => 'ext.behaviors.ErrorsAggBehavior',
+            ),
             'ToArrayBehavior' => array(
                 'class' => 'ext.behaviors.ToArrayBehavior.ToArrayBehavior',
                 'fields' => array(
