@@ -4,10 +4,23 @@
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
-SET standard_conforming_strings = off;
+SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET escape_string_warning = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
 
 SET search_path = public, pg_catalog;
 
@@ -76,8 +89,8 @@ CREATE TABLE application (
 CREATE SEQUENCE application_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -86,13 +99,6 @@ CREATE SEQUENCE application_id_seq
 --
 
 ALTER SEQUENCE application_id_seq OWNED BY application.id;
-
-
---
--- Name: application_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('application_id_seq', 3, true);
 
 
 --
@@ -116,8 +122,8 @@ CREATE TABLE content (
 CREATE SEQUENCE content_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -126,13 +132,6 @@ CREATE SEQUENCE content_id_seq
 --
 
 ALTER SEQUENCE content_id_seq OWNED BY content.id;
-
-
---
--- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('content_id_seq', 100, false);
 
 
 --
@@ -161,8 +160,8 @@ CREATE TABLE cron_mail (
 CREATE SEQUENCE cron_mail_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -171,13 +170,6 @@ CREATE SEQUENCE cron_mail_id_seq
 --
 
 ALTER SEQUENCE cron_mail_id_seq OWNED BY cron_mail.id;
-
-
---
--- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
 
 
 --
@@ -208,8 +200,8 @@ COMMENT ON COLUMN favorite.type IS 'type of user favorite - users, posts, messag
 CREATE SEQUENCE favorite_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -221,10 +213,135 @@ ALTER SEQUENCE favorite_id_seq OWNED BY favorite.id;
 
 
 --
--- Name: favorite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: feed_external; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-SELECT pg_catalog.setval('favorite_id_seq', 1, false);
+CREATE TABLE feed_external (
+    id integer NOT NULL,
+    parser_type character varying(164),
+    name integer,
+    url character varying(1024),
+    last_parsing timestamp without time zone,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone,
+    is_active boolean DEFAULT true NOT NULL
+);
+
+
+--
+-- Name: COLUMN feed_external.parser_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN feed_external.parser_type IS 'rss, rss2, parser_sample,
+vkontakte_user';
+
+
+--
+-- Name: feed_external_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE feed_external_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: feed_external_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE feed_external_id_seq OWNED BY feed_external.id;
+
+
+--
+-- Name: feed_external_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE feed_external_item (
+    id integer NOT NULL,
+    url character varying(2000) NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    feed_external_id integer,
+    title character varying(512),
+    text integer,
+    date timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: feed_external_item_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE feed_external_item_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: feed_external_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE feed_external_item_id_seq OWNED BY feed_external_item.id;
+
+
+--
+-- Name: media; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE media (
+    id integer NOT NULL,
+    type character varying NOT NULL,
+    source character varying NOT NULL,
+    data text
+);
+
+
+--
+-- Name: COLUMN media.type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN media.type IS 'image
+url
+youtube';
+
+
+--
+-- Name: COLUMN media.source; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN media.source IS 'urls or ids';
+
+
+--
+-- Name: COLUMN media.data; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN media.data IS 'serialized data for source';
+
+
+--
+-- Name: media_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE media_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: media_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE media_id_seq OWNED BY media.id;
 
 
 --
@@ -253,8 +370,8 @@ CREATE TABLE message (
 CREATE SEQUENCE message_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -263,13 +380,6 @@ CREATE SEQUENCE message_id_seq
 --
 
 ALTER SEQUENCE message_id_seq OWNED BY message.id;
-
-
---
--- Name: message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('message_id_seq', 1, false);
 
 
 --
@@ -314,8 +424,8 @@ COMMENT ON COLUMN post.post_id IS 'only two level tree';
 CREATE SEQUENCE post_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -324,13 +434,6 @@ CREATE SEQUENCE post_id_seq
 --
 
 ALTER SEQUENCE post_id_seq OWNED BY post.id;
-
-
---
--- Name: post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('post_id_seq', 1, false);
 
 
 --
@@ -368,8 +471,8 @@ CREATE TABLE smtp (
 CREATE SEQUENCE smtp_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -378,13 +481,6 @@ CREATE SEQUENCE smtp_id_seq
 --
 
 ALTER SEQUENCE smtp_id_seq OWNED BY smtp.id;
-
-
---
--- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('smtp_id_seq', 1, false);
 
 
 --
@@ -406,8 +502,8 @@ CREATE TABLE tag (
 CREATE SEQUENCE tag_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -416,13 +512,6 @@ CREATE SEQUENCE tag_id_seq
 --
 
 ALTER SEQUENCE tag_id_seq OWNED BY tag.id;
-
-
---
--- Name: tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('tag_id_seq', 9, true);
 
 
 --
@@ -450,8 +539,8 @@ CREATE TABLE tag_place (
 CREATE SEQUENCE tag_place_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -460,13 +549,6 @@ CREATE SEQUENCE tag_place_id_seq
 --
 
 ALTER SEQUENCE tag_place_id_seq OWNED BY tag_place.id;
-
-
---
--- Name: tag_place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('tag_place_id_seq', 2480, true);
 
 
 --
@@ -501,8 +583,8 @@ CREATE TABLE token (
 CREATE SEQUENCE token_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -511,13 +593,6 @@ CREATE SEQUENCE token_id_seq
 --
 
 ALTER SEQUENCE token_id_seq OWNED BY token.id;
-
-
---
--- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('token_id_seq', 1, false);
 
 
 --
@@ -549,8 +624,8 @@ CREATE TABLE "user" (
 CREATE SEQUENCE user_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -559,13 +634,6 @@ CREATE SEQUENCE user_id_seq
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
-
-
---
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_id_seq', 10000, true);
 
 
 --
@@ -606,8 +674,8 @@ COMMENT ON COLUMN user_place.permissions IS 'bits
 CREATE SEQUENCE user_place_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -616,13 +684,6 @@ CREATE SEQUENCE user_place_id_seq
 --
 
 ALTER SEQUENCE user_place_id_seq OWNED BY user_place.id;
-
-
---
--- Name: user_place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_place_id_seq', 1915, true);
 
 
 --
@@ -650,8 +711,8 @@ COMMENT ON COLUMN user_settings.radius IS 'user area radius';
 CREATE SEQUENCE user_settings_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -660,13 +721,6 @@ CREATE SEQUENCE user_settings_id_seq
 --
 
 ALTER SEQUENCE user_settings_id_seq OWNED BY user_settings.id;
-
-
---
--- Name: user_settings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_settings_id_seq', 6, true);
 
 
 --
@@ -696,8 +750,8 @@ COMMENT ON TABLE user_social IS 'users from social accounts linked to users';
 CREATE SEQUENCE user_social_id_seq
     START WITH 100
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -709,108 +763,122 @@ ALTER SEQUENCE user_social_id_seq OWNED BY user_social.id;
 
 
 --
--- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_social_id_seq', 1, true);
+ALTER TABLE ONLY application ALTER COLUMN id SET DEFAULT nextval('application_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE application ALTER COLUMN id SET DEFAULT nextval('application_id_seq'::regclass);
+ALTER TABLE ONLY content ALTER COLUMN id SET DEFAULT nextval('content_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE content ALTER COLUMN id SET DEFAULT nextval('content_id_seq'::regclass);
+ALTER TABLE ONLY cron_mail ALTER COLUMN id SET DEFAULT nextval('cron_mail_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE cron_mail ALTER COLUMN id SET DEFAULT nextval('cron_mail_id_seq'::regclass);
+ALTER TABLE ONLY favorite ALTER COLUMN id SET DEFAULT nextval('favorite_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE favorite ALTER COLUMN id SET DEFAULT nextval('favorite_id_seq'::regclass);
+ALTER TABLE ONLY feed_external ALTER COLUMN id SET DEFAULT nextval('feed_external_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE message ALTER COLUMN id SET DEFAULT nextval('message_id_seq'::regclass);
+ALTER TABLE ONLY feed_external_item ALTER COLUMN id SET DEFAULT nextval('feed_external_item_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE post ALTER COLUMN id SET DEFAULT nextval('post_id_seq'::regclass);
+ALTER TABLE ONLY media ALTER COLUMN id SET DEFAULT nextval('media_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE smtp ALTER COLUMN id SET DEFAULT nextval('smtp_id_seq'::regclass);
+ALTER TABLE ONLY message ALTER COLUMN id SET DEFAULT nextval('message_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE tag ALTER COLUMN id SET DEFAULT nextval('tag_id_seq'::regclass);
+ALTER TABLE ONLY post ALTER COLUMN id SET DEFAULT nextval('post_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE tag_place ALTER COLUMN id SET DEFAULT nextval('tag_place_id_seq'::regclass);
+ALTER TABLE ONLY smtp ALTER COLUMN id SET DEFAULT nextval('smtp_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE token ALTER COLUMN id SET DEFAULT nextval('token_id_seq'::regclass);
+ALTER TABLE ONLY tag ALTER COLUMN id SET DEFAULT nextval('tag_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
+ALTER TABLE ONLY tag_place ALTER COLUMN id SET DEFAULT nextval('tag_place_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE user_place ALTER COLUMN id SET DEFAULT nextval('user_place_id_seq'::regclass);
+ALTER TABLE ONLY token ALTER COLUMN id SET DEFAULT nextval('token_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE user_settings ALTER COLUMN id SET DEFAULT nextval('user_settings_id_seq'::regclass);
+ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE user_social ALTER COLUMN id SET DEFAULT nextval('user_social_id_seq'::regclass);
+ALTER TABLE ONLY user_place ALTER COLUMN id SET DEFAULT nextval('user_place_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_settings ALTER COLUMN id SET DEFAULT nextval('user_settings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_social ALTER COLUMN id SET DEFAULT nextval('user_social_id_seq'::regclass);
 
 
 --
@@ -874,6 +942,13 @@ COPY application (id, slug, name, description, secret_key, publick_key, return_u
 
 
 --
+-- Name: application_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('application_id_seq', 3, true);
+
+
+--
 -- Data for Name: content; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -886,11 +961,25 @@ COPY content (id, title, slug, text, created_at, updated_at) FROM stdin;
 
 
 --
+-- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('content_id_seq', 100, false);
+
+
+--
 -- Data for Name: cron_mail; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY cron_mail (id, subject, body, body_alt, to_mail, to_name, from_mail, from_name, is_sent, attachment_file, attachment_name) FROM stdin;
 \.
+
+
+--
+-- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
 
 
 --
@@ -902,6 +991,58 @@ COPY favorite (id, user_id, favorite_id, type, created_at, updated_at) FROM stdi
 
 
 --
+-- Name: favorite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('favorite_id_seq', 1, false);
+
+
+--
+-- Data for Name: feed_external; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY feed_external (id, parser_type, name, url, last_parsing, created_at, updated_at, is_active) FROM stdin;
+\.
+
+
+--
+-- Name: feed_external_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('feed_external_id_seq', 1, false);
+
+
+--
+-- Data for Name: feed_external_item; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY feed_external_item (id, url, created_at, feed_external_id, title, text, date, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: feed_external_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('feed_external_item_id_seq', 1, false);
+
+
+--
+-- Data for Name: media; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY media (id, type, source, data) FROM stdin;
+\.
+
+
+--
+-- Name: media_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('media_id_seq', 1, false);
+
+
+--
 -- Data for Name: message; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -910,11 +1051,25 @@ COPY message (id, to_user_id, from_user_id, is_new, subject, text, created_at, u
 
 
 --
+-- Name: message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('message_id_seq', 1, false);
+
+
+--
 -- Data for Name: post; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY post (id, user_id, subject, text, is_media, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id, deleted_at) FROM stdin;
 \.
+
+
+--
+-- Name: post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('post_id_seq', 1, false);
 
 
 --
@@ -934,6 +1089,13 @@ COPY smtp (id, host, username, password, port, encryption, timeout, "extensionHa
 
 
 --
+-- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('smtp_id_seq', 1, false);
+
+
+--
 -- Data for Name: tag; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -948,6 +1110,13 @@ COPY tag (id, name, created_at, updated_at) FROM stdin;
 8	Simple_very_tag	2013-10-11 17:39:40	\N
 9	Taggg_with_max_length	2013-10-11 17:39:40	\N
 \.
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('tag_id_seq', 9, true);
 
 
 --
@@ -3439,6 +3608,13 @@ COPY tag_place (id, user_id, tag_id, created_at, updated_at, cx, cy, cx_p_cy, cx
 
 
 --
+-- Name: tag_place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('tag_place_id_seq', 2480, true);
+
+
+--
 -- Data for Name: tag_post; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -3452,6 +3628,13 @@ COPY tag_post (post_id, tag_id) FROM stdin;
 
 COPY token (id, application_id, user_id, token, expire_at, created_at, updated_at) FROM stdin;
 \.
+
+
+--
+-- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('token_id_seq', 1, false);
 
 
 --
@@ -4509,6 +4692,13 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 1049	user1049	user1049@user.com	\N	2010-10-11 01:12:20	2010-11-10 01:12:20	user	t	2010-11-25 01:12:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 1	U_twitter_71662685	\N	\N	2013-10-07 14:40:22	2013-10-07 14:40:22	user	t	2013-10-07 14:40:22	\N	1.jpg	\N	\N	\N
 \.
+
+
+--
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_id_seq', 10000, true);
 
 
 --
@@ -6435,6 +6625,13 @@ COPY user_place (id, user_id, name, cx, cy, cx_p_cy, cx_m_cy, created_at, update
 
 
 --
+-- Name: user_place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_place_id_seq', 1915, true);
+
+
+--
 -- Data for Name: user_settings; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6449,12 +6646,26 @@ COPY user_settings (id, user_id, radius) FROM stdin;
 
 
 --
+-- Name: user_settings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_settings_id_seq', 6, true);
+
+
+--
 -- Data for Name: user_social; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY user_social (id, user_id, social_service, user_social_id, additional_data) FROM stdin;
 1	101	twitter	71662685	\N
 \.
+
+
+--
+-- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_social_id_seq', 1, true);
 
 
 --
@@ -6519,6 +6730,30 @@ ALTER TABLE ONLY cron_mail
 
 ALTER TABLE ONLY favorite
     ADD CONSTRAINT favorite_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: feed_external_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY feed_external_item
+    ADD CONSTRAINT feed_external_item_pkey PRIMARY KEY (id, created_at, url);
+
+
+--
+-- Name: feed_external_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY feed_external
+    ADD CONSTRAINT feed_external_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: media_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY media
+    ADD CONSTRAINT media_pkey PRIMARY KEY (id);
 
 
 --
@@ -6785,6 +7020,14 @@ ALTER TABLE ONLY "AuthItemChild"
 
 ALTER TABLE ONLY favorite
     ADD CONSTRAINT "Ref_favorite_to_user" FOREIGN KEY (user_id) REFERENCES "user"(id);
+
+
+--
+-- Name: Ref_feed_external_item_to_feed_external; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY feed_external_item
+    ADD CONSTRAINT "Ref_feed_external_item_to_feed_external" FOREIGN KEY (feed_external_id) REFERENCES feed_external(id);
 
 
 --
