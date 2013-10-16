@@ -41,13 +41,13 @@ abstract class BaseFeedExternalItem extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('url, created_at, text', 'required'),
+			array('url, created_at, feed_external_id, text', 'required'),
 			array('feed_external_id', 'numerical', 'integerOnly'=>true),
 			array('url', 'length', 'max'=>2000),
 			array('title', 'length', 'max'=>512),
 			array('guid', 'length', 'max'=>256),
 			array('date, updated_at', 'safe'),
-			array('feed_external_id, title, date, updated_at, guid', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('title, date, updated_at, guid', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('id, url, created_at, feed_external_id, title, text, date, updated_at, guid', 'safe', 'on'=>'search'),
 		);
 	}

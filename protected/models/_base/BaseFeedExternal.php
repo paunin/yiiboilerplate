@@ -18,6 +18,7 @@
  * @property string $updated_at
  * @property boolean $is_active
  *
+ * @property UserFeedExternal[] $userFeedExternals
  * @property FeedExternalItem[] $feedExternalItems
  */
 abstract class BaseFeedExternal extends GxActiveRecord {
@@ -52,6 +53,7 @@ abstract class BaseFeedExternal extends GxActiveRecord {
 
 	public function relations() {
 		return array(
+			'userFeedExternals' => array(self::HAS_MANY, 'UserFeedExternal', 'feed_external_id'),
 			'feedExternalItems' => array(self::HAS_MANY, 'FeedExternalItem', 'feed_external_id'),
 		);
 	}
@@ -71,6 +73,7 @@ abstract class BaseFeedExternal extends GxActiveRecord {
 			'created_at' => Yii::t('app', 'Created At'),
 			'updated_at' => Yii::t('app', 'Updated At'),
 			'is_active' => Yii::t('app', 'Is Active'),
+			'userFeedExternals' => null,
 			'feedExternalItems' => null,
 		);
 	}

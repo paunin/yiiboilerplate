@@ -24,16 +24,17 @@
  * @property string $middle_name
  * @property string $first_name
  *
+ * @property UserFeedExternal[] $userFeedExternals
+ * @property TagPlace[] $tagPlaces
  * @property Favorite[] $favorites
- * @property Token[] $tokens
  * @property Message[] $messages
  * @property Message[] $messages1
  * @property Post[] $posts
- * @property TagPlace[] $tagPlaces
  * @property Post[] $posts1
- * @property UserSocial[] $userSocials
- * @property UserPlace[] $userPlaces
  * @property UserSettings[] $userSettings
+ * @property UserPlace[] $userPlaces
+ * @property Token[] $tokens
+ * @property UserSocial[] $userSocials
  */
 abstract class BaseUser extends GxActiveRecord {
 
@@ -66,16 +67,17 @@ abstract class BaseUser extends GxActiveRecord {
 
 	public function relations() {
 		return array(
+			'userFeedExternals' => array(self::HAS_MANY, 'UserFeedExternal', 'user_id'),
+			'tagPlaces' => array(self::HAS_MANY, 'TagPlace', 'user_id'),
 			'favorites' => array(self::HAS_MANY, 'Favorite', 'user_id'),
-			'tokens' => array(self::HAS_MANY, 'Token', 'user_id'),
 			'messages' => array(self::HAS_MANY, 'Message', 'to_user_id'),
 			'messages1' => array(self::HAS_MANY, 'Message', 'from_user_id'),
 			'posts' => array(self::MANY_MANY, 'Post', 'post_name_user(user_id, post_id)'),
-			'tagPlaces' => array(self::HAS_MANY, 'TagPlace', 'user_id'),
 			'posts1' => array(self::HAS_MANY, 'Post', 'user_id'),
-			'userSocials' => array(self::HAS_MANY, 'UserSocial', 'user_id'),
-			'userPlaces' => array(self::HAS_MANY, 'UserPlace', 'user_id'),
 			'userSettings' => array(self::HAS_MANY, 'UserSettings', 'user_id'),
+			'userPlaces' => array(self::HAS_MANY, 'UserPlace', 'user_id'),
+			'tokens' => array(self::HAS_MANY, 'Token', 'user_id'),
+			'userSocials' => array(self::HAS_MANY, 'UserSocial', 'user_id'),
 		);
 	}
 
@@ -101,16 +103,17 @@ abstract class BaseUser extends GxActiveRecord {
 			'last_name' => Yii::t('app', 'Last Name'),
 			'middle_name' => Yii::t('app', 'Middle Name'),
 			'first_name' => Yii::t('app', 'First Name'),
+			'userFeedExternals' => null,
+			'tagPlaces' => null,
 			'favorites' => null,
-			'tokens' => null,
 			'messages' => null,
 			'messages1' => null,
 			'posts' => null,
-			'tagPlaces' => null,
 			'posts1' => null,
-			'userSocials' => null,
-			'userPlaces' => null,
 			'userSettings' => null,
+			'userPlaces' => null,
+			'tokens' => null,
+			'userSocials' => null,
 		);
 	}
 

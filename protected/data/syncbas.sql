@@ -35,7 +35,7 @@
 ALTER TABLE "media"
 	SET TABLESPACE pg_default;
 
-CREATE TABLE "public"."_pgmdd_backup_feed_external_item_2013-16-10_21:22" AS
+CREATE TABLE "public"."_pgmdd_backup_feed_external_item_2013-16-10_21:59" AS
 	SELECT * FROM public.feed_external_item;
 
 ALTER TABLE "feed_external_item" ALTER COLUMN "feed_external_id" SET NOT NULL;
@@ -102,4 +102,29 @@ ALTER TABLE "AuthItem"
 
 ALTER TABLE "AuthAssignment"
 	SET TABLESPACE pg_default;
+
+CREATE TABLE "user_feed_external" (
+	"id" SERIAL NOT NULL,
+	"user_id" int4 NOT NULL,
+	"last_published_id" int4,
+	"feed_external_id" int4 NOT NULL,
+	"created_at" timestamp NOT NULL DEFAULT NOW(),
+	"updated_at" timestamp,
+  PRIMARY KEY("id")
+);
+
+
+ALTER TABLE "user_feed_external" OWNER TO "placemeup";
+
+ALTER TABLE "user_feed_external"
+   ADD CONSTRAINT "Ref_user_feed_external_to_user" FOREIGN KEY ("user_id")
+    REFERENCES "user"("id")
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+      NOT DEFERRABLE,
+   ADD CONSTRAINT "Ref_user_feed_external_to_feed_external" FOREIGN KEY ("feed_external_id")
+    REFERENCES "feed_external"("id")
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+      NOT DEFERRABLE;
 
