@@ -77,14 +77,86 @@ class Post extends BasePost
             'coordinate' => array(
                 'class' => 'ext.behaviors.CoordinateBehavior.CoordinateBehavior'
             ),
+            'CAdvancedArBehavior' => array(
+                'class' => 'application.extensions.behaviors.CAdvancedArBehavior'
+            )
         );
     }
 
-
+    /**
+     * @return bool
+     */
     public function delete()
     {
         $this->deleted_at = date('Y-m-d H:i:s');
         return $this->save();
+    }
+
+
+    public function afterSave()
+    {
+        $this->parseTags();
+        $this->parseNames();
+        return parent::afterSave();
+    }
+    /**
+     * @return array
+     */
+    private function parseNames(){
+        $pattern = '/@(' . Yii::app()->params['user_username_pattern'] . ')/iU';
+        $matches = array();
+        if(preg_match_all($pattern, $this->text, $matches)) {
+            $count_down = Yii::app()->params['user_username_per_message_limit'];
+            $user_names = array();
+
+            foreach ($matches[1] as $user_name) {
+                if(in_array($user_name,$user_names))
+                    continue;
+                if(!$count_down)
+                    break;
+                $user = User::model()->findByAttributes(array('username'=>$user_name));
+                if(!$user)
+                    continue;
+                $user_names[] = $user_name;
+                $pnm = new PostNameUser();
+
+                $pnm->post_id = $this->id;
+                $pnm->user_id = $user->id;
+
+                if($pnm->save())
+                    $count_down--;
+            }
+        }
+        return $user_names;
+    }
+
+    /**
+     * @return array
+     */
+    private function parseTags(){
+        $pattern = '/#(' . Yii::app()->params['tag_pattern'] . ')/iU';
+        $matches = array();
+        if(preg_match_all($pattern, $this->text, $matches)) {
+            $count_down = Yii::app()->params['tag_per_message_limit'];
+            $tag_names = array();
+
+            foreach ($matches[1] as $tag_name) {
+                if(in_array($tag_name,$tag_names))
+                    continue;
+                if(!$count_down)
+                    break;
+                $tag = Tag::getOrCreate($tag_name);
+                $tag_names[] = $tag->name;
+
+                $tp = new TagPost();
+                $tp->post_id = $this->id;
+                $tp->tag_id = $tag->id;
+
+                if($tp->save())
+                    $count_down--;
+            }
+        }
+        return $tag_names;
     }
 
     /**

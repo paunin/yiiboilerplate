@@ -158,17 +158,24 @@ $public_params = array(
 
     'tag_length_min' => 2,
     'tag_length_max' => 25,
+    'tag_pattern' => '[a-zA-Z_а-яА-Я0-9]{2,25}?',
+
     'tag_one_user_radius_allow' => 20,
     'tag_one_name_radius_weight' => 30,
     'tag_get_limit_default' => 10,
     'tag_get_limit_max' => 30,
     'tag_get_limit_min' => 1,
+    'tag_per_message_limit' => 15,
 
     'limit_feed_max' => 200,
     'limit_feed_default' => 20,
 
     'post_allow_edit_time' => 300,
     'post_limit_max' => 50,
+
+    'user_username_pattern' => '[a-zA-Z0-9_]{4,12}?',
+
+    'user_username_per_message_limit' => 15,
 
     'user_avatars_sizes' => array(
         's' => array('w' => 50, 'h' => 50),
@@ -193,7 +200,7 @@ $main['params'] = array_merge(
     )
 );
 
-if (is_file(dirname(__FILE__) . '/solr.php')) {
+if(is_file(dirname(__FILE__) . '/solr.php')) {
     $solr = require(dirname(__FILE__) . '/solr.php');
     $main = CMap::mergeArray(
         $main,
@@ -201,14 +208,14 @@ if (is_file(dirname(__FILE__) . '/solr.php')) {
     );
 }
 
-if (is_file(dirname(__FILE__) . '/custom.php')) {
+if(is_file(dirname(__FILE__) . '/custom.php')) {
     $custom = require(dirname(__FILE__) . '/custom.php');
     $main = CMap::mergeArray(
         $main,
         $custom
     );
 
-    if (defined('PROJECT_CUSTOM_DEBUG') && PROJECT_CUSTOM_DEBUG == true) {
+    if(defined('PROJECT_CUSTOM_DEBUG') && PROJECT_CUSTOM_DEBUG == true) {
         unset($main['components']['clientScript']);
         $dev = require(dirname(__FILE__) . '/dev.php');
         $main = CMap::mergeArray(

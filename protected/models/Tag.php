@@ -20,7 +20,7 @@ class Tag extends BaseTag
             parent::rules(),
             array(
                 array('name', 'application.validators.TagStringValidator'),
-                array('name', 'unique','className'=>"Tag", 'attributeName'=>'name')
+                array('name', 'unique', 'className' => "Tag", 'attributeName' => 'name')
             )
         );
     }
@@ -37,9 +37,24 @@ class Tag extends BaseTag
                     'id', 'name'
                 )
             ),
-            'ErrorsAggBehavior' => array(
-                'class' => 'ext.behaviors.ErrorsAggBehavior'
-            )
         );
+    }
+
+    /**
+     * @param $tag_name
+     * @return CActiveRecord|Tag
+     * @throws CException
+     */
+    public static  function getOrCreate($tag_name)
+    {
+        $tag = Tag::model()->findByAttributes(array('name' => $tag_name));
+        if(!$tag){
+            $tag = new Tag();
+            $tag->name = $tag_name;
+            if(!$tag->validate())
+                throw new CException(Yii::t('app', 'Incorrect tag name'));
+            $tag->save();
+        }
+        return $tag;
     }
 }

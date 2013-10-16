@@ -6,7 +6,7 @@ class TagStringValidator extends CRegularExpressionValidator
     {
 
         if(empty($this->pattern))
-            $this->pattern = '/^[a-zA-Z_а-яА-Я0-9]{'.(Yii::app()->params['tag_length_min']).','.(Yii::app()->params['tag_length_max']).'}$/iU';
+            $this->pattern = '/^'.Yii::app()->params['tag_pattern'].'$/iU';
         if(empty($this->message))
             $this->message = Yii::t('app', 'Incorrect tag name');
 
