@@ -18,6 +18,16 @@ class HtmlTextFilter {
         $out = $filter->purify($html);
         $out = preg_replace('/(<br[^>]*>)(?:\s*\1)+/',str_repeat('$1',$nl_limit),$out);
         return $out;
-
     }
+
+    public static function filterAllHtml($html){
+        $filter = new CHtmlPurifier();
+
+        $filter->options = array(
+            'HTML.AllowedElements' => array()
+        );
+        $out = $filter->purify($html);
+        return $out;
+    }
+
 } 

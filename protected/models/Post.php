@@ -76,9 +76,6 @@ class Post extends BasePost
             ),
             'coordinate' => array(
                 'class' => 'ext.behaviors.CoordinateBehavior.CoordinateBehavior'
-            ),
-            'CAdvancedArBehavior' => array(
-                'class' => 'application.extensions.behaviors.CAdvancedArBehavior'
             )
         );
     }
@@ -99,23 +96,25 @@ class Post extends BasePost
         $this->parseNames();
         return parent::afterSave();
     }
+
     /**
      * @return array
      */
-    private function parseNames(){
+    private function parseNames()
+    {
         $pattern = '/@(' . Yii::app()->params['user_username_pattern'] . ')/iU';
         $matches = array();
-        if(preg_match_all($pattern, $this->text, $matches)) {
+        if (preg_match_all($pattern, $this->text, $matches)) {
             $count_down = Yii::app()->params['user_username_per_message_limit'];
             $user_names = array();
 
             foreach ($matches[1] as $user_name) {
-                if(in_array($user_name,$user_names))
+                if (in_array($user_name, $user_names))
                     continue;
-                if(!$count_down)
+                if (!$count_down)
                     break;
-                $user = User::model()->findByAttributes(array('username'=>$user_name));
-                if(!$user)
+                $user = User::model()->findByAttributes(array('username' => $user_name));
+                if (!$user)
                     continue;
                 $user_names[] = $user_name;
                 $pnm = new PostNameUser();
@@ -123,7 +122,7 @@ class Post extends BasePost
                 $pnm->post_id = $this->id;
                 $pnm->user_id = $user->id;
 
-                if($pnm->save())
+                if ($pnm->save())
                     $count_down--;
             }
         }
@@ -133,17 +132,18 @@ class Post extends BasePost
     /**
      * @return array
      */
-    private function parseTags(){
+    private function parseTags()
+    {
         $pattern = '/#(' . Yii::app()->params['tag_pattern'] . ')/iU';
         $matches = array();
-        if(preg_match_all($pattern, $this->text, $matches)) {
+        if (preg_match_all($pattern, $this->text, $matches)) {
             $count_down = Yii::app()->params['tag_per_message_limit'];
             $tag_names = array();
 
             foreach ($matches[1] as $tag_name) {
-                if(in_array($tag_name,$tag_names))
+                if (in_array($tag_name, $tag_names))
                     continue;
-                if(!$count_down)
+                if (!$count_down)
                     break;
                 $tag = Tag::getOrCreate($tag_name);
                 $tag_names[] = $tag->name;
@@ -152,7 +152,7 @@ class Post extends BasePost
                 $tp->post_id = $this->id;
                 $tp->tag_id = $tag->id;
 
-                if($tp->save())
+                if ($tp->save())
                     $count_down--;
             }
         }
@@ -172,10 +172,10 @@ class Post extends BasePost
         $result['comment_count'] = $this->post_id ? 0 : $this->childrenCount;
         $result['comments'] = array();
 
-        if($comments_limit && !$this->post_id) {
+        if ($comments_limit && !$this->post_id) {
             $comments_offset = (int)$comments_offset;
 
-            if(!is_numeric($comments_limit) || $comments_limit > Yii::app()->params['post_limit_max'])
+            if (!is_numeric($comments_limit) || $comments_limit > Yii::app()->params['post_limit_max'])
                 $comments_limit = Yii::app()->params['post_limit_max'];
             $cr = Post::getBaseCriteria();
             $cr->addCondition('post_id = :parent_id');

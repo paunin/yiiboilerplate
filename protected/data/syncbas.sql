@@ -1,36 +1,50 @@
-DROP TYPE _tag_place;
 
-DROP TYPE _user_place;
 
-DROP TYPE _user_settings;
 
-DROP TYPE _user_social;
 
-DROP TYPE "_AuthAssignment";
 
-DROP TYPE "_AuthItem";
 
-DROP TYPE "_AuthItemChild";
 
-DROP TYPE _content;
 
-DROP TYPE _cron_mail;
 
-DROP TYPE _favorite;
 
-DROP TYPE _message;
 
-DROP TYPE _post;
 
-DROP TYPE _post_name_user;
 
-DROP TYPE _smtp;
 
-DROP TYPE _tag;
 
-DROP TYPE _tag_post;
 
-DROP TYPE _user;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE "media"
+	SET TABLESPACE pg_default;
+
+CREATE TABLE "public"."_pgmdd_backup_feed_external_item_2013-16-10_21:22" AS
+	SELECT * FROM public.feed_external_item;
+
+ALTER TABLE "feed_external_item" ALTER COLUMN "feed_external_id" SET NOT NULL;
+
+ALTER TABLE "feed_external_item"
+	SET TABLESPACE pg_default;
+
+ALTER TABLE "feed_external"
+	SET TABLESPACE pg_default;
 
 ALTER TABLE "token"
 	SET TABLESPACE pg_default;
