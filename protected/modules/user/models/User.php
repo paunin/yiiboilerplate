@@ -19,17 +19,16 @@ class User extends BaseUser
 
     public function relations()
     {
-
-
         $relations = parent::relations();
         $relations['userSettings'] = array(self::HAS_ONE, 'UserSettings', 'user_id');
         $relations = array_merge(
             $relations,
             array(
-
                 'userCurrentPlace' => array(self::HAS_ONE,'UserPlace','user_id','on' => 'is_spirit = false'),
                 'favoriteUsers' => array(self::HAS_MANY, 'Favorite', 'user_id', 'on' => 'type = \''.Favorite::TYPE_USER.'\'' ),
                 'messagesCountNew' => array(self::STAT, 'Message', 'to_user', 'condition' => 'is_new = true'),
+                'messagesTo' => array(self::HAS_MANY, 'Message', 'to_user_id'),
+                'messagesFrom' => array(self::HAS_MANY, 'Message', 'from_user_id'),
             )
         );
         return $relations;
