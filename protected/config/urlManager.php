@@ -29,6 +29,15 @@ return array(
         array('apiProfile/favoritePost', 'pattern' => 'api_v0/profile/favorite/<id:\d+>', 'verb' => 'POST'),
         array('apiProfile/favoriteDelete', 'pattern' => 'api_v0/profile/favorite/<id:\d+>', 'verb' => 'DELETE'),
 
+
+        array('apiProfile/messageGet', 'pattern' => 'profile/<id:\d+>/message', 'verb' => 'GET'),
+        array('apiProfile/messagePost', 'pattern' => 'profile/<id:\d+>/message', 'verb' => 'POST'),
+
+        array('apiProfile/messageGetOne', 'pattern' => 'profile/message/<message_id:\d+>', 'verb' => 'GET'),
+        array('apiProfile/messageDelete', 'pattern' => 'profile/message/<message_id:\d+>', 'verb' => 'DELETE'),
+
+
+
         array('apiTag/get', 'pattern' => 'api_v0/tag', 'verb' => 'GET'),
         array('apiTag/post', 'pattern' => 'api_v0/tag', 'verb' => 'POST'),
 

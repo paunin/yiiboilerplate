@@ -173,6 +173,8 @@ $public_params = array(
     'post_allow_edit_time' => 300,
     'post_limit_max' => 50,
 
+    'message_limit_max' =>50,
+
     'user_username_pattern' => '[a-zA-Z0-9_]{4,12}?',
 
     'user_username_per_message_limit' => 15,
