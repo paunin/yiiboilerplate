@@ -37,8 +37,8 @@ class Favorite extends BaseFavorite
         return array_merge(
             parent::relations(),
             array(
-                'favoriteUser' => array(self::BELONGS_TO, 'User','favorite_id','condition'=>'type=\''.Favorite::TYPE_USER.'\''),
-                'favoritePost' => array(self::BELONGS_TO, 'Post','favorite_id','condition'=>'type=\''.Favorite::TYPE_POST.'\''),
+                'favoriteUser' => array(self::BELONGS_TO, 'User','favorite_id'),
+                'favoritePost' => array(self::BELONGS_TO, 'Post','favorite_id'),
             )
         );
     }

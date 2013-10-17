@@ -47,7 +47,7 @@ class Post extends BasePost
         $relations = array_merge(
             $relations,
             array(
-                'favoritePosts' => array(self::HAS_MANY, 'Favorite', 'user_id', 'condition' => 'type = \'' . Favorite::TYPE_POST . '\''),
+                'favoritePosts' => array(self::HAS_MANY, 'Favorite', 'favorite_id', 'on' => 'type = \'' . Favorite::TYPE_POST . '\''),
                 'likesCount' => array(self::STAT, 'Favorite', 'favorite_id', 'condition' => 'type = \'' . Favorite::TYPE_POST . '\''),
                 'childrenCount' => array(self::STAT, 'Post', 'post_id', 'condition' => 'deleted_at IS null'),
                 'parent' => array(self::BELONGS_TO, 'Post', 'post_id'),
@@ -104,10 +104,9 @@ class Post extends BasePost
     {
         $pattern = '/@(' . Yii::app()->params['user_username_pattern'] . ')/iU';
         $matches = array();
+        $user_names = array();
         if (preg_match_all($pattern, $this->text, $matches)) {
             $count_down = Yii::app()->params['user_username_per_message_limit'];
-            $user_names = array();
-
             foreach ($matches[1] as $user_name) {
                 if (in_array($user_name, $user_names))
                     continue;
@@ -136,9 +135,10 @@ class Post extends BasePost
     {
         $pattern = '/#(' . Yii::app()->params['tag_pattern'] . ')/iU';
         $matches = array();
+        $tag_names = array();
         if (preg_match_all($pattern, $this->text, $matches)) {
             $count_down = Yii::app()->params['tag_per_message_limit'];
-            $tag_names = array();
+
 
             foreach ($matches[1] as $tag_name) {
                 if (in_array($tag_name, $tag_names))
