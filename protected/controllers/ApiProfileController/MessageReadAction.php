@@ -25,7 +25,7 @@ class MessageReadAction extends ApiAction
             $message->read_at = date('Y-m-d H:i:s');
             $message->save();
         }
-        $this->controller->out(true);
+        $this->controller->out($message->toArray());
 
     }
 }

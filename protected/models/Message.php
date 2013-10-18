@@ -96,7 +96,7 @@ class Message extends BaseMessage
      * @param $message_id
      * @param $first_person_id
      * @param $second_person_id
-     * @return CActiveRecord
+     * @return Message
      */
     public static function getOneWithUser($message_id, $first_person_id, $second_person_id)
     {
@@ -109,7 +109,27 @@ class Message extends BaseMessage
         return $message;
     }
 
+    /**
+     * @param $message_id
+     * @param $first_person_id
+     * @return Message
+     */
+    public static function getOne($message_id, $first_person_id){
+        $criteria = Message::getBaseCriteria();
+        $criteria->params = array(
+            ':first_person_id' => $first_person_id
+        );
+        $message = Message::model()->findByPk($message_id, $criteria);
+        return $message;
+    }
 
+
+    /**
+     * @param $first_person_id
+     * @param $second_person_id
+     * @param null $message_id
+     * @return int
+     */
     public static function readAll($first_person_id, $second_person_id, $message_id = null)
     {
         $criteria = Message::getDialogCriteria();
