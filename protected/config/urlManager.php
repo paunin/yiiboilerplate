@@ -30,11 +30,14 @@ return array(
         array('apiProfile/favoriteDelete', 'pattern' => 'api_v0/profile/favorite/<id:\d+>', 'verb' => 'DELETE'),
 
 
-        array('apiProfile/messageGet', 'pattern' => 'profile/<id:\d+>/message', 'verb' => 'GET'),
-        array('apiProfile/messagePost', 'pattern' => 'profile/<id:\d+>/message', 'verb' => 'POST'),
+        array('apiProfile/messageGet', 'pattern' => 'api_v0/profile/<id:\d+>/message', 'verb' => 'GET'),
+        array('apiProfile/messagePost', 'pattern' => 'api_v0/profile/<id:\d+>/message', 'verb' => 'POST'),
 
-        array('apiProfile/messageGetOne', 'pattern' => 'profile/message/<message_id:\d+>', 'verb' => 'GET'),
-        array('apiProfile/messageDelete', 'pattern' => 'profile/message/<message_id:\d+>', 'verb' => 'DELETE'),
+        array('apiProfile/messageReadAll', 'pattern' => 'api_v0/profile/<id:\d+>/message/read', 'verb' => 'POST'),
+        array('apiProfile/messageRead', 'pattern' => 'api_v0/profile/message/<message_id:\d+>/read', 'verb' => 'PUT'),
+
+        array('apiProfile/messageGetOne', 'pattern' => 'api_v0/profile/message/<message_id:\d+>', 'verb' => 'GET'),
+        array('apiProfile/messageDelete', 'pattern' => 'api_v0/profile/message/<message_id:\d+>', 'verb' => 'DELETE'),
 
 
 

@@ -12,14 +12,13 @@
  * @property integer $id
  * @property integer $to_user_id
  * @property integer $from_user_id
- * @property boolean $is_new
  * @property string $subject
  * @property string $text
  * @property string $created_at
  * @property string $updated_at
- * @property integer $read_at
- * @property boolean $to_deleted
- * @property boolean $from_deleted
+ * @property string $read_at
+ * @property string $from_deleted_at
+ * @property string $to_deleted_at
  *
  * @property User $toUser
  * @property User $fromUser
@@ -45,11 +44,11 @@ abstract class BaseMessage extends GxActiveRecord {
 	public function rules() {
 		return array(
 			array('to_user_id, text, created_at', 'required'),
-			array('to_user_id, from_user_id, read_at', 'numerical', 'integerOnly'=>true),
+			array('to_user_id, from_user_id', 'numerical', 'integerOnly'=>true),
 			array('subject', 'length', 'max'=>1024),
-			array('is_new, updated_at, to_deleted, from_deleted', 'safe'),
-			array('from_user_id, is_new, subject, updated_at, read_at, to_deleted, from_deleted', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, to_user_id, from_user_id, is_new, subject, text, created_at, updated_at, read_at, to_deleted, from_deleted', 'safe', 'on'=>'search'),
+			array('updated_at, read_at, from_deleted_at, to_deleted_at', 'safe'),
+			array('from_user_id, subject, updated_at, read_at, from_deleted_at, to_deleted_at', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, to_user_id, from_user_id, subject, text, created_at, updated_at, read_at, from_deleted_at, to_deleted_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,14 +69,13 @@ abstract class BaseMessage extends GxActiveRecord {
 			'id' => Yii::t('app', 'ID'),
 			'to_user_id' => null,
 			'from_user_id' => null,
-			'is_new' => Yii::t('app', 'Is New'),
 			'subject' => Yii::t('app', 'Subject'),
 			'text' => Yii::t('app', 'Text'),
 			'created_at' => Yii::t('app', 'Created At'),
 			'updated_at' => Yii::t('app', 'Updated At'),
 			'read_at' => Yii::t('app', 'Read At'),
-			'to_deleted' => Yii::t('app', 'To Deleted'),
-			'from_deleted' => Yii::t('app', 'From Deleted'),
+			'from_deleted_at' => Yii::t('app', 'From Deleted At'),
+			'to_deleted_at' => Yii::t('app', 'To Deleted At'),
 			'toUser' => null,
 			'fromUser' => null,
 		);
@@ -89,14 +87,13 @@ abstract class BaseMessage extends GxActiveRecord {
 		$criteria->compare('id', $this->id);
 		$criteria->compare('to_user_id', $this->to_user_id);
 		$criteria->compare('from_user_id', $this->from_user_id);
-		$criteria->compare('is_new', $this->is_new);
 		$criteria->compare('subject', $this->subject, true);
 		$criteria->compare('text', $this->text, true);
 		$criteria->compare('created_at', $this->created_at, true);
 		$criteria->compare('updated_at', $this->updated_at, true);
-		$criteria->compare('read_at', $this->read_at);
-		$criteria->compare('to_deleted', $this->to_deleted);
-		$criteria->compare('from_deleted', $this->from_deleted);
+		$criteria->compare('read_at', $this->read_at, true);
+		$criteria->compare('from_deleted_at', $this->from_deleted_at, true);
+		$criteria->compare('to_deleted_at', $this->to_deleted_at, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
