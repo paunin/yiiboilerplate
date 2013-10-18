@@ -69,7 +69,25 @@ class Message extends BaseMessage
         $criteria->addCondition('to_user_id = :second_person_id OR from_user_id = :second_person_id');
         return $criteria;
     }
+    /**
+     * @return CDbCriteria
+     */
+    public static function getInboxCriteria()
+    {
+        $criteria = Message::getBaseCriteria();
+        $criteria->addCondition('to_user_id = :first_person_id');
+        return $criteria;
+    }
 
+    /**
+     * @return CDbCriteria
+     */
+    public static function getOutboxCriteria()
+    {
+        $criteria = Message::getBaseCriteria();
+        $criteria->addCondition('from_user_id = :first_person_id');
+        return $criteria;
+    }
     /**
      * @param $first_person_id
      * @param $second_person_id
@@ -92,6 +110,31 @@ class Message extends BaseMessage
         return Message::model()->findAll($criteria);
     }
 
+    /**
+     * @param $first_person_id
+     * @param $limit
+     * @param $offset
+     * @param bool $only_new
+     * @return CActiveRecord[]
+     */
+    public static function getInbox($first_person_id, $limit, $offset, $only_new = false)
+    {
+        if($limit > Yii::app()->params['message_limit_max'])
+            $limit = Yii::app()->params['message_limit_max'];
+        $criteria = Message::getInboxCriteria();
+        $criteria->limit = $limit;
+        $criteria->offset = $offset;
+        $criteria->params = array(
+            ':first_person_id' => $first_person_id
+        );
+        $criteria->order = "created_at DESC";
+
+        if($only_new){
+            $criteria->addCondition('read_at IS NULL');
+        }
+
+        return Message::model()->findAll($criteria);
+    }
     /**
      * @param $message_id
      * @param $first_person_id

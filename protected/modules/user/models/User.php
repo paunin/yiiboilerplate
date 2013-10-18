@@ -26,9 +26,9 @@ class User extends BaseUser
             array(
                 'userCurrentPlace' => array(self::HAS_ONE,'UserPlace','user_id','on' => 'is_spirit = false'),
                 'favoriteUsers' => array(self::HAS_MANY, 'Favorite', 'user_id', 'on' => 'type = \''.Favorite::TYPE_USER.'\'' ),
-                'messagesCountNew' => array(self::STAT, 'Message', 'to_user', 'condition' => 'is_new = true'),
-                'messagesTo' => array(self::HAS_MANY, 'Message', 'to_user_id'),
-                'messagesFrom' => array(self::HAS_MANY, 'Message', 'from_user_id'),
+                'messagesCountNew' => array(self::STAT, 'Message', 'to_user_id', 'condition' => 'read_at IS NULL AND to_deleted_at IS NULL'),
+                'messagesTo' => array(self::HAS_MANY, 'Message', 'to_user_id','on' => 'to_deleted_at IS NULL'),
+                'messagesFrom' => array(self::HAS_MANY, 'Message', 'from_user_id','on' => 'from_deleted_at IS NULL'),
             )
         );
         return $relations;

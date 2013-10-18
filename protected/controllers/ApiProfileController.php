@@ -18,6 +18,8 @@ class ApiProfileController extends ApiController
         'messageGetOne',
         'messageReadAll',
         'messageRead',
+        'messageNewCount',
+        'messageNew',
     );
 
     public function filters()
@@ -41,7 +43,9 @@ class ApiProfileController extends ApiController
                     'messageDelete',
                     'messageGetOne',
                     'messageReadAll',
-                    'messageRead'
+                    'messageRead',
+                    'messageNewCount',
+                    'messageNew',
                 ),
                 'users' => array('?'),
             ),

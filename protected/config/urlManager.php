@@ -40,6 +40,8 @@ return array(
         array('apiProfile/messageDelete', 'pattern' => 'api_v0/profile/message/<message_id:\d+>', 'verb' => 'DELETE'),
 
 
+        array('apiProfile/messageNew', 'pattern' => 'api_v0/profile/message/new', 'verb' => 'GET'),
+        array('apiProfile/messageNewCount', 'pattern' => 'api_v0/profile/message/new/count', 'verb' => 'GET'),
 
         array('apiTag/get', 'pattern' => 'api_v0/tag', 'verb' => 'GET'),
         array('apiTag/post', 'pattern' => 'api_v0/tag', 'verb' => 'POST'),
