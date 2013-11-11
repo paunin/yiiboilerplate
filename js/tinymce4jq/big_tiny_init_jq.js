@@ -12,8 +12,8 @@ $(document).ready(function () {
         image_advtab: true ,
         external_filemanager_path:"/web/responsive_filemanager/filemanager/",
         filemanager_title:"Responsive Filemanager" ,
-        external_plugins: { "filemanager" : "/web/responsive_filemanager/filemanager/plugin.min.js"}
-
+        external_plugins: { "filemanager" : "/web/responsive_filemanager/filemanager/plugin.min.js"},
+        fontsize_formats: "8px 10px 12px 14px 18px 24px 36px"
 
     });
 });

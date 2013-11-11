@@ -24,7 +24,9 @@ class ChangeMailForm extends User
     {
         return array_merge(
             parent::attributeLabels(),
-            array()
+            array(
+                'newemail' => 'New email'
+            )
         );
     }
 

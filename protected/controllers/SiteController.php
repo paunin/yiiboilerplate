@@ -26,7 +26,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->render('index');
+        if(Yii::app()->user->isGuest)
+            $this->render('index');
+        else
+            $this->redirect(Cut::createUrl('baby/index'));
     }
 
     public function onSomething(CEvent $event)
@@ -47,19 +50,19 @@ class SiteController extends Controller
         }
     }
 
-    public function filters()
-    {
-        return array(
-            array(
-                'application.filters.ExtPreFilter',
-                'unit' => 'test',
-            ),
-            array(
-                'application.filters.ExtPostFilter',
-                'unit' => 'test',
-            ),
-        );
-    }
+//    public function filters()
+//    {
+//        return array(
+//            array(
+//                'application.filters.ExtPreFilter',
+//                'unit' => 'test',
+//            ),
+//            array(
+//                'application.filters.ExtPostFilter',
+//                'unit' => 'test',
+//            ),
+//        );
+//    }
 
 
 }

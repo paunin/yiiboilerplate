@@ -4,23 +4,10 @@
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
+SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
+SET escape_string_warning = off;
 
 SET search_path = public, pg_catalog;
 
@@ -64,6 +51,125 @@ CREATE TABLE "AuthItemChild" (
 
 
 --
+-- Name: baby; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE baby (
+    id integer NOT NULL,
+    created_by integer NOT NULL,
+    name integer,
+    born_date timestamp without time zone,
+    created_at timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- Name: baby_action_category; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE baby_action_category (
+    id integer NOT NULL,
+    created_by integer,
+    title character varying(256) NOT NULL,
+    description text,
+    color character varying(8) DEFAULT 0 NOT NULL
+);
+
+
+--
+-- Name: baby_action_category_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE baby_action_category_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- Name: baby_action_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE baby_action_category_id_seq OWNED BY baby_action_category.id;
+
+
+--
+-- Name: baby_action_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('baby_action_category_id_seq', 1, false);
+
+
+--
+-- Name: baby_action_log; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE baby_action_log (
+    id integer NOT NULL,
+    baby_id integer NOT NULL,
+    baby_action_category_id integer,
+    description text,
+    time_start timestamp without time zone NOT NULL,
+    time_finish timestamp without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: baby_action_log_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE baby_action_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- Name: baby_action_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE baby_action_log_id_seq OWNED BY baby_action_log.id;
+
+
+--
+-- Name: baby_action_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('baby_action_log_id_seq', 1, false);
+
+
+--
+-- Name: baby_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE baby_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- Name: baby_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE baby_id_seq OWNED BY baby.id;
+
+
+--
+-- Name: baby_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('baby_id_seq', 1, false);
+
+
+--
 -- Name: content; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -84,8 +190,8 @@ CREATE TABLE content (
 CREATE SEQUENCE content_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -94,6 +200,13 @@ CREATE SEQUENCE content_id_seq
 --
 
 ALTER SEQUENCE content_id_seq OWNED BY content.id;
+
+
+--
+-- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('content_id_seq', 100, false);
 
 
 --
@@ -122,8 +235,8 @@ CREATE TABLE cron_mail (
 CREATE SEQUENCE cron_mail_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -132,6 +245,13 @@ CREATE SEQUENCE cron_mail_id_seq
 --
 
 ALTER SEQUENCE cron_mail_id_seq OWNED BY cron_mail.id;
+
+
+--
+-- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
 
 
 --
@@ -159,8 +279,8 @@ CREATE TABLE smtp (
 CREATE SEQUENCE smtp_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -169,6 +289,13 @@ CREATE SEQUENCE smtp_id_seq
 --
 
 ALTER SEQUENCE smtp_id_seq OWNED BY smtp.id;
+
+
+--
+-- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('smtp_id_seq', 1, false);
 
 
 --
@@ -195,8 +322,8 @@ CREATE TABLE "user" (
 CREATE SEQUENCE user_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -205,6 +332,13 @@ CREATE SEQUENCE user_id_seq
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
+
+
+--
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_id_seq', 100, true);
 
 
 --
@@ -234,8 +368,8 @@ COMMENT ON TABLE user_social IS 'users from social accounts linked to users';
 CREATE SEQUENCE user_social_id_seq
     START WITH 100
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -244,6 +378,34 @@ CREATE SEQUENCE user_social_id_seq
 --
 
 ALTER SEQUENCE user_social_id_seq OWNED BY user_social.id;
+
+
+--
+-- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_social_id_seq', 1, false);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY baby ALTER COLUMN id SET DEFAULT nextval('baby_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY baby_action_category ALTER COLUMN id SET DEFAULT nextval('baby_action_category_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY baby_action_log ALTER COLUMN id SET DEFAULT nextval('baby_action_log_id_seq'::regclass);
 
 
 --
@@ -333,6 +495,30 @@ admin	filemanager
 
 
 --
+-- Data for Name: baby; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY baby (id, created_by, name, born_date, created_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: baby_action_category; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY baby_action_category (id, created_by, title, description, color) FROM stdin;
+\.
+
+
+--
+-- Data for Name: baby_action_log; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY baby_action_log (id, baby_id, baby_action_category_id, description, time_start, time_finish, created_at) FROM stdin;
+\.
+
+
+--
 -- Data for Name: content; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -344,14 +530,6 @@ COPY content (id, title, slug, text, created_at, updated_at) FROM stdin;
 \.
 
 
-
---
--- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('content_id_seq', 100, false);
-
-
 --
 -- Data for Name: cron_mail; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -361,25 +539,11 @@ COPY cron_mail (id, subject, body, body_alt, to_mail, to_name, from_mail, from_n
 
 
 --
--- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
-
-
---
 -- Data for Name: smtp; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY smtp (id, host, username, password, port, encryption, timeout, "extensionHandlers", using_count, banned) FROM stdin;
 \.
-
-
---
--- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('smtp_id_seq', 1, false);
 
 
 --
@@ -413,25 +577,11 @@ COPY "user" (id, username, email, key, created_at, role, is_active, last_login, 
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_id_seq', 100, true);
-
-
---
 -- Data for Name: user_social; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY user_social (id, user_id, social_service, user_social_id, additional_data) FROM stdin;
 \.
-
-
---
--- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_social_id_seq', 1, false);
 
 
 --
@@ -456,6 +606,30 @@ ALTER TABLE ONLY "AuthItemChild"
 
 ALTER TABLE ONLY "AuthItem"
     ADD CONSTRAINT "AuthItem_pkey" PRIMARY KEY (name);
+
+
+--
+-- Name: baby_action_category_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY baby_action_category
+    ADD CONSTRAINT baby_action_category_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: baby_action_log_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY baby_action_log
+    ADD CONSTRAINT baby_action_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: baby_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY baby
+    ADD CONSTRAINT baby_pkey PRIMARY KEY (id);
 
 
 --
@@ -552,6 +726,38 @@ ALTER TABLE ONLY "AuthItemChild"
 
 ALTER TABLE ONLY "AuthItemChild"
     ADD CONSTRAINT "AuthItemChild_parent_fkey" FOREIGN KEY (parent) REFERENCES "AuthItem"(name) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: Ref_baby_action_category_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY baby_action_category
+    ADD CONSTRAINT "Ref_baby_action_category_to_user" FOREIGN KEY (created_by) REFERENCES "user"(id);
+
+
+--
+-- Name: Ref_baby_action_log_to_baby; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY baby_action_log
+    ADD CONSTRAINT "Ref_baby_action_log_to_baby" FOREIGN KEY (baby_id) REFERENCES baby(id);
+
+
+--
+-- Name: Ref_baby_action_log_to_baby_action_category; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY baby_action_log
+    ADD CONSTRAINT "Ref_baby_action_log_to_baby_action_category" FOREIGN KEY (baby_action_category_id) REFERENCES baby_action_category(id);
+
+
+--
+-- Name: Ref_baby_to_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY baby
+    ADD CONSTRAINT "Ref_baby_to_user" FOREIGN KEY (created_by) REFERENCES "user"(id);
 
 
 --

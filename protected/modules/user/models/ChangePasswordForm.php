@@ -29,7 +29,11 @@ class ChangePasswordForm extends CFormModel
     {
         return array_merge(
             parent::attributeLabels(),
-            array()
+            array(
+                'password' => Yii::t('app', 'Current password'),
+                'newpassword' => Yii::t('app', 'New password'),
+                'newpassword2' => Yii::t('app', 'New password again'),
+            )
         );
     }
 

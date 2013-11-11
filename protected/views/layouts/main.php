@@ -14,6 +14,7 @@ Asse::addCss('bootstrap-theme.min.css', Yii::getPathOfAlias('webroot.web.bootstr
 Yii::app()->getClientScript()->registerCoreScript('jquery');
 
 Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.js'));
+
 /* @var $this Controller */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -22,21 +23,21 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="language" content="en"/>
+    <link rel="shortcut icon" href="/favicon.ico" />
+
 
     <!--[if lt IE 8]>
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css"
-          media="screen, projection"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection"/>
     <![endif]-->
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
 <body>
-
 <div class="container" id="page">
 
     <div id="header">
-        <div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+        <div id="logo"><a href="/" class="logo"><?php echo CHtml::encode(Yii::app()->name); ?></a></div>
     </div>
     <!-- header -->
 
@@ -80,32 +81,21 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
             <?php $this->widget('application.widgets.b3menu.b3menuWidget', array(
                 'htmlOptions' => array('class' => 'nav navbar-nav navbar-right'),
                 'items' => array(
-                    array('label' => 'Login', 'url' => array('/user/login/login'), 'visible' => Yii::app()->user->isGuest),
-                    array('label' => 'Register', 'url' => array('/user/register/register'), 'visible' => Yii::app()->user->isGuest),
-                    array(
-                        'label' => 'etc',
-                        'visible' => Yii::app()->user->isGuest,
-                        'items' => array(
-                            array('label' => 'Resend verify email', 'url' => array('/user/register/resendmail')),
-                            array('label' => 'Verify email', 'url' => array('/user/register/endregister')),
-                            array(),
-                            array('label' => 'Recovery password', 'url' => array('/user/register/recoverypass')),
-                            array('label' => 'Recovery password(new pass)', 'url' => array('/user/register/endrecoverypass')),
-                        )
-                    ),
+                    array('label' => Yii::t('app','Login'), 'url' => array('/user/login/login'), 'visible' => Yii::app()->user->isGuest),
+                    array('label' => Yii::t('app','Register'), 'url' => array('/user/register/register'), 'visible' => Yii::app()->user->isGuest),
 
-                    array('label' => 'Logout (' . Yii::app()->user->name . ' '. Yii::app()->user->id .')', 'url' => array('/user/login/logout'), 'visible' => !Yii::app()->user->isGuest),
                     array(
-                        'label' => 'profile',
+                        'label' => Yii::app()->user->name,
                         'visible' => !Yii::app()->user->isGuest,
                         'items' => array(
-                            array('label' => 'Simple profile', 'url' => array('/user/profile/index')),
+                            array('label' => Yii::t('app','Profile'), 'url' => array('/user/profile/index')),
+                            array('label' => Yii::t('app','Logout'), 'url' => array('/user/login/logout')),
                             array(),
-                            array('label' => 'Change email', 'url' => array('/user/profile/changemail')),
-                            array('label' => 'Changed email verify', 'url' => array('/user/profile/endchangemail')),
-                            array(),
-                            array('label' => 'Changed username', 'url' => array('/user/profile/changeusername')),
-                            array('label' => 'Changed password', 'url' => array('/user/profile/changepassword')),
+                            array('label' => Yii::t('app','Change email'), 'url' => array('/user/profile/changemail')),
+//                            array('label' => 'Changed email verify', 'url' => array('/user/profile/endchangemail')),
+//                            array(),
+                            array('label' => Yii::t('app','Changed username'), 'url' => array('/user/profile/changeusername')),
+                            array('label' => Yii::t('app','Changed password'), 'url' => array('/user/profile/changepassword')),
                         )
 
                     )
@@ -147,7 +137,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
     <div class="clear"></div>
 
     <div id="footer">
-        <?php echo Yii::powered(); ?>
+        <?php echo CHtml::encode(Yii::app()->params['slogan']) ?> &copy; <?php echo CHtml::encode(Yii::app()->name)?>
     </div>
     <!-- footer -->
 

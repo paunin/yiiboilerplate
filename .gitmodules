@@ -19,3 +19,6 @@
 [submodule "protected/packages/solr"]
 	path = protected/packages/solr
 	url = https://github.com/phpnode/YiiSolr.git
+[submodule "web/bootstrap_helpers"]
+	path = web/bootstrap_helpers
+	url = https://github.com/vlamanna/BootstrapFormHelpers.git

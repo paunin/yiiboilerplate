@@ -2,8 +2,9 @@
 $main = array(
 
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'Yii Boilerplate App', //@ChangeIt
-    'language'=>'ru',
+    'name' => 'Baby Stat',
+    'language'=>'en',
+    'sourceLanguage'=>'en',
 
     // preloading 'log' component
     'preload' => array('log'),
@@ -106,6 +107,8 @@ $main = array(
                 'gii/<controller:\w+>/<action:\w+>' => 'gii/<controller>/<action>',
 
 
+                'my_baby' => 'baby/index',
+
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
@@ -139,9 +142,10 @@ $main = array(
     // application-level parameters that can be accessed
     // using Yii::app()->params['site_url']
     'params' => array(
-        'slogan' => 'Slogan for Yii Boilerplate Application', //@ChangeIt
-        'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
-        'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
+        'slogan' => 'Keep your baby in time',
+        'captcha_public_key' => '6LcNDOoSAAAAAP_chNH2J9NqxxF-DxurLwf1QjDb',
+        'captcha_private_key' => '6LcNDOoSAAAAAJ_ESNMM1q1i2Ck7tEgiu9pGk653',
+        'path_img_cache' => 'assets/img_cache'
     ),
 );
 

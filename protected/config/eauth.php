@@ -12,8 +12,8 @@ return array(
           'twitter' => array(
               // register your app here: https://dev.twitter.com/apps/new
               'class' => 'application.components.eauth_custom.TwitterService',
-              'key' => '6Ae8XbMXBb93KDmTG6kaQ',
-              'secret' => 'hjq4QWIaZOCeuYFv3DjxWTDTr9dN0HId7iZETKkY',
+              'key' => 'ajufPaApWJRzImDaIicVg',
+              'secret' => 'k0xL84sdzfAYiIItKLQk7GEB7VFqTiCYP1rIxObA',
           ),
 //        'google' => array(
 //            'class' => 'GoogleOpenIDService',

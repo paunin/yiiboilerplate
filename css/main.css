@@ -47,6 +47,14 @@ body
 	font-size: 200%;
 }
 
+a.logo{
+    color: #555;
+    font-weight: bold;
+}
+a.logo:hover{
+    text-decoration: none;
+    color: #000;
+}
 #mainmenu
 {
 	background:white url(bg.gif) repeat-x left top;
@@ -232,4 +240,11 @@ div.search-form
 .auth-services{
     margin: 0 auto !important;
     width: 390px;
+}
+
+
+
+a.wellcome{
+    font-size: 24px;
+    color: #297B9F;
 }

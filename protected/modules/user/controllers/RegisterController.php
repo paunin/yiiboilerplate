@@ -2,8 +2,6 @@
 
 class RegisterController extends Controller
 {
-
-
     public function actionRegister()
     {
         $model = new RegisterForm();
@@ -21,11 +19,11 @@ class RegisterController extends Controller
             if ($model->validate()) {
                 $model->scenario = NULL;
                 if ($model->register()) {
-                    Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+                    Cut::setFlash(Yii::t('app','Check your mailbox for complete registration process'),'success');
                     $this->redirect(Yii::app()->user->returnUrl);
                 }
             }
-            Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
+            //Cut::setFlash("Something wrong", 'error');
         }
         $this->render('/register/register', array('model' => $model));
     }
@@ -49,10 +47,10 @@ class RegisterController extends Controller
         if (isset($_POST['EndRegisterForm'])) {
             $model->attributes = $_POST['EndRegisterForm'];
             if ($model->validate() && $model->endregister()) {
-                Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+                Cut::setFlash(Yii::t('app','Now you can sign in with your username and password'), 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
-            Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
+            //Cut::setFlash("Something wrong", 'error');
         }
 
 
@@ -76,11 +74,11 @@ class RegisterController extends Controller
             if ($model->validate()) {
                 $model->scenario = NULL;
                 if ($model->resend()) {
-                    Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+                    Cut::setFlash(Yii::t('app','Check your mailbox for complete registration process'),'success');
                     $this->redirect(Yii::app()->user->returnUrl);
                 }
             }
-            Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
+            //Cut::setFlash("Something wrong", 'error');
         }
         $this->render('/register/resendmail', array('model' => $model));
     }
@@ -101,11 +99,11 @@ class RegisterController extends Controller
             if ($model->validate()) {
                 $model->scenario = NULL;
                 if ($model->recovery()) {
-                    Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+                    Cut::setFlash(Yii::t('app','Check your mailbox for complete recovery password process'), 'success');
                     $this->redirect(Yii::app()->user->returnUrl);
                 }
             }
-            Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
+            //Cut::setFlash("Something wrong", 'error');
         }
         $this->render('/register/recoverypass', array('model' => $model));
     }
@@ -129,10 +127,10 @@ class RegisterController extends Controller
         if (isset($_POST['EndRecoveryPassForm'])) {
             $model->attributes = $_POST['EndRecoveryPassForm'];
             if ($model->validate() && $model->endrecovery()) {
-                Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+                Cut::setFlash(Yii::t('app','Now you can sign in with your username and NEW password'), 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
-            Cut::setFlash($this->getAction()->id." ACTION error",'error');
+            //Cut::setFlash("Something wrong", 'error');
         }
         $this->render('/register/endrecoverypass', array('model' => $model));
     }
