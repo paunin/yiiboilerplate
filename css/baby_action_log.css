@@ -1,0 +1,93 @@
+.chart-element-date {
+    width: 85px;
+    float: left;
+    margin-left: 10px;
+}
+
+.chart-element-bar {
+    display: block;
+    margin: 3px 10px 0 0;
+    padding: 0;
+    height: 10px;
+    border: solid 1px #777;
+    float: right;
+    width: 720px;
+}
+
+.chart-element-time {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 8px;
+    position: relative ;
+    opacity: 0.7;
+    top: 0;
+    width: 0;
+    float: left;
+    overflow: visible;
+}
+.chart-agg .chart-element-time{
+    opacity: 0.2;
+}
+.chart-group{
+    width: 750px;
+    height: 16px;
+    float: right;
+}
+.chart{
+    position: relative;
+    height: 8px;
+    cursor: pointer;
+    overflow: visible;
+
+}
+.chart .delete-log{
+    display: block;
+    position: relative;
+    left: -17px;
+    width: 17px;
+    height: 17px;
+}
+.chart-mini .delete-log{
+
+    display: none;
+
+}
+
+
+.chart-element hr{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    clear: both;
+    color: #90bed5;
+    background: #90bed5;
+
+}
+.chart-element-actions{
+    width: 10px;
+    float: right;
+    margin-left: 5px;
+    font-size: 11px;
+    padding-top: 4px;
+
+}
+.chart-element-actions a{
+    display: block;
+    height: 10px;
+    opacity: 0.5;
+}
+.chart-element-actions a:hover{
+    opacity: 0.85;
+}
+.chart-element-actions a.active{
+    opacity: 1;
+}
+
+
+h2.empty-stat{
+    text-align: center;
+    display: block;
+    margin: 50px 10px;
+    font-size: 22px;
+    color: #777;
+}

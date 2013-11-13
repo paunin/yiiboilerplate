@@ -11,7 +11,7 @@
  *
  * @property integer $id
  * @property integer $created_by
- * @property integer $name
+ * @property string $name
  * @property string $born_date
  * @property string $created_at
  *
@@ -39,7 +39,8 @@ abstract class BaseBaby extends GxActiveRecord {
 	public function rules() {
 		return array(
 			array('created_by, created_at', 'required'),
-			array('created_by, name', 'numerical', 'integerOnly'=>true),
+			array('created_by', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>255),
 			array('born_date', 'safe'),
 			array('name, born_date', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('id, created_by, name, born_date, created_at', 'safe', 'on'=>'search'),
@@ -75,7 +76,7 @@ abstract class BaseBaby extends GxActiveRecord {
 
 		$criteria->compare('id', $this->id);
 		$criteria->compare('created_by', $this->created_by);
-		$criteria->compare('name', $this->name);
+		$criteria->compare('name', $this->name, true);
 		$criteria->compare('born_date', $this->born_date, true);
 		$criteria->compare('created_at', $this->created_at, true);
 

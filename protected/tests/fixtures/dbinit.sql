@@ -57,7 +57,7 @@ CREATE TABLE "AuthItemChild" (
 CREATE TABLE baby (
     id integer NOT NULL,
     created_by integer NOT NULL,
-    name integer,
+    name character varying(255),
     born_date timestamp without time zone,
     created_at timestamp without time zone DEFAULT now() NOT NULL
 );
@@ -99,7 +99,7 @@ ALTER SEQUENCE baby_action_category_id_seq OWNED BY baby_action_category.id;
 -- Name: baby_action_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('baby_action_category_id_seq', 1, false);
+SELECT pg_catalog.setval('baby_action_category_id_seq', 6, true);
 
 
 --
@@ -166,7 +166,7 @@ ALTER SEQUENCE baby_id_seq OWNED BY baby.id;
 -- Name: baby_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('baby_id_seq', 1, false);
+SELECT pg_catalog.setval('baby_id_seq', 5, true);
 
 
 --
@@ -338,7 +338,7 @@ ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_id_seq', 100, true);
+SELECT pg_catalog.setval('user_id_seq', 101, true);
 
 
 --
@@ -384,7 +384,7 @@ ALTER SEQUENCE user_social_id_seq OWNED BY user_social.id;
 -- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_social_id_seq', 1, false);
+SELECT pg_catalog.setval('user_social_id_seq', 1, true);
 
 
 --
@@ -499,6 +499,7 @@ admin	filemanager
 --
 
 COPY baby (id, created_by, name, born_date, created_at) FROM stdin;
+5	101	My baby	\N	2013-11-12 12:08:14
 \.
 
 
@@ -507,6 +508,12 @@ COPY baby (id, created_by, name, born_date, created_at) FROM stdin;
 --
 
 COPY baby_action_category (id, created_by, title, description, color) FROM stdin;
+1	\N	Sleep	\N	777
+2	\N	Diaper change	\N	777
+3	\N	Eat	\N	777
+4	\N	Bath	\N	777
+5	\N	Walk	\N	777
+6	\N	Massage	\N	777
 \.
 
 
@@ -573,6 +580,7 @@ COPY "user" (id, username, email, key, created_at, role, is_active, last_login, 
 21	user19	user19@user.com	\N	2012-03-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 22	user20	user20@user.com	\N	2012-02-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 23	user21	user21@user.com	\N	2012-01-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
+101	U_twitter_71662685	\N	\N	\N	user	t	2013-11-12 12:08:13	\N
 \.
 
 
@@ -581,6 +589,7 @@ COPY "user" (id, username, email, key, created_at, role, is_active, last_login, 
 --
 
 COPY user_social (id, user_id, social_service, user_social_id, additional_data) FROM stdin;
+1	101	twitter	71662685	\N
 \.
 
 

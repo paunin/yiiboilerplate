@@ -1,0 +1,20 @@
+.form-add-event-title {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.date {
+    width: 140px;
+}
+
+.time {
+    width: 100px;
+}
+
+input.note {
+    width: 255px;
+}
+
+select.category {
+    width: 90px;
+}

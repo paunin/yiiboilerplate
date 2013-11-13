@@ -13,7 +13,7 @@ class Baby extends BaseBaby
         return array(
             'TimestampBehavior' => array(
                 'class' => 'ext.behaviors.TimestampBehavior',
-                'updated_at' => null
+                'updateAttribute' => null
             ),
             'SignableBehavior' => array(
                 'class' => 'ext.behaviors.SignableBehavior.SignableBehavior',

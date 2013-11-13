@@ -7,6 +7,11 @@ $this->breadcrumbs = array(
 );
 ?>
 <h2>Bind social account:</h2>
+<style>
+    .auth-services{
+        width: 780px;
+    }
+</style>
 <?php
 $this->widget('ext.eauth.EAuthWidget', array('action' => '/user/login/login'));
 ?>

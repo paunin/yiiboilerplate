@@ -5,6 +5,7 @@
 
 $this->pageTitle = Yii::app()->name . ' - Login';
 $this->breadcrumbs = false;
+
 ?>
 
 <div class="form bs3-form">
@@ -37,10 +38,10 @@ $this->breadcrumbs = false;
     <div class="row buttons">
         <?php echo CHtml::submitButton('Login', array('class' => 'btn btn-lg btn-primary btn-block')); ?>
     </div>
-    <div class="row rememberMe">
+    <div class="row rememberMe" style="text-align: center">
         <?php echo CHtml::link(Yii::t('app', 'Recovery password'), Cut::createUrl('/user/register/recoverypass')) ?> |
         <?php echo CHtml::link(Yii::t('app', 'Resend registration email'), Cut::createUrl('/user/register/resendmail')) ?> |
-        <?php echo CHtml::mailto(Yii::t('app', 'Support request'), Yii::app()->params['adminEmail']) ?>
+        <?php echo CHtml::mailto(Yii::t('app', 'Support'), Yii::app()->params['adminEmail']) ?>
 
 
     </div>

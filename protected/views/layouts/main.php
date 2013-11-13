@@ -4,10 +4,8 @@ Asse::addCss('print.css',null,false,'print');
 Asse::addCss('main.css');
 Asse::addCss('form.css');
 
-
-
-Asse::addCss('bootstrap.min.css', Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
-Asse::addCss('bootstrap-theme.min.css', Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
+//Asse::addCss('bootstrap.min.css', Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
+//Asse::addCss('bootstrap-theme.min.css', Yii::getPathOfAlias('webroot.web.bootstrap_300.css'));
 //Asse::addJs('jquery/jquery-1.10.2.js');
 //Asse::addJs('jquery/jquery.cookie.js');
 
@@ -30,6 +28,8 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection"/>
     <![endif]-->
 
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/web/bootstrap_300/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/web/bootstrap_300/css/bootstrap-theme.min.css"/>
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -37,7 +37,13 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
 <div class="container" id="page">
 
     <div id="header">
-        <div id="logo"><a href="/" class="logo"><?php echo CHtml::encode(Yii::app()->name); ?></a></div>
+        <div id="logo"><a href="/" class="logo"><img src="<?php
+                echo Img::getSizedPath(
+                    Yii::getPathOfAlias('webroot').'/images/baby-boy.png',
+                    30,
+                    30
+                );
+                ?>"><span><?php echo CHtml::encode(Yii::app()->name); ?></span></a></div>
     </div>
     <!-- header -->
 

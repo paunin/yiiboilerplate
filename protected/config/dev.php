@@ -19,7 +19,7 @@ return  array(
     'components' => array(
         'urlManager' => array(
             //'urlFormat' => 'get',
-            'showScriptName' => true
+            //'showScriptName' => true
         ),
         'fixture' => array(
             'class' => 'system.test.CDbFixtureManager',

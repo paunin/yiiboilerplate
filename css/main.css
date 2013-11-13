@@ -6,7 +6,13 @@ body
 	font: normal 10pt Arial,Helvetica,sans-serif;
 	background: #EFEFEF;
 }
+a{
+    text-decoration: none;
+}
 
+.clear{
+    clear: both;
+}
 #page
 {
 	margin-top: 5px;
@@ -43,10 +49,17 @@ body
 
 #logo
 {
-	padding: 10px 20px;
+	padding: 17px 20px;
 	font-size: 200%;
 }
+#logo img{
+    margin-right: 5px;
+    margin-top: -5px;
+}
 
+#logo span{
+    padding-top: 10px;
+}
 a.logo{
     color: #555;
     font-weight: bold;

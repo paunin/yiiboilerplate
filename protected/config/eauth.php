@@ -22,49 +22,51 @@ return array(
         'google_oauth' => array(
             // register your app here: https://code.google.com/apis/console/
             'class' => 'GoogleOAuthService',
-            'client_id' => '620690907725.apps.googleusercontent.com',
-            'client_secret' => 'tULdcRqXhDw0N_zMcf5usE4M',
+            'client_id' => '566633457378.apps.googleusercontent.com',
+            'client_secret' => 'Q_F_clAfBYKBghvRUlJvLdGK',
             'title' => 'Google',
         ),
         'facebook' => array(
             // register your app here: https://developers.facebook.com/apps/
             'class' => 'FacebookOAuthService',
-            'client_id' => '606392652746197',
-            'client_secret' => '8208ae757a903d25a1cb18cb15b5da7a',
+            'client_id' => '256908007791921',
+            'client_secret' => '58b6a16741f7e5f5080950330faa9ae7',
+        ),
+        'linkedin' => array(
+            // register your app here: https://www.linkedin.com/secure/developer
+            'class' => 'LinkedinOAuthService',
+            'key' => '75t22hpvnf4wq7',
+            'secret' => '5RgD2LFB2TFZNMrl',
+        ),
+        'github' => array(
+            // register your app here: https://github.com/settings/applications
+            'class' => 'GitHubOAuthService',
+            'client_id' => '809be3829a20cc140ca3',
+            'client_secret' => 'c3be21a41ea68e74a6e83dd69c30fe21034135f3',
         ),
         'vkontakte' => array(
             // register your app here: https://vk.com/editapp?act=create&site=1
             'class' => 'VKontakteOAuthService',
-            'client_id' => '3886566',
-            'client_secret' => '8EPeW9B3evETBPCEtsRH',
+            'client_id' => '3993150',
+            'client_secret' => 'XLyA4x3FAjSyzqomCUbj',
         ),
         'yandex_oauth' => array(
             // register your app here: https://oauth.yandex.ru/client/my
             'class' => 'YandexOAuthService',
-            'client_id' => '82343d009b4a48cab6a5832e17a7ffa3',
-            'client_secret' => 'bc40e6991b4b4e368af6ce2c55d0e8a9',
+            'client_id' => '5c48f9984ea040929f07ee36538ddf9b',
+            'client_secret' => '1632b16e68d64255a3ab67219a6f1d20',
             'title' => 'Yandex',
         ),
         'moikrug' => array(
             // register your app here: https://oauth.yandex.ru/client/my
             'class' => 'MoikrugOAuthService',
-            'client_id' => '82343d009b4a48cab6a5832e17a7ffa3',
-            'client_secret' => 'bc40e6991b4b4e368af6ce2c55d0e8a9',
+            'client_id' => '6f52596769e8420aadd0b7fefaa0968c',
+            'client_secret' => 'e34ab10802fc4b1e8b0fb2b48bec2045',
             'title' => 'Moikrug.ru',
         ),
 
-         'linkedin' => array(
-             // register your app here: https://www.linkedin.com/secure/developer
-             'class' => 'LinkedinOAuthService',
-             'key' => '...',
-             'secret' => '...',
-         ),
-         'github' => array(
-             // register your app here: https://github.com/settings/applications
-             'class' => 'GitHubOAuthService',
-             'client_id' => 'b07f27a05c78edda4e74',
-             'client_secret' => 'c4356c16360653c6837883db60cd0ca2de06709d',
-         ),
+
+
 //         'live' => array(
 //             // register your app here: https://manage.dev.live.com/Applications/Index
 //             'class' => 'LiveOAuthService',
@@ -75,8 +77,8 @@ return array(
         'mailru' => array(
             // register your app here: http://api.mail.ru/sites/my/add
             'class' => 'MailruOAuthService',
-            'client_id' => '710430',
-            'client_secret' => '713b38242f9bec9e33bd2c043ad0d823',
+            'client_id' => '713009',
+            'client_secret' => '7b638c8c34ca431ebb6a6cad04ffe119',
         ),
 
 
@@ -84,9 +86,9 @@ return array(
             // register your app here: http://dev.odnoklassniki.ru/wiki/pages/viewpage.action?pageId=13992188
             // ... or here: http://www.odnoklassniki.ru/dk?st.cmd=appsInfoMyDevList&st._aid=Apps_Info_MyDev
             'class' => 'OdnoklassnikiOAuthService',
-            'client_id' => '194586624',
-            'client_public' => 'CBAJCKJMABABABABA',
-            'client_secret' => '894AF535396533C8D40374B0',
+            'client_id' => '201041408',
+            'client_public' => 'CBAHKMPMABABABABA',
+            'client_secret' => '76FF105AD6EB10AF49C535AF',
             'title' => 'Odnokl.',
         ),
     ),
