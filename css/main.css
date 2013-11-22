@@ -6,6 +6,13 @@ body
 	font: normal 10pt Arial,Helvetica,sans-serif;
 	background: #EFEFEF;
 }
+a {
+    text-decoration: none;
+}
+
+.clear {
+    clear: both;
+}
 
 #page
 {
