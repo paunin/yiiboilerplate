@@ -1,7 +1,7 @@
 <?php
-require_once(dirname(__FILE__).'/../../../../norun.php');
-if(!Yii::app()->user->checkAccess('filemanager'))
-    die('403 Filemanager useless for you');
+//require_once(dirname(__FILE__).'/../../../../norun.php');
+//if(!Yii::app()->user->checkAccess('filemanager'))
+//    die('403 Filemanager useless for you');
 session_start();
 
 //------------------------------------------------------------------------------
