@@ -39,9 +39,9 @@ $this->breadcrumbs = false;
         <?php echo CHtml::submitButton('Login', array('class' => 'btn btn-lg btn-primary btn-block')); ?>
     </div>
     <div class="row rememberMe" style="text-align: center">
-        <?php echo CHtml::link(Yii::t('app', 'Recovery password'), Cut::createUrl('/user/register/recoverypass')) ?> |
-        <?php echo CHtml::link(Yii::t('app', 'Resend registration email'), Cut::createUrl('/user/register/resendmail')) ?> |
-        <?php echo CHtml::mailto(Yii::t('app', 'Support'), Yii::app()->params['adminEmail']) ?>
+        <?php echo CHtml::link(Yii::t('c_app', 'Recovery password'), Cut::createUrl('/user/register/recoverypass')) ?> |
+        <?php echo CHtml::link(Yii::t('c_app', 'Resend registration email'), Cut::createUrl('/user/register/resendmail')) ?> |
+        <?php echo CHtml::mailto(Yii::t('c_app', 'Support'), Yii::app()->params['adminEmail']) ?>
 
 
     </div>

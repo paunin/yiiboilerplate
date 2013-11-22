@@ -8,8 +8,12 @@
 Asse::addCss('baby_action_log_form.css');
 Asse::addCss('baby_action_log.css');
 
+Asse::addJs('jquery.tipsy.js',Yii::getPathOfAlias('webroot.web.tipsy.src.javascripts'));
+Asse::addCss('tipsy.css',Yii::getPathOfAlias('webroot.web.tipsy.src.stylesheets'));
+
 $this->pageTitle = $baby->name . ' - ' . Yii::app()->name;
 $this->breadcrumbs = array(
+    Yii::t('c_app','My babies')=>'baby/index',
     $baby->name,
 );
 ?>
@@ -88,7 +92,7 @@ $this->breadcrumbs = array(
     <?php echo $form->textField($model, 'description', array('class' => 'form-control note', 'placeholder' => $model->getAttributeLabel('description'))); ?>
 </div>
 
-<button type="submit" class="btn btn-default"><?php echo Yii::t('app', 'Add') ?></button>
+<button type="submit" class="btn btn-default"><?php echo Yii::t('c_app', 'Add') ?></button>
 <?php if($model->errors) Cut::setFlash($form->errorSummary($model), 'error'); ?>
 <?php $this->endWidget(); ?>
 
@@ -96,7 +100,8 @@ $this->breadcrumbs = array(
     $(document).ready(function () {
         setTimeout(function () {
             $('input.real-value').each(function () {
-                $('#' + $(this).data('id')).val($(this).val())
+                $('#' + $(this).data('id')).find('input.form-control').val($(this).val());
+                $('.bfh-datepicker, .bfh-timepicker').find('input').removeAttr('readonly');
             })
         }, 300)
     })
@@ -111,7 +116,7 @@ $this->breadcrumbs = array(
 
 <?php $form = $this->beginWidget('CActiveForm', array(
     'method' => 'get',
-    'action' => Cut::createUrl('baby/index'),
+    'action' => Cut::createUrl('baby/baby'),
     'id' => 'baby-action-log-show-form',
     'htmlOptions' => array('class' => 'form-inline', 'role' => 'form', 'style' => "float: right; margin-top: 10px"),
     'enableClientValidation' => true,
@@ -123,7 +128,7 @@ $this->breadcrumbs = array(
 <div class="form-group">
     <?php
     $list = CHtml::listData(BabyActionCategory::model()->findAll(), 'id', 'title');
-    $list = array('' => Yii::t('app', 'All')) + $list;
+    $list = array('' => Yii::t('c_app', 'All')) + $list;
     echo CHtml::activeDropDownList($modelShow, 'baby_action_category_id',
         $list,
         array('class' => "form-control category")) ?>
@@ -171,7 +176,7 @@ $this->breadcrumbs = array(
 </div>
 
 
-<button type="submit" class="btn btn-primary"><?php echo Yii::t('app', 'Show events') ?></button>
+<button type="submit" class="btn btn-primary"><?php echo Yii::t('c_app', 'Show events') ?></button>
 <?php if($modelShow->errors) Cut::setFlash($form->errorSummary($modelShow), 'error'); ?>
 <?php $this->endWidget(); ?>
 <br/>
@@ -179,7 +184,7 @@ $this->breadcrumbs = array(
 <br/>
 <br/>
 <?php if(empty($stat)): ?>
-    <h2 class="empty-stat"><?php echo Yii::t('app', 'No information about your baby. Check filters or add some events.') ?></h2>
+    <h2 class="empty-stat"><?php echo Yii::t('c_app', 'No information about your baby. Check filters or add some events.') ?></h2>
 <?php endif; ?>
 
 <?php foreach ($stat as $date => $cats): ?>
@@ -189,8 +194,7 @@ $this->breadcrumbs = array(
 
         <?php foreach ($cats as $cat_id => $cat): ?>
             <div class="chart-group">
-                <div class="chart-element-actions"><a href="#" class="expand-log"><img
-                            src="<?php echo Yii::app()->request->baseUrl; ?>/images/expand.gif"></a></div>
+
                 <ul class="chart-element-bar<?php echo $modelShow->agg ? ' chart-agg' : '' ?>"
                     data-color="#<?php echo $cat['color'] ?>"
                     data-category-id="<?php echo $cat_id ?>"
@@ -202,15 +206,27 @@ $this->breadcrumbs = array(
                             data-id="<?php echo $item_id ?>"
                             data-start="<?php echo date('H:i', strtotime($item['start'])) ?>"
                             data-end="<?php echo date('H:i', strtotime($item['finish'])) ?>">
-                            <div class="chart chart-mini" title="<?php echo $item['title'] ?>">
-                                <a href="#" class="delete-log">
-                                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
-                                </a>
+                            <div class="chart chart-mini tipsyt" data-tipsy-g="s" title="<?php echo $item['title'] ?>">
+                                <span class="title-log">
+                                    [<?php echo date('H:i', strtotime($item['start'])) ?> - <?php echo date('H:i', strtotime($item['finish'])) ?>]
+                                    <a href="<?php echo Cut::createUrl('baby/deleteLog',array('id'=>$item_id)) ?>"
+                                       class="delete-log tipsyt"  data-tipsy-g="nw" title="<?php echo Yii::t('c_app','Delete event') ?>">
+                                        del
+                                    </a>
+                                </span>
                             </div>
                         </li>
                     <?php endforeach; ?>
 
                 </ul>
+                <div class="chart-element-actions">
+                    <a href="#"
+                       class="expand-log tipsyt"
+                       title="<?php echo Yii::t('c_app','Show/hide all events') ?>"
+                       data-tipsy-g="w" >
+                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/expand.gif">
+                    </a>
+                </div>
             </div>
             <br class="clear"/>
         <?php endforeach; ?>
@@ -223,6 +239,15 @@ $this->breadcrumbs = array(
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $('.tipsyt')
+            .each(function(){
+                var g = $(this).data('tipsy-g');
+                if(g)
+                    $(this).tipsy({gravity: g})
+                else
+                    $(this).tipsy({gravity: 's'})
+            });
 
         $('.chart-element-bar').each(function () {
             var color = $(this).data('color');
@@ -237,15 +262,17 @@ $this->breadcrumbs = array(
 
                 var len = end_point - start_point;
                 if (len <= 0) {
-                    len = 1;
-                    var local_color = "#777"
+                    start_point = start_point-2
+                    len = 2;
+                    var local_color = "#aaa"
                 }
-                $(this).find('.chart').css('background-color', local_color ? local_color : color);
-                $(this).find('.chart').css('left', start_point + 'px');
-                $(this).find('.chart').width(len + 'px');
+                $(this).find('.chart').css('background-color', local_color ? local_color : color)
+                                      .css('left', start_point + 'px')
+                                      .width(len + 'px');
 
                 $(this).click(function () {
-                    alert($(this).data('id'));
+                    $(this).parents('.chart-group').find('.expand-log').click();
+                    return false;
                 })
             })
         })
@@ -253,25 +280,57 @@ $this->breadcrumbs = array(
         $('a.expand-log').click(function () {
 
             if($(this).hasClass('active')){
-
-                $(this).parents('.chart-group').animate({'margin-bottom':0},'slow')
-                $(this).parents('.chart-group').find('.chart-element-time').each(function(index, value){
-                    $(this).animate({'top':0})
-                    $(this).find('.chart').addClass('chart-mini');
-                    $(this).find('.chart').animate({'height':'9px'});
-                })
+                $(this).parents('.chart-group')
+                            .animate({'height':'16px'},'slow')
+                            .find('.chart-element-bar')
+                                .animate({'height':'10px'},'slow',function(){
+                                    $(this).removeClass('chart-element-bar-expanded');
+                                })
+                            .end()
+                            .find('.chart-element-time')
+                                .each(function(index, value){
+                                    $(this).animate({'top':0},function(){
+                                        if($(this).hasClass('chart-element-time-deleted'))
+                                            $(this).remove();
+                                    })
+                                    $(this).find('.chart').addClass('chart-mini');
+                                    $(this).find('.chart').animate({'height':'9px'});
+                                })
             } else {
                 var count = $(this).parents('.chart-group').find('.chart-element-time').length;
-                $(this).parents('.chart-group').animate({'margin-bottom':(count) * 20 + 10 +'px'},'fast')
+                if(!count)
+                    count = 1;
 
-                $(this).parents('.chart-group').find('.chart-element-time').each(function(index, value){
-                    $(this).animate({'top':(index+1) * 20 +'px'})
-                    $(this).find('.chart').animate({'height':'15px'},function(){
-                        $(this).removeClass('chart-mini');
-                    });
-                })
+                $(this).parents('.chart-group')
+                            .animate({'height':(count) * 20 + 10 +'px'},'fast')
+                            .find('.chart-element-bar')
+                                .addClass('chart-element-bar-expanded')
+                            .end()
+                            .find('.chart-element-bar')
+                                .animate({'height':((count) * 20)-3 +'px'},'fast')
+                            .end()
+                            .find('.chart-element-time')
+                                .each(function(index, value){
+                                    $(this).animate({'top':(index+0) * 20 +'px'})
+                                    $(this).find('.chart').animate({'height':'15px'},'fast',function(){
+                                        $(this).removeClass('chart-mini');
+                                    });
+                                })
             }
             $(this).toggleClass('active');
+            return false;
+        })
+
+        $('a.delete-log').click(function (){
+            $(this).hide().parents('.chart-element-time').addClass('chart-element-time-deleted');
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('href'),
+                dataType: "json",
+                success: function(data){
+                    //success
+                }
+            });
             return false;
         })
 

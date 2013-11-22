@@ -45,7 +45,7 @@ class ProfileController extends Controller
         if(isset($_POST['ChangeMailForm'])) {
             $model->attributes = $_POST['ChangeMailForm'];
             if($model->validate() && $model->changemail()) {
-                Cut::setFlash(Yii::t('app','Check your mailbox for complete email change process'),'success');
+                Cut::setFlash(Yii::t('c_app','Check your mailbox for complete email change process'),'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
             //Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
@@ -68,7 +68,7 @@ class ProfileController extends Controller
         if($key && !isset($_POST['EndChangeMailForm'])) {
             $model->hash = $key;
             if($model->validate() && $model->endchange()) {
-                Cut::setFlash(Yii::t('app','Email has been changed'), 'success');
+                Cut::setFlash(Yii::t('c_app','Email has been changed'), 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
         }
@@ -77,7 +77,7 @@ class ProfileController extends Controller
         if(isset($_POST['EndChangeMailForm'])) {
             $model->attributes = $_POST['EndChangeMailForm'];
             if($model->validate() && $model->endchange()) {
-                Cut::setFlash(Yii::t('app','Email has been changed'), 'success');
+                Cut::setFlash(Yii::t('c_app','Email has been changed'), 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
             //Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
@@ -103,7 +103,7 @@ class ProfileController extends Controller
         if(isset($_POST['ChangePasswordForm'])) {
             $model->attributes = $_POST['ChangePasswordForm'];
             if($model->validate() && $model->change()) {
-                Cut::setFlash(Yii::t('app','Password has been changed'), 'success');
+                Cut::setFlash(Yii::t('c_app','Password has been changed'), 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
             //Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
@@ -126,7 +126,7 @@ class ProfileController extends Controller
         if(isset($_POST['ChangeUsernameForm'])) {
             $model->attributes = $_POST['ChangeUsernameForm'];
             if($model->validate() && $model->change()) {
-                Cut::setFlash(Yii::t('app','Username has been changed'), 'success');
+                Cut::setFlash(Yii::t('c_app','Username has been changed'), 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
             //Cut::setFlash($this->getAction()->id . " ACTION error", 'error');

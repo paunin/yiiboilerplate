@@ -19,7 +19,7 @@ class RegisterController extends Controller
             if ($model->validate()) {
                 $model->scenario = NULL;
                 if ($model->register()) {
-                    Cut::setFlash(Yii::t('app','Check your mailbox for complete registration process'),'success');
+                    Cut::setFlash(Yii::t('c_app','Check your mailbox for complete registration process'),'success');
                     $this->redirect(Yii::app()->user->returnUrl);
                 }
             }
@@ -47,7 +47,7 @@ class RegisterController extends Controller
         if (isset($_POST['EndRegisterForm'])) {
             $model->attributes = $_POST['EndRegisterForm'];
             if ($model->validate() && $model->endregister()) {
-                Cut::setFlash(Yii::t('app','Now you can sign in with your username and password'), 'success');
+                Cut::setFlash(Yii::t('c_app','Now you can sign in with your username and password'), 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
             //Cut::setFlash("Something wrong", 'error');
@@ -74,7 +74,7 @@ class RegisterController extends Controller
             if ($model->validate()) {
                 $model->scenario = NULL;
                 if ($model->resend()) {
-                    Cut::setFlash(Yii::t('app','Check your mailbox for complete registration process'),'success');
+                    Cut::setFlash(Yii::t('c_app','Check your mailbox for complete registration process'),'success');
                     $this->redirect(Yii::app()->user->returnUrl);
                 }
             }
@@ -99,7 +99,7 @@ class RegisterController extends Controller
             if ($model->validate()) {
                 $model->scenario = NULL;
                 if ($model->recovery()) {
-                    Cut::setFlash(Yii::t('app','Check your mailbox for complete recovery password process'), 'success');
+                    Cut::setFlash(Yii::t('c_app','Check your mailbox for complete recovery password process'), 'success');
                     $this->redirect(Yii::app()->user->returnUrl);
                 }
             }
@@ -127,7 +127,7 @@ class RegisterController extends Controller
         if (isset($_POST['EndRecoveryPassForm'])) {
             $model->attributes = $_POST['EndRecoveryPassForm'];
             if ($model->validate() && $model->endrecovery()) {
-                Cut::setFlash(Yii::t('app','Now you can sign in with your username and NEW password'), 'success');
+                Cut::setFlash(Yii::t('c_app','Now you can sign in with your username and NEW password'), 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
             }
             //Cut::setFlash("Something wrong", 'error');

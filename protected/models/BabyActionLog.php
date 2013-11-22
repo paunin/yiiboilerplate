@@ -15,7 +15,7 @@ class BabyActionLog extends BaseBabyActionLog
             array_merge(
                 parent::attributeLabels(),
                 array(
-                    'baby_action_category_id'=>Yii::t('app','Action')
+                    'baby_action_category_id'=>Yii::t('c_app','Action')
                 )
             );
     }

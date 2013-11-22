@@ -5,6 +5,7 @@ $this->pageTitle = Yii::app()->name . ' - My profile';
 $this->breadcrumbs = array(
     'My profile',
 );
+
 ?>
 <h2>Bind social account:</h2>
 <style>

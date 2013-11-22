@@ -78,7 +78,7 @@ $main = array(
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'class' => 'HttpRequest',
-            'noCsrfValidationRoutes' => array('admin'),
+            'noCsrfValidationRoutes' => array('admin','baby/deleteLog'),
         ),
         'image' => array(
             'class' => 'ext.image.CImageComponent',
@@ -107,7 +107,8 @@ $main = array(
                 'gii/<controller:\w+>/<action:\w+>' => 'gii/<controller>/<action>',
 
 
-                'my_baby' => 'baby/index',
+                'my_baby' => 'baby/baby',
+                'my_baby/log/delete/<id:\d+>' => 'baby/deleteLog',
 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

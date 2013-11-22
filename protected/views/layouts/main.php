@@ -87,21 +87,21 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
             <?php $this->widget('application.widgets.b3menu.b3menuWidget', array(
                 'htmlOptions' => array('class' => 'nav navbar-nav navbar-right'),
                 'items' => array(
-                    array('label' => Yii::t('app','Login'), 'url' => array('/user/login/login'), 'visible' => Yii::app()->user->isGuest),
-                    array('label' => Yii::t('app','Register'), 'url' => array('/user/register/register'), 'visible' => Yii::app()->user->isGuest),
+                    array('label' => Yii::t('c_app','Login'), 'url' => array('/user/login/login'), 'visible' => Yii::app()->user->isGuest),
+                    array('label' => Yii::t('c_app','Register'), 'url' => array('/user/register/register'), 'visible' => Yii::app()->user->isGuest),
 
                     array(
-                        'label' => Yii::app()->user->name,
+                        'label' => User::current()->username,
                         'visible' => !Yii::app()->user->isGuest,
                         'items' => array(
-                            array('label' => Yii::t('app','Profile'), 'url' => array('/user/profile/index')),
-                            array('label' => Yii::t('app','Logout'), 'url' => array('/user/login/logout')),
+                            array('label' => Yii::t('c_app','Profile'), 'url' => array('/user/profile/index')),
+                            array('label' => Yii::t('c_app','Logout'), 'url' => array('/user/login/logout')),
                             array(),
-                            array('label' => Yii::t('app','Change email'), 'url' => array('/user/profile/changemail')),
+                            array('label' => Yii::t('c_app','Change email'), 'url' => array('/user/profile/changemail')),
 //                            array('label' => 'Changed email verify', 'url' => array('/user/profile/endchangemail')),
 //                            array(),
-                            array('label' => Yii::t('app','Changed username'), 'url' => array('/user/profile/changeusername')),
-                            array('label' => Yii::t('app','Changed password'), 'url' => array('/user/profile/changepassword')),
+                            array('label' => Yii::t('c_app','Changed username'), 'url' => array('/user/profile/changeusername')),
+                            array('label' => Yii::t('c_app','Changed password'), 'url' => array('/user/profile/changepassword')),
                         )
 
                     )
@@ -111,7 +111,18 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
 
         </div>
     </nav>
+    <!--[if lt IE 50]>
+    <div class="alert alert-warning" style="text-align: center">
 
+        <h2><?php echo Yii::t('c_app','For all site features you should use another browser') ?></h2>
+        <div id="browsers">
+            <a rel="nofolow"  style="background: url(/images/chrome.gif) no-repeat 50% 6px;" target="_blank" href="http://www.google.com/chrome/">Google Chrome</a>
+            <a rel="nofolow"  style="background: url(/images/firefox.gif) no-repeat 50% 7px;" target="_blank" href="http://www.mozilla-europe.org/">Mozilla Firefox</a>
+            <a rel="nofolow"  style="background: url(/images/safari.gif) no-repeat 50% 0px;" target="_blank" href="http://www.apple.com/safari/">Safari</a>
+            <a rel="nofolow"  style="background: url(/images/opera.gif) no-repeat 50% 7px;" target="_blank" href="http://www.opera.com/">Opera</a>
+        </div>
+    </div>
+    <![endif]-->
     <?php if (isset($this->breadcrumbs)): ?>
         <?php $this->widget('zii.widgets.CBreadcrumbs', array(
             'tagName'=>'ol',
@@ -127,6 +138,11 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
     if(!empty($this->breadcrumbs) && count($this->breadcrumbs)>0):?>
         <h1><?php echo array_pop($this->breadcrumbs); ?></h1>
     <?php endif; ?>
+
+
+
+
+
     <?php
     foreach (Yii::app()->user->getFlashes() as $key => $message) {
         if($key=='error') //bootstrap 3

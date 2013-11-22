@@ -22,3 +22,6 @@
 [submodule "web/bootstrap_helpers"]
 	path = web/bootstrap_helpers
 	url = https://github.com/vlamanna/BootstrapFormHelpers.git
+[submodule "web/tipsy"]
+	path = web/tipsy
+	url = git://github.com/jaz303/tipsy.git

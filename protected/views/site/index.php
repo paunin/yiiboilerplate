@@ -3,7 +3,7 @@
     <br/>
     <br/>
     <a class="wellcome"
-       href="<?php echo Cut::createUrl('user/login/login') ?>"><?php echo Yii::t('app', 'You should be authorised to keep your baby in time!') ?></a>
+       href="<?php echo Cut::createUrl('user/login/login') ?>"><?php echo Yii::t('c_app', 'You should be authorised to keep your baby in time!') ?></a>
 
     <br/>
     <br/>

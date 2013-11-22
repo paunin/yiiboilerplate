@@ -40,9 +40,9 @@ class BabyActionLogForm extends BabyActionLog
             array_merge(
                 parent::attributeLabels(),
                 array(
-                    'time_start' => Yii::t('app', 'Start'),
-			        'time_finish' => Yii::t('app', 'Finish'),
-			        'description' => Yii::t('app', 'Note'),
+                    'time_start' => Yii::t('c_app', 'Start'),
+			        'time_finish' => Yii::t('c_app', 'Finish'),
+			        'description' => Yii::t('c_app', 'Note'),
                 )
             );
     }

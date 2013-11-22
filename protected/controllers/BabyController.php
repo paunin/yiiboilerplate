@@ -9,7 +9,7 @@ class BabyController extends Controller {
     /**
      * Declares class-based actions.
      */
-    protected $_actions = array('index');
+    protected $_actions = array('index','baby','deleteLog');
 
     public function filters()
     {
@@ -23,7 +23,7 @@ class BabyController extends Controller {
     {
         return array(
             array('deny',
-                'actions' => array('index', 'myDelete', 'myGet'),
+                'actions' => array('index','baby', 'deleteLog'),
                 'users' => array('?'),
             ),
         );

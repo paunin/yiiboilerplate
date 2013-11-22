@@ -140,7 +140,7 @@ ALTER SEQUENCE baby_action_log_id_seq OWNED BY baby_action_log.id;
 -- Name: baby_action_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('baby_action_log_id_seq', 1, false);
+SELECT pg_catalog.setval('baby_action_log_id_seq', 23, true);
 
 
 --
@@ -166,7 +166,7 @@ ALTER SEQUENCE baby_id_seq OWNED BY baby.id;
 -- Name: baby_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('baby_id_seq', 5, true);
+SELECT pg_catalog.setval('baby_id_seq', 9, true);
 
 
 --
@@ -338,7 +338,7 @@ ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_id_seq', 101, true);
+SELECT pg_catalog.setval('user_id_seq', 106, true);
 
 
 --
@@ -384,7 +384,7 @@ ALTER SEQUENCE user_social_id_seq OWNED BY user_social.id;
 -- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_social_id_seq', 1, true);
+SELECT pg_catalog.setval('user_social_id_seq', 5, true);
 
 
 --
@@ -500,6 +500,10 @@ admin	filemanager
 
 COPY baby (id, created_by, name, born_date, created_at) FROM stdin;
 5	101	My baby	\N	2013-11-12 12:08:14
+6	102	My baby	\N	2013-11-13 10:37:11
+7	103	My baby	\N	2013-11-13 12:51:37
+8	104	My baby	\N	2013-11-13 16:16:12
+9	106	My baby	\N	2013-11-14 11:44:45
 \.
 
 
@@ -508,12 +512,12 @@ COPY baby (id, created_by, name, born_date, created_at) FROM stdin;
 --
 
 COPY baby_action_category (id, created_by, title, description, color) FROM stdin;
-1	\N	Sleep	\N	777
-2	\N	Diaper change	\N	777
-3	\N	Eat	\N	777
-4	\N	Bath	\N	777
-5	\N	Walk	\N	777
-6	\N	Massage	\N	777
+1	\N	Sleep	\N	8CC474
+2	\N	Diaper change	\N	BC5679
+3	\N	Eat	\N	dda816
+4	\N	Bath	\N	6F85BF
+5	\N	Walk	\N	aa6fbc
+6	\N	Massage	\N	6fabbc
 \.
 
 
@@ -522,6 +526,18 @@ COPY baby_action_category (id, created_by, title, description, color) FROM stdin
 --
 
 COPY baby_action_log (id, baby_id, baby_action_category_id, description, time_start, time_finish, created_at) FROM stdin;
+4	6	1	\N	2013-11-14 00:40:59	2013-11-14 04:40:59	2013-11-13 10:40:59
+10	9	2	полный памперс	2013-11-14 09:30:02	2013-11-14 09:33:02	2013-11-14 11:50:02
+12	9	3	ела засыпая	2013-11-14 09:34:58	2013-11-14 09:55:58	2013-11-14 11:53:58
+13	9	1	\N	2013-11-14 10:00:19	2013-11-14 11:30:19	2013-11-14 11:55:19
+14	9	2	подмывала под краном. памперс почти пустой	2013-11-14 11:35:19	2013-11-14 11:40:19	2013-11-14 11:57:19
+15	9	6	каталась на мячике	2013-11-14 11:30:08	2013-11-14 11:35:08	2013-11-14 12:01:08
+16	9	3	поела быстро, засыпая	2013-11-14 11:40:53	2013-11-14 11:59:53	2013-11-14 12:03:53
+18	9	1	\N	2013-11-14 12:00:53	2013-11-14 12:55:53	2013-11-14 13:19:53
+19	9	2	полный памперс	2013-11-14 13:00:51	2013-11-14 13:05:51	2013-11-14 13:20:51
+20	9	4	утренний туалет, обработка пупочка	2013-11-14 13:05:49	2013-11-14 13:15:49	2013-11-14 13:22:49
+22	9	3	ела вяло	2013-11-14 13:15:56	2013-11-14 13:55:56	2013-11-14 14:14:56
+23	9	2	помочилась	2013-11-14 14:05:39	2013-11-14 14:10:39	2013-11-14 14:16:39
 \.
 
 
@@ -580,7 +596,12 @@ COPY "user" (id, username, email, key, created_at, role, is_active, last_login, 
 21	user19	user19@user.com	\N	2012-03-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 22	user20	user20@user.com	\N	2012-02-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
 23	user21	user21@user.com	\N	2012-01-16 12:26:14.018	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff
-101	U_twitter_71662685	\N	\N	\N	user	t	2013-11-12 12:08:13	\N
+105	Paunina	e.k.nikitina90@gmail.com	register|97ac761d70ba5304e67ae7ab4fd74577	2013-11-14 07:44:18.255679	user	f	\N	4297f44b13955235245b2497399d7a93
+106	katya	\N	\N	\N	user	t	2013-11-14 11:44:44	\N
+101	paunin3	\N	changemail|d.m.paunin@gmail.com|4803b7ac4abe4a2092debc94e78f9130	\N	user	t	2013-11-14 15:23:44	4297f44b13955235245b2497399d7a93
+103	U_vkontakte_913132	\N	\N	\N	user	t	2013-11-14 15:24:52	\N
+104	paunin2	d.m.paunin@gmail.com	\N	2013-11-13 12:13:38.10477	user	t	2013-11-13 16:26:36	4297f44b13955235245b2497399d7a93
+102	paunin	\N	changemail|info@paunin.com|c38374f1dac30e0a8d23450583189d62	\N	user	t	2013-11-13 19:14:29	4297f44b13955235245b2497399d7a93
 \.
 
 
@@ -590,6 +611,10 @@ COPY "user" (id, username, email, key, created_at, role, is_active, last_login, 
 
 COPY user_social (id, user_id, social_service, user_social_id, additional_data) FROM stdin;
 1	101	twitter	71662685	\N
+2	102	facebook	1151315899	\N
+3	103	vkontakte	913132	\N
+4	106	vkontakte	217091021	\N
+5	101	github	500074	\N
 \.
 
 

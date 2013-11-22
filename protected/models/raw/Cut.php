@@ -64,7 +64,7 @@ class Cut
 
     public static function setFlash($text = '', $type = 'notice')
     {
-        Yii::app()->user->setFlash($type, $text);
+        return Yii::app()->user->setFlash($type, $text);
     }
 
     /**

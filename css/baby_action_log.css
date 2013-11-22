@@ -10,8 +10,9 @@
     padding: 0;
     height: 10px;
     border: solid 1px #777;
-    float: right;
-    width: 720px;
+    float: left;
+    width: 722px;
+    overflow: visible !important;
 }
 
 .chart-element-time {
@@ -20,38 +21,80 @@
     padding: 0;
     height: 8px;
     position: relative ;
-    opacity: 0.7;
+    opacity: 0.75;
     top: 0;
     width: 0;
     float: left;
     overflow: visible;
 }
+.chart-element-time-deleted{
+    opacity: 0.4 !important;
+}
+.chart-element-time-deleted .chart{
+    background-color: #bfbfbf !important;
+}
+
 .chart-agg .chart-element-time{
     opacity: 0.2;
 }
+
+.expand-log{
+    display: block;
+    width: 17px;
+}
+.chart-element-time:hover{
+    opacity: 1;
+}
+.chart-element-bar-expanded .chart-element-time{
+    opacity: 1;
+}
 .chart-group{
-    width: 750px;
+    width: 780px;
     height: 16px;
     float: right;
+    overflow: visible !important;
+
 }
+
 .chart{
     position: relative;
     height: 8px;
     cursor: pointer;
-    overflow: visible;
+    overflow: visible !important;
 
 }
-.chart .delete-log{
+
+.chart .title-log{
     display: block;
     position: relative;
-    left: -17px;
-    width: 17px;
-    height: 17px;
+    top: 0;
+    white-space: nowrap;
+    width: 0;
+    height: 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: #000000;
+    padding-left: 2px;
+    padding-top: 1px;
 }
-.chart-mini .delete-log{
 
+.delete-log{
     display: none;
+}
+.title-log:hover .delete-log{
+    display: inline;
+}
 
+
+
+.chart-mini .title-log
+{
+    display: none;
+}
+
+.chart-element-bar-expanded{
+    border-left: none;
+    border-right: none;
 }
 
 
@@ -65,7 +108,7 @@
 }
 .chart-element-actions{
     width: 10px;
-    float: right;
+    float: left;
     margin-left: 5px;
     font-size: 11px;
     padding-top: 4px;
@@ -75,6 +118,7 @@
     display: block;
     height: 10px;
     opacity: 0.5;
+    margin-right: 20px;
 }
 .chart-element-actions a:hover{
     opacity: 0.85;

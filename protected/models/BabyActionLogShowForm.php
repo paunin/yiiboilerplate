@@ -32,9 +32,9 @@ class BabyActionLogShowForm extends BabyActionLog
             array_merge(
                 parent::attributeLabels(),
                 array(
-                    'date_start' => Yii::t('app', 'From date'),
-                    'date_finish' => Yii::t('app', 'To date'),
-                    'agg' => Yii::t('app', 'Aggregate events'),
+                    'date_start' => Yii::t('c_app', 'From date'),
+                    'date_finish' => Yii::t('c_app', 'To date'),
+                    'agg' => Yii::t('c_app', 'Aggregate events'),
                 )
             );
     }
@@ -75,7 +75,8 @@ class BabyActionLogShowForm extends BabyActionLog
         $criteria->addCondition('t.time_start >= :time_start');
         $criteria->addCondition('t.time_finish <= :time_finish');
         $criteria->addCondition('t.baby_id = :baby_id');
-        $criteria->order = "t.time_start";
+        $criteria->order = "to_char( t.time_start, 'HH24:MI')";
+        //$criteria->order = " t.time_start";
         $criteria->params = array(':time_start' => $this->time_start,':time_finish'=> $this->time_finish, ':baby_id' => $this->baby_id );
         if($this->baby_action_category_id){
             $criteria->addCondition('t.baby_action_category_id = :baby_action_category_id');
@@ -95,8 +96,8 @@ class BabyActionLogShowForm extends BabyActionLog
         foreach($records as $baby_log){
             /** @var $baby_log BabyActionLog */
             $date = $this->agg?
-                Yii::t('app','All period')/*date('d.m.Y', strtotime($this->time_start)).'&mdash;'.date('d.m.Y', strtotime($this->time_finish))*/:
-                date('d.m.Y', strtotime($baby_log->time_start));
+                Yii::t('c_app','All period')/*date('d.m.Y', strtotime($this->time_start)).'&mdash;'.date('d.m.Y', strtotime($this->time_finish))*/:
+                date('Y.m.d', strtotime($baby_log->time_start));
 
             if(empty($result[$date])){
                 $result[$date] = array();
@@ -116,7 +117,8 @@ class BabyActionLogShowForm extends BabyActionLog
             );
 
         }
-
+        ksort($result);
+        $result = array_reverse($result);
         return $result;
 
 

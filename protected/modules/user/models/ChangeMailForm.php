@@ -42,7 +42,7 @@ class ChangeMailForm extends User
 
         return myMail::send(
             $this->newemail,
-            Yii::t('user_module', 'Change email address'),
+            Yii::t('c_app', 'Change email address'),
             'ch_email',
             array(
                 'url' => Cut::createUrl('user/profile/endchangemail', array('key' => $user->key), true),
