@@ -2,8 +2,8 @@
 $main = array(
 
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'Baby Stat',
-    'language'=>'en',
+    'name' => 'Yii Boilerplate App', //@ChangeIt
+    'language'=>'ru',
     'sourceLanguage'=>'en',
 
     // preloading 'log' component
@@ -143,9 +143,9 @@ $main = array(
     // application-level parameters that can be accessed
     // using Yii::app()->params['site_url']
     'params' => array(
-        'slogan' => 'Keep your baby in time',
-        'captcha_public_key' => '6LcNDOoSAAAAAP_chNH2J9NqxxF-DxurLwf1QjDb',
-        'captcha_private_key' => '6LcNDOoSAAAAAJ_ESNMM1q1i2Ck7tEgiu9pGk653',
+        'slogan' => 'Slogan for Yii Boilerplate Application', //@ChangeIt
+        'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
+        'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
         'path_img_cache' => 'assets/img_cache'
     ),
 );
