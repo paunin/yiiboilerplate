@@ -37,7 +37,13 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
 <div class="container" id="page">
 
     <div id="header">
-        <div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+        <div id="logo"><a href="/" class="logo"><img src="<?php
+                echo Img::getSizedPath(
+                    Yii::getPathOfAlias('webroot').'/images/baby-boy.png',
+                    30,
+                    30
+                );
+                ?>"><span><?php echo CHtml::encode(Yii::app()->name); ?></span></a></div>
     </div>
     <!-- header -->
 

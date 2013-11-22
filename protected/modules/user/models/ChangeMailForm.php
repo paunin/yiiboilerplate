@@ -25,7 +25,7 @@ class ChangeMailForm extends User
         return array_merge(
             parent::attributeLabels(),
             array(
-                'newemail' => Yii::t('c_app', 'New email')
+                'newemail' => 'New email'
             )
         );
     }

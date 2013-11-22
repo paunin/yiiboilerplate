@@ -2,8 +2,8 @@
 $main = array(
 
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'Yii Boilerplate App', //@ChangeIt
-    'language'=>'ru',
+    'name' => 'Baby Stat',
+    'language'=>'en',
     'sourceLanguage'=>'en',
 
     // preloading 'log' component
