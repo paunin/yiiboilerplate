@@ -28,7 +28,9 @@ class EndRecoveryPassForm extends CFormModel
     {
         return array_merge(
             parent::attributeLabels(),
-            array()
+            array(
+                'password2' => Yii::t('c_app', 'Password again')
+            )
         );
     }
 

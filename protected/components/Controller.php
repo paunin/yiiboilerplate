@@ -21,4 +21,14 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 
+    public function actions()
+    {
+        $actions = array();
+        if(isset($this->_actions))
+            foreach ($this->_actions as $action) {
+                $actions[$action] = 'application.controllers.' . get_class($this) . '.' . ucfirst($action) . 'Action';
+            }
+        return $actions;
+    }
+
 }

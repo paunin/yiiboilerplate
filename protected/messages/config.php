@@ -9,20 +9,12 @@ return array(
     'languages' => array('ru'),
     'fileTypes' => array('php'),
     'overwrite' => true,
-    'removeOld' => false,
+    'removeOld' => true,
     'translator' => '(?:MyYii|Yii)::t',
+    'sort'       => 'new',
     'exclude' => array(
         '.svn',
         '.git',
         '.gitignore',
-        'yiilite.php',
-        'yiit.php',
-        '/i18n/data',
-        '/messages',
-        '/vendors',
-        '/yii',
-        '/extensions',
-        '/_docs',
-
     ),
 );
