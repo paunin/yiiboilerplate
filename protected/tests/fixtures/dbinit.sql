@@ -4,23 +4,10 @@
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
+SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
+SET escape_string_warning = off;
 
 SET search_path = public, pg_catalog;
 
@@ -89,8 +76,8 @@ CREATE TABLE application (
 CREATE SEQUENCE application_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -99,6 +86,13 @@ CREATE SEQUENCE application_id_seq
 --
 
 ALTER SEQUENCE application_id_seq OWNED BY application.id;
+
+
+--
+-- Name: application_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('application_id_seq', 3, true);
 
 
 --
@@ -122,8 +116,8 @@ CREATE TABLE content (
 CREATE SEQUENCE content_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -132,6 +126,13 @@ CREATE SEQUENCE content_id_seq
 --
 
 ALTER SEQUENCE content_id_seq OWNED BY content.id;
+
+
+--
+-- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('content_id_seq', 100, false);
 
 
 --
@@ -160,8 +161,8 @@ CREATE TABLE cron_mail (
 CREATE SEQUENCE cron_mail_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -170,6 +171,13 @@ CREATE SEQUENCE cron_mail_id_seq
 --
 
 ALTER SEQUENCE cron_mail_id_seq OWNED BY cron_mail.id;
+
+
+--
+-- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
 
 
 --
@@ -200,8 +208,8 @@ COMMENT ON COLUMN favorite.type IS 'type of user favorite - users, posts, messag
 CREATE SEQUENCE favorite_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -210,6 +218,13 @@ CREATE SEQUENCE favorite_id_seq
 --
 
 ALTER SEQUENCE favorite_id_seq OWNED BY favorite.id;
+
+
+--
+-- Name: favorite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('favorite_id_seq', 1, false);
 
 
 --
@@ -243,8 +258,8 @@ vkontakte_user';
 CREATE SEQUENCE feed_external_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -253,6 +268,13 @@ CREATE SEQUENCE feed_external_id_seq
 --
 
 ALTER SEQUENCE feed_external_id_seq OWNED BY feed_external.id;
+
+
+--
+-- Name: feed_external_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('feed_external_id_seq', 3, true);
 
 
 --
@@ -279,8 +301,8 @@ CREATE TABLE feed_external_item (
 CREATE SEQUENCE feed_external_item_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -289,6 +311,13 @@ CREATE SEQUENCE feed_external_item_id_seq
 --
 
 ALTER SEQUENCE feed_external_item_id_seq OWNED BY feed_external_item.id;
+
+
+--
+-- Name: feed_external_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('feed_external_item_id_seq', 310, true);
 
 
 --
@@ -333,8 +362,8 @@ COMMENT ON COLUMN media.data IS 'serialized data for source';
 CREATE SEQUENCE media_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -343,6 +372,13 @@ CREATE SEQUENCE media_id_seq
 --
 
 ALTER SEQUENCE media_id_seq OWNED BY media.id;
+
+
+--
+-- Name: media_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('media_id_seq', 1, false);
 
 
 --
@@ -370,8 +406,8 @@ CREATE TABLE message (
 CREATE SEQUENCE message_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -380,6 +416,13 @@ CREATE SEQUENCE message_id_seq
 --
 
 ALTER SEQUENCE message_id_seq OWNED BY message.id;
+
+
+--
+-- Name: message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('message_id_seq', 1, false);
 
 
 --
@@ -424,8 +467,8 @@ COMMENT ON COLUMN post.post_id IS 'only two level tree';
 CREATE SEQUENCE post_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -434,6 +477,13 @@ CREATE SEQUENCE post_id_seq
 --
 
 ALTER SEQUENCE post_id_seq OWNED BY post.id;
+
+
+--
+-- Name: post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('post_id_seq', 1, false);
 
 
 --
@@ -471,8 +521,8 @@ CREATE TABLE smtp (
 CREATE SEQUENCE smtp_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -481,6 +531,13 @@ CREATE SEQUENCE smtp_id_seq
 --
 
 ALTER SEQUENCE smtp_id_seq OWNED BY smtp.id;
+
+
+--
+-- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('smtp_id_seq', 1, false);
 
 
 --
@@ -502,8 +559,8 @@ CREATE TABLE tag (
 CREATE SEQUENCE tag_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -512,6 +569,13 @@ CREATE SEQUENCE tag_id_seq
 --
 
 ALTER SEQUENCE tag_id_seq OWNED BY tag.id;
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('tag_id_seq', 9, true);
 
 
 --
@@ -539,8 +603,8 @@ CREATE TABLE tag_place (
 CREATE SEQUENCE tag_place_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -549,6 +613,13 @@ CREATE SEQUENCE tag_place_id_seq
 --
 
 ALTER SEQUENCE tag_place_id_seq OWNED BY tag_place.id;
+
+
+--
+-- Name: tag_place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('tag_place_id_seq', 2480, true);
 
 
 --
@@ -583,8 +654,8 @@ CREATE TABLE token (
 CREATE SEQUENCE token_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -593,6 +664,13 @@ CREATE SEQUENCE token_id_seq
 --
 
 ALTER SEQUENCE token_id_seq OWNED BY token.id;
+
+
+--
+-- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('token_id_seq', 1, false);
 
 
 --
@@ -638,8 +716,8 @@ CREATE TABLE user_feed_external (
 CREATE SEQUENCE user_feed_external_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -651,14 +729,21 @@ ALTER SEQUENCE user_feed_external_id_seq OWNED BY user_feed_external.id;
 
 
 --
+-- Name: user_feed_external_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_feed_external_id_seq', 1, false);
+
+
+--
 -- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE user_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -667,6 +752,13 @@ CREATE SEQUENCE user_id_seq
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
+
+
+--
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_id_seq', 10000, true);
 
 
 --
@@ -707,8 +799,8 @@ COMMENT ON COLUMN user_place.permissions IS 'bits
 CREATE SEQUENCE user_place_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -717,6 +809,13 @@ CREATE SEQUENCE user_place_id_seq
 --
 
 ALTER SEQUENCE user_place_id_seq OWNED BY user_place.id;
+
+
+--
+-- Name: user_place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_place_id_seq', 1915, true);
 
 
 --
@@ -744,8 +843,8 @@ COMMENT ON COLUMN user_settings.radius IS 'user area radius';
 CREATE SEQUENCE user_settings_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -754,6 +853,13 @@ CREATE SEQUENCE user_settings_id_seq
 --
 
 ALTER SEQUENCE user_settings_id_seq OWNED BY user_settings.id;
+
+
+--
+-- Name: user_settings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_settings_id_seq', 6, true);
 
 
 --
@@ -783,8 +889,8 @@ COMMENT ON TABLE user_social IS 'users from social accounts linked to users';
 CREATE SEQUENCE user_social_id_seq
     START WITH 100
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -796,129 +902,136 @@ ALTER SEQUENCE user_social_id_seq OWNED BY user_social.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY application ALTER COLUMN id SET DEFAULT nextval('application_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY content ALTER COLUMN id SET DEFAULT nextval('content_id_seq'::regclass);
+SELECT pg_catalog.setval('user_social_id_seq', 1, true);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY cron_mail ALTER COLUMN id SET DEFAULT nextval('cron_mail_id_seq'::regclass);
+ALTER TABLE application ALTER COLUMN id SET DEFAULT nextval('application_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY favorite ALTER COLUMN id SET DEFAULT nextval('favorite_id_seq'::regclass);
+ALTER TABLE content ALTER COLUMN id SET DEFAULT nextval('content_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY feed_external ALTER COLUMN id SET DEFAULT nextval('feed_external_id_seq'::regclass);
+ALTER TABLE cron_mail ALTER COLUMN id SET DEFAULT nextval('cron_mail_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY feed_external_item ALTER COLUMN id SET DEFAULT nextval('feed_external_item_id_seq'::regclass);
+ALTER TABLE favorite ALTER COLUMN id SET DEFAULT nextval('favorite_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY media ALTER COLUMN id SET DEFAULT nextval('media_id_seq'::regclass);
+ALTER TABLE feed_external ALTER COLUMN id SET DEFAULT nextval('feed_external_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY message ALTER COLUMN id SET DEFAULT nextval('message_id_seq'::regclass);
+ALTER TABLE feed_external_item ALTER COLUMN id SET DEFAULT nextval('feed_external_item_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY post ALTER COLUMN id SET DEFAULT nextval('post_id_seq'::regclass);
+ALTER TABLE media ALTER COLUMN id SET DEFAULT nextval('media_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY smtp ALTER COLUMN id SET DEFAULT nextval('smtp_id_seq'::regclass);
+ALTER TABLE message ALTER COLUMN id SET DEFAULT nextval('message_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY tag ALTER COLUMN id SET DEFAULT nextval('tag_id_seq'::regclass);
+ALTER TABLE post ALTER COLUMN id SET DEFAULT nextval('post_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY tag_place ALTER COLUMN id SET DEFAULT nextval('tag_place_id_seq'::regclass);
+ALTER TABLE smtp ALTER COLUMN id SET DEFAULT nextval('smtp_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY token ALTER COLUMN id SET DEFAULT nextval('token_id_seq'::regclass);
+ALTER TABLE tag ALTER COLUMN id SET DEFAULT nextval('tag_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
+ALTER TABLE tag_place ALTER COLUMN id SET DEFAULT nextval('tag_place_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY user_feed_external ALTER COLUMN id SET DEFAULT nextval('user_feed_external_id_seq'::regclass);
+ALTER TABLE token ALTER COLUMN id SET DEFAULT nextval('token_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY user_place ALTER COLUMN id SET DEFAULT nextval('user_place_id_seq'::regclass);
+ALTER TABLE "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY user_settings ALTER COLUMN id SET DEFAULT nextval('user_settings_id_seq'::regclass);
+ALTER TABLE user_feed_external ALTER COLUMN id SET DEFAULT nextval('user_feed_external_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY user_social ALTER COLUMN id SET DEFAULT nextval('user_social_id_seq'::regclass);
+ALTER TABLE user_place ALTER COLUMN id SET DEFAULT nextval('user_place_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE user_settings ALTER COLUMN id SET DEFAULT nextval('user_settings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE user_social ALTER COLUMN id SET DEFAULT nextval('user_social_id_seq'::regclass);
 
 
 --
@@ -982,29 +1095,15 @@ COPY application (id, slug, name, description, secret_key, publick_key, return_u
 
 
 --
--- Name: application_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('application_id_seq', 3, true);
-
-
---
 -- Data for Name: content; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY content (id, title, slug, text, created_at, updated_at) FROM stdin;
-2	Тестовый контент 1	content_slug_1	Привет друзья! Часто ли вы покупаете еду или воду в специализированных для этого автоматах? Лично я никогда. Но Google хочет перевернуть во мне представление о подобных автоматах!\r\n \r\n\r\nЯпонское подразделение Google запустило в Токио экспериментальный проект - продажу игр с помощью автоматов, в которых обычно покупают еду и напитки. Для установки игр нужен Android 4.0+ и NFC модуль.\r\n\r\nЗа автоматом наблюдают специальные гуглолюди, которые подозрительно на вас смотрят и вынуждают вас потратить больше-больше-больше денег! Но отвлечемся от теории всемирного заговора и вернемся к нашему автомату. На экране показано 18 игр, как платных, так и бесплатных. За каждое скачивание пользователь получает сувенир - сначала он появляется на экране, а затем по-настоящему выскакивает из лотка внизу аппарата, как газировка. Что приятно, так это то, что Google, если вы не знаете что такое андроид, предложит вам им попользоваться, на примере гуглофона Nexus 4!\r\n \r\n\r\nНе знаю как вы, а я к этой идее отнесся с оптимизмом. Например если поставить такие автоматы туда где нет интернета, то быстро закачать полезное приложение будет очень кстати!\r\n\r\nПричем моду на автоматы некоторые компании взяли давно. В больших торговых центрах я часто наблюдаю картину, когда в подобных автоматах продаются чехлы для iPhone. �? очень хорошо продаются! А значит у идеи определенно есть потенциал, правда пока проект в статусе бета, но я думаю, что скоро такие автоматы будут во все прогрессивных странах!	2013-10-01 11:30:38.088602	\N
-3	Тестовый контент 2	content_slug_2	Привет друзья! Часто ли вы покупаете еду или воду в специализированных для этого автоматах? Лично я никогда. Но Google хочет перевернуть во мне представление о подобных автоматах!\r\n \r\n\r\nЯпонское подразделение Google запустило в Токио экспериментальный проект - продажу игр с помощью автоматов, в которых обычно покупают еду и напитки. Для установки игр нужен Android 4.0+ и NFC модуль.\r\n\r\nЗа автоматом наблюдают специальные гуглолюди, которые подозрительно на вас смотрят и вынуждают вас потратить больше-больше-больше денег! Но отвлечемся от теории всемирного заговора и вернемся к нашему автомату. На экране показано 18 игр, как платных, так и бесплатных. За каждое скачивание пользователь получает сувенир - сначала он появляется на экране, а затем по-настоящему выскакивает из лотка внизу аппарата, как газировка. Что приятно, так это то, что Google, если вы не знаете что такое андроид, предложит вам им попользоваться, на примере гуглофона Nexus 4!\r\n \r\n\r\nНе знаю как вы, а я к этой идее отнесся с оптимизмом. Например если поставить такие автоматы туда где нет интернета, то быстро закачать полезное приложение будет очень кстати!\r\n\r\nПричем моду на автоматы некоторые компании взяли давно. В больших торговых центрах я часто наблюдаю картину, когда в подобных автоматах продаются чехлы для iPhone. �? очень хорошо продаются! А значит у идеи определенно есть потенциал, правда пока проект в статусе бета, но я думаю, что скоро такие автоматы будут во все прогрессивных странах!	2013-10-01 11:30:38.088602	\N
-4	Тестовый контент 3	content_slug_3	Привет друзья! Часто ли вы покупаете еду или воду в специализированных для этого автоматах? Лично я никогда. Но Google хочет перевернуть во мне представление о подобных автоматах!\r\n \r\n\r\nЯпонское подразделение Google запустило в Токио экспериментальный проект - продажу игр с помощью автоматов, в которых обычно покупают еду и напитки. Для установки игр нужен Android 4.0+ и NFC модуль.\r\n\r\nЗа автоматом наблюдают специальные гуглолюди, которые подозрительно на вас смотрят и вынуждают вас потратить больше-больше-больше денег! Но отвлечемся от теории всемирного заговора и вернемся к нашему автомату. На экране показано 18 игр, как платных, так и бесплатных. За каждое скачивание пользователь получает сувенир - сначала он появляется на экране, а затем по-настоящему выскакивает из лотка внизу аппарата, как газировка. Что приятно, так это то, что Google, если вы не знаете что такое андроид, предложит вам им попользоваться, на примере гуглофона Nexus 4!\r\n \r\n\r\nНе знаю как вы, а я к этой идее отнесся с оптимизмом. Например если поставить такие автоматы туда где нет интернета, то быстро закачать полезное приложение будет очень кстати!\r\n\r\nПричем моду на автоматы некоторые компании взяли давно. В больших торговых центрах я часто наблюдаю картину, когда в подобных автоматах продаются чехлы для iPhone. �? очень хорошо продаются! А значит у идеи определенно есть потенциал, правда пока проект в статусе бета, но я думаю, что скоро такие автоматы будут во все прогрессивных странах!	2013-10-01 11:30:38.088602	\N
-5	Тестовый контент 4	content_slug_4	Привет друзья! Часто ли вы покупаете еду или воду в специализированных для этого автоматах? Лично я никогда. Но Google хочет перевернуть во мне представление о подобных автоматах!\r\n \r\n\r\nЯпонское подразделение Google запустило в Токио экспериментальный проект - продажу игр с помощью автоматов, в которых обычно покупают еду и напитки. Для установки игр нужен Android 4.0+ и NFC модуль.\r\n\r\nЗа автоматом наблюдают специальные гуглолюди, которые подозрительно на вас смотрят и вынуждают вас потратить больше-больше-больше денег! Но отвлечемся от теории всемирного заговора и вернемся к нашему автомату. На экране показано 18 игр, как платных, так и бесплатных. За каждое скачивание пользователь получает сувенир - сначала он появляется на экране, а затем по-настоящему выскакивает из лотка внизу аппарата, как газировка. Что приятно, так это то, что Google, если вы не знаете что такое андроид, предложит вам им попользоваться, на примере гуглофона Nexus 4!\r\n \r\n\r\nНе знаю как вы, а я к этой идее отнесся с оптимизмом. Например если поставить такие автоматы туда где нет интернета, то быстро закачать полезное приложение будет очень кстати!\r\n\r\nПричем моду на автоматы некоторые компании взяли давно. В больших торговых центрах я часто наблюдаю картину, когда в подобных автоматах продаются чехлы для iPhone. �? очень хорошо продаются! А значит у идеи определенно есть потенциал, правда пока проект в статусе бета, но я думаю, что скоро такие автоматы будут во все прогрессивных странах!	2013-10-01 11:30:38.088602	\N
+2	Тестовый контент 1	content_slug_1	Привет друзья! Часто ли вы покупаете еду или воду в специализированных для этого автоматах? Лично я никогда. Но Google хочет перевернуть во мне представление о подобных автоматах!\r\n \r\n\r\nЯпонское подразделение Google запустило в Токио экспериментальный проект - продажу игр с помощью автоматов, в которых обычно покупают еду и напитки. Для установки игр нужен Android 4.0+ и NFC модуль.\r\n\r\nЗа автоматом наблюдают специальные гуглолюди, которые подозрительно на вас смотрят и вынуждают вас потратить больше-больше-больше денег! Но отвлечемся от теории всемирного заговора и вернемся к нашему автомату. На экране показано 18 игр, как платных, так и бесплатных. За каждое скачивание пользователь получает сувенир - сначала он появляется на экране, а затем по-настоящему выскакивает из лотка внизу аппарата, как газировка. Что приятно, так это то, что Google, если вы не знаете что такое андроид, предложит вам им попользоваться, на примере гуглофона Nexus 4!\r\n \r\n\r\nНе знаю как вы, а я к этой идее отнесся с оптимизмом. Например если поставить такие автоматы туда где нет интернета, то быстро закачать полезное приложение будет очень кстати!\r\n\r\nПричем моду на автоматы некоторые компании взяли давно. В больших торговых центрах я часто наблюдаю картину, когда в подобных автоматах продаются чехлы для iPhone. И очень хорошо продаются! А значит у идеи определенно есть потенциал, правда пока проект в статусе бета, но я думаю, что скоро такие автоматы будут во все прогрессивных странах!	2013-10-01 11:30:38.088602	\N
+3	Тестовый контент 2	content_slug_2	Привет друзья! Часто ли вы покупаете еду или воду в специализированных для этого автоматах? Лично я никогда. Но Google хочет перевернуть во мне представление о подобных автоматах!\r\n \r\n\r\nЯпонское подразделение Google запустило в Токио экспериментальный проект - продажу игр с помощью автоматов, в которых обычно покупают еду и напитки. Для установки игр нужен Android 4.0+ и NFC модуль.\r\n\r\nЗа автоматом наблюдают специальные гуглолюди, которые подозрительно на вас смотрят и вынуждают вас потратить больше-больше-больше денег! Но отвлечемся от теории всемирного заговора и вернемся к нашему автомату. На экране показано 18 игр, как платных, так и бесплатных. За каждое скачивание пользователь получает сувенир - сначала он появляется на экране, а затем по-настоящему выскакивает из лотка внизу аппарата, как газировка. Что приятно, так это то, что Google, если вы не знаете что такое андроид, предложит вам им попользоваться, на примере гуглофона Nexus 4!\r\n \r\n\r\nНе знаю как вы, а я к этой идее отнесся с оптимизмом. Например если поставить такие автоматы туда где нет интернета, то быстро закачать полезное приложение будет очень кстати!\r\n\r\nПричем моду на автоматы некоторые компании взяли давно. В больших торговых центрах я часто наблюдаю картину, когда в подобных автоматах продаются чехлы для iPhone. И очень хорошо продаются! А значит у идеи определенно есть потенциал, правда пока проект в статусе бета, но я думаю, что скоро такие автоматы будут во все прогрессивных странах!	2013-10-01 11:30:38.088602	\N
+4	Тестовый контент 3	content_slug_3	Привет друзья! Часто ли вы покупаете еду или воду в специализированных для этого автоматах? Лично я никогда. Но Google хочет перевернуть во мне представление о подобных автоматах!\r\n \r\n\r\nЯпонское подразделение Google запустило в Токио экспериментальный проект - продажу игр с помощью автоматов, в которых обычно покупают еду и напитки. Для установки игр нужен Android 4.0+ и NFC модуль.\r\n\r\nЗа автоматом наблюдают специальные гуглолюди, которые подозрительно на вас смотрят и вынуждают вас потратить больше-больше-больше денег! Но отвлечемся от теории всемирного заговора и вернемся к нашему автомату. На экране показано 18 игр, как платных, так и бесплатных. За каждое скачивание пользователь получает сувенир - сначала он появляется на экране, а затем по-настоящему выскакивает из лотка внизу аппарата, как газировка. Что приятно, так это то, что Google, если вы не знаете что такое андроид, предложит вам им попользоваться, на примере гуглофона Nexus 4!\r\n \r\n\r\nНе знаю как вы, а я к этой идее отнесся с оптимизмом. Например если поставить такие автоматы туда где нет интернета, то быстро закачать полезное приложение будет очень кстати!\r\n\r\nПричем моду на автоматы некоторые компании взяли давно. В больших торговых центрах я часто наблюдаю картину, когда в подобных автоматах продаются чехлы для iPhone. И очень хорошо продаются! А значит у идеи определенно есть потенциал, правда пока проект в статусе бета, но я думаю, что скоро такие автоматы будут во все прогрессивных странах!	2013-10-01 11:30:38.088602	\N
+5	Тестовый контент 4	content_slug_4	Привет друзья! Часто ли вы покупаете еду или воду в специализированных для этого автоматах? Лично я никогда. Но Google хочет перевернуть во мне представление о подобных автоматах!\r\n \r\n\r\nЯпонское подразделение Google запустило в Токио экспериментальный проект - продажу игр с помощью автоматов, в которых обычно покупают еду и напитки. Для установки игр нужен Android 4.0+ и NFC модуль.\r\n\r\nЗа автоматом наблюдают специальные гуглолюди, которые подозрительно на вас смотрят и вынуждают вас потратить больше-больше-больше денег! Но отвлечемся от теории всемирного заговора и вернемся к нашему автомату. На экране показано 18 игр, как платных, так и бесплатных. За каждое скачивание пользователь получает сувенир - сначала он появляется на экране, а затем по-настоящему выскакивает из лотка внизу аппарата, как газировка. Что приятно, так это то, что Google, если вы не знаете что такое андроид, предложит вам им попользоваться, на примере гуглофона Nexus 4!\r\n \r\n\r\nНе знаю как вы, а я к этой идее отнесся с оптимизмом. Например если поставить такие автоматы туда где нет интернета, то быстро закачать полезное приложение будет очень кстати!\r\n\r\nПричем моду на автоматы некоторые компании взяли давно. В больших торговых центрах я часто наблюдаю картину, когда в подобных автоматах продаются чехлы для iPhone. И очень хорошо продаются! А значит у идеи определенно есть потенциал, правда пока проект в статусе бета, но я думаю, что скоро такие автоматы будут во все прогрессивных странах!	2013-10-01 11:30:38.088602	\N
 \.
-
-
---
--- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('content_id_seq', 100, false);
 
 
 --
@@ -1016,25 +1115,11 @@ COPY cron_mail (id, subject, body, body_alt, to_mail, to_name, from_mail, from_n
 
 
 --
--- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
-
-
---
 -- Data for Name: favorite; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY favorite (id, user_id, favorite_id, type, created_at, updated_at) FROM stdin;
 \.
-
-
---
--- Name: favorite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('favorite_id_seq', 1, false);
 
 
 --
@@ -1046,13 +1131,6 @@ COPY feed_external (id, parser_type, name, url, last_parsing, created_at, update
 2	rss2	zodroid.ru	http://zodroid.ru/content/rss/	2013-10-16 19:02:14	2013-10-16 21:31:37.695	\N	t
 3	rss2	politprofi.ru	http://politprofi.ru/rss	2013-10-16 19:02:15	2013-10-16 21:33:58.346	\N	t
 \.
-
-
---
--- Name: feed_external_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('feed_external_id_seq', 3, true);
 
 
 --
@@ -1068,11 +1146,11 @@ COPY feed_external_item (id, url, created_at, feed_external_id, title, text, dat
 161	http://www.you2you.ru/news/masshtabnoe-obnovlenie-operatsionnoy-sistemyi-windows-phone-anonsirovala-kompaniya-microsoft	2013-10-16 19:02:08	1	​Масштабное обновление операционной системы Windows Phone анонсировала компания Microsoft	​Масштабное обновление операционной системы Windows Phone анонсировала компания Microsoft. В новой версии своей операционной системы компания реализовала поддержку формата Full HD, что ныне особенно актуально – в эпоху больших смартфонов, оснащенных современными дисплеями высокого для нашего времени разрешения.	2013-10-15 04:37:58	\N	news_14013
 162	http://www.you2you.ru/news/kompaniya-hp-namerena-vyipustit-novyiy-unikalnyiy-noutbuk-postroennyiy-na-baze-mobilnoy-operatsionnoy-sistemyi-google-android-42	2013-10-16 19:02:08	1	​Компания HP намерена выпустить новый уникальный ноутбук, построенный на базе мобильной операционной системы Google Android 4.2	​Компания HP намерена выпустить новый уникальный ноутбук, построенный на базе мобильной операционной системы Google Android 4.2. Устройство будет продаваться по цене 249 евро в странах Евросоюза, о российских продажах на сегодняшний день ничего не известно. Отметим, что форм-фактор ноутбука, как и его операционная система, также заслуживает внимания.	2013-10-14 05:18:41	\N	news_14011
 163	http://www.you2you.ru/news/vladeltsyi-smartfonov-apple-iphone-5s-jaluyutsya-na-nekorrektnyie-sboi-programmnoy-proshivki	2013-10-16 19:02:08	1	​Владельцы смартфонов Apple iPhone 5S жалуются на некорректные сбои программной прошивки	​Владельцы смартфонов Apple iPhone 5S жалуются на некорректные сбои программной прошивки. Так, предустановленная в смартфоне операционная система iOS 7 часто «виснет», отображая при этом так называемый «синий экран смерти».	2013-10-14 04:48:59	\N	news_14010
-164	http://www.you2you.ru/news/v-2014-godu-ojidaetsya-start-proizvodstva-windows-phone-smartfonov-s-dvumya-slotami-pod-kartochki-sim	2013-10-16 19:02:08	1	​В 2014 году ожидается старт производства Windows Phone смартфонов с двумя слотами под карточки SIM	​В 2014 году ожидается старт производства Windows Phone смартфонов с двумя слотами под карточки SIM. �?нформацию о возможном их появлении на рынке накануне уже распространял техноблог Evleaks, сообщивший о начале работы компании Nokia над особой модификацией одного из гаджетов из линейки Lumia.	2013-10-14 04:31:01	\N	news_14009
+164	http://www.you2you.ru/news/v-2014-godu-ojidaetsya-start-proizvodstva-windows-phone-smartfonov-s-dvumya-slotami-pod-kartochki-sim	2013-10-16 19:02:08	1	​В 2014 году ожидается старт производства Windows Phone смартфонов с двумя слотами под карточки SIM	​В 2014 году ожидается старт производства Windows Phone смартфонов с двумя слотами под карточки SIM. Информацию о возможном их появлении на рынке накануне уже распространял техноблог Evleaks, сообщивший о начале работы компании Nokia над особой модификацией одного из гаджетов из линейки Lumia.	2013-10-14 04:31:01	\N	news_14009
 165	http://www.you2you.ru/news/predstavlena-obnovlennaya-versiya-samoy-nedorogoy-polnokadrovoy-zerkalnoy-kameryi-nikon-d610	2013-10-16 19:02:08	1	​Представлена обновленная версия самой недорогой полнокадровой зеркальной камеры – Nikon D610	​Представлена обновленная версия самой недорогой полнокадровой зеркальной камеры – Nikon D610. Устройство получило доработанный затвор и увеличенную до 6 кадров в секунду скорость серийной съемки. Камера оснащена 24,3-мегапиксельным сенсором формата FX. Максимальное разрешение фотографий, которые делает Nikon D610, составляет 6016×4016 пикселей, видео записывается в формате Full HD.	2013-10-11 05:17:48	\N	news_14007
 166	http://www.you2you.ru/news/kompaniya-google-mojet-predstavit-novyiy-android-44-kitkat-i-obnovlennyiy-smartfon-google-nexus-5-uje-15-oktyabrya	2013-10-16 19:02:08	1	​Компания Google может представить новый Android 4.4 KitKat и обновленный смартфон Google Nexus 5 уже 15 октября	​Компания Google может представить новый Android 4.4 KitKat и обновленный смартфон Google Nexus 5 уже 15 октября. Такую информацию распространил накануне уважаемый техноблог TechManiacs.gr. Отметим, что со стороны компании Google никаких данных, подтверждающих это, пока еще не было, но еще не вечер, да и IT-гиганты имеют привычку сообщать о своих продуктах в последние дни до релиза.	2013-10-11 05:03:45	\N	news_14006
 167	http://www.you2you.ru/news/ryinok-personalnyih-kompyuterov-v-klassicheskom-form-faktore-i-v-form-faktore-noutbuk-dostig-rekordnogo-minimuma-za-poslednie-pyat-let	2013-10-16 19:02:08	1	​Рынок персональных компьютеров в классическом форм-факторе и в форм-факторе «ноутбук» достиг рекордного минимума за последние пять лет	​Рынок персональных компьютеров в классическом форм-факторе и в форм-факторе «ноутбук» достиг рекордного минимума за последние пять лет. Так, в третьем квартале 2013 года, продажи настольных ПК просели на 8.6% в сравнении с периодом прошлого года.	2013-10-11 04:43:35	\N	news_14005
-168	http://www.you2you.ru/news/kompaniya-apple-priznana-samyim-dorogim-brendom-v-mire-i-eto-nesmotrya-na-skeptichnyie-prognozyi-ekspertov	2013-10-16 19:02:08	1	​Компания Apple признана самым дорогим брендом в мире. �? это несмотря на скептичные прогнозы экспертов	​Компания Apple признана самым дорогим брендом в мире. �? это несмотря на скептичные прогнозы экспертов, которые из года в год сулят одно и то же – падение акций, давление конкурентов, потерю былого имиджа. Но удивительно – ничего такого с Apple не происходит. За Apple следует, как не трудно догадаться, поисковый гигант Google, а компания Coca-Cola закрепилась на третьей строчке рейтинга.	2013-10-10 05:00:14	\N	news_14003
+168	http://www.you2you.ru/news/kompaniya-apple-priznana-samyim-dorogim-brendom-v-mire-i-eto-nesmotrya-na-skeptichnyie-prognozyi-ekspertov	2013-10-16 19:02:08	1	​Компания Apple признана самым дорогим брендом в мире. И это несмотря на скептичные прогнозы экспертов	​Компания Apple признана самым дорогим брендом в мире. И это несмотря на скептичные прогнозы экспертов, которые из года в год сулят одно и то же – падение акций, давление конкурентов, потерю былого имиджа. Но удивительно – ничего такого с Apple не происходит. За Apple следует, как не трудно догадаться, поисковый гигант Google, а компания Coca-Cola закрепилась на третьей строчке рейтинга.	2013-10-10 05:00:14	\N	news_14003
 169	http://www.you2you.ru/news/google-hischno-poglyadyivaet-na-stagniruyuschiy-ryinok-noutbukov-v-zakromah-u-kompanii-est-prostyie-no-ochen-vostrebovannyie-idei	2013-10-16 19:02:08	1	​Google хищно поглядывает на стагнирующий рынок ноутбуков. В закромах у компании есть простые, но очень востребованные идеи	​Google хищно поглядывает на стагнирующий рынок ноутбуков. Крупнейший гигант отрасли IT уже знает чем брать здесь своего покупателя – ставка целиком и полностью сделано на «Хромбуки», которые с каждым новым поколением становятся все более совершенными.	2013-10-10 04:53:33	\N	news_14002
 170	http://www.you2you.ru/news/bolshaya-sdelka-kitayskiy-it-gigant-lenovo-mojet-poglotit-tayvanskuyu-kompaniyu-htc	2013-10-16 19:02:08	1	​Большая сделка. Китайский IT-гигант Lenovo может поглотить тайваньскую компанию HTC	​Большая сделка. Китайский IT-гигант Lenovo может поглотить тайваньскую компанию HTC. Вторые сегодня переживают далеко не самые лучшие времена: испытывают финансовый и технологический кризис; едва ли успеют за преуспевающими брендами сегмента.	2013-10-10 04:40:56	\N	news_14001
 171	http://www.you2you.ru/news/kompaniya-lenovo-anonsirovala-novyie-planshetnyie-kompyuteryi-lineyki-ideapad-b8000-f-i-b6000-f-s-neobyichnoy-konstruktsiey-korpusa	2013-10-16 19:02:08	1	​Компания Lenovo анонсировала новые планшетные компьютеры линейки Ideapad – B8000-F и B6000-F с необычной конструкцией корпуса	​Компания Lenovo анонсировала новые планшетные компьютеры линейки Ideapad – B8000-F и B6000-F с необычной конструкцией корпуса, включающей в себя интегрированную подставку. Работают устройства на базе операционной системы Android 4.2.	2013-10-09 05:36:08	\N	news_13999
@@ -1091,7 +1169,7 @@ COPY feed_external_item (id, url, created_at, feed_external_id, title, text, dat
 183	http://www.you2you.ru/news/anonsirovan-novyiy-chromebook-ot-acer-116-dyuymovyiy-noutbuk-rabotayuschiy-pod-upravleniem-operatsionnoy-sistemyi-chrome-os	2013-10-16 19:02:09	1	​Анонсирован новый Chromebook от Acer. 11,6-дюймовый ноутбук, работающий под управлением операционной системы Chrome OS	​Анонсирован новый Chromebook от Acer. 11,6-дюймовый ноутбук, работающий под управлением операционной системы Chrome OS, как ожидается, будет оснащаться процессором Intel Celeron 2955U Haswell. Это повысит производительность и увеличит срок службы батарей по сравнению с более ранними моделями.	2013-10-03 05:31:25	\N	news_13979
 184	http://www.you2you.ru/news/kompaniya-sharp-obyyavila-chto-namerena-vyiyti-na-ryinok-planshetnyih-kompyuterov	2013-10-16 19:02:09	1	​Компания Sharp объявила, что намерена выйти на рынок планшетных компьютеров	​Компания Sharp объявила, что намерена выйти на рынок планшетных компьютеров. В качестве операционной системы для своей продукции бренд намерен использовать Microsoft Windows 8.1. В качестве подтверждения своих намерений представители Sharp на проходящей в Японии выставке CEATEC уже анонсировали модель планшетного компьютера Mebius Pad с IGZO-панелью и диагональю экрана 10.1 дюйма.	2013-10-03 05:17:59	\N	news_13978
 185	http://www.you2you.ru/news/kompaniya-apple-otlojila-proizvodstvo-novyih-planshetnyih-kompyuterov-apple-ipad-mini-2-na-2014-god	2013-10-16 19:02:09	1	​Компания Apple отложила производство новых планшетных компьютеров Apple iPad mini 2 на 2014 год	​Компания Apple отложила производство новых планшетных компьютеров Apple iPad mini 2 на 2014 год. Для производства новых планшетов не хватает современных дисплеев Retina – партии удастся сформировать не ранее января 2014 года.	2013-10-03 05:05:55	\N	news_13977
-186	http://www.you2you.ru/news/predstaviteli-kompanii-samsung-zayavili-o-dostijenii-novogo-rubeja-populyarnosti-ih-firmennogo-messendjera-chaton	2013-10-16 19:02:09	1	​Представители компании Samsung заявили о достижении нового рубежа популярности их фирменного мессенджера ChatON	​Представители компании Samsung заявили о достижении нового рубежа популярности их фирменного мессенджера ChatON. Сервис ныне используют около сотни миллионов человек. �?нтернет-сервис Samsung ChatON, представляющий собой приложение по отправке мгновенных сообщений (мессенджер, одним словом), заработал в октябре 2011 года. Тем не менее, он долгое время не мог называться популярным, так как имел множество аналогов от других разработчиков.	2013-10-02 04:52:20	\N	news_13975
+186	http://www.you2you.ru/news/predstaviteli-kompanii-samsung-zayavili-o-dostijenii-novogo-rubeja-populyarnosti-ih-firmennogo-messendjera-chaton	2013-10-16 19:02:09	1	​Представители компании Samsung заявили о достижении нового рубежа популярности их фирменного мессенджера ChatON	​Представители компании Samsung заявили о достижении нового рубежа популярности их фирменного мессенджера ChatON. Сервис ныне используют около сотни миллионов человек. Интернет-сервис Samsung ChatON, представляющий собой приложение по отправке мгновенных сообщений (мессенджер, одним словом), заработал в октябре 2011 года. Тем не менее, он долгое время не мог называться популярным, так как имел множество аналогов от других разработчиков.	2013-10-02 04:52:20	\N	news_13975
 187	http://www.you2you.ru/news/kompanii-canon-hp-samsung-electronics-i-xerox-nachali-rabotu-nad-standartizatsiey-osnov-besprovodnoy-pechati-snimkov	2013-10-16 19:02:09	1	​Компании Canon, HP, Samsung Electronics и Xerox начали работу над стандартизацией основ беспроводной печати снимков	​Компании Canon, HP, Samsung Electronics и Xerox заключили договор о создании неприбыльного альянса Mopria. Основной работой альянса станет работа над увеличением доступности беспроводной печати со смартфонов, планшетов и других мобильных устройств. Альянс будет заниматься созданием универсальных стандартов в печатной, мобильной и программной областях, которые позволят сделать печать со смартфонов и планшетов общедоступной.	2013-10-02 04:43:49	\N	news_13974
 188	http://www.you2you.ru/news/dolya-operatsionnoy-sistemyi-windows-phone-prodoljaet-rasti	2013-10-16 19:02:09	1	​Доля операционной системы Windows Phone продолжает расти	​Доля операционной системы Windows Phone продолжает расти. Несмотря на печальные прогнозы рыночных аналитиков, уже только в Европе каждый девятый смартфон работает на базе мобильной операционной системы от Microsoft.	2013-10-02 04:31:47	\N	news_13973
 189	http://www.you2you.ru/news/kompaniya-nikon-terpit-zametnyie-ubyitki-iz-za-poteri-sprosa-na-kompaktnyie-tsifrovyie-fotoapparatyi	2013-10-16 19:02:09	1	​Компания Nikon терпит заметные убытки из-за потери спроса на компактные цифровые фотоаппараты	​Компания Nikon терпит заметные убытки из-за потери спроса на компактные цифровые фотоаппараты. Согласно отчету, за три месяца доход известнейшего производителя фотокамер и аксессуаров составил 238,981 млрд. иен, что на 7,9% меньше, чем год назад. При этом операционная прибыль за год сократилась с 23,368 до 6,032 млрд. иен, то есть на 74,2%, а чистая прибыль — с 15,770 до 4,436 млрд. или на 71,9%.	2013-10-01 05:27:00	\N	news_13971
@@ -1099,7 +1177,7 @@ COPY feed_external_item (id, url, created_at, feed_external_id, title, text, dat
 191	http://www.you2you.ru/news/sony-xperia-z1-mini-novyiy-smartfon-ot-yaponskogo-brenda-mojet-byit-anonsirovan-uje-v-blijayshee-vremya	2013-10-16 19:02:09	1	​Sony Xperia Z1 Mini – новый смартфон от японского бренда, может быть анонсирован уже в ближайшее время	​Sony Xperia Z1 Mini – новый смартфон от японского бренда, может быть анонсирован уже в ближайшее время. Устройство, как оно и понятно из названия, является уменьшенной смартфона Sony Xperia Z1.	2013-10-01 04:50:46	\N	news_13967
 192	http://www.you2you.ru/news/anons-fotoapparata-pentax-k-3-mojet-sostoyatsya-uje-v-blijayshee-vremya	2013-10-16 19:02:09	1	Анонс фотоаппарата Pentax K-3 может состояться уже в ближайшее время	​Японская компания Pentax Ricoh Imaging Company, известная у нас, прежде всего как один из ведущих производителей фотокамер, объективов и другого оптического оборудования, планирует уже в самое ближайшее время анонсировать выпуск зеркального фотоаппарата получившего наименование Pentax K-3. Новинка внешне  напоминает модель Pentax K-5 2010 года, которая в свою очередь переняла свой дизайн у модели K-7.	2013-09-30 06:19:18	\N	news_13965
 193	http://www.you2you.ru/news/kompaniya-lenovo-predstavila-novyiy-kompyuter-tolschinoy-97-millimetrov	2013-10-16 19:02:09	1	Компания Lenovo представила новый компьютер толщиной 9,7 миллиметров	Компания Lenovo представила новый компьютер толщиной 9,7 миллиметров – ноутбук вдвое тоньше, чем отец сегмента ультратонких ПК – Apple MacBook Air. Новый китайский компьютер может похвастать толщиной 9,7 мм, что примерно вдвое меньше толщины MacBook Air, сообщает The Verge со ссылкой на китайский ресурс Yesky. Толщина MacBook Air составляет 17 мм.	2013-09-30 06:01:52	\N	news_13964
-194	http://www.you2you.ru/news/planshetnyiy-kompyuter-nokia-lumia-2520-sirius-mojet-poluchit-podderjku-setey-lte	2013-10-16 19:02:09	1	​Планшетный компьютер Nokia Lumia 2520 (Sirius) может получить поддержку сетей LTE	​Планшетный компьютер Nokia Lumia 2520 (Sirius) может получить поддержку сетей LTE. �?нформация эта подтверждена выдержками из официальных документов федеральных агентств, которые контролируют сферу связи.	2013-09-30 05:56:23	\N	news_13963
+194	http://www.you2you.ru/news/planshetnyiy-kompyuter-nokia-lumia-2520-sirius-mojet-poluchit-podderjku-setey-lte	2013-10-16 19:02:09	1	​Планшетный компьютер Nokia Lumia 2520 (Sirius) может получить поддержку сетей LTE	​Планшетный компьютер Nokia Lumia 2520 (Sirius) может получить поддержку сетей LTE. Информация эта подтверждена выдержками из официальных документов федеральных агентств, которые контролируют сферу связи.	2013-09-30 05:56:23	\N	news_13963
 195	http://www.you2you.ru/news/novaya-tsifrovaya-fotokamera-sigma-dp3-merrill-poyavitsya-skoro-v-prodaje	2013-10-16 19:02:09	1	Новая цифровая фотокамера Sigma DP3 Merrill появится скоро в продаже	​Анонсированная несколько месяцев назад фотокамера Sigma DP3 Merrill, имеющая в своем конструктиве трехслойную матрицу APS-C с разрешеним 46 мегапикселей, в скором времени появится в интернет-магазине Ю2Ю.	2013-09-27 05:09:39	\N	news_13961
 196	http://www.you2you.ru/news/sony-mobile-communications-predstavit-v-rossiyskoy-roznitse-novyiy-pyatidyuymovyiy-smartfon-sony-xperia-c-po-tsene-12990-rubley	2013-10-16 19:02:10	1	​Sony Mobile Communications представит в российской рознице новый пятидюймовый смартфон Sony Xperia C по цене 12990 рублей	​Sony Mobile Communications представит в российской рознице новый пятидюймовый смартфон Sony Xperia C по цене 12990 рублей.  Смартфон оснащен 5” сенсорным емкостным экраном с разрешением 960х540 точек (qHD), четырехъядерным процессором MediaTek MTK6589 с тактовой частотой 1,2 ГГц, основной 8-Мп камерой с сенсором Exmor R, автофокусом, светодиодной вспышкой и функцией видеозаписи с разрешением 1080p, фронтальной VGA-камерой для видеотелефонии.	2013-09-27 04:59:10	\N	news_13960
 197	http://www.you2you.ru/news/kompaniya-htc-soobschila-ob-obnovlenii-proshivki-flagmana-htc-one	2013-10-16 19:02:10	1	​Компания HTC сообщила об обновлении прошивки флагмана HTC One	​Компания HTC сообщила об обновлении прошивки флагмана HTC One. Выпущенный в марте текущего года, флагман HTC One работал под управлением Android 4.1.2 и стал одним из первых аппаратов, получивших обновление до Android 4.2.2.	2013-09-27 04:51:55	\N	news_13959
@@ -1111,7 +1189,7 @@ COPY feed_external_item (id, url, created_at, feed_external_id, title, text, dat
 202	http://www.you2you.ru/news/kompaniya-apple-obnovila-lineyku-kompyuterov-apple-imac	2013-10-16 19:02:10	1	​Компания Apple обновила линейку компьютеров Apple iMac	​Компания Apple обновила линейку компьютеров Apple iMac. Теперь устройства оснащены производительными процессорами Intel Core четвертого поколения, имеют на своем борту современную графическую систему от Nvidia. Стоимость новых компьютеров Apple iMac теперь начинается от 1300 долларов США.	2013-09-25 04:41:45	\N	news_13953
 203	http://www.you2you.ru/news/kompaniya-samsung-electronics-gotovitsya-popolnit-modelnyiy-ryad-smartfonov-samsung-galaxy-note	2013-10-16 19:02:10	1	​Компания Samsung Electronics готовится пополнить модельный ряд смартфонов Samsung Galaxy Note	​Компания Samsung Electronics готовится пополнить модельный ряд смартфонов Samsung Galaxy Note. Так, на уже на подходе еще одна третья версия этого гаджета, построенная на базе  Exynos 5 Octa и Qualcomm Snapdragon 800 (вариант с LTE).	2013-09-25 04:32:31	\N	news_13952
 204	http://www.you2you.ru/news/tayvanskaya-kompaniya-asus-anonsirovala-novyiy-kompaktnyiy-planshetnyiy-kompyuter-asus-fonepad-7	2013-10-16 19:02:10	1	​Тайваньская компания Asus анонсировала новый компактный планшетный компьютер Asus Fonepad 7	​Тайваньская компания Asus анонсировала новый компактный планшетный компьютер Asus Fonepad 7. Обновленное устройство представляет собой гаджет с операционной системой Android на борту, 3G-модулем для поддержки работы с сетями сотовой связи, а также с весьма производительной начинкой и прекрасным экраном. В качестве процессора в планшетном компьютере используется современный чип Intel Atom Z2560, за отображение картинки же отвечает яркий IPS-дисплей с разрешением 1280x800 пикселей.	2013-09-24 05:05:53	\N	news_13950
-205	http://www.you2you.ru/news/igrovaya-pristavka-sony-playstation-4-budet-prodavatsya-yaponskim-proizvoditelem-v-minus	2013-10-16 19:02:10	1	​�?гровая приставка Sony PlayStation 4 будет продаваться японским производителем в минус	​�?гровая приставка Sony PlayStation 4 будет продаваться японским производителем в минус. С каждой проданной консолью Sony потеряет 60 долларов. Отметим, такой ценовой демпинг позволит производителю очень серьезного конкурировать с игровой приставкой Xbox One, стоимость которой на 100 долларов выше, чем цена на японский вариант. Это обязательно поспособствует укреплению на рынке игровых консолей лидерство за японским производителем, позволит сформировать мощную аудиторию вокруг новой игровой приставки, и в конечном итоге, заработать куда больше денег.	2013-09-24 04:40:27	\N	news_13949
+205	http://www.you2you.ru/news/igrovaya-pristavka-sony-playstation-4-budet-prodavatsya-yaponskim-proizvoditelem-v-minus	2013-10-16 19:02:10	1	​Игровая приставка Sony PlayStation 4 будет продаваться японским производителем в минус	​Игровая приставка Sony PlayStation 4 будет продаваться японским производителем в минус. С каждой проданной консолью Sony потеряет 60 долларов. Отметим, такой ценовой демпинг позволит производителю очень серьезного конкурировать с игровой приставкой Xbox One, стоимость которой на 100 долларов выше, чем цена на японский вариант. Это обязательно поспособствует укреплению на рынке игровых консолей лидерство за японским производителем, позволит сформировать мощную аудиторию вокруг новой игровой приставки, и в конечном итоге, заработать куда больше денег.	2013-09-24 04:40:27	\N	news_13949
 206	http://www.you2you.ru/news/microsoft-anonsirovala-novoe-pokolenie-planshetnyih-kompyuterov-microsoft-surface	2013-10-16 19:02:10	1	​Microsoft анонсировала новое поколение планшетных компьютеров Microsoft Surface	​Microsoft анонсировала новое поколение планшетных компьютеров Microsoft Surface. К счастью, не оправдалось мнение о том, что новое поколение лишится своей ARM-версии, как и ранее, Surface продаваться будет в двух экземплярах.	2013-09-24 04:24:19	\N	news_13948
 259	http://zodroid.ru/content/znews-13/	2013-10-16 19:02:12	2	ZNews #13	 \r\n \r\nПривет друзья! Сегодня вас ждет 13 выпуск почти ежедневной программы "Znews", в которой мы расскажем о самом интересном из мира IT! Все как всегда:) Поехали!	\N	\N	http://zodroid.ru/content/znews-13/
 207	http://www.you2you.ru/news/uroven-prodaj-kompaktnyih-tsifrovyih-fotoapparatov-upal-do-naimenshih-znacheniy-poslednego-desyatiletiya	2013-10-16 19:02:10	1	​Уровень продаж компактных цифровых фотоаппаратов упал до наименьших значений последнего десятилетия	​Уровень продаж компактных цифровых фотоаппаратов упал до наименьших значений последнего десятилетия – смартфоны все активнее вытесняют с рынка некогда популярнейший вид фототехники. Сейчас, чтобы привлечь покупателей, Nikon, второй по величине мировой производитель камер, снизил цену на свою продукцию. Аналитики полагают, что лидер сегмента Canon последует примеру и предупреждают, что более мелкие производители могут не выдержать усилившейся ценовой конкуренции и будут вынуждены покинуть рынок.	2013-09-23 05:06:46	\N	news_13946
@@ -1134,7 +1212,7 @@ COPY feed_external_item (id, url, created_at, feed_external_id, title, text, dat
 222	http://www.you2you.ru/news/ell-v-skorom-vremeni-vyipustit-na-ryinok-novyiy-planshetnyiy-pk-s-windows-81-na-bortu	2013-10-16 19:02:11	1	Dell, в скором времени выпустит на рынок новый планшетный ПК с Windows 8.1 на борту	​Знаменитый американский производитель электроники – компания Dell, в скором времени выпустит на рынок новый планшетный ПК с Windows 8.1 на борту. Устройство должно получиться весьма конкурентным по одной простой причине – он будет действительно недорого стоить! Пару дней назад в ходе конференции Intel Developer Forum компания Dell сообщила о «реинкарнации» своего мобильного бренда Venue (ранее под ним выпускались смартфоны).	2013-09-16 06:04:01	\N	news_13924
 223	http://www.you2you.ru/news/nokia-vyibivaetsya-v-lideryi-na-ryinke-rossii	2013-10-16 19:02:11	1	​Nokia выбивается в лидеры на рынке России	​Nokia выбивается в лидеры на рынке России. Финскому бренду удалось опередить своего главного конкурента – компанию Samsung, и в результате, суммарный объем продаж смартфонов и телефонов Nokia превысил планку в 29%, тогда как у Samsung сегодня лишь 27% рынка.	2013-09-16 04:37:54	\N	news_13923
 224	http://www.you2you.ru/news/microsoft-surface-za-staryiy-apple-ipad-na-chto-tolko-oni-ne-poydut-chtobyi-prodat-svoi-win8-ustroystva	2013-10-16 19:02:11	1	Microsoft Surface за старый Apple iPad - на что только они не пойдут, чтобы продать свои Win8-устройства	​На что только не готова компания Microsoft, чтобы не дать погибнуть своему молодому и увы, не самому успешному мобильному подразделению. Новым шагом корпорации в стороны исправления сложившейся ситуации стал анонс акции от ряда американских фирменных магазинов, предлагающих стать свой старый планшетный компьютер iPad от второго поколения и выше, и получить взамен него подарочные карты с определенной суммой, которую тут же можно потратить на приобретение нового планшета Surface.	2013-09-16 04:24:36	\N	news_13922
-225	http://www.you2you.ru/news/novyiy-sotsialnyiy-fotoapparat-predstavil-yaponskiy-proizvoditel-fototehniki-canon	2013-10-16 19:02:11	1	Новый "социальный" фотоаппарат представил японский производитель фототехники Canon	​Компания Canon представила новый ультра-современный фотоаппарат, оснащенный модулем беспроводной связи и системой публикации снимков в социальную сеть Facebook нажатием одной лишь кнопки. Отметим, социальная сеть Facebook, стремясь расширить свои интересы и за пределы �?нтернета, активно сотрудничает с производителями разнообразных устройств. В качестве примеров такого сотрудничества можно привести мобильный телефон HTC First или фотоаппарат Canon PowerShot N.	2013-09-13 05:41:09	\N	news_13920
+225	http://www.you2you.ru/news/novyiy-sotsialnyiy-fotoapparat-predstavil-yaponskiy-proizvoditel-fototehniki-canon	2013-10-16 19:02:11	1	Новый "социальный" фотоаппарат представил японский производитель фототехники Canon	​Компания Canon представила новый ультра-современный фотоаппарат, оснащенный модулем беспроводной связи и системой публикации снимков в социальную сеть Facebook нажатием одной лишь кнопки. Отметим, социальная сеть Facebook, стремясь расширить свои интересы и за пределы Интернета, активно сотрудничает с производителями разнообразных устройств. В качестве примеров такого сотрудничества можно привести мобильный телефон HTC First или фотоаппарат Canon PowerShot N.	2013-09-13 05:41:09	\N	news_13920
 226	http://www.you2you.ru/news/hrombuki-sleduyuschego-pokoleniya-anonsirovali-kompanii-hp-acer-i-toshiba	2013-10-16 19:02:11	1	«Хромбуки» следующего поколения анонсировали компании HP, Acer и Toshiba	​«Хромбуки» следующего поколения анонсировали компании HP, Acer и Toshiba. Новые устройства, разработанные совместно с Chipzilla и Google, сделаны в рамках основной их концепции  - дешевле некуда при высококлассном железе и современном дизайне.	2013-09-13 05:24:56	\N	news_13919
 227	http://www.you2you.ru/news/smartfon-nokia-lumia-1020-nachal-prodavatsya-v-germanii-skoro-doberetsya-i-do-rossii	2013-10-16 19:02:11	1	​Смартфон  Nokia Lumia 1020 начал продаваться в Германии - скоро доберется и до России	​Смартфон  Nokia Lumia 1020 начал продаваться в Германии. Абсолютную новинку можно приобрести на немецком рынке почти за 700 евро (включая все налоги и без операторского контракта).	2013-09-13 05:04:34	\N	news_13918
 228	http://www.you2you.ru/news/kompaniya-olympus-anonsirovala-kameru-om-d-e-m1-standarta-micro-43-prishedshuyu-na-smenu-prejney-topovoy-modeli-om-d-e-m5	2013-10-16 19:02:11	1	​Компания Olympus анонсировала камеру OM-D E-M1 стандарта Micro 4:3, пришедшую на смену прежней топовой модели OM-D E-M5	​Компания Olympus анонсировала камеру OM-D E-M1 стандарта Micro 4:3, пришедшую на смену прежней топовой модели OM-D E-M5, говорится в сообщении компании. Камера оснащена 16-мегапиксельным сенсором изображения Live MOS и мощным графическим процессором седьмого поколения TruePic, что, по заявлению производителя, обеспечит получение снимков наилучшего качества за всю историю Olympus.	2013-09-12 05:04:58	\N	news_13916
@@ -1149,11 +1227,11 @@ COPY feed_external_item (id, url, created_at, feed_external_id, title, text, dat
 236	http://www.you2you.ru/news/prezentatsiya-novyih-apple-iphone-uje-zavtra-11-sentyabrya	2013-10-16 19:02:11	1	Презентация новых Apple iPhone. Уже завтра - 11 сентября!	​Уже завтра, 11 сентября, американская компания Apple покажет миру сразу два новых смартфона Apple iPhone нового поколения. Как и ранее, «Яблочный бренд» держит в секрете информацию о новых устройства, но благодаря утечкам – преднамеренным, или истинным, все-таки немного информации о новых устройства у нас имеется.	2013-09-10 04:44:56	\N	news_13906
 237	http://www.you2you.ru/news/novaya-statya-13903	2013-10-16 19:02:11	1	Раскрыта часть информации о грядущему флагманском смартфоне Nokia Lumia 1520	​Появились первые изображения смартфона Nokia Lumia 1520. Аппарат до сих пор не анонсирован официально, однако информация о некоторых его фишках доступна уже. Смартфон станет первым среди WP-устройств, который будет поддерживать полноценное Full HD-разрешение.	2013-09-09 05:37:24	\N	news_13904
 238	http://www.you2you.ru/news/kompaniya-asus-predstavila-novyiy-fonepad-note-6-s-6-dyuymovyim-ekranom	2013-10-16 19:02:11	1	​Компания Asus представила новый Fonepad Note 6 с 6-дюймовым экраном	​Компания Asus представила новый Fonepad Note 6 с 6-дюймовым экраном, поддерживающим полноценное Full HD - разрешение. Это устройство было разработано для пользователей, которые ищут мультимедийный табфон, сочетающий в себе возможности планшета и телефона.	2013-09-09 05:11:46	\N	news_13902
-302	http://politprofi.ru/info/novosti-ryinka/skromnyiy-kommunalnyiy-resurs	2013-10-16 19:02:14	3	Новости рынка: Скромный коммунальный ресурс	На предвыборную кампанию Александра Ноговицына было потрачено более 30 млн казенных денег, утверждают местные СМ�?.	2013-10-02 13:04:04	\N	news_1311
+302	http://politprofi.ru/info/novosti-ryinka/skromnyiy-kommunalnyiy-resurs	2013-10-16 19:02:14	3	Новости рынка: Скромный коммунальный ресурс	На предвыборную кампанию Александра Ноговицына было потрачено более 30 млн казенных денег, утверждают местные СМИ.	2013-10-02 13:04:04	\N	news_1311
 239	http://www.you2you.ru/news/kompaniya-microsoft-obvinila-finskiy-brend-nokia-v-sokryitii-informatsii-o-tehnologicheskih-razrabotkah-svoih-telefonov	2013-10-16 19:02:11	1	​Компания Microsoft обвинила финский бренд Nokia в сокрытии информации о технологических разработках своих телефонов	​Компания Microsoft обвинила финский бренд Nokia в сокрытии информации о технологических разработках своих телефонов. Как сообщил в интервью CNET вице-президент Microsoft Джо Бельфиор, отвечавший за работу над Windows Phone, за время сотрудничества двух гигантов своих отраслей менеджеры Microsoft неоднократно постфактум узнавали об изменениях, внесенных в разрабатываемые Nokia аппараты, и были вынуждены в последний момент корректировать программное обеспечение.	2013-09-09 04:39:48	\N	news_13901
 240	http://www.you2you.ru/news/anonsirovan-ultraportativnyiy-noutbuk-asus-x102ba-osnaschennyiy-101-dyuymovyim-sensornyim-displeem	2013-10-16 19:02:11	1	​Анонсирован ультрапортативный ноутбук Asus X102BA, оснащенный 10,1-дюймовым сенсорным дисплеем	​Анонсирован ультрапортативный ноутбук Asus X102BA, оснащенный 10,1-дюймовым сенсорным дисплеем. Кажется, что тайваньский производитель решил вернуть нетбукам былую рыночную нишу, и вполне возможно, что у бренда задуманное получится.	2013-09-06 06:00:21	\N	news_13899
 241	http://www.you2you.ru/news/poyavilas-pervaya-informatsiya-o-nadvigayuschemsya-anonse-planshetnogo-kompyutera-microsoft-surface-pro-2	2013-10-16 19:02:11	1	​Появилась первая информация о надвигающемся анонсе планшетного компьютера Microsoft Surface Pro 2	​Появилась первая информация о надвигающемся анонсе планшетного компьютера Microsoft Surface Pro 2. Устройство по имеющейся информации, собираться будет на базе процессоров Intel Haswell i5. Объем оперативной памяти гаджета составит от четырех до восьми гигабайт.	2013-09-06 05:51:00	\N	news_13898
-242	http://www.you2you.ru/news/microsoft-xbox-360-budet-podderjivatsya-posle-vyihoda-novoy-konsoli-na-protyajenii-esche-neskolkih-le	2013-10-16 19:02:11	1	Microsoft Xbox 360 будет поддерживаться после выхода новой консоли на протяжении еще нескольких ле	​�?гровая приставка Microsoft Xbox 360 будет поддерживаться после выхода новой консоли на протяжении еще нескольких лет. Шаг этот со стороны американской корпорации вполне логичный, ведь  за свое время бренду удалось реализовать 80 миллионов игровых приставок, а это признак весьма немаленькой аудитории бренда, с которой нельзя так просто взять и прекратить плотно работать.	2013-09-06 05:48:55	\N	news_13897
+242	http://www.you2you.ru/news/microsoft-xbox-360-budet-podderjivatsya-posle-vyihoda-novoy-konsoli-na-protyajenii-esche-neskolkih-le	2013-10-16 19:02:11	1	Microsoft Xbox 360 будет поддерживаться после выхода новой консоли на протяжении еще нескольких ле	​Игровая приставка Microsoft Xbox 360 будет поддерживаться после выхода новой консоли на протяжении еще нескольких лет. Шаг этот со стороны американской корпорации вполне логичный, ведь  за свое время бренду удалось реализовать 80 миллионов игровых приставок, а это признак весьма немаленькой аудитории бренда, с которой нельзя так просто взять и прекратить плотно работать.	2013-09-06 05:48:55	\N	news_13897
 243	http://www.you2you.ru/news/sony-predstavila-osobennyiy-obyektiv-kotoryiy-mojno-zakrepit-na-lyuboy-sovremennyiy-kommunikator	2013-10-16 19:02:11	1	Sony представила особенный "объектив", который можно закрепить на любой современный коммуникатор	​Компания Sony анонсировала на выставке электроники IFA 2013, проходящей в Берлине, новый мобильный аксессуар – фотоприставку для современных смартфонов.  С помощью этого небольшого устройства на мобильный девайс пользователь может получать высококачественные снимки.	2013-09-05 05:10:58	\N	news_13895
 244	http://www.you2you.ru/news/asus-vivobook-s301-tayvanskiy-brend-predstavil-novyiy-ultrabuk-s-priemlemoy-tsenoy-i-neplohimi-harakteristikami	2013-10-16 19:02:12	1	Asus Vivobook S301 - тайваньский бренд представил новый ультрабук с приемлемой ценой и неплохими характеристиками	​Ассортимент компании Asus вот-вот пополнится новой моделью ультрабука, которая позиционируется в качестве доступного продукта. Новинка называется Asus Vivobook S301, в зависимости от конкретной конфигурации её стоимость начитается с отметки в $700.	2013-09-05 05:05:13	\N	news_13894
 245	http://www.you2you.ru/news/yujno-koreyskaya-kompaniya-samsung-predstavila-4-sentyabrya-umnyie-chasyi-samsung-galaxy-gear	2013-10-16 19:02:12	1	Южно-корейская компания Samsung представила 4 сентября умные часы Samsung Galaxy Gear	​Вот и свершилось! Южно-корейская компания Samsung представила 4 сентября умные часы Samsung Galaxy Gear. Кроме того, вместе с умными часами производителем были показаны: фаблет Galaxy Note 3 и планшетный компьютер Galaxy Note 10.1.	2013-09-05 04:48:25	\N	news_13893
@@ -1166,63 +1244,56 @@ COPY feed_external_item (id, url, created_at, feed_external_id, title, text, dat
 251	http://www.you2you.ru/news/korporatsiya-samsung-obognala-kompaniyu-apple-po-prodajam-planshetnyih-kompyuterov-na-rossiyskom-ryinke	2013-10-16 19:02:12	1	​Корпорация Samsung обогнала компанию Apple по продажам планшетных компьютеров на российском рынке	​Корпорация Samsung обогнала компанию Apple по продажам планшетных компьютеров на российском рынке. Так, согласно опубликованным данным, доля  продаж планшетных ПК у корпорации Samsung выросла до 17,3%, в то же время, вместо былых 30% у Apple сегодня 17% от рыночной доли.	2013-09-03 04:30:39	\N	news_13884
 252	http://www.you2you.ru/news/v-nachale-sentyabrya-2013-goda-v-prodaje-poyavitsya-novyiy-prodvinutyiy-zerkalnyiy-fotoapparat-canon-eos-70d	2013-10-16 19:02:12	1	​В начале сентября 2013 года в продаже появится новый продвинутый зеркальный фотоаппарат Canon EOS 70D	​В начале сентября 2013 года в продаже появится новый продвинутый зеркальный фотоаппарат Canon EOS 70D. Устройство будет поставляться в комплекте с объективом 18-135 мм IS STM. Фотоаппарат наверняка будет интересен профессиональным фотографам благодаря своим во многом достойным характеристикам.	2013-09-02 05:31:35	\N	news_13882
 253	http://www.you2you.ru/news/kompaniya-asus-gotova-predstavit-4-sentyabrya-novyiy-planshetnyiy-kompyuter-lineyki-transformer-pad	2013-10-16 19:02:12	1	​Компания Asus готова представить 4 сентября новый планшетный компьютер линейки Transformer Pad	​Компания Asus готова представить 4 сентября новый планшетный компьютер линейки Transformer Pad. Ожидается, что новый планшет будет работать на Android OS и процессоре Tegra 4. Вполне вероятно, что новый ASUS Transformer Pad получит 10,1-дюймовый дисплей.	2013-09-02 05:19:55	\N	news_13881
-254	http://www.you2you.ru/news/v-obozrimom-buduschem-polzovateli-skype-smogut-obschatsya-drug-s-drugom-v-formate-3d	2013-10-16 19:02:12	1	В обозримом будущем пользователи Skype смогут общаться друг с другом в формате 3D	​Разработчики популярного во всем мире мессенджера Skype рассказали, что ведут разработку нового функционала программы для осуществления видеозвонков в формате 3D. �?нформацию подтвердили и представители компании Microsoft, курирующей Skype. Как выяснили журналисты Би-би-си, соответствующие технологии уже находятся в стадии активного тестирования.	2013-09-02 04:45:34	\N	news_13880
+254	http://www.you2you.ru/news/v-obozrimom-buduschem-polzovateli-skype-smogut-obschatsya-drug-s-drugom-v-formate-3d	2013-10-16 19:02:12	1	В обозримом будущем пользователи Skype смогут общаться друг с другом в формате 3D	​Разработчики популярного во всем мире мессенджера Skype рассказали, что ведут разработку нового функционала программы для осуществления видеозвонков в формате 3D. Информацию подтвердили и представители компании Microsoft, курирующей Skype. Как выяснили журналисты Би-би-си, соответствующие технологии уже находятся в стадии активного тестирования.	2013-09-02 04:45:34	\N	news_13880
 255	http://www.you2you.ru/news/novyiy-monitor-ultravyisokogo-razresheniya-predstavila-kompaniya-acer	2013-10-16 19:02:12	1	​Новый монитор ультравысокого разрешения представила компания Acer	​Новый монитор ультравысокого разрешения представила компания Acer. Новое устройство Acer T272HUL – это профессионального уровня монитор с 27-дюймовым сенсорным экраном формата WQHD (2560 х 1440 пикселей) и поддержкой 1,07 млрд цветов.	2013-08-30 05:29:24	\N	news_13878
 260	http://zodroid.ru/content/chego-stoit-ozhidat-ot-prezentacii-google/	2013-10-16 19:02:12	2	Чего стоит ожидать от презентации Google	\r\n \r\nВсем привет! Вот вот компания Google должна представит свое новое детище под именем KitKat и в придачу к нему пару гаджетов. Чем же собирается нас удивлять компания добра? Давайте разбираться..	\N	\N	http://zodroid.ru/content/chego-stoit-ozhidat-ot-prezentacii-google/
-261	http://zodroid.ru/content/znews-12/	2013-10-16 19:02:12	2	ZNews #12	\r\n \r\nВсем привет! Очередная порция свежего выпуска ZNewsпредстала пред ваши ясны очи. Нынче мы поговорим об утечках и анонсах — благо информации предостаточно. �?так,  жмем «подробнее» и наслаждаемся :	\N	\N	http://zodroid.ru/content/znews-12/
+261	http://zodroid.ru/content/znews-12/	2013-10-16 19:02:12	2	ZNews #12	\r\n \r\nВсем привет! Очередная порция свежего выпуска ZNewsпредстала пред ваши ясны очи. Нынче мы поговорим об утечках и анонсах — благо информации предостаточно. Итак,  жмем «подробнее» и наслаждаемся :	\N	\N	http://zodroid.ru/content/znews-12/
 262	http://zodroid.ru/content/htc-one-max-biometricheskij-monstr/	2013-10-16 19:02:13	2	HTC One Max - биометрический монстр!	\r\n \r\nКомпания HTC наконец таки представила свой "плафон", конкурента Samsung Galaxy Note III. Смартфон, как и ожидалось, зовется HTC One Max.....	\N	\N	http://zodroid.ru/content/htc-one-max-biometricheskij-monstr/
 263	http://zodroid.ru/content/pyat-prichin-provala-iphone-5c/	2013-10-16 19:02:13	2	Пять причин провала iPhone 5C	\r\n \r\nПривет друзья! Тех людей, которые страдают пюре головного мозга прошу отдалится от экранов! Сегодня мы поговорим о безоговорочном провале iPhone 5C.	\N	\N	http://zodroid.ru/content/pyat-prichin-provala-iphone-5c/
-264	http://zodroid.ru/content/obzor-beta-versii-prilozheniya-themer/	2013-10-16 19:02:13	2	Обзор бета-версии приложения Themer	\r\n \r\nДоброго времени суток! Мы ведь знаем как вы любите кастомизировать рабочий стол своего android-девайса! �? поэтому замутили новенькое видео на эту тему. На этот раз вас ждет обзор бета-версии приложения Themer, от создателей mycolorscreen! Приятного просмотра! 	\N	\N	http://zodroid.ru/content/obzor-beta-versii-prilozheniya-themer/
+264	http://zodroid.ru/content/obzor-beta-versii-prilozheniya-themer/	2013-10-16 19:02:13	2	Обзор бета-версии приложения Themer	\r\n \r\nДоброго времени суток! Мы ведь знаем как вы любите кастомизировать рабочий стол своего android-девайса! И поэтому замутили новенькое видео на эту тему. На этот раз вас ждет обзор бета-версии приложения Themer, от создателей mycolorscreen! Приятного просмотра! 	\N	\N	http://zodroid.ru/content/obzor-beta-versii-prilozheniya-themer/
 265	http://zodroid.ru/content/obzor-igry-deer-hunter-2014-vremya-strelyat/	2013-10-16 19:02:13	2	Обзор игры Deer Hunter 2014-время стрелять!	Осень, грибники собирают грибы, студенты ходят на пары, и только охотники веселятся на полную мощность! Пойдем и ты с нами, застрелим этого оленя! Да не в живую, не бойся! А в отличном симуляторе охоты Deer Hunter 2014! Как это не играл? Ну тогда читай обзор, и заряжай ружье! \r\n	\N	\N	http://zodroid.ru/content/obzor-igry-deer-hunter-2014-vremya-strelyat/
-266	http://zodroid.ru/content/znews-11/	2013-10-16 19:02:13	2	ZNews #11	\r\n \r\n«Маленький, да удаленький». �?менно так можно охарактеризовать сегодняшнюю подборку новостей с нафталиновым душком. Приятного прочтения ;)	\N	\N	http://zodroid.ru/content/znews-11/
-267	http://zodroid.ru/content/igrovye-smartfony-nashe-budushee/	2013-10-16 19:02:13	2	�?гровые смартфоны - наше будущее?	\r\n \r\nДоброго времени суток! Вы наверное знаете, что существуют, так называемые, игровые ноутбуки. От своих собратьев они отличаются в первую очередь производительностью, которая в некоторых случаях в разы выше! Но проблема в том, что рынок предпочитает компактные устройства, типа планшета или смартфона. Согласитесь, ноутбук с собой таскать не всегда удобно, а в игрушки поиграть хочется! Если вы еще не поняли, я говорю про "игровые" смартфоны, с физическими контролерами и  механически кнопками.	\N	\N	http://zodroid.ru/content/igrovye-smartfony-nashe-budushee/
+266	http://zodroid.ru/content/znews-11/	2013-10-16 19:02:13	2	ZNews #11	\r\n \r\n«Маленький, да удаленький». Именно так можно охарактеризовать сегодняшнюю подборку новостей с нафталиновым душком. Приятного прочтения ;)	\N	\N	http://zodroid.ru/content/znews-11/
+267	http://zodroid.ru/content/igrovye-smartfony-nashe-budushee/	2013-10-16 19:02:13	2	Игровые смартфоны - наше будущее?	\r\n \r\nДоброго времени суток! Вы наверное знаете, что существуют, так называемые, игровые ноутбуки. От своих собратьев они отличаются в первую очередь производительностью, которая в некоторых случаях в разы выше! Но проблема в том, что рынок предпочитает компактные устройства, типа планшета или смартфона. Согласитесь, ноутбук с собой таскать не всегда удобно, а в игрушки поиграть хочется! Если вы еще не поняли, я говорю про "игровые" смартфоны, с физическими контролерами и  механически кнопками.	\N	\N	http://zodroid.ru/content/igrovye-smartfony-nashe-budushee/
 268	http://zodroid.ru/content/pochemu-ya-otkazalsya-ot-pokupki-iphone-5s/	2013-10-16 19:02:13	2	Почему я отказался от покупки Iphone 5S	\r\n \r\nОдни называют его идеальным смартфон, другие упрекают его в явных недостатках. Неверно вы уже догадались о ком сегодня пойдёт речь - Iphone 5S. Нет, это не обзор, а лишь не большое чтиво  о том, почему я отказался от покупки яблочного флагмана\r\n!Осторожно слишком много имхо!	\N	\N	http://zodroid.ru/content/pochemu-ya-otkazalsya-ot-pokupki-iphone-5s/
 269	http://zodroid.ru/content/znews-10-yubilejnyj-vypusk/	2013-10-16 19:02:13	2	ZNews #10 - юбилейный выпуск! 	\r\n \r\nВсем привет! Вашему вниманию представлен юбилейный десятый выпуск ZNews, как и обычно мы поведаем вам все самые интересные ITновости за день. Приятного прочтения;) 	\N	\N	http://zodroid.ru/content/znews-10-yubilejnyj-vypusk/
 270	http://zodroid.ru/content/znews-9/	2013-10-16 19:02:13	2	Znews #9	\r\n \r\nПривет друзья! Сейчас вас ждет очередная порция IT новостей! Если вы готовы, то смело начинаем!:)	\N	\N	http://zodroid.ru/content/znews-9/
 271	http://zodroid.ru/content/htc-vy-v-polnoj/	2013-10-16 19:02:13	2	HTC, все очень плохо....	\r\n \r\nПривет друзья! Сегодня речь пойдет о небезызвестной компании HTC, которая в данный момент переживает, мягко говоря, не лучшие времена......	\N	\N	http://zodroid.ru/content/htc-vy-v-polnoj/
 272	http://zodroid.ru/content/nexus-5-google-ty-serezno/	2013-10-16 19:02:13	2	Nexus 5 - Google, ты серьезно?	\r\n \r\nПривет друзья! Сегодня, а точнее вчера, пришла информация о том, что Японская розничная сеть Redstar открыла на своем сайте предварительный заказ на LG Nexus 5!	\N	\N	http://zodroid.ru/content/nexus-5-google-ty-serezno/
 276	http://zodroid.ru/content/5-prichin-pochemu-apple-ignoriruet-rossiyu/	2013-10-16 19:02:13	2	Пять причин почему Apple игнорирует Россию	\r\n \r\nПривет друзья! Вы все знаете, что компания Apple не очень любит тяжелую Российскую действительность. Русская душа видимо слишком глубока для американской корпорации. А Siri, уже несколько лет не может выучить богатый русский язык. В чем же дело? Неужели все это происки империалистов?:) Давайте разберемся и выведем пять причин, по которым Apple игнорирует Россию.	\N	\N	http://zodroid.ru/content/5-prichin-pochemu-apple-ignoriruet-rossiyu/
-277	http://zodroid.ru/content/aviate/	2013-10-16 19:02:13	2	Aviate	\r\nМилости просим дорогие читатели. Свежая порция информации о том как украсить свой рабочий стол. �? сделать еще кучу полезных вещей. Смотрим, и обязательно делимся своими мыслями в коментариях.	\N	\N	http://zodroid.ru/content/aviate/
+277	http://zodroid.ru/content/aviate/	2013-10-16 19:02:13	2	Aviate	\r\nМилости просим дорогие читатели. Свежая порция информации о том как украсить свой рабочий стол. И сделать еще кучу полезных вещей. Смотрим, и обязательно делимся своими мыслями в коментариях.	\N	\N	http://zodroid.ru/content/aviate/
 278	http://zodroid.ru/content/obzor-contra-revolution-privet-iz-90-h/	2013-10-16 19:02:13	2	Обзор Contra Evolution-привет из 90-х!	Помните свою приставку с картриджами, провода к телевизору, и звук загрузки Dendy? Значит вы помните и одну из тех игр, после которой хотелось разбить джойстик-ContraRevolution! А теперь в нее можно играть и на мобильных девайсах, ну а у нас есть обзор! Посмотрим...\r\n 	\N	\N	http://zodroid.ru/content/obzor-contra-revolution-privet-iz-90-h/
 279	http://zodroid.ru/content/mnenie-o-tvitter-klientah/	2013-10-16 19:02:13	2	Мнение о твиттер-клиентах 	\r\nЗдравствуй уважаемый читатель :)Так как я все время пользовался твиттер-клиентом Plume, то никак себя не мог заставить пересесть на другой клиент. Потому как чаще всего я сидел через виджет на рабочем столе, может вам и покажется это странным :)\r\n 	\N	\N	http://zodroid.ru/content/mnenie-o-tvitter-klientah/
 280	http://zodroid.ru/content/znews-6/	2013-10-16 19:02:13	2	ZNews #6	\r\n \r\nЧто может быть лучше, чем самый лучший дайджест про новости из мира IT? Правильно, только самая свежая его версия.. Читаем и комментим, лайкаем, твиттим и +1-м.	\N	\N	http://zodroid.ru/content/znews-6/
 281	http://zodroid.ru/content/siri-umnoe-ono/	2013-10-16 19:02:13	2	Siri - умное "оно"...	\r\n \r\nПривет друзья! Сегодня четвертое октября и это тот самый день, когда голосовой помощник Siri была включена в IOS. Тогда еще 5 версии. Т.е. у неё сегодня официальный день рождения!	\N	\N	http://zodroid.ru/content/siri-umnoe-ono/
-282	http://zodroid.ru/content/znews-5/	2013-10-16 19:02:13	2	ZNews #5	\r\n \r\nВсем привет! Очередная порция свежего выпуска ZNewsпредстала пред ваши ясны очи. Нынче мы поговорим об утечках и анонсах — благо информации предостаточно. �?так,  жмем «подробнее» и наслаждаемся :)	\N	\N	http://zodroid.ru/content/znews-5/
+282	http://zodroid.ru/content/znews-5/	2013-10-16 19:02:13	2	ZNews #5	\r\n \r\nВсем привет! Очередная порция свежего выпуска ZNewsпредстала пред ваши ясны очи. Нынче мы поговорим об утечках и анонсах — благо информации предостаточно. Итак,  жмем «подробнее» и наслаждаемся :)	\N	\N	http://zodroid.ru/content/znews-5/
 283	http://zodroid.ru/content/freeze-horoshij-tajmkiller/	2013-10-16 19:02:13	2	Freeze - хороший таймкиллер!	\r\n \r\nПривет, уважаемый читатель! Любишь ли ты качественные игры, на логику, с графикой, да еще и с музыкой красивой? Думаю,да, и тогда мы предлагаем твоему вниманию обзор русской игры Freeze!	\N	\N	http://zodroid.ru/content/freeze-horoshij-tajmkiller/
 284	http://zodroid.ru/content/znews-4/	2013-10-16 19:02:13	2	ZNews #4	\r\n \r\nПривет друзья! Сегодня вас ждет 4 выпуск почти ежедневной программы "Znews", в которой мы расскажем о самом интересном из мира IT! Все как всегда:) Поехали!	\N	\N	http://zodroid.ru/content/znews-4/
 285	http://zodroid.ru/content/iwatch-ajfon-na-zapyaste/	2013-10-16 19:02:14	2	iWatch - айфон на запястье!	\r\nВсем привет! Ни для кого не секрет, что Apple работает над своими умными часами. Причем Apple должны сделать этот продукт как обычно качественным, способным перевернуть целую индустрию, которая, по правде говоря, застряла в эре E-link экранов и лагающих интерфейсов.....	\N	\N	http://zodroid.ru/content/iwatch-ajfon-na-zapyaste/
 286	http://politprofi.ru/info/novosti-ryinka/v-altayskom-krae-popyitayutsya-vozrodit-rossiyu	2013-10-16 19:02:14	3	Новости рынка: В Алтайском крае попытаются возродить Россию	В Алтайском крае зарегистрировано отделение партии «Возрождения России». «Возрождение России» стала 52 зарегистрированной на территории Алтайского края партией.	2013-10-16 06:53:31	\N	news_1328
 287	http://politprofi.ru/info/novosti-ryinka/v-permskom-krae-naznachili-datyi-vyiborov	2013-10-16 19:02:14	3	Новости рынка: В Пермском крае назначили даты выборов	8 сентября в Пермском крае прошли выборы глав различных поселений, муниципальных районов и городских округов.	2013-10-16 06:50:35	\N	news_1327
 288	http://politprofi.ru/info/novosti-ryinka/vyiboryi-opredelili-gubernatorov-otlichnikov	2013-10-16 19:02:14	3	Новости рынка: Выборы определили губернаторов-отличников	Вышел тринадцатый по счету "рейтинг выживаемости губернаторов", составляемый группой экспертов.	2013-10-16 06:45:35	\N	news_1326
-289	http://politprofi.ru/info/news/v-tomske-opredelili-mera	2013-10-16 19:02:14	3	Новости: В Томске определили мэра	�?збирательная комиссия Томска утвердила итоги голосования на выборах мэра Томска и избрание единоросса �?вана Кляйна на этот пост, говорится в решении комиссии, опубликованном ее сайте.	2013-10-16 06:40:25	\N	news_1325
+289	http://politprofi.ru/info/news/v-tomske-opredelili-mera	2013-10-16 19:02:14	3	Новости: В Томске определили мэра	Избирательная комиссия Томска утвердила итоги голосования на выборах мэра Томска и избрание единоросса Ивана Кляйна на этот пост, говорится в решении комиссии, опубликованном ее сайте.	2013-10-16 06:40:25	\N	news_1325
 290	http://politprofi.ru/info/novosti-ryinka/s-sudimostyu-na-vyiboryi	2013-10-16 19:02:14	3	Новости рынка: С судимостью на выборы	Закон о выборах не соответствует Конституции Российской Федерации – таково постановление Конституционного суда, который, рассмотрев обращение пяти граждан из разных регионов страны, снятых с выборов 14 октября 2012 года из-за того, что они имели судимости по "тяжким" статьям, встал на сторону заявителей.	2013-10-16 06:35:24	\N	news_1324
 291	http://politprofi.ru/info/novosti-ryinka/perevalilo-za-25	2013-10-16 19:02:14	3	Новости рынка: Перевалило за 25	С начала года в Калининградской области, по данным областного управления Министерства юстиции РФ, количество политических партий увеличилось на 25.	2013-10-16 06:30:38	\N	news_1323
 292	http://politprofi.ru/info/novosti-ryinka/karernyiy-rost-na-kritike-gubernatora	2013-10-16 19:02:14	3	Новости рынка: Карьерный рост на критике губернатора	Региональное отделение партии «Родина» в Волгоградской области возглавил экс-единоросс Николай Чувальский, жестко раскритиковавший губернатора Сергея Боженова.	2013-10-16 06:23:58	\N	news_1322
-293	http://politprofi.ru/info/novosti-ryinka/nerazluchna-s-prezidentom	2013-10-16 19:02:14	3	Новости рынка: Неразлучна с президентом	Cъезд «Единой России», прошедший в минувшие выходные, показал несколько тенденций, отмечают СМ�?: партия продолжила избавляться от кадров вновь вернувшегося на работу в администрацию президента Владислава Суркова и стала копировать методы внепартийного движения Общероссийского народного фронта (ОНФ), с которым не хочет делить Владимира Путина.	2013-10-07 06:51:35	\N	news_1321
+293	http://politprofi.ru/info/novosti-ryinka/nerazluchna-s-prezidentom	2013-10-16 19:02:14	3	Новости рынка: Неразлучна с президентом	Cъезд «Единой России», прошедший в минувшие выходные, показал несколько тенденций, отмечают СМИ: партия продолжила избавляться от кадров вновь вернувшегося на работу в администрацию президента Владислава Суркова и стала копировать методы внепартийного движения Общероссийского народного фронта (ОНФ), с которым не хочет делить Владимира Путина.	2013-10-07 06:51:35	\N	news_1321
 294	http://politprofi.ru/info/novosti-ryinka/er-vosstanovila-doverie	2013-10-16 19:02:14	3	Новости рынка: ЕР восстановила доверие	Результаты выборов показали, что "Единая Россия" восстановила доверие населения и это связано не с удачной кампанией, а с тем, что партия держит слово, заявил премьер-министр РФ, председатель ЕР Дмитрий Медведев на пленарном заседании съезда единороссов.	2013-10-07 06:49:14	\N	news_1320
-295	http://politprofi.ru/info/novosti-ryinka/prejdevremennyie-vyiboryi-v-mosgordumu	2013-10-16 19:02:14	3	Новости рынка: Преждевременные выборы в Мосгордуму	Выборы в Московскую городскую думу запланированы на сентябрь следующего года, однако и партии, и будущие кандидаты уже начали готовиться к ним, при этом из территориальных избирательных комиссий поступает информация о том, что в декабре столичный парламент может самораспуститься и тогда голосование будет перенесено на март, пишут федеральные СМ�?.	2013-10-07 06:47:26	\N	news_1319
+295	http://politprofi.ru/info/novosti-ryinka/prejdevremennyie-vyiboryi-v-mosgordumu	2013-10-16 19:02:14	3	Новости рынка: Преждевременные выборы в Мосгордуму	Выборы в Московскую городскую думу запланированы на сентябрь следующего года, однако и партии, и будущие кандидаты уже начали готовиться к ним, при этом из территориальных избирательных комиссий поступает информация о том, что в декабре столичный парламент может самораспуститься и тогда голосование будет перенесено на март, пишут федеральные СМИ.	2013-10-07 06:47:26	\N	news_1319
 296	http://politprofi.ru/info/novosti-ryinka/pochem-vzyali-moskvu	2013-10-16 19:02:14	3	Новости рынка: Почем взяли Москву	Мэр Москвы Сергей Собянин потратил на избирательную кампанию 107 млн рублей. При этом в борьбе за пост столичного градоначальника он не использовал собственные денежные средства.	2013-10-07 06:46:14	\N	news_1318
-297	http://politprofi.ru/info/novosti-ryinka/sr-smenit-rukovodstvo	2013-10-16 19:02:14	3	Новости рынка: "СР" сменит руководство	Об этом СМ�? заявил председатель справороссов Николай Левичев. По его словам, съезд пройдет в конце октября в соответствии с решением Президиума Центрального совета партии в связи с истечением сроков полномочий ее руководящих органов.	2013-10-07 06:45:19	\N	news_1317
+297	http://politprofi.ru/info/novosti-ryinka/sr-smenit-rukovodstvo	2013-10-16 19:02:14	3	Новости рынка: "СР" сменит руководство	Об этом СМИ заявил председатель справороссов Николай Левичев. По его словам, съезд пройдет в конце октября в соответствии с решением Президиума Центрального совета партии в связи с истечением сроков полномочий ее руководящих органов.	2013-10-07 06:45:19	\N	news_1317
 298	http://politprofi.ru/info/novosti-ryinka/hinshteyn-nazval-kolleg-po-partii-izlishne-samouverennyimi	2013-10-16 19:02:14	3	Новости рынка: Хинштейн назвал коллег по партии излишне самоуверенными	Внутриэлитные конфликты и излишняя самоуверенность стали одними из причин проигрыша "Единой России" на выборах мэра в Екатеринбурге и Петрозаводске, считает депутат-единоросс Александр Хинштейн.	2013-10-07 06:44:16	\N	news_1316
 299	http://politprofi.ru/info/novosti-ryinka/peredumali-s-boykotom	2013-10-16 19:02:14	3	Новости рынка: Передумали с бойкотом	Партия КПРФ планирует выдвинуть своего кандидата на выборы главы региона в следующем году, даже несмотря на непреодолимый муниципальный фильтр, сообщает Барнаульский городской комитет КПРФ.	2013-10-02 13:09:19	\N	news_1315
-300	http://politprofi.ru/info/novosti-ryinka/tomskih-izbirateley-pereschitayut	2013-10-16 19:02:14	3	Новости рынка: Томских избирателей пересчитают	Участковые избирательные комиссии со среды начнут уточнять списки избирателей в рамках подготовки к голосованию на выборах мэра Томска, сообщила СМ�? председатель горизбиркома Татьяна Арбузова.	2013-10-02 13:08:06	\N	news_1314
+300	http://politprofi.ru/info/novosti-ryinka/tomskih-izbirateley-pereschitayut	2013-10-16 19:02:14	3	Новости рынка: Томских избирателей пересчитают	Участковые избирательные комиссии со среды начнут уточнять списки избирателей в рамках подготовки к голосованию на выборах мэра Томска, сообщила СМИ председатель горизбиркома Татьяна Арбузова.	2013-10-02 13:08:06	\N	news_1314
 301	http://politprofi.ru/info/novosti-ryinka/vyiboryi-mera-novosibirska-obeschayut-byit-jarkimi	2013-10-16 19:02:14	3	Новости рынка: Выборы мэра Новосибирска обещают быть жаркими	Такого мнения придерживается вице-губернатор области Виктор Козодой.	2013-10-02 13:05:02	\N	news_1312
-303	http://politprofi.ru/info/novosti-ryinka/informatsiyu-o-dne-vyiborov-propechatayut	2013-10-16 19:02:14	3	Новости рынка: �?нформацию о дне выборов пропечатают	В России должны расширить доступ к информации о назначении выборов. Предполагается, что официальная информация о выборах будет размещаться не только в интернете, но и в печати.	2013-10-02 13:06:51	\N	news_1313
-304	http://politprofi.ru/info/novosti-ryinka/obschestvo-zdorovo	2013-10-16 19:02:15	3	Новости рынка: Общество здорово	Глава Администрации президента РФ Сергей �?ванов высказался по поводу диалога власти и оппозиции, а также дал оценку прошедшим в начале сентября выборам мэра Москвы.	2013-10-02 13:02:39	\N	news_1310
+303	http://politprofi.ru/info/novosti-ryinka/informatsiyu-o-dne-vyiborov-propechatayut	2013-10-16 19:02:14	3	Новости рынка: Информацию о дне выборов пропечатают	В России должны расширить доступ к информации о назначении выборов. Предполагается, что официальная информация о выборах будет размещаться не только в интернете, но и в печати.	2013-10-02 13:06:51	\N	news_1313
+304	http://politprofi.ru/info/novosti-ryinka/obschestvo-zdorovo	2013-10-16 19:02:15	3	Новости рынка: Общество здорово	Глава Администрации президента РФ Сергей Иванов высказался по поводу диалога власти и оппозиции, а также дал оценку прошедшим в начале сентября выборам мэра Москвы.	2013-10-02 13:02:39	\N	news_1310
 305	http://politprofi.ru/info/novosti-ryinka/prokuratura-schitaet-chto-royzmana-vyibrali-nezakonno	2013-10-16 19:02:15	3	Новости рынка: Прокуратура считает что Ройзмана выбрали незаконно	Прокуратура обнаружила нарушения во время заседания городской думы Екатеринбурга, на нем мэром города был официально утвержден выигравший выборы Евгений Ройзман.	2013-10-02 13:01:35	\N	news_1309
 306	http://politprofi.ru/info/novosti-ryinka/usekli-vyiboryi	2013-10-16 19:02:15	3	Новости рынка: Усекли выборы	Вчера за новый порядок выборов главы Новосибирска, отменяющий проведение второго тура, проголосовали члены городского Совета депутатов. В Устав муниципалитета были внесены изменения, отменяющие правило абсолютного большинства.	2013-09-29 18:44:41	\N	news_1308
 307	http://politprofi.ru/info/novosti-ryinka/blagoveschensku-vernuli-pryamyie-vyiboryi-mera	2013-10-16 19:02:15	3	Новости рынка: Благовещенску вернули прямые выборы мэра	На заседании думы Благовещенска был рассмотрен вопрос о возвращении прямых выборов мэра и внесении изменений в Устав муниципального образования. Предложение народные избранники одобрили единогласно.	2013-09-29 18:43:28	\N	news_1307
 308	http://politprofi.ru/info/novosti-ryinka/grafu-protiv-vseh-mogut-vernut	2013-10-16 19:02:15	3	Новости рынка: Графу "Против всех" могут вернуть	Спикер Совета Федерации Валентина Матвиенко предложила вернуть в избирательные бюллетени графу «против всех». Соответствующее заявление бывшая губернатор Петербурга сделала во время открытия первого заседания осенней сессии Совфеда.	2013-09-29 18:41:53	\N	news_1306
 309	http://politprofi.ru/info/novosti-ryinka/v-pskovskoy-oblasti-naznachili-vyiboryi	2013-10-16 19:02:15	3	Новости рынка: В Псковской области назначили выборы	24 сентября на заседании Собрания депутатов Великолукского района был рассмотрен вопрос о назначении даты выборов главы Великолукского района. Датой досрочных выборов решено назначить 15 декабря 2013 года.	2013-09-29 18:39:23	\N	news_1305
-310	http://politprofi.ru/info/novosti-ryinka/vyiboram-poka-esche-doveryayut	2013-10-16 19:02:15	3	Новости рынка: Выборам пока еще доверяют	Доверие к итогам выборов за последние годы выросло, сообщает ВЦ�?ОМ. 48% людей из населенных пунктов, где проходили выборы, считают их достоверными.	2013-09-29 18:38:10	\N	news_1304
+310	http://politprofi.ru/info/novosti-ryinka/vyiboram-poka-esche-doveryayut	2013-10-16 19:02:15	3	Новости рынка: Выборам пока еще доверяют	Доверие к итогам выборов за последние годы выросло, сообщает ВЦИОМ. 48% людей из населенных пунктов, где проходили выборы, считают их достоверными.	2013-09-29 18:38:10	\N	news_1304
 \.
-
-
---
--- Name: feed_external_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('feed_external_item_id_seq', 310, true);
 
 
 --
@@ -1234,13 +1305,6 @@ COPY media (id, type, source, data) FROM stdin;
 
 
 --
--- Name: media_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('media_id_seq', 1, false);
-
-
---
 -- Data for Name: message; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -1249,25 +1313,11 @@ COPY message (id, to_user_id, from_user_id, subject, text, created_at, updated_a
 
 
 --
--- Name: message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('message_id_seq', 1, false);
-
-
---
 -- Data for Name: post; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY post (id, user_id, subject, text, is_media, created_at, updated_at, cx, cy, cx_p_cy, cx_m_cy, post_id, deleted_at) FROM stdin;
 \.
-
-
---
--- Name: post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('post_id_seq', 1, false);
 
 
 --
@@ -1287,13 +1337,6 @@ COPY smtp (id, host, username, password, port, encryption, timeout, "extensionHa
 
 
 --
--- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('smtp_id_seq', 1, false);
-
-
---
 -- Data for Name: tag; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -1308,13 +1351,6 @@ COPY tag (id, name, created_at, updated_at) FROM stdin;
 8	Simple_very_tag	2013-10-11 17:39:40	\N
 9	Taggg_with_max_length	2013-10-11 17:39:40	\N
 \.
-
-
---
--- Name: tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('tag_id_seq', 9, true);
 
 
 --
@@ -3806,13 +3842,6 @@ COPY tag_place (id, user_id, tag_id, created_at, updated_at, cx, cy, cx_p_cy, cx
 
 
 --
--- Name: tag_place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('tag_place_id_seq', 2480, true);
-
-
---
 -- Data for Name: tag_post; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -3826,13 +3855,6 @@ COPY tag_post (post_id, tag_id) FROM stdin;
 
 COPY token (id, application_id, user_id, token, expire_at, created_at, updated_at) FROM stdin;
 \.
-
-
---
--- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('token_id_seq', 1, false);
 
 
 --
@@ -4898,20 +4920,6 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 
 COPY user_feed_external (id, user_id, last_published_id, feed_external_id, created_at, updated_at) FROM stdin;
 \.
-
-
---
--- Name: user_feed_external_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_feed_external_id_seq', 1, false);
-
-
---
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_id_seq', 10000, true);
 
 
 --
@@ -6838,13 +6846,6 @@ COPY user_place (id, user_id, name, cx, cy, cx_p_cy, cx_m_cy, created_at, update
 
 
 --
--- Name: user_place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_place_id_seq', 1915, true);
-
-
---
 -- Data for Name: user_settings; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6859,26 +6860,12 @@ COPY user_settings (id, user_id, radius) FROM stdin;
 
 
 --
--- Name: user_settings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_settings_id_seq', 6, true);
-
-
---
 -- Data for Name: user_social; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY user_social (id, user_id, social_service, user_social_id, additional_data) FROM stdin;
 1	101	twitter	71662685	\N
 \.
-
-
---
--- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_social_id_seq', 1, true);
 
 
 --

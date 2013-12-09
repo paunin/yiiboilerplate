@@ -12,7 +12,6 @@ return array(
         array('apiOauth/tokenGet', 'pattern' => 'api_v0/oauth/token', 'verb' => 'GET'),
 
 
-        
         //404
         array('apiV0/error404', 'pattern' => 'api<whartever:.*>'),
         //>>>REST patterns

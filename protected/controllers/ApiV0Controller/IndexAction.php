@@ -15,7 +15,7 @@ class IndexAction extends ApiAction
 
         $this->controller->out(
             array(
-                'hello' => 'Wellcome to API',
+                'hello' => 'Wellcome to PlaceMeUp API',
                 'version' => 0,
                 'config' => $confs,
             )

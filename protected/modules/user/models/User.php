@@ -78,7 +78,7 @@ class User extends BaseUser
         return $this->username . '(' . $this->email . ')';
     }
 
-    
+
 
     /**
      * @param Application $app

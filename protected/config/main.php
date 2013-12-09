@@ -4,7 +4,7 @@ $main = array(
 
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Yii Boilerplate App', //@ChangeIt
-    'language'=>'en',
+    'language' => 'en',
 
     // preloading 'log' component
     'preload' => array('log'),
@@ -143,7 +143,7 @@ $main = array(
     ),
 );
 
-if(is_file(dirname(__FILE__) . '/solr.php')) {
+if (is_file(dirname(__FILE__) . '/solr.php')) {
     $solr = require(dirname(__FILE__) . '/solr.php');
     $main = CMap::mergeArray(
         $main,
@@ -151,14 +151,14 @@ if(is_file(dirname(__FILE__) . '/solr.php')) {
     );
 }
 
-if(is_file(dirname(__FILE__) . '/custom.php')) {
+if (is_file(dirname(__FILE__) . '/custom.php')) {
     $custom = require(dirname(__FILE__) . '/custom.php');
     $main = CMap::mergeArray(
         $main,
         $custom
     );
 
-    if(defined('PROJECT_CUSTOM_DEBUG') && PROJECT_CUSTOM_DEBUG == true) {
+    if (defined('PROJECT_CUSTOM_DEBUG') && PROJECT_CUSTOM_DEBUG == true) {
         unset($main['components']['clientScript']);
         $dev = require(dirname(__FILE__) . '/dev.php');
         $main = CMap::mergeArray(
