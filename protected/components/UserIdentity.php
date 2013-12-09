@@ -35,7 +35,7 @@ class UserIdentity extends CUserIdentity
             $this->assignDbUser($user);
         }
 
-        return $this->errorCode == self::ERROR_NONE;
+        return ($this->errorCode == self::ERROR_NONE)?true:false;
     }
 
     /**

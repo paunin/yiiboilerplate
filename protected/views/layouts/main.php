@@ -153,7 +153,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
     <div class="clear"></div>
 
     <div id="footer">
-        <?php echo CHtml::encode(Yii::app()->params['slogan']) ?> &copy; <?php echo CHtml::encode(Yii::app()->name)?>
+        &copy;  Drunken Monkey
     </div>
     <!-- footer -->
 

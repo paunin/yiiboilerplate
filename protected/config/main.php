@@ -5,7 +5,6 @@ $main = array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Yii Boilerplate App', //@ChangeIt
     'language'=>'en',
-    'sourceLanguage'=>'en',
 
     // preloading 'log' component
     'preload' => array('log'),
@@ -13,10 +12,13 @@ $main = array(
     // autoloading model and component classes
     'import' => array(
 
+        'application.validators.*',
         'application.models.*',
         'application.models.raw.*',
+        'application.models.virtual.*',
         'application.models.forms.*',
         'application.components.*',
+        'application.components.api.*',
         'application.helpers.*',
         'application.modules.user.models.*',
 
@@ -57,29 +59,37 @@ $main = array(
             'dryRun' => false,
         ),
         'user' => array(
-            // enable cookie-based authentication
+            'class' => 'application.components.WebUser',
             'allowAutoLogin' => true,
-            'loginUrl'=>array('user/login/login'),
+            'loginUrl' => array('user/login/login'),
+            'stateKeyPrefix' => 'frontend_',
         ),
-        'db' =>array(
+        'apiUser' => array(
+            'class' => 'application.components.api.ApiUser',
+            'allowAutoLogin' => false,
+            'stateKeyPrefix' => 'api_',
+            'loginUrl' => array('user/login/login'),
+            'authTimeout' => 60
+        ),
+        'db' => array(
             'pdoClass' => 'NestedPDO',
             'emulatePrepare' => false
         ),
 
-/*        'clientScript' => array(
-            'class' => 'ext.ExtendedClientScript.ExtendedClientScript',
-            'combineCss' => true,
-            'compressCss' => true,
-            'combineJs' => true,
-            'compressJs' => true,
-            'excludeJsFiles' => array('jquery-1.10.2.min.js','bootstrap.min.js','jquery.cookie.js','auth.css'),
-            'excludeCssFiles' => array('bootstrap-theme.min.css','bootstrap.min.css',),
-        ),*/
+        /*        'clientScript' => array(
+                    'class' => 'ext.ExtendedClientScript.ExtendedClientScript',
+                    'combineCss' => true,
+                    'compressCss' => true,
+                    'combineJs' => true,
+                    'compressJs' => true,
+                    'excludeJsFiles' => array('jquery-1.10.2.min.js','bootstrap.min.js','jquery.cookie.js','auth.css'),
+                    'excludeCssFiles' => array('bootstrap-theme.min.css','bootstrap.min.css',),
+                ),*/
         'request' => array(
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'class' => 'HttpRequest',
-            'noCsrfValidationRoutes' => array('admin'),
+            'noCsrfValidationRoutes' => array('admin', 'apiV0', 'apiOauth', 'apiUser', 'apiTag', 'apiProfile', 'apiPost'),
         ),
         'image' => array(
             'class' => 'ext.image.CImageComponent',
@@ -98,22 +108,7 @@ $main = array(
             'defaultRoles' => array('guest'),
         ),
 
-        'urlManager' => array(
-            'urlFormat' => 'path',
-            'showScriptName' => false,
-            'rules' => array(
-
-                'gii' => 'gii',
-                'gii/<controller:\w+>' => 'gii/<controller>',
-                'gii/<controller:\w+>/<action:\w+>' => 'gii/<controller>/<action>',
-
-
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                '<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
-            ),
-        ),
+        'urlManager' => require(dirname(__FILE__) . '/urlManager.php'),
         'cache' => array(
             'class' => 'system.caching.CFileCache',
         ),
@@ -148,7 +143,7 @@ $main = array(
     ),
 );
 
-if(is_file(dirname(__FILE__) . '/solr.php')){
+if(is_file(dirname(__FILE__) . '/solr.php')) {
     $solr = require(dirname(__FILE__) . '/solr.php');
     $main = CMap::mergeArray(
         $main,
@@ -156,14 +151,14 @@ if(is_file(dirname(__FILE__) . '/solr.php')){
     );
 }
 
-if(is_file(dirname(__FILE__) . '/custom.php')){
+if(is_file(dirname(__FILE__) . '/custom.php')) {
     $custom = require(dirname(__FILE__) . '/custom.php');
     $main = CMap::mergeArray(
         $main,
         $custom
     );
 
-    if(defined('PROJECT_CUSTOM_DEBUG') && PROJECT_CUSTOM_DEBUG==true){
+    if(defined('PROJECT_CUSTOM_DEBUG') && PROJECT_CUSTOM_DEBUG == true) {
         unset($main['components']['clientScript']);
         $dev = require(dirname(__FILE__) . '/dev.php');
         $main = CMap::mergeArray(

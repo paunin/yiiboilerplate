@@ -52,7 +52,7 @@ class LoginController extends Controller
 
 
                     $identity = new UserSocialIdentity($soc_identity);
-                    if($identity->authenticate() == UserSocialIdentity::ERROR_NONE)
+                    if($identity->authenticate())
                         Yii::app()->user->login($identity);
 
                     // special redirect with closing popup window
@@ -125,7 +125,7 @@ class LoginController extends Controller
         $social_account = UserSocial::model()->findByPk($bind_id);
         if(empty($social_account))
             throw new CHttpException(404,'social_account not found');
-        if($social_account->user_id != User::current()->id)
+        if($social_account->user_id != Yii::app()->user->getId())
             throw new CHttpException(403,'social_account not for current user');
         try{
             $social_account->unbind();

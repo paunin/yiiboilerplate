@@ -8,4 +8,5 @@ if(is_file($config_path.'/custom.php'))
     $config_arr = require($config_path.'/custom.php');
 
 require_once($yii);
-Yii::createWebApplication($config);
+require_once(dirname(__FILE__).'/protected/components/WebApplication.php');
+Yii::createApplication('WebApplication',$config);

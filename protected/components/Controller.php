@@ -21,6 +21,13 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 
+    /**
+     * @var array Class based actions
+     */
+    protected $_actions = array();
+    /**
+     * @return array
+     */
     public function actions()
     {
         $actions = array();
@@ -30,5 +37,4 @@ class Controller extends CController
             }
         return $actions;
     }
-
 }
