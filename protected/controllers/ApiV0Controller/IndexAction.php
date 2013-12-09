@@ -11,13 +11,13 @@ class IndexAction extends ApiAction
 
         //throw new ApiException('s');
 
-        $confs = Yii::app()->params['public'];
+
 
         $this->controller->out(
             array(
                 'hello' => 'Wellcome to API',
-                'version' => 0,
-                'config' => $confs,
+                'version' => 0
+
             )
         );
     }
