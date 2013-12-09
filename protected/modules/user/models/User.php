@@ -104,15 +104,7 @@ class User extends BaseUser
         return $token;
     }
 
-    /**
-     * @param LocationPoint $point
-     * @return UserPlace|null
-     */
-    public function getPlace(LocationPoint $point)
-    {
-        return UserPlace::model()->findByAttributes(array('cx' => $point->cx, 'cy' => $point->cy, 'user_id' => $this->id));
 
-    }
 
     public function toFullProfile(){
         $profile = array(

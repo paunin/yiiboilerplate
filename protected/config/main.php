@@ -139,7 +139,11 @@ $main = array(
         'slogan' => 'Slogan for Yii Boilerplate Application', //@ChangeIt
         'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
         'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
-        'path_img_cache' => 'assets/img_cache'
+        'path_img_cache' => 'assets/img_cache',
+        'app_own_slug' => 'yiiboilerplate',
+        'app_own_id' => 3,
+        'app_token_ttl' => '5 minutes',
+        'rand_key' => '%er%u7f&*))Fdsdfdtr'
     ),
 );
 

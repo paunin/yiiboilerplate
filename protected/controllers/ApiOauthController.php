@@ -23,7 +23,6 @@ class ApiOauthController extends ApiController
     public function accessRules()
     {
         return array(
-
             array('deny',
                 'actions' => array('tokenGet'),
                 'users' => array('?'),
