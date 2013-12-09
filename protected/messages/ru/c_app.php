@@ -45,8 +45,6 @@ return array(
     'My babies' => 'Мои дети',
     'New password' => 'Новый пароль',
     'New password again' => 'Новый пароль снова',
-    'No information about your baby. Check filters or add some events.' => 'Нет информации о вашем ребенке. Проверьти фильтры или добавьте несколько событий.',
-    'Note' => 'Замечание',
     'Now you can sign in with your username and NEW password' => 'Теперь вы можете войтис вашим логином и НОВЫМ паролем',
     'Now you can sign in with your username and password' => 'Теперь вы можете войтис вашим логином и паролем',
     'Password has been changed' => 'Пароль был изменен',
@@ -63,7 +61,4 @@ return array(
     'Verify your email address' => 'Подтвердите ваш email',
     'You can\'t unbind your social account. Set your email address firstly.' => 'Вы не можете открепить ваш социальный акаунт. Сначала установите ваш email.',
     'You can\'t unbind your social account. Set your password firstly.' => 'Вы не можете открепить ваш социальный акаунт. Сначала установите ваш пароль.',
-    'You should be authorised to keep your baby in time!' => 'Вы должны быть авторизованы для поддержки вашего ребёнка в графике!',
-
-
 );
