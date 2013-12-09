@@ -1,7 +1,8 @@
 <?php
-require_once(dirname(__FILE__).'/../../../../norun.php');
-if(!Yii::app()->user->checkAccess('filemanager'))
-    die('403 Filemanager useless for you');
+header('Access-Control-Allow-Origin: *');
+//require_once(dirname(__FILE__).'/../../../../norun.php');
+//if(!Yii::app()->user->checkAccess('filemanager'))
+//    die('403 Filemanager useless for you');
 session_start();
 
 //------------------------------------------------------------------------------
@@ -22,7 +23,7 @@ session_start();
 //    |   |   |   |- responsivefilemanager
 //    |   |   |   |   |- plugin.min.js
 
-$base_url="http://www.site.com";  // base url (only domain) of site (without final /). If you prefer relative urls leave empty
+$base_url="http://".$_SERVER['HTTP_HOST'];  // base url (only domain) of site (without final /). If you prefer relative urls leave empty
 $upload_dir = '/uploads/'; // path from base_url to base of upload folder (with start and final /)
 $current_path = '../../../uploads/'; // relative path from filemanager folder to upload folder (with final /)
 //thumbs folder can't put inside upload folder

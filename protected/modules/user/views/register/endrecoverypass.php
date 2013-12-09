@@ -19,7 +19,7 @@ $this->breadcrumbs=array(
 
     <div class="row">
         <?php //echo $form->labelEx($model,'hash'); ?>
-        <?php echo $form->textField($model,'hash',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('hash'))); ?>
+        <?php echo $form->hiddenField($model,'hash',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('hash'))); ?>
         <?php echo $form->error($model,'hash'); ?>
     </div>
 

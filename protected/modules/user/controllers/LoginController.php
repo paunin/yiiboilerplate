@@ -56,11 +56,11 @@ class LoginController extends Controller
                         Yii::app()->user->login($identity);
 
                     // special redirect with closing popup window
-                    Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+                    Cut::setFlash(Yii::t('c_app','Login successful'), 'success');
                     $eauth->redirect();
                 } else {
                     // close popup window and redirect to cancelUrl
-                    Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
+                    //Cut::setFlash("Something wrong", 'error');
                     $eauth->cancel();
                 }
             }
@@ -70,7 +70,7 @@ class LoginController extends Controller
         } catch (EAuthException $e) {
             // save authentication error to session
             Yii::app()->user->setFlash('error', 'EAuthException: ' . $e->getMessage());
-            Cut::setFlash($this->getAction()->id . " ACTION error" . 'EAuthException: ' . $e->getMessage(), 'error');
+            Cut::setFlash("Something wrong" . 'EAuthException: ' . $e->getMessage(), 'error');
             // close popup window and redirect to cancelUrl
             $eauth->redirect($eauth->getCancelUrl());
         }
@@ -91,10 +91,11 @@ class LoginController extends Controller
             $model->attributes = $_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
             if($model->validate() && $model->login()) {
-                Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+                Cut::setFlash(Yii::t('c_app','Login successful'), 'success');
                 $this->redirect(Yii::app()->user->returnUrl);
+                die();
             }
-            Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
+            //Cut::setFlash($this->getAction()->id . " ACTION error", 'error');
         }
         // display the login form
         $this->render('/login/login', array('model' => $model));
@@ -112,7 +113,7 @@ class LoginController extends Controller
     public function actionLogout()
     {
         Yii::app()->user->logout();
-        Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+        //Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
         $this->redirect(Yii::app()->homeUrl);
     }
 
@@ -126,10 +127,9 @@ class LoginController extends Controller
             throw new CHttpException(404,'social_account not found');
         if($social_account->user_id != Yii::app()->user->getId())
             throw new CHttpException(403,'social_account not for current user');
-
         try{
             $social_account->unbind();
-            Cut::setFlash($this->getAction()->id . " ACTION success", 'success');
+            Cut::setFlash(Yii::t('c_app','Account has been unbound'), 'success');
         }catch(Exception $e){
             Cut::setFlash($e->getMessage(), 'error');
         }

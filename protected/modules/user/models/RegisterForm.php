@@ -33,7 +33,10 @@ class RegisterForm extends User
 	{
 		return array_merge(
             parent::attributeLabels(),
-            array()
+            array(
+                'password2' => Yii::t('app', 'Password again'),
+
+            )
         );
 	}
 
@@ -55,6 +58,6 @@ class RegisterForm extends User
      * @param $user
      */
     public function sendMail($user){
-        return myMail::send($user->email,Yii::t('user_module','Verify your email address'),'register',array('url'=>Cut::createUrl('user/register/endregister',array('key'=>$user->key),true)));
+        return myMail::send($user->email,Yii::t('c_app','Verify your email address'),'register',array('url'=>Cut::createUrl('user/register/endregister',array('key'=>$user->key),true)));
     }
 }

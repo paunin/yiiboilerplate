@@ -61,9 +61,9 @@ class UserSocial extends BaseUserSocial
             return $this->delete();
 
         if(empty($user->email))
-            throw new CException(Yii::t('user_module','You can\'t unbind your social account. Set your email address firstly.'));
+            throw new CException(Yii::t('c_app','You can\'t unbind your social account. Set your email address firstly.'));
         if(empty($user->password))
-            throw new CException(Yii::t('user_module','You can\'t unbind your social account. Set your password firstly.'));
+            throw new CException(Yii::t('c_app','You can\'t unbind your social account. Set your password firstly.'));
         return $this->delete();
     }
 }
