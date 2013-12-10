@@ -24,4 +24,9 @@
 	url = https://github.com/vlamanna/BootstrapFormHelpers.git
 [submodule "web/tipsy"]
 	path = web/tipsy
-	url = git://github.com/jaz303/tipsy.git
+	url = https://github.com/jaz303/tipsy.git
+[submodule "web/flot"]
+        path = web/flot
+	url = https://github.com/flot/flot.git
+
+
