@@ -1,1 +1,1 @@
-*/5  *    *    *    *          cd !!!!!!!!!!!!!?/protected/ && php yiic CronMail send
+*/5  *    *    *    *          cd /full/path/to/protected/ && php yiic CronMail send

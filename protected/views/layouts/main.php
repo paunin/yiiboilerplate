@@ -85,7 +85,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                     array('label' => Yii::t('c_app','Register'), 'url' => array('/user/register/register'), 'visible' => Yii::app()->user->isGuest),
 
                     array(
-                        'label' => User::current()->username,
+                        'label' => !Yii::app()->user->isGuest?User::current()->username:'',
                         'visible' => !Yii::app()->user->isGuest,
                         'items' => array(
                             array('label' => Yii::t('c_app','Profile'), 'url' => array('/user/profile/index')),
