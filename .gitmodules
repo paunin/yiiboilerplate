@@ -29,4 +29,6 @@
         path = web/flot
 	url = https://github.com/flot/flot.git
 
-
+[submodule "stat/gearman_monitor"]
+	path = stat/gearman_monitor
+	url = https://github.com/yugene/Gearman-Monitor.git
