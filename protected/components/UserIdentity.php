@@ -46,6 +46,25 @@ class UserIdentity extends CUserIdentity
         $this->_id = $user->id;
         $this->_username = $user->username;
         $user->last_login = date('Y-m-d H:i:s');
+
+        /** @var CAuthManager $auth */
+        $auth=Yii::app()->getAuthManager(); //initializes the authManager
+        $assigned_roles = $auth->getRoles($user->id);
+
+
+        if(!isset($assigned_roles[$user->role])){
+            if(!empty($assigned_roles)) //checks that there are assigned roles
+            {
+                foreach($assigned_roles as $n=>$role)
+                {
+                    if($auth->revoke($n,$user->id)) //remove each assigned role for this user
+                        $auth->save(); //again always save the result
+                }
+            }
+            $auth->assign($user->role,$user->id);
+            $auth->save();
+        }
+
         return $user->save();
     }
 

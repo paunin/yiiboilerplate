@@ -35,12 +35,17 @@ if(!is_dir($targetdir)){
     mkdir($targetdir,0777,true);
     file_put_contents($targetdir.'/user.txt','Username:'.Yii::app()->user->name."\nUserId:".Yii::app()->user->id."\n");
 }
+$targetdir2 = (dirname(__FILE__).'/../../../../thumbs/users/user_'.Yii::app()->user->id);
+if(!is_dir($targetdir)){
+    mkdir($targetdir,0777,true);
+}
 
 
 if(!Yii::app()->user->checkAccess('filemanagersuper'))
 {
     $upload_dir = '/uploads/users/user_'.Yii::app()->user->id.'/'; // path from base_url to base of upload folder (with start and final /)
     $current_path = '../../../uploads/users/user_'.Yii::app()->user->id.'/'; // relative path from filemanager folder to upload folder (with final /)
+    $thumbs_base_path = '../../../thumbs/users/user_'.Yii::app()->user->id.'/';
 }
 
 //------------------------------------------------------------------------------
