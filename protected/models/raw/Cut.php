@@ -16,7 +16,7 @@ class Cut
             try{
                 $url = Yii::app()->createAbsoluteUrl($route, $params, $schema, $ampersand);
             }catch(Exception $e){
-                Yii::app()->params['site_url'].Yii::app()->createUrl($route, $params, $ampersand);
+                $url = Yii::app()->params['site_url'].Yii::app()->createUrl($route, $params, $ampersand);
             }
         }else{
             $url = Yii::app()->createUrl($route, $params, $ampersand);
