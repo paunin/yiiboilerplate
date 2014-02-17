@@ -43,21 +43,14 @@ class Img
         $remove_orig = false
     )
     {
+
+        //web img
+        self::normalizePath($path);
         //build path
         if (!$new_path) {
             $spath = self::makeSizedPath($path, $max_w, $max_h, false, $need_crop, $crop_top, $crop_left, false);
         } else {
             $spath = $new_path;
-        }
-        //web img
-        if (preg_match('/^(http|https|ftp):\/\/.*/i', $path)) {
-            $tmp_path = YiiBase::getPathOfAlias('application.runtime') . '/img' . md5($path) . '.png';
-            if (!is_file($tmp_path)) {
-                if (!$fgc = @file_get_contents($path))
-                    return null;
-                file_put_contents($tmp_path, $fgc);
-            }
-            $path = $tmp_path;
         }
 
         //no input file
@@ -108,6 +101,18 @@ class Img
         return $spath;
     }
 
+    private static function normalizePath(&$path, $upload_external = true){
+        if (preg_match('/^(http|https|ftp):\/\/.*/i', $path)) {
+            $tmp_path = YiiBase::getPathOfAlias('application.runtime') . '/img' . md5($path) . '.png';
+            if ($upload_external && !is_file($tmp_path)) {
+                if (!$fgc = @file_get_contents($path))
+                    return null;
+                file_put_contents($tmp_path, $fgc);
+            }
+            $path = $tmp_path;
+        }
+        return $path;
+    }
     private static function makeRelativePath($path)
     {
         $root = str_replace('\\', '/', preg_replace('/.protected?/', '', Yii::getPathOfAlias('application')));
@@ -135,14 +140,22 @@ class Img
      */
     public static function remove($path, $with_cache = true)
     {
+        self::normalizePath($path,false);
         if (is_file($path)) {
             unlink($path);
             if ($with_cache) {
-                $cdir = self::getCachePathForImg($path);
-                if (is_dir($cdir)) {
-                    Cut::delDirTree($cdir);
-                }
+                self::removeCache($path);
             }
         }
+    }
+
+    public static function removeCache($path)
+    {
+        self::normalizePath($path,false);
+        $cdir = self::getCachePathForImg($path);
+        if(is_dir($cdir)) {
+            Cut::delDirTree($cdir);
+        }
+
     }
 }

@@ -46,7 +46,7 @@ class ChangePasswordForm extends CFormModel
     {
         $pass = $this->$attribute;
         if(User::current()->password != User::encPass($pass))
-            $this->addError($attribute, 'Incorrect Password' /*.User::current()->password .'!='. md5($pass).'('.$pass.')'*/);
+            $this->addError($attribute, Yii::t('c_app', 'Incorrect Password') /*.User::current()->password .'!='. md5($pass).'('.$pass.')'*/);
     }
 
     /**

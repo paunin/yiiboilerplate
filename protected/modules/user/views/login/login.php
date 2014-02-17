@@ -3,7 +3,7 @@
 /* @var $model LoginForm */
 /* @var $form CActiveForm */
 
-$this->pageTitle = Yii::app()->name . ' - Login';
+$this->pageTitle = Yii::app()->name . ' - '.Yii::t('c_app','Login');
 $this->breadcrumbs = false;
 
 ?>
@@ -18,13 +18,13 @@ $this->breadcrumbs = false;
     )); ?>
 
     <div class="row">
-        <?php //echo $form->labelEx($model,'username'); ?>
+        <?php echo $form->labelEx($model,'username'); ?>
         <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'placeholder' => $model->getAttributeLabel('username'))); ?>
         <?php echo $form->error($model, 'username'); ?>
     </div>
 
     <div class="row">
-        <?php //echo $form->labelEx($model,'password'); ?>
+        <?php echo $form->labelEx($model,'password'); ?>
         <?php echo $form->passwordField($model, 'password', array('class' => 'form-control', 'placeholder' => $model->getAttributeLabel('password'))); ?>
         <?php echo $form->error($model, 'password'); ?>
     </div>
@@ -36,7 +36,7 @@ $this->breadcrumbs = false;
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Login', array('class' => 'btn btn-lg btn-primary btn-block')); ?>
+        <?php echo CHtml::submitButton(Yii::t('c_app','Login'), array('class' => 'btn btn-lg btn-primary btn-block')); ?>
     </div>
     <div class="row rememberMe" style="text-align: center">
         <?php echo CHtml::link(Yii::t('c_app', 'Recovery password'), Cut::createUrl('/user/register/recoverypass')) ?> |
@@ -50,14 +50,14 @@ $this->breadcrumbs = false;
         </br>
         </br>
         </br>
-        OR USE ONE OF YOUR SOCIAL ACCOUNTS</br></br></br>
+        <?php Yii::t('c_app','OR USE ONE OF YOUR SOCIAL ACCOUNTS')?></br></br></br>
         <?php
         $this->widget('ext.eauth.EAuthWidget', array('action' => '/user/login/login'));
         ?>
         </br>
         </br>
         </br>
-        OR USE SIGNUP FORM TO GET NEW ACCOUNT
+        <?php Yii::t('c_app','OR USE SIGNUP FORM TO GET NEW ACCOUNT')?>
         </br>
         </br>
         </br>

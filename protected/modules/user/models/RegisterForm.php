@@ -34,7 +34,7 @@ class RegisterForm extends User
 		return array_merge(
             parent::attributeLabels(),
             array(
-                'password2' => Yii::t('app', 'Password again'),
+                'password2' => Yii::t('c_app', 'Password again'),
 
             )
         );

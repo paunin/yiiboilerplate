@@ -14,5 +14,6 @@ class TokenGetAction extends ApiAction
 
         $token = User::current()->getToken($app,true);
         $this->controller->out($token->toArray());
+
     }
 }

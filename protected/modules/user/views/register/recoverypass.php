@@ -3,9 +3,9 @@
 /* @var $model RecoveryPassForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Recovery password';
+$this->pageTitle=Yii::app()->name . ' - '.Yii::t('c_app','Recovery password');
 $this->breadcrumbs=array(
-    'Recovery password',
+    Yii::t('c_app','Recovery password'),
 );
 ?>
  <div class="form bs3-form">
@@ -18,13 +18,13 @@ $this->breadcrumbs=array(
     )); ?>
 
     <div class="row">
-        <?php //echo $form->labelEx($model,'email'); ?>
+        <?php echo $form->labelEx($model,'email'); ?>
         <?php echo $form->textField($model,'email',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('email'))); ?>
         <?php echo $form->error($model,'email'); ?>
     </div>
 
     <div class="row">
-        <?php //echo $form->labelEx($model,'validacion'); ?>
+        <?php echo $form->labelEx($model,'validacion'); ?>
         <?php $this->widget('application.extensions.recaptcha.EReCaptcha',
             array('model'=>$model, 'attribute'=>'validacion',
                 'theme'=>'red', 'language'=>'es_ES',
@@ -34,7 +34,7 @@ $this->breadcrumbs=array(
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Recovery',array('class'=>'btn btn-lg btn-primary btn-block')); ?>
+        <?php echo CHtml::submitButton(Yii::t('c_app','Recovery'),array('class'=>'btn btn-lg btn-primary btn-block')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

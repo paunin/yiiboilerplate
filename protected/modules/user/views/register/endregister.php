@@ -3,9 +3,9 @@
 /* @var $model EndRegisterForm */
 /* @var $form CActiveForm */
 
-$this->pageTitle = Yii::app()->name . ' - Registration(Verify email)';
+$this->pageTitle = Yii::app()->name . ' - '.Yii::t('c_app','Registration(Verify email)');
 $this->breadcrumbs = array(
-    'Registration(Verify email)',
+    Yii::t('c_app','Registration(Verify email)'),
 );
 ?>
 
@@ -19,13 +19,13 @@ $this->breadcrumbs = array(
     )); ?>
 
      <div class="row">
-         <?php //echo $form->labelEx($model,'hash'); ?>
+         <?php echo $form->labelEx($model,'hash'); ?>
         <?php echo $form->textField($model, 'hash',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('hash'))); ?>
         <?php echo $form->error($model, 'hash'); ?>
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Submit',array('class'=>'btn btn-lg btn-primary btn-block')); ?>
+        <?php echo CHtml::submitButton(Yii::t('c_app','Submit'),array('class'=>'btn btn-lg btn-primary btn-block')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

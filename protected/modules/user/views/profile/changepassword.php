@@ -3,9 +3,9 @@
 /* @var $model ChangePasswordForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Change password';
+$this->pageTitle=Yii::app()->name . ' - ' . Yii::t('c_app','Changed password');
 $this->breadcrumbs=array(
-    'Change password',
+    Yii::t('c_app','Changed password'),
 );
 ?>
 <div class="form  bs3-form">
@@ -19,24 +19,24 @@ $this->breadcrumbs=array(
     <?php //echo CHtml::errorSummary($model); ?>
     <?php if($model->getScenario()=='withpassword'): ?>
         <div class="row">
-            <?php //echo $form->labelEx($model,'password'); ?>
+            <?php echo $form->labelEx($model,'password'); ?>
             <?php echo $form->passwordField($model,'password',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('password'))); ?>
             <?php echo $form->error($model,'password'); ?>
         </div>
     <?php endif;?>
     <div class="row">
-        <?php //echo $form->labelEx($model,'newpassword'); ?>
+        <?php echo $form->labelEx($model,'newpassword'); ?>
         <?php echo $form->passwordField($model,'newpassword',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('newpassword'))); ?>
         <?php echo $form->error($model,'newpassword'); ?>
     </div>
     <div class="row">
-        <?php //echo $form->labelEx($model,'newpassword2'); ?>
+        <?php echo $form->labelEx($model,'newpassword2'); ?>
         <?php echo $form->passwordField($model,'newpassword2',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('newpassword2'))); ?>
         <?php echo $form->error($model,'newpassword2'); ?>
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Change',array('class'=>'btn btn-lg btn-primary btn-block')); ?>
+        <?php echo CHtml::submitButton(Yii::t('c_app','Change'),array('class'=>'btn btn-lg btn-primary btn-block')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

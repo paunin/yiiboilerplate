@@ -3,9 +3,9 @@
 /* @var $model EndRecoveryPassForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Changed email verify';
+$this->pageTitle=Yii::app()->name . ' - '.  Yii::t('c_app','Changed email verify');
 $this->breadcrumbs=array(
-    'Changed email verify',
+    Yii::t('c_app','Changed email verify'),
 );
 ?>
  <div class="form bs3-form">
@@ -18,13 +18,13 @@ $this->breadcrumbs=array(
     )); ?>
 
     <div class="row">
-        <?php //echo $form->labelEx($model,'hash'); ?>
+        <?php echo $form->labelEx($model,'hash'); ?>
         <?php echo $form->textField($model,'hash',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('hash'))); ?>
         <?php echo $form->error($model,'hash'); ?>
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Change',array('class'=>'btn btn-lg btn-primary btn-block')); ?>
+        <?php echo CHtml::submitButton( Yii::t('c_app','Change'),array('class'=>'btn btn-lg btn-primary btn-block')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

@@ -53,16 +53,16 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <?php $this->widget('application.widgets.b3menu.b3menuWidget', array(
                 'items' => array(
-                    array('label' => 'Home',
+                    array('label' => Yii::t('c_app', 'Home'),
                         'url' => array('/site/index'),
                     ),
-                    array('label' => 'Content',
+                    array('label' => Yii::t('c_app', 'Content'),
                         'url' => array('/site/index'),
                         'visible' => Yii::app()->user->checkAccess('admin'),
                         'items' => array(
-                            //array('label' => 'Users'),
-                            array('label' => 'Users', 'url' => array('/admin/user')),
-                            array('label' => 'Content', 'url' => array('/admin/content')),
+                            //array('label' => Yii::t('с_app', 'Users')),
+                            array('label' => Yii::t('с_app', 'Users'), 'url' => array('/admin/user')),
+                            array('label' => Yii::t('с_app', 'Content'), 'url' => array('/admin/content')),
                             //array(),
                         )
                     ),
@@ -92,7 +92,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                             array('label' => Yii::t('c_app','Logout'), 'url' => array('/user/login/logout')),
                             array(),
                             array('label' => Yii::t('c_app','Change email'), 'url' => array('/user/profile/changemail')),
-//                            array('label' => 'Changed email verify', 'url' => array('/user/profile/endchangemail')),
+//                            array('label' => Yii::t('с_app', 'Changed email verify'), 'url' => array('/user/profile/endchangemail')),
 //                            array(),
                             array('label' => Yii::t('c_app','Changed username'), 'url' => array('/user/profile/changeusername')),
                             array('label' => Yii::t('c_app','Changed password'), 'url' => array('/user/profile/changepassword')),

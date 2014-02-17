@@ -19,5 +19,6 @@
 return array (
   'An error occurred' => '',
   'Check REST method, and parameters' => '',
+  'Token required/expired/incorrect' => '',
   'You are not authorized to perform this action' => '',
 );

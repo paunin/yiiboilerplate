@@ -27,4 +27,5 @@ return array (
   'Solr Document requires a "solr" ASolrConnection application component.' => '',
   'The verification code is incorrect.' => '',
   'Your request is invalid.' => '',
+  '{class} does not have attribute "{attribute}".' => '',
 );

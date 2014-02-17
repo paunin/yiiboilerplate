@@ -3,9 +3,9 @@
 /* @var $model ChangeUsernameForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Change username';
+$this->pageTitle=Yii::app()->name . ' - ' . Yii::t('c_app','Changed username');
 $this->breadcrumbs=array(
-    'Change username',
+    Yii::t('c_app','Changed username'),
 );
 ?>
 <div class="form  bs3-form">
@@ -18,14 +18,14 @@ $this->breadcrumbs=array(
     )); ?>
     <?php //echo CHtml::errorSummary($model); ?>
     <div class="row">
-        <?php //echo $form->labelEx($model,'username'); ?>
+        <?php echo $form->labelEx($model,'username'); ?>
         <?php echo $form->textField($model,'username',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('username'))); ?>
         <?php echo $form->error($model,'username'); ?>
     </div>
 
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Change',array('class'=>'btn btn-lg btn-primary btn-block')); ?>
+        <?php echo CHtml::submitButton(Yii::t('c_app','Change'),array('class'=>'btn btn-lg btn-primary btn-block')); ?>
     </div>
 
     <?php $this->endWidget(); ?>

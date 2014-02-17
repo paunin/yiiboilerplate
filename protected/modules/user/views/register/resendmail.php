@@ -3,9 +3,9 @@
 /* @var $model RegisterForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Resend verify eMail';
+$this->pageTitle=Yii::app()->name . ' - ' . Yii::t('c_app','Resend verify eMail');
 $this->breadcrumbs=array(
-    'Resend verify eMail',
+    Yii::t('c_app','Resend verify eMail'),
 );
 ?>
  <div class="form bs3-form">
@@ -17,13 +17,13 @@ $this->breadcrumbs=array(
         ),
     )); ?>
     <div class="row">
-        <?php //echo $form->labelEx($model,'email'); ?>
+        <?php echo $form->labelEx($model,'email'); ?>
         <?php echo $form->textField($model,'email',array('class'=>'form-control' , 'placeholder'=>$model->getAttributeLabel('email'))); ?>
         <?php echo $form->error($model,'email'); ?>
     </div>
 
     <div class="row">
-        <?php //echo $form->labelEx($model,'validacion'); ?>
+        <?php echo $form->labelEx($model,'validacion'); ?>
         <?php $this->widget('application.extensions.recaptcha.EReCaptcha',
             array('model'=>$model, 'attribute'=>'validacion',
                 'theme'=>'red', 'language'=>'es_ES',
@@ -33,7 +33,7 @@ $this->breadcrumbs=array(
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton('Resend',array('class'=>'btn btn-lg btn-primary btn-block')); ?>
+        <?php echo CHtml::submitButton(Yii::t('c_app','Resend'),array('class'=>'btn btn-lg btn-primary btn-block')); ?>
     </div>
 
     <?php $this->endWidget(); ?>
