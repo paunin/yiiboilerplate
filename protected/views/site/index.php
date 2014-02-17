@@ -19,7 +19,7 @@ $pagination->setResults(User::model()->findAll($criteria));
 
 foreach ($pagination->getResults() as $user):
     /** @var User $user */
-    echo $user->username . " ({$user->email})" . '</br>';
+    echo $user->id.')'.$user->username . " ({$user->email})" . '</br>';
 endforeach;
 ?>
 <?php echo $pagination->renderHtml() ?>

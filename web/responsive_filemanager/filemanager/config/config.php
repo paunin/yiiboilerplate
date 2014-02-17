@@ -1,8 +1,9 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-//require_once(dirname(__FILE__).'/../../../../norun.php');
-//if(!Yii::app()->user->checkAccess('filemanager'))
-//    die('403 Filemanager useless for you');
+require_once(dirname(__FILE__).'/../../../../norun.php');
+if(!Yii::app()->user->checkAccess('filemanager'))
+    die('<br><br><br><br><br><br><br><br><p style="text-align:center;">К сожалению у вас нет доступа к файловому хранилищу сайта.<br/>Для получения прав обратитесь по адресу <a href="mailto:'.Yii::app()->params['adminEmail'].'">'.Yii::app()->params['adminEmail'].'</a></p>');
+session_start();
+
 session_start();
 
 //------------------------------------------------------------------------------
@@ -28,6 +29,24 @@ $upload_dir = '/uploads/'; // path from base_url to base of upload folder (with 
 $current_path = '../../../uploads/'; // relative path from filemanager folder to upload folder (with final /)
 //thumbs folder can't put inside upload folder
 $thumbs_base_path = '../../../thumbs/'; // relative path from filemanager folder to thumbs folder (with final /)
+
+$targetdir = (dirname(__FILE__).'/../../../../uploads/users/user_'.Yii::app()->user->id);
+if(!is_dir($targetdir)){
+    mkdir($targetdir,0777,true);
+    file_put_contents($targetdir.'/user.txt','Username:'.Yii::app()->user->name."\nUserId:".Yii::app()->user->id."\n");
+}
+$targetdir2 = (dirname(__FILE__).'/../../../../thumbs/users/user_'.Yii::app()->user->id);
+if(!is_dir($targetdir)){
+    mkdir($targetdir,0777,true);
+}
+
+
+if(!Yii::app()->user->checkAccess('filemanagersuper'))
+{
+    $upload_dir = '/uploads/users/user_'.Yii::app()->user->id.'/'; // path from base_url to base of upload folder (with start and final /)
+    $current_path = '../../../uploads/users/user_'.Yii::app()->user->id.'/'; // relative path from filemanager folder to upload folder (with final /)
+    $thumbs_base_path = '../../../thumbs/users/user_'.Yii::app()->user->id.'/';
+}
 
 //------------------------------------------------------------------------------
 // YOU CAN COPY AND CHANGE THESE VARIABLES IN FOLDERS config.php FILES

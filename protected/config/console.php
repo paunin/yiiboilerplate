@@ -12,6 +12,10 @@ $ret = CMap::mergeArray(
             'fixture' => array(
                 'class' => 'system.test.CDbFixtureManager',
             ),
+            'request' => array(
+                'hostInfo' => 'http://'.$domain,
+                'baseUrl' => 'http://'.$domain
+            ),
         )
     )
 );

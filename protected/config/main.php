@@ -136,14 +136,33 @@ $main = array(
     // application-level parameters that can be accessed
     // using Yii::app()->params['site_url']
     'params' => array(
+        'site_url' => 'http://yiiboilerplate.paunin.com',
+        'adminEmail'=> 'admin@yiiboilerplate.paunin.com',
+        'robotEmail'=> 'robot@yiiboilerplate.paunin.com',
+        'robotEmailName'=> 'robot@yiiboilerplate.paunin.com',
+
         'slogan' => 'Slogan for Yii Boilerplate Application', //@ChangeIt
+
         'captcha_public_key' => '6LeViucSAAAAAICVEHUbu7VNTzYjerwqO5U5e_kC',
         'captcha_private_key' => '6LeViucSAAAAAIhOg1ZNLVVQarj-9jea4jk-1uB-',
+
+        'path_avatars' => "external/user/avatars",
         'path_img_cache' => 'assets/img_cache',
-        'app_own_slug' => 'yiiboilerplate',
-        'app_own_id' => 3,
+
+        'app_own_slug' => 'yiiboilerplate', 'app_own_id' => 3,
+
         'app_token_ttl' => '5 minutes',
-        'rand_key' => '%er%u7f&*))Fdsdfdtr'
+        'rand_key' => '%er%u7f&*))Fdsdfdtr',
+
+        'user_avatars_sizes' => array(
+            's' => array('w' => 50, 'h' => 50),
+            'm' => array('w' => 150, 'h' => 150),
+            'l' => array('w' => 300, 'h' => 300),
+            //'xl'=>array('w'=>400,'h'=>400),
+            //'xxl'=>array('w'=>550,'h'=>550),
+        )
+
+
     ),
 );
 

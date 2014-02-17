@@ -5,16 +5,23 @@ class Cut
     /**
      * @param $route
      * @param array $params
-     * @param string $ampersand
      * @param bool $abs
-     * @return mixed
+     * @param string $schema
+     * @param string $ampersand
+     * @return string
      */
-    public static function createUrl($route, $params = array(), $abs = false, $ampersand = '&')
+    public static function createUrl($route, $params = array(), $abs = false, $schema ='', $ampersand = '&')
     {
-        $url = Yii::app()->createUrl($route, $params, $ampersand);
-        return  $abs?
-            Yii::app()->params['site_url'].$url:
-            $url;
+        if($abs){
+            try{
+                $url = Yii::app()->createAbsoluteUrl($route, $params, $schema, $ampersand);
+            }catch(Exception $e){
+                $url = Yii::app()->params['site_url'].Yii::app()->createUrl($route, $params, $ampersand);
+            }
+        }else{
+            $url = Yii::app()->createUrl($route, $params, $ampersand);
+        }
+        return  $url;
     }
 
     /**
