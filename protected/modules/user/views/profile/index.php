@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 );
 ?>
 Hello, <?php echo User::current()?> (IP = <?php echo Yii::app()->request->getUserHostAddress() ?>)<br/>
-<img src="<?php echo User::current()->getAvatarsPaths()['s'] ?>" />
+<!--<img src="--><?php //echo User::current()->getAvatarsPaths()['s'] ?><!--" />-->
 <!--<img src="--><?php //echo User::current()->getAvatarsPaths()['m'] ?><!--" />-->
 <!--<img src="--><?php //echo User::current()->getAvatarsPaths()['l'] ?><!--" />-->
 <h2>Sociall accounts</h2>

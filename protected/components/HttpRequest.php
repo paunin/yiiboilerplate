@@ -11,6 +11,14 @@ class HttpRequest extends CHttpRequest
         return $this->getUserHostAddressExt('HTTP_X_REAL_IP',true,array('REMOTE_ADDR'));
     }
     /**
+     * @return string
+     */
+    public function getPathInfo(){
+        $i = parent::getPathInfo();
+        Yii::app()->language = $this->getParam(Yii::app()->urlManager->languageParam,Yii::app()->language);
+        return $i;
+    }
+    /**
      * @param null|string $ip_param_name - ключ элемента _SERVER, в котором нужно искать IP адрес
      *          если не задано ищем по индексу REMOTE_ADDR и считаем что проксирование отсутствует или прозрачное,
      *          если задано считаем что IP пробрасывается по заданному индексу,

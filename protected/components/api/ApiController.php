@@ -57,7 +57,7 @@ class ApiController extends Controller
             );
 
         if(Yii::app()->getRequest()->getParam('_debug')) {
-            header('Content-Type: text/html');
+            header('Content-Type: text/html; charset=utf-8');
             Yii::app()->controller->render('application.views.api.debug', array('debug' => print_r($in, true)));
             return;
         }
@@ -125,8 +125,8 @@ class ApiController extends Controller
      */
     public static function makeXml($in)
     {
-        //header('Content-Type: text/xml');
-        header('Content-Type: text/plain');
+        //header('Content-Type: text/xml; charset=utf-8');
+        header('Content-Type: text/plain; charset=utf-8');
         die('@TODO');
     }
 
@@ -136,7 +136,7 @@ class ApiController extends Controller
      */
     public static function makePhp($in)
     {
-        header('Content-Type: text/plain');
+        header('Content-Type: text/plain; charset=utf-8');
         return var_export($in, true);
     }
 
@@ -175,7 +175,7 @@ class ApiController extends Controller
      */
     public static function makeJsonp($json)
     {
-        header('Content-Type: text/plain');
+        header('Content-Type: text/plain; charset=utf-8');
         return (Yii::app()->getRequest()->getParam('callback'))
             ? (Yii::app()->getRequest()->getParam('callback') . "($json)")
             : $json;

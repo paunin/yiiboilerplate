@@ -21,4 +21,5 @@ return array (
   'Check REST method, and parameters' => '',
   'Token required/expired/incorrect' => '',
   'You are not authorized to perform this action' => '',
+  'Wellcome to API' => 'Добро пожаловать в API'
 );

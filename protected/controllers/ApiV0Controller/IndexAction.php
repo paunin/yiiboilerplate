@@ -15,7 +15,7 @@ class IndexAction extends ApiAction
 
         $this->controller->out(
             array(
-                'hello' => 'Wellcome to API',
+                'hello' => Yii::t('api','Wellcome to API').' - '.Yii::app()->createAbsoluteUrl('apiV0/index'),
                 'version' => 0
 
             )

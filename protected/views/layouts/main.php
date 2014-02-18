@@ -148,7 +148,8 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
     ?>
 
 
-    <?php echo $content; ?>
+    <?php
+    echo $content; ?>
 
     <div class="clear"></div>
 
