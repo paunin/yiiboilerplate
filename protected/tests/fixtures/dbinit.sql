@@ -262,7 +262,7 @@ ALTER SEQUENCE token_id_seq OWNED BY token.id;
 -- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('token_id_seq', 1, false);
+SELECT pg_catalog.setval('token_id_seq', 3, true);
 
 
 --
@@ -310,7 +310,7 @@ ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_id_seq', 10000, true);
+SELECT pg_catalog.setval('user_id_seq', 10001, true);
 
 
 --
@@ -356,7 +356,7 @@ ALTER SEQUENCE user_social_id_seq OWNED BY user_social.id;
 -- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_social_id_seq', 1, true);
+SELECT pg_catalog.setval('user_social_id_seq', 3, true);
 
 
 --
@@ -435,6 +435,7 @@ user	20	\N	\N
 user	21	\N	\N
 user	22	\N	\N
 user	23	\N	\N
+user	101	\N	N;
 \.
 
 
@@ -501,6 +502,9 @@ COPY smtp (id, host, username, password, port, encryption, timeout, "extensionHa
 --
 
 COPY token (id, application_id, user_id, token, expire_at, created_at, updated_at) FROM stdin;
+1	3	101	e4e5b4b2e7cdf533c34cadea63663755	2013-12-10 07:17:46	2013-12-10 07:12:46	\N
+2	3	10001	ca96a089c56f1066829b115a26a59931	2013-12-11 10:51:40	2013-12-11 10:46:40	\N
+3	3	101	a6d2ebed830d5c324db9a197441ac8be	2014-02-18 13:17:59	2014-02-18 13:12:59	\N
 \.
 
 
@@ -1557,7 +1561,8 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 1048	user1048	user1048@user.com	\N	2010-10-12 02:13:20	2010-11-11 02:13:20	user	t	2010-11-26 02:13:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 1049	user1049	user1049@user.com	\N	2010-10-11 01:12:20	2010-11-10 01:12:20	user	t	2010-11-25 01:12:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 1	U_twitter_71662685	\N	\N	2013-10-07 14:40:22	2013-10-07 14:40:22	user	t	2013-10-07 14:40:22	\N	1.jpg	\N	\N	\N
-101	user101	d.m.paunin@gmail.com	\N	2013-06-25 05:00:20	2013-12-10 05:39:27	user	t	2013-08-09 05:00:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
+10001	U_vkontakte_913132	\N	\N	2013-12-11 10:46:39	2013-12-11 10:46:39	user	t	2013-12-11 10:46:39	\N	\N	\N	\N	\N
+101	paunin	d.m.paunin@gmail.com	\N	2013-06-25 05:00:20	2014-02-17 12:13:39	user	t	2014-02-17 12:13:39	f5bb0c8de146c67b44babbf4e6584cc0	\N	\N	\N	\N
 \.
 
 
@@ -1567,6 +1572,8 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 
 COPY user_social (id, user_id, social_service, user_social_id, additional_data) FROM stdin;
 1	101	twitter	71662685	\N
+2	101	google_oauth	117533842138222482389	\N
+3	10001	vkontakte	913132	\N
 \.
 
 

@@ -4,6 +4,7 @@ class UrlManager extends CUrlManager
 {
     //<<<-------------------------------------------------------
     public $languageParam = 'lang';
+    public $noI18nParam = 'nolang';
     //public $countryParam = 'country';
     public $i18nRules = array();
     //>>>-------------------------------------------------------
@@ -57,7 +58,52 @@ class UrlManager extends CUrlManager
             $cache->set(self::CACHE_KEY, array($this->_rules, $hash));
     }
 
+    /**
+     * @see CUrlManager::createUrl
+     *
+     * @param string $route
+     * @param array $params
+     * @param string $ampersand
+     * @param bool $nolang
+     * @return string
+     */
+    public function createUrl($route,$params=array(),$ampersand='&', $nolang = false)
+    {
+        if(!$nolang && empty($params[$this->noI18nParam]))
+            if(empty($params[$this->languageParam]))
+                $params[$this->languageParam] = Yii::app()->language;
 
+        if(!empty($params[$this->noI18nParam]))
+            unset($params[$this->noI18nParam]);
+
+        //-----------------------------------------------
+        unset($params[$this->routeVar]);
+        foreach($params as $i=>$param)
+            if($param===null)
+                $params[$i]='';
+
+        if(isset($params['#']))
+        {
+            $anchor='#'.$params['#'];
+            unset($params['#']);
+        }
+        else
+            $anchor='';
+        $route=trim($route,'/');
+        foreach($this->_rules as $i=>$rule)
+        {
+            if(is_array($rule))
+                $this->_rules[$i]=$rule=Yii::createComponent($rule);
+            if(($url=$rule->createUrl($this,$route,$params,$ampersand))!==false)
+            {
+                if($rule->hasHostInfo)
+                    return $url==='' ? '/'.$anchor : $url.$anchor;
+                else
+                    return $this->getBaseUrl().'/'.$url.$anchor;
+            }
+        }
+        return $this->createUrlDefault($route,$params,$ampersand).$anchor;
+    }
 
 
 
@@ -91,51 +137,7 @@ class UrlManager extends CUrlManager
         }
     }
 
-    /**
-     * @see CUrlManager
-     *
-     * @param string $route
-     * @param array $params
-     * @param string $ampersand
-     * @param bool $nolang
-     * @return string
-     */
-    public function createUrl($route,$params=array(),$ampersand='&', $nolang = false)
-    {
-        if(!$nolang && empty($params['nolang']))
-            if(empty($params[$this->languageParam]))
-                $params[$this->languageParam] = Yii::app()->language;
 
-        if(!empty($params['nolang']))
-            unset($params['nolang']);
-
-        unset($params[$this->routeVar]);
-        foreach($params as $i=>$param)
-            if($param===null)
-                $params[$i]='';
-
-        if(isset($params['#']))
-        {
-            $anchor='#'.$params['#'];
-            unset($params['#']);
-        }
-        else
-            $anchor='';
-        $route=trim($route,'/');
-        foreach($this->_rules as $i=>$rule)
-        {
-            if(is_array($rule))
-                $this->_rules[$i]=$rule=Yii::createComponent($rule);
-            if(($url=$rule->createUrl($this,$route,$params,$ampersand))!==false)
-            {
-                if($rule->hasHostInfo)
-                    return $url==='' ? '/'.$anchor : $url.$anchor;
-                else
-                    return $this->getBaseUrl().'/'.$url.$anchor;
-            }
-        }
-        return $this->createUrlDefault($route,$params,$ampersand).$anchor;
-    }
 
     /**
      * Parses the user request.

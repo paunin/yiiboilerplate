@@ -7,4 +7,8 @@
 
 class UrlRule extends CUrlRule {
 
+
+    public function createUrl($manager,$route,$params,$ampersand){
+        return parent::createUrl($manager,$route,$params,$ampersand);
+    }
 } 
