@@ -32,3 +32,7 @@
 [submodule "stat/gearman_monitor"]
 	path = stat/gearman_monitor
 	url = https://github.com/yugene/Gearman-Monitor.git
+
+[submodule "protected/vendors/restler"]
+	path = protected/vendors/restler
+	url = https://github.com/Luracast/Restler.git

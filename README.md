@@ -8,6 +8,7 @@ Yii Boilerplate App
     #chmod -R 777 protected/runtime/ assets/ uploads/ thumbs/
     #cp protected/config/example.custom.php protected/config/custom.php
     #vim protected/config/custom.php
+    #cd protected/vendors/restler/ &&  composer update
 
 ## Cron
 
