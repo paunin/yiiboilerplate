@@ -4,3 +4,4 @@
 /protected/config/custom.php
 /uploads/*
 /thumbs/*
+/api/cache/*
