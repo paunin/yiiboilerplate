@@ -3,6 +3,7 @@ class Event
 {
     /**
      * Навещивает обработчики событий
+     *
      * @static
      * @param CComponent $object
      * @return object

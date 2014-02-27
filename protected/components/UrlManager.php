@@ -4,9 +4,9 @@ class UrlManager extends CUrlManager
 {
     //<<<-------------------------------------------------------
     public $languageParam = 'lang';
-    public $noI18nParam = 'nolang';
     //public $countryParam = 'country';
     public $i18nRules = array();
+    public $urlRuleClass='UrlRule';
     //>>>-------------------------------------------------------
 
     public function init(){
@@ -42,21 +42,5 @@ class UrlManager extends CUrlManager
         $this->addRules($rules_l);
         $this->addRules($rules);
         return parent::init();
-    }
-
-
-    /**
-     * @see CUrlManager::createUrl
-     */
-    public function createUrl($route,$params=array(),$ampersand='&', $nolang = false)
-    {
-        if(!$nolang && empty($params[$this->noI18nParam]))
-            if(empty($params[$this->languageParam]))
-                $params[$this->languageParam] = Yii::app()->language;
-
-        if(!empty($params[$this->noI18nParam]))
-            unset($params[$this->noI18nParam]);
-
-       return parent::createUrl($route,$params,$ampersand);
     }
 }

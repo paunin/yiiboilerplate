@@ -18,6 +18,6 @@ Hello, <?php echo User::current()?> (IP = <?php echo Yii::app()->request->getUse
 
     <?php echo $social_account->social_service ?>:
     <?php echo $social_account->user_social_id ?>
-    <?php echo CHtml::link(Yii::t('c_app','unbind'),Cut::createUrl('user/login/unbindSocial',array('bind_id'=>$social_account->id))) ?> </br>
+    <?php echo CHtml::link(Yii::t('c_app','unbind'),Yii::app()->createUrl('user/login/unbindSocial',array('bind_id'=>$social_account->id))) ?> </br>
 <?php endforeach; ?>
 

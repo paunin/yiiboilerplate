@@ -58,6 +58,6 @@ class RegisterForm extends User
      * @param $user
      */
     public function sendMail($user){
-        return myMail::send($user->email,Yii::t('c_app','Verify your email address'),'register',array('url'=>Cut::createUrl('user/register/endregister',array('key'=>$user->key),true)));
+        return myMail::send($user->email,Yii::t('c_app','Verify your email address'),'register',array('url'=>Yii::app()->createAbsoluteUrl('user/register/endregister',array('key'=>$user->key))));
     }
 }

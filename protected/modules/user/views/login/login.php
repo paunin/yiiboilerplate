@@ -39,8 +39,8 @@ $this->breadcrumbs = false;
         <?php echo CHtml::submitButton(Yii::t('c_app','Login'), array('class' => 'btn btn-lg btn-primary btn-block')); ?>
     </div>
     <div class="row rememberMe" style="text-align: center">
-        <?php echo CHtml::link(Yii::t('c_app', 'Recovery password'), Cut::createUrl('/user/register/recoverypass')) ?> |
-        <?php echo CHtml::link(Yii::t('c_app', 'Resend registration email'), Cut::createUrl('/user/register/resendmail')) ?> |
+        <?php echo CHtml::link(Yii::t('c_app', 'Recovery password'), Yii::app()->createUrl('/user/register/recoverypass')) ?> |
+        <?php echo CHtml::link(Yii::t('c_app', 'Resend registration email'), Yii::app()->createUrl('/user/register/resendmail')) ?> |
         <?php echo CHtml::mailto(Yii::t('c_app', 'Support'), Yii::app()->params['adminEmail']) ?>
 
 
@@ -63,7 +63,7 @@ $this->breadcrumbs = false;
         </br>
         </br>
 
-        <?php echo CHtml::link('Register', Cut::createUrl('/user/register/register'), array('class' => 'btn btn-lg btn-primary btn-block')); ?>
+        <?php echo CHtml::link('Register', Yii::app()->createUrl('/user/register/register'), array('class' => 'btn btn-lg btn-primary btn-block')); ?>
 
 
     </div>

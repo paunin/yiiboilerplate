@@ -45,7 +45,7 @@ class ChangeMailForm extends User
             Yii::t('c_app', 'Change email address'),
             'ch_email',
             array(
-                'url' => Cut::createUrl('user/profile/endchangemail', array('key' => $user->key), true),
+                'url' => Yii::app()->createAbsoluteUrl('user/profile/endchangemail', array('key' => $user->key)),
                 'old_email' => $user->email
             )
         );

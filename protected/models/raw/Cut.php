@@ -1,34 +1,17 @@
 <?php
 
+/**
+ * Class Cut
+ *
+ * ShortCuts for application
+ */
 class Cut
 {
-    /**
-     * @param $route
-     * @param array $params
-     * @param bool $abs
-     * @param string $schema
-     * @param string $ampersand
-     * @return string
-     */
-    public static function createUrl($route, $params = array(), $abs = false, $schema ='', $ampersand = '&')
-    {
-        if($abs){
-            try{
-                $url = Yii::app()->createAbsoluteUrl($route, $params, $schema, $ampersand);
-            }catch(Exception $e){
-                $url = Yii::app()->params['site_url'].Yii::app()->createUrl($route, $params, $ampersand);
-            }
-        }else{
-            $url = Yii::app()->createUrl($route, $params, $ampersand);
-        }
-        return  $url;
-    }
-
     /**
      *  Удаляет рекурсивно директорию
      * @static
      * @param $dir
-     * @return void
+     * @return bool
      */
     public static function delDirTree($dir)
     {
@@ -44,6 +27,11 @@ class Cut
         return rmdir($dir);
     }
 
+    /**
+     * @param bool $only_last_elem
+     * @param bool $need_slogan
+     * @return string
+     */
     public static function getHtmlPageTitle($only_last_elem = false, $need_slogan = false)
     {
         if (!Yii::app()->getController()->pageTitle && count(Yii::app()->getController()->breadcrumbs)) {
@@ -55,20 +43,11 @@ class Cut
         return trim(CHtml::encode(Yii::app()->getController()->pageTitle . ($need_slogan ? $slogan : '')));
     }
 
-    public static function makeDate($date, $format = "d MMMM yг. в HH:mm")
-    {
-        return Yii::app()->dateFormatter->format($format, $date);
-    }
 
-    public static function isOvertime($time, $minutes_limit = 1, $now = null)
-    {
-
-
-        $t = $now ? $now : date("Y-m-d H:i:s");
-        //die(date("Y-m-d H:i:s"));
-        return (strtotime($time . ' +' . $minutes_limit . ' minutes') < strtotime($t));
-    }
-
+    /**
+     * @param string $text
+     * @param string $type
+     */
     public static function setFlash($text = '', $type = 'notice')
     {
         return Yii::app()->user->setFlash($type, $text);
