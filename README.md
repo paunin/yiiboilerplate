@@ -1,14 +1,17 @@
 Yii Boilerplate App
 ==========
 
+## Requires
+
+* PHP >= 5.3
+* [PHP Composer](https://getcomposer.org/)
+
 ## Installation
 
     #git clone https://github.com/paunin/yiiboilerplate.git yourProject && cd yourProject
-    #git submodule update --init --recursive
-    #chmod -R 777 protected/runtime/ assets/ uploads/ thumbs/
-    #cp protected/config/example.custom.php protected/config/custom.php
-    #vim protected/config/custom.php
-    #cd protected/vendors/restler/ &&  composer update
+    #./protected/install.sh
+
+@see `protected/install.sh` to understand installation process
 
 ## Cron
 
