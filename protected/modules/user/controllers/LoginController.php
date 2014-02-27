@@ -53,7 +53,7 @@ class LoginController extends Controller
 
                     $identity = new UserSocialIdentity($soc_identity);
                     if($identity->authenticate())
-                        Yii::app()->user->login($identity);
+                        Yii::app()->user->login($identity,Yii::app()->params['user_login_duration']);
 
                     // special redirect with closing popup window
                     Cut::setFlash(Yii::t('c_app','Login successful'), 'success');

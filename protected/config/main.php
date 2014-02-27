@@ -136,6 +136,12 @@ $main = array(
     // application-level parameters that can be accessed
     // using Yii::app()->params['site_url']
     'params' => array(
+        'translatedLanguages' => array(
+            'en' => 'English',
+            'ru' => 'Русский',
+        ),
+        'defaultLanguage' => 'en',
+
         'site_url' => 'http://yiiboilerplate.paunin.com',
         'adminEmail'=> 'admin@yiiboilerplate.paunin.com',
         'robotEmail'=> 'robot@yiiboilerplate.paunin.com',
@@ -153,6 +159,8 @@ $main = array(
 
         'app_token_ttl' => '5 minutes',
         'rand_key' => '%er%u7f&*))Fdsdfdtr',
+
+        'user_login_duration' => 3600*24*30, // 30 days,
 
         'user_avatars_sizes' => array(
             's' => array('w' => 50, 'h' => 50),

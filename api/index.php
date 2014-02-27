@@ -1,15 +1,13 @@
 <?php
-//require_once(dirname(__FILE__).'/../norun.php');
+require_once dirname(__FILE__).'/../protected/components/api/YiiRestler.php';
+require_once dirname(__FILE__).'/../protected/components/api/YiiRestlerAccessControll.php';
 
-require_once dirname(__FILE__).'/../protected/vendors/restler/vendor/restler.php';
-use Luracast\Restler\Restler;
+$r = new YiiRestler();
 
-$r = new Restler();
+$r->addAPIClass('Api'); // repeat for more
 
-require_once(dirname(__FILE__).'/Pets.class.php');
-$r->addAPIClass('Pets'); // repeat for more
-
-
+$r->setSupportedFormats('JsonFormat', 'XmlFormat');
+$r->addAuthenticationClass('YiiRestlerAccessControl');
 $r->addAPIClass('Resources'); //from restler framework for API Explorer
 $r->addFilterClass('RateLimit'); //Add Filters as needed
 $r->handle(); //serve the response

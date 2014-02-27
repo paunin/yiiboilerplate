@@ -28,7 +28,7 @@ class ApiIdentity extends UserIdentity
             return false;
         }
 
-        if(YII_DEBUG){
+        if(YII_DEBUG && is_numeric($this->token)){
             $u = User::model()->findByPk($this->token);
             if($u){
                 $this->errorCode = self::ERROR_NONE;

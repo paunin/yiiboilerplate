@@ -15,7 +15,10 @@ class HttpRequest extends CHttpRequest
      */
     public function getPathInfo(){
         $i = parent::getPathInfo();
-        Yii::app()->language = $this->getParam(Yii::app()->urlManager->languageParam,Yii::app()->language);
+        $lang = $this->getParam(Yii::app()->urlManager->languageParam, Yii::app()->language);
+        if(!in_array($lang,array_keys(Yii::app()->params['translatedLanguages'])))
+            $lang = Yii::app()->language;
+        Yii::app()->language = $lang;
         return $i;
     }
     /**

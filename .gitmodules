@@ -36,3 +36,6 @@
 [submodule "protected/vendors/restler"]
 	path = protected/vendors/restler
 	url = https://github.com/Luracast/Restler.git
+[submodule "web/swagger"]
+	path = web/swagger
+	url = https://github.com/wordnik/swagger-ui

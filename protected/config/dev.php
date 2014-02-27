@@ -51,10 +51,10 @@ return  array(
                     'class' => 'CFileLogRoute',
                     'levels' => 'error, warning, trace',
                 ),
-                array(
-                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-                    'ipFilters'=>array('*'),
-                ),
+//                array(
+//                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+//                    'ipFilters'=>array('*'),
+//                ),
 //                    array( // configuration for the toolbar
 //                        'class' => 'XWebDebugRouter',
 //                        'config' => 'alignRight, opaque, runInDebug, fixedPos,  yamlStyle, collapsed',
