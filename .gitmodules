@@ -9,7 +9,7 @@
 	url = https://github.com/yiisoft/yii.git
 [submodule "protected/extensions/eauth"]
 	path = protected/extensions/eauth
-	url = https://github.com/paunin/yii-eauth.git
+	url = https://github.com/Nodge/yii-eauth
 [submodule "protected/extensions/behaviors/SolrBehavior"]
 	path = protected/extensions/behaviors/SolrBehavior
 	url = https://github.com/paunin/YiiSolrBehavior.git
