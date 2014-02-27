@@ -5,6 +5,7 @@ Yii Boilerplate App
 
 * PHP >= 5.3
 * [PHP Composer](https://getcomposer.org/)
+* PostgreSQL
 
 ## Installation
 

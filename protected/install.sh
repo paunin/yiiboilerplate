@@ -6,5 +6,6 @@ cd protected/vendors/restler/ &&  composer update
 cd ../../..
 cp protected/config/example.custom.php protected/config/custom.php
 vim protected/config/custom.php
+php protected/yiic dbworker load
 echo 'YiiBoilerplate installed!'
 

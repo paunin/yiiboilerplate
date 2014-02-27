@@ -4,10 +4,23 @@
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
-SET standard_conforming_strings = off;
+SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET escape_string_warning = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
 
 SET search_path = public, pg_catalog;
 
@@ -76,8 +89,8 @@ CREATE TABLE application (
 CREATE SEQUENCE application_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -86,13 +99,6 @@ CREATE SEQUENCE application_id_seq
 --
 
 ALTER SEQUENCE application_id_seq OWNED BY application.id;
-
-
---
--- Name: application_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('application_id_seq', 3, true);
 
 
 --
@@ -116,8 +122,8 @@ CREATE TABLE content (
 CREATE SEQUENCE content_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -126,13 +132,6 @@ CREATE SEQUENCE content_id_seq
 --
 
 ALTER SEQUENCE content_id_seq OWNED BY content.id;
-
-
---
--- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('content_id_seq', 100, false);
 
 
 --
@@ -161,8 +160,8 @@ CREATE TABLE cron_mail (
 CREATE SEQUENCE cron_mail_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -171,13 +170,6 @@ CREATE SEQUENCE cron_mail_id_seq
 --
 
 ALTER SEQUENCE cron_mail_id_seq OWNED BY cron_mail.id;
-
-
---
--- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
 
 
 --
@@ -205,8 +197,8 @@ CREATE TABLE smtp (
 CREATE SEQUENCE smtp_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -215,13 +207,6 @@ CREATE SEQUENCE smtp_id_seq
 --
 
 ALTER SEQUENCE smtp_id_seq OWNED BY smtp.id;
-
-
---
--- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('smtp_id_seq', 1, false);
 
 
 --
@@ -246,8 +231,8 @@ CREATE TABLE token (
 CREATE SEQUENCE token_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -256,13 +241,6 @@ CREATE SEQUENCE token_id_seq
 --
 
 ALTER SEQUENCE token_id_seq OWNED BY token.id;
-
-
---
--- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('token_id_seq', 3, true);
 
 
 --
@@ -294,8 +272,8 @@ CREATE TABLE "user" (
 CREATE SEQUENCE user_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -304,13 +282,6 @@ CREATE SEQUENCE user_id_seq
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
-
-
---
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_id_seq', 10001, true);
 
 
 --
@@ -340,8 +311,8 @@ COMMENT ON TABLE user_social IS 'users from social accounts linked to users';
 CREATE SEQUENCE user_social_id_seq
     START WITH 100
     INCREMENT BY 1
-    NO MAXVALUE
     NO MINVALUE
+    NO MAXVALUE
     CACHE 1;
 
 
@@ -350,13 +321,6 @@ CREATE SEQUENCE user_social_id_seq
 --
 
 ALTER SEQUENCE user_social_id_seq OWNED BY user_social.id;
-
-
---
--- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_social_id_seq', 3, true);
 
 
 --
@@ -436,6 +400,10 @@ user	21	\N	\N
 user	22	\N	\N
 user	23	\N	\N
 user	101	\N	N;
+user	1	\N	N;
+user	45	\N	N;
+user	75	\N	N;
+user	110	\N	N;
 \.
 
 
@@ -470,6 +438,13 @@ COPY application (id, slug, name, description, secret_key, publick_key, return_u
 
 
 --
+-- Name: application_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('application_id_seq', 3, true);
+
+
+--
 -- Data for Name: content; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -482,11 +457,25 @@ COPY content (id, title, slug, text, created_at, updated_at) FROM stdin;
 
 
 --
+-- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('content_id_seq', 100, false);
+
+
+--
 -- Data for Name: cron_mail; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY cron_mail (id, subject, body, body_alt, to_mail, to_name, from_mail, from_name, is_sent, attachment_file, attachment_name) FROM stdin;
 \.
+
+
+--
+-- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
 
 
 --
@@ -498,6 +487,13 @@ COPY smtp (id, host, username, password, port, encryption, timeout, "extensionHa
 
 
 --
+-- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('smtp_id_seq', 1, false);
+
+
+--
 -- Data for Name: token; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -505,7 +501,22 @@ COPY token (id, application_id, user_id, token, expire_at, created_at, updated_a
 1	3	101	e4e5b4b2e7cdf533c34cadea63663755	2013-12-10 07:17:46	2013-12-10 07:12:46	\N
 2	3	10001	ca96a089c56f1066829b115a26a59931	2013-12-11 10:51:40	2013-12-11 10:46:40	\N
 3	3	101	a6d2ebed830d5c324db9a197441ac8be	2014-02-18 13:17:59	2014-02-18 13:12:59	\N
+4	3	2	4666a239d7103f31e8837cc795bdf014	2014-02-26 13:29:24	2014-02-26 13:24:24	\N
+5	3	2	b3db4c63713ffd47142d6a72ad0bf7ec	2014-02-26 13:50:37	2014-02-26 13:45:37	\N
+6	3	2	fa8780b6085807cdb42ed5f8055fa10c	2014-02-26 14:00:21	2014-02-26 13:55:21	\N
+7	3	2	bb9320a857b5da4953af85cf993b856d	2014-02-26 14:06:01	2014-02-26 14:01:01	\N
+8	3	2	b487753526d7f802114662528905f58c	2014-02-26 14:49:06	2014-02-26 14:44:06	\N
+9	3	2	75cf8bd262a13606e6ea2a3b764b3be8	2014-02-26 16:16:51	2014-02-26 16:11:51	\N
+10	3	2	110d0ab7add3af8a9be66d4cf51fae52	2014-02-26 16:26:21	2014-02-26 16:21:21	\N
+11	3	2	1f24d977ae24fe2922488e47b718b31e	2014-02-26 17:58:13	2014-02-26 17:53:13	\N
 \.
+
+
+--
+-- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('token_id_seq', 11, true);
 
 
 --
@@ -526,7 +537,6 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 19	user19	user19@user.com	\N	2013-09-18 16:22:20	2013-10-18 16:22:20	user	t	2013-11-02 16:22:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 20	user20	user20@user.com	\N	2013-09-17 15:21:20	\N	user	t	2013-11-01 15:21:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 21	user21	user21@user.com	\N	2013-09-16 14:20:20	2013-10-16 14:20:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
-22	user22	user22@user.com	\N	2013-09-15 13:19:20	2013-10-15 13:19:20	user	t	2013-10-30 13:19:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 23	user23	user23@user.com	\N	2013-09-14 12:18:20	2013-10-14 12:18:20	user	t	2013-10-29 12:18:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 24	user24	user24@user.com	\N	2013-09-13 11:17:20	2013-10-13 11:17:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 25	user25	user25@user.com	\N	2013-09-12 10:16:20	\N	user	t	2013-10-27 10:16:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
@@ -549,7 +559,6 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 42	user42	user42@user.com	\N	2013-08-25 16:59:20	2013-09-24 16:59:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 43	user43	user43@user.com	\N	2013-08-24 15:58:20	2013-09-23 15:58:20	user	t	2013-10-08 15:58:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 44	user44	user44@user.com	\N	2013-08-23 14:57:20	2013-09-22 14:57:20	user	t	2013-10-07 14:57:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
-45	user45	user45@user.com	\N	2013-08-22 13:56:20	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 46	user46	user46@user.com	\N	2013-08-21 12:55:20	2013-09-20 12:55:20	user	t	2013-10-05 12:55:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 47	user47	user47@user.com	\N	2013-08-20 11:54:20	2013-09-19 11:54:20	user	t	2013-10-04 11:54:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 48	user48	user48@user.com	\N	2013-08-19 10:53:20	2013-09-18 10:53:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
@@ -566,14 +575,14 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 59	user59	user59@user.com	\N	2013-08-07 23:42:20	2013-09-06 23:42:20	user	t	2013-09-21 23:42:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 60	user60	user60@user.com	\N	2013-08-06 22:41:20	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 61	user61	user61@user.com	\N	2013-08-05 21:40:20	2013-09-04 21:40:20	user	t	2013-09-19 21:40:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
-2	admin	admin@admin.com	\N	2013-09-16 11:47:38	2013-10-07 12:42:38	admin	t	2013-10-07 12:42:38	1341215dbe9acab4361fd6417b2b11bc	2.jpg	\N	\N	\N
-3	user3	user3@user.com	\N	2013-10-05 08:38:20	2013-11-04 08:38:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	3.jpg	\N	\N	\N
 4	user4	user4@user.com	\N	2013-10-04 07:37:20	2013-11-03 07:37:20	user	t	2013-11-18 07:37:20	87dc1e131a1369fdf8f1c824a6a62dff	4.jpg	\N	\N	\N
-5	user5	user5@user.com	\N	2013-10-03 06:36:20	\N	user	t	2013-11-17 06:36:20	87dc1e131a1369fdf8f1c824a6a62dff	5.jpg	\N	\N	\N
-6	user6	user6@user.com	\N	2013-10-02 05:35:20	2013-11-01 05:35:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	6.jpg	\N	\N	\N
 7	user7	user7@user.com	\N	2013-10-01 04:34:20	2013-10-31 04:34:20	user	t	2013-11-15 04:34:20	87dc1e131a1369fdf8f1c824a6a62dff	7.jpg	\N	\N	\N
 8	user8	user8@user.com	\N	2013-09-30 03:33:20	2013-10-30 03:33:20	user	t	2013-11-14 03:33:20	87dc1e131a1369fdf8f1c824a6a62dff	8.jpg	\N	\N	\N
 62	user62	user62@user.com	\N	2013-08-04 20:39:20	2013-09-03 20:39:20	user	t	2013-09-18 20:39:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
+45	user45	user45@user.com	\N	2013-08-22 13:56:20	2014-02-26 15:32:48	user	t	2014-02-26 15:32:48	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
+3	user3	user3@user.com	\N	2013-10-05 08:38:20	2014-02-27 05:46:36	user	t	2014-02-27 05:46:36	87dc1e131a1369fdf8f1c824a6a62dff	3.jpg	\N	\N	\N
+6	user6	user6@user.com	\N	2013-10-02 05:35:20	2014-02-26 14:45:55	user	t	2014-02-26 14:45:55	87dc1e131a1369fdf8f1c824a6a62dff	6.jpg	\N	\N	\N
+22	user22	user22@user.com	\N	2013-09-15 13:19:20	2014-02-26 16:05:21	user	t	2014-02-26 16:05:21	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 63	user63	user63@user.com	\N	2013-08-03 19:38:20	2013-09-02 19:38:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 64	user64	user64@user.com	\N	2013-08-02 18:37:20	2013-09-01 18:37:20	user	t	2013-09-16 18:37:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 65	user65	user65@user.com	\N	2013-08-01 17:36:20	\N	user	t	2013-09-15 17:36:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
@@ -586,7 +595,6 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 72	user72	user72@user.com	\N	2013-07-25 10:29:20	2013-08-24 10:29:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 73	user73	user73@user.com	\N	2013-07-24 09:28:20	2013-08-23 09:28:20	user	t	2013-09-07 09:28:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 74	user74	user74@user.com	\N	2013-07-23 08:27:20	2013-08-22 08:27:20	user	t	2013-09-06 08:27:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
-75	user75	user75@user.com	\N	2013-07-22 07:26:20	\N	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 76	user76	user76@user.com	\N	2013-07-21 06:25:20	2013-08-20 06:25:20	user	t	2013-09-04 06:25:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 77	user77	user77@user.com	\N	2013-07-20 05:24:20	2013-08-19 05:24:20	user	t	2013-09-03 05:24:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 78	user78	user78@user.com	\N	2013-07-19 04:23:20	2013-08-18 04:23:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
@@ -620,7 +628,6 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 107	user107	user107@user.com	\N	2013-06-18 22:54:20	2013-07-18 22:54:20	user	t	2013-08-02 22:54:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 108	user108	user108@user.com	\N	2013-06-17 21:53:20	2013-07-17 21:53:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 109	user109	user109@user.com	\N	2013-06-16 20:52:20	2013-07-16 20:52:20	user	t	2013-07-31 20:52:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
-110	user110	user110@user.com	\N	2013-06-15 19:51:20	\N	user	t	2013-07-30 19:51:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 111	user111	user111@user.com	\N	2013-06-14 18:50:20	2013-07-14 18:50:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 112	user112	user112@user.com	\N	2013-06-13 17:49:20	2013-07-13 17:49:20	user	t	2013-07-28 17:49:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 113	user113	user113@user.com	\N	2013-06-12 16:48:20	2013-07-12 16:48:20	user	t	2013-07-27 16:48:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
@@ -635,6 +642,7 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 122	user122	user122@user.com	\N	2013-06-03 07:39:20	2013-07-03 07:39:20	user	t	2013-07-18 07:39:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 123	user123	user123@user.com	\N	2013-06-02 06:38:20	2013-07-02 06:38:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 124	user124	user124@user.com	\N	2013-06-01 05:37:20	2013-07-01 05:37:20	user	t	2013-07-16 05:37:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
+110	user110	user110@user.com	\N	2013-06-15 19:51:20	2014-02-26 16:22:11	user	t	2014-02-26 16:22:11	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 125	user125	user125@user.com	\N	2013-05-31 04:36:20	\N	user	t	2013-07-15 04:36:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 126	user126	user126@user.com	\N	2013-05-30 03:35:20	2013-06-29 03:35:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 127	user127	user127@user.com	\N	2013-05-29 02:34:20	2013-06-28 02:34:20	user	t	2013-07-13 02:34:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
@@ -1560,10 +1568,20 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 1047	user1047	user1047@user.com	\N	2010-10-13 03:14:20	2010-11-12 03:14:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 1048	user1048	user1048@user.com	\N	2010-10-12 02:13:20	2010-11-11 02:13:20	user	t	2010-11-26 02:13:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 1049	user1049	user1049@user.com	\N	2010-10-11 01:12:20	2010-11-10 01:12:20	user	t	2010-11-25 01:12:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
-1	U_twitter_71662685	\N	\N	2013-10-07 14:40:22	2013-10-07 14:40:22	user	t	2013-10-07 14:40:22	\N	1.jpg	\N	\N	\N
 10001	U_vkontakte_913132	\N	\N	2013-12-11 10:46:39	2013-12-11 10:46:39	user	t	2013-12-11 10:46:39	\N	\N	\N	\N	\N
 101	paunin	d.m.paunin@gmail.com	\N	2013-06-25 05:00:20	2014-02-17 12:13:39	user	t	2014-02-17 12:13:39	f5bb0c8de146c67b44babbf4e6584cc0	\N	\N	\N	\N
+1	U_twitter_71662685	\N	\N	2013-10-07 14:40:22	2014-02-26 15:04:33	user	t	2014-02-26 15:04:33	\N	1.jpg	\N	\N	\N
+75	user75	user75@user.com	\N	2013-07-22 07:26:20	2014-02-26 16:18:06	user	t	2014-02-26 16:18:06	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
+2	admin	admin@admin.com	\N	2013-09-16 11:47:38	2014-02-27 06:29:46	admin	t	2014-02-27 06:29:46	1341215dbe9acab4361fd6417b2b11bc	2.jpg	\N	\N	\N
+5	user5	user5@user.com	\N	2013-10-03 06:36:20	2014-02-26 14:45:36	user	t	2014-02-26 14:45:36	87dc1e131a1369fdf8f1c824a6a62dff	5.jpg	\N	\N	\N
 \.
+
+
+--
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_id_seq', 10001, true);
 
 
 --
@@ -1575,6 +1593,13 @@ COPY user_social (id, user_id, social_service, user_social_id, additional_data) 
 2	101	google_oauth	117533842138222482389	\N
 3	10001	vkontakte	913132	\N
 \.
+
+
+--
+-- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_social_id_seq', 3, true);
 
 
 --
