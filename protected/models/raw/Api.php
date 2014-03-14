@@ -132,7 +132,6 @@ class ReturnExampleObject {
     public $three_p = 'q';
     /** @var string  */
     public $three2_p;
-
 }
 
 
