@@ -8,16 +8,7 @@ class YiiRestlerAccessControl implements iAuthenticate
 
     public function __isAllowed()
     {
-
-        $identity = new ApiIdentity(Yii::app()->getRequest()->getParam('api_key',null));
-        if($identity->authenticate()){
-            Yii::app()->user->login($identity);
-        }else{
-            Yii::app()->user->logout(false);
-        }
-
         Resources::$accessControlFunction = 'YiiRestlerAccessControl::verifyAccess';
-
         return Yii::app()->user->checkAccess(self::$min_requires);
     }
 

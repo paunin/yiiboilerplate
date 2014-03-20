@@ -42,7 +42,9 @@ class Asse {
      * @return boolean
      */
     private static function publish($file,$path = null){
-        return Yii::app()->getAssetManager()->publish($path.'/'.$file);
+        if(is_file($path.'/'.$file))
+            return Yii::app()->getAssetManager()->publish($path.'/'.$file);
+        else
+            return false;
     }
-
 }

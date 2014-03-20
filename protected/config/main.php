@@ -58,6 +58,9 @@ $main = array(
             'logging' => true,
             'dryRun' => false,
         ),
+        'session' => array(
+            'class' => 'application.components.HttpSession',
+        ),
         'user' => array(
             'class' => 'application.components.WebUser',
             'allowAutoLogin' => true,
