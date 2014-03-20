@@ -9,5 +9,5 @@ $r->addAPIClass('Api'); // repeat for more
 $r->setSupportedFormats('JsonFormat', 'XmlFormat');
 $r->addAuthenticationClass('YiiRestlerAccessControl');
 $r->addAPIClass('Resources'); //from restler framework for API Explorer
-$r->addFilterClass('RateLimit'); //Add Filters as needed
+//$r->addFilterClass('RateLimit'); //Add Filters as needed
 $r->handle(); //serve the response
