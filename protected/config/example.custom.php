@@ -4,26 +4,17 @@
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 $domain = 'example.com'; //@ChangeIt
 
-$sqlDb = 'pumh';
-$sqlUser = 'pumh';
-$sqlPassword = '';
-$sqlHost = 'localhost';
 return array(
     'components' => array(
         'db' => array(
-            'connectionString' => "pgsql:host=$sqlHost;dbname=$sqlDb",
+            'connectionString' => "pgsql:host=localhost;dbname=pumh",
             //'emulatePrepare' => true,
-            'username' => $sqlUser,
-            'password' => $sqlPassword,
+            'username' => 'pumh',
+            'password' => '',
             'charset' => 'utf8',
         ),
     ),
     'params' => array(
-        'sqlDb'=>"$sqlDb",
-        'sqlUser'=>"$sqlUser",
-        'sqlPassword'=>"$sqlPassword",
-        'sqlHost'=>"$sqlHost",
-
         'site_url' => "http://$domain",
         'adminEmail' => "admin@$domain",
         'robotEmail' => "robot@$domain",
