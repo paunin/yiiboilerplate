@@ -160,7 +160,7 @@ $main = array(
 
         'app_own_slug' => 'yiiboilerplate', 'app_own_id' => 3,
 
-        'app_token_ttl' => '5 minutes',
+        'app_token_ttl' => '24 hours',
         'rand_key' => '%er%u7f&*))Fdsdfdtr',
 
         'user_login_duration' => 3600*24*30, // 30 days,
