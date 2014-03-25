@@ -24,10 +24,24 @@ class YiiRestler extends Restler {
         Defaults::$language = Yii::app()->language;
 
         $this->setYiiLang();
-
+        $this->extendRestExceptionWithCodes();
         parent::__construct(!YII_DEBUG, $refreshCache);
+
     }
 
+    public function extendRestExceptionWithCodes(){
+        $codes = array();
+        for($i=260;$i<=280;$i++){
+            \Luracast\Restler\RestException::$codes[$i]='Success';
+        }
+        for($i=460;$i<=480;$i++){
+            \Luracast\Restler\RestException::$codes[$i]='Client error';
+        }
+        for($i=560;$i<=580;$i++){
+            \Luracast\Restler\RestException::$codes[$i]='Server error';
+        }
+
+    }
 
     /**
      * Set lang
@@ -63,22 +77,4 @@ class YiiRestler extends Restler {
         throw new \Luracast\Restler\RestException($status, $message);
     }
 
-    /**
-     * @param $status
-     * @return string
-     */
-    public  static function _getStatusCodeMessage($status)
-    {
-        $codes = Array(
-            200 => 'OK',
-            400 => 'Bad Request',
-            401 => 'Unauthorized',
-            402 => 'Payment Required',
-            403 => 'Forbidden',
-            404 => 'Not Found',
-            500 => 'Internal Server Error',
-            501 => 'Not Implemented',
-        );
-        return (isset($codes[$status])) ? $codes[$status] : 'NOT OKAY';
-    }
 }
