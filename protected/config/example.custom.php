@@ -3,6 +3,7 @@
 //defined('YII_DEBUG') or define('YII_DEBUG',true);
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 $domain = 'example.com'; //@ChangeIt
+$base_url = '';
 
 return array(
     'components' => array(
