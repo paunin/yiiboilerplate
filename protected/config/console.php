@@ -14,7 +14,7 @@ $ret = CMap::mergeArray(
             ),
             'request' => array(
                 'hostInfo' => 'http://'.$domain,
-                'baseUrl' => ''
+                'baseUrl' => $base_url
             ),
         )
     )
