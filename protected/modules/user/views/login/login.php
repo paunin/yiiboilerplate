@@ -50,14 +50,14 @@ $this->breadcrumbs = false;
         </br>
         </br>
         </br>
-        <?php Yii::t('c_app','OR USE ONE OF YOUR SOCIAL ACCOUNTS')?></br></br></br>
+        <?php echo Yii::t('c_app','OR USE ONE OF YOUR SOCIAL ACCOUNTS')?></br></br></br>
         <?php
         $this->widget('ext.eauth.EAuthWidget', array('action' => '/user/login/login'));
         ?>
         </br>
         </br>
         </br>
-        <?php Yii::t('c_app','OR USE SIGNUP FORM TO GET NEW ACCOUNT')?>
+        <?php echo Yii::t('c_app','OR USE SIGNUP FORM TO GET NEW ACCOUNT')?>
         </br>
         </br>
         </br>
