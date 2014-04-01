@@ -7,11 +7,7 @@ $ret = CMap::mergeArray(
         'params' => array(
 
         ),
-
         'components' => array(
-            'fixture' => array(
-                'class' => 'system.test.CDbFixtureManager',
-            ),
             'request' => array(
                 'hostInfo' => 'http://'.$domain,
                 'baseUrl' => $base_url
