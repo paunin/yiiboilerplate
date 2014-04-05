@@ -4,23 +4,10 @@
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
+SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
+SET escape_string_warning = off;
 
 SET search_path = public, pg_catalog;
 
@@ -89,8 +76,8 @@ CREATE TABLE application (
 CREATE SEQUENCE application_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -99,6 +86,13 @@ CREATE SEQUENCE application_id_seq
 --
 
 ALTER SEQUENCE application_id_seq OWNED BY application.id;
+
+
+--
+-- Name: application_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('application_id_seq', 3, true);
 
 
 --
@@ -122,8 +116,8 @@ CREATE TABLE content (
 CREATE SEQUENCE content_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -132,6 +126,13 @@ CREATE SEQUENCE content_id_seq
 --
 
 ALTER SEQUENCE content_id_seq OWNED BY content.id;
+
+
+--
+-- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('content_id_seq', 100, false);
 
 
 --
@@ -160,8 +161,8 @@ CREATE TABLE cron_mail (
 CREATE SEQUENCE cron_mail_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -170,6 +171,13 @@ CREATE SEQUENCE cron_mail_id_seq
 --
 
 ALTER SEQUENCE cron_mail_id_seq OWNED BY cron_mail.id;
+
+
+--
+-- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
 
 
 --
@@ -197,8 +205,8 @@ CREATE TABLE smtp (
 CREATE SEQUENCE smtp_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -207,6 +215,13 @@ CREATE SEQUENCE smtp_id_seq
 --
 
 ALTER SEQUENCE smtp_id_seq OWNED BY smtp.id;
+
+
+--
+-- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('smtp_id_seq', 1, false);
 
 
 --
@@ -231,8 +246,8 @@ CREATE TABLE token (
 CREATE SEQUENCE token_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -241,6 +256,13 @@ CREATE SEQUENCE token_id_seq
 --
 
 ALTER SEQUENCE token_id_seq OWNED BY token.id;
+
+
+--
+-- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('token_id_seq', 11, true);
 
 
 --
@@ -272,8 +294,8 @@ CREATE TABLE "user" (
 CREATE SEQUENCE user_id_seq
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -285,6 +307,13 @@ ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 
 
 --
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_id_seq', 10001, true);
+
+
+--
 -- Name: user_social; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -293,7 +322,10 @@ CREATE TABLE user_social (
     user_id integer NOT NULL,
     social_service character varying NOT NULL,
     user_social_id character varying NOT NULL,
-    additional_data text
+    additional_data text,
+    url character varying(256),
+    name character varying(64),
+    email character varying(256)
 );
 
 
@@ -311,8 +343,8 @@ COMMENT ON TABLE user_social IS 'users from social accounts linked to users';
 CREATE SEQUENCE user_social_id_seq
     START WITH 100
     INCREMENT BY 1
-    NO MINVALUE
     NO MAXVALUE
+    NO MINVALUE
     CACHE 1;
 
 
@@ -324,52 +356,59 @@ ALTER SEQUENCE user_social_id_seq OWNED BY user_social.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY application ALTER COLUMN id SET DEFAULT nextval('application_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY content ALTER COLUMN id SET DEFAULT nextval('content_id_seq'::regclass);
+SELECT pg_catalog.setval('user_social_id_seq', 3, true);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY cron_mail ALTER COLUMN id SET DEFAULT nextval('cron_mail_id_seq'::regclass);
+ALTER TABLE application ALTER COLUMN id SET DEFAULT nextval('application_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY smtp ALTER COLUMN id SET DEFAULT nextval('smtp_id_seq'::regclass);
+ALTER TABLE content ALTER COLUMN id SET DEFAULT nextval('content_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY token ALTER COLUMN id SET DEFAULT nextval('token_id_seq'::regclass);
+ALTER TABLE cron_mail ALTER COLUMN id SET DEFAULT nextval('cron_mail_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
+ALTER TABLE smtp ALTER COLUMN id SET DEFAULT nextval('smtp_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY user_social ALTER COLUMN id SET DEFAULT nextval('user_social_id_seq'::regclass);
+ALTER TABLE token ALTER COLUMN id SET DEFAULT nextval('token_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE user_social ALTER COLUMN id SET DEFAULT nextval('user_social_id_seq'::regclass);
 
 
 --
@@ -438,13 +477,6 @@ COPY application (id, slug, name, description, secret_key, publick_key, return_u
 
 
 --
--- Name: application_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('application_id_seq', 3, true);
-
-
---
 -- Data for Name: content; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -457,13 +489,6 @@ COPY content (id, title, slug, text, created_at, updated_at) FROM stdin;
 
 
 --
--- Name: content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('content_id_seq', 100, false);
-
-
---
 -- Data for Name: cron_mail; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -472,25 +497,11 @@ COPY cron_mail (id, subject, body, body_alt, to_mail, to_name, from_mail, from_n
 
 
 --
--- Name: cron_mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('cron_mail_id_seq', 1, false);
-
-
---
 -- Data for Name: smtp; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY smtp (id, host, username, password, port, encryption, timeout, "extensionHandlers", using_count, banned) FROM stdin;
 \.
-
-
---
--- Name: smtp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('smtp_id_seq', 1, false);
 
 
 --
@@ -510,13 +521,6 @@ COPY token (id, application_id, user_id, token, expire_at, created_at, updated_a
 10	3	2	110d0ab7add3af8a9be66d4cf51fae52	2014-02-26 16:26:21	2014-02-26 16:21:21	\N
 11	3	2	1f24d977ae24fe2922488e47b718b31e	2014-02-26 17:58:13	2014-02-26 17:53:13	\N
 \.
-
-
---
--- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('token_id_seq', 11, true);
 
 
 --
@@ -584,6 +588,7 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 6	user6	user6@user.com	\N	2013-10-02 05:35:20	2014-02-26 14:45:55	user	t	2014-02-26 14:45:55	87dc1e131a1369fdf8f1c824a6a62dff	6.jpg	\N	\N	\N
 22	user22	user22@user.com	\N	2013-09-15 13:19:20	2014-02-26 16:05:21	user	t	2014-02-26 16:05:21	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 63	user63	user63@user.com	\N	2013-08-03 19:38:20	2013-09-02 19:38:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
+249	user249	user249@user.com	\N	2013-01-21 22:32:20	2013-02-20 22:32:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 64	user64	user64@user.com	\N	2013-08-02 18:37:20	2013-09-01 18:37:20	user	t	2013-09-16 18:37:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 65	user65	user65@user.com	\N	2013-08-01 17:36:20	\N	user	t	2013-09-15 17:36:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 66	user66	user66@user.com	\N	2013-07-31 16:35:20	2013-08-30 16:35:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
@@ -767,7 +772,6 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 246	user246	user246@user.com	\N	2013-01-25 01:35:20	2013-02-24 01:35:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 247	user247	user247@user.com	\N	2013-01-24 00:34:20	2013-02-23 00:34:20	user	t	2013-03-10 00:34:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 248	user248	user248@user.com	\N	2013-01-22 23:33:20	2013-02-21 23:33:20	user	t	2013-03-08 23:33:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
-249	user249	user249@user.com	\N	2013-01-21 22:32:20	2013-02-20 22:32:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 250	user250	user250@user.com	\N	2013-01-20 21:31:20	\N	user	t	2013-03-06 21:31:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 251	user251	user251@user.com	\N	2013-01-19 20:30:20	2013-02-18 20:30:20	user	t	2013-03-05 20:30:20	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
 252	user252	user252@user.com	\N	2013-01-18 19:29:20	2013-02-17 19:29:20	user	t	\N	87dc1e131a1369fdf8f1c824a6a62dff	\N	\N	\N	\N
@@ -1578,28 +1582,14 @@ COPY "user" (id, username, email, key, created_at, updated_at, role, is_active, 
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_id_seq', 10001, true);
-
-
---
 -- Data for Name: user_social; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY user_social (id, user_id, social_service, user_social_id, additional_data) FROM stdin;
-1	101	twitter	71662685	\N
-2	101	google_oauth	117533842138222482389	\N
-3	10001	vkontakte	913132	\N
+COPY user_social (id, user_id, social_service, user_social_id, additional_data, url, name, email) FROM stdin;
+1	101	twitter	71662685	\N	\N	\N	\N
+2	101	google_oauth	117533842138222482389	\N	\N	\N	\N
+3	10001	vkontakte	913132	\N	\N	\N	\N
 \.
-
-
---
--- Name: user_social_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('user_social_id_seq', 3, true);
 
 
 --
