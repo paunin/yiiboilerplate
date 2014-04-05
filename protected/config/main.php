@@ -36,6 +36,7 @@ $main = array(
         'ext.lightopenid.*',
         'ext.eauth.*',
         'ext.eauth.services.*',
+        'ext.eauth.custom_services.*',
 
     ),
 
