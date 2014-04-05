@@ -79,7 +79,6 @@ class User extends BaseUser
     }
 
 
-
     /**
      * @param Application $app
      * @param bool $force_create
@@ -105,8 +104,8 @@ class User extends BaseUser
     }
 
 
-
-    public function toFullProfile(){
+    public function toFullProfile()
+    {
         $profile = array(
             'id' => $this->id,
             'username' => $this->username,
@@ -124,16 +123,18 @@ class User extends BaseUser
      * @param bool $emulate_resize
      * @return array
      */
-    public static function  getAvatarsPathsByImg($img,$emulate_resize = true){
+    public static function  getAvatarsPathsByImg($img, $emulate_resize = true)
+    {
         $result = array();
-        $img = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . Yii::app()->params['path_avatars']. DIRECTORY_SEPARATOR . $img;
-        foreach(Yii::app()->params['user_avatars_sizes'] as $name => $size){
-            $result[$name] = $emulate_resize?
-                Img::getSizedPath($img, $size['w'], $size['h'],true,true)
-                :Img::getSizedPath($img, $size['w'], $size['h'],true,true);
+        $img = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . Yii::app()->params['path_avatars'] . DIRECTORY_SEPARATOR . $img;
+        foreach (Yii::app()->params['user_avatars_sizes'] as $name => $size) {
+            $result[$name] = $emulate_resize ?
+                Img::getSizedPath($img, $size['w'], $size['h'], true, true)
+                : Img::getSizedPath($img, $size['w'], $size['h'], true, true);
         }
         return $result;
     }
+
     /**
      * @param bool $emulate_resize
      * @return array
@@ -141,9 +142,32 @@ class User extends BaseUser
     public function getAvatarsPaths($emulate_resize = true)
     {
         $result = array();
-        if($this->avatar_name){
-            $result = User::getAvatarsPathsByImg($this->avatar_name,$emulate_resize);
+        if ($this->avatar_name) {
+            $result = User::getAvatarsPathsByImg($this->avatar_name, $emulate_resize);
         }
         return $result;
+    }
+
+    /**
+     * @param $name
+     * @return string
+     */
+    public static function constructName($name)
+    {
+        Yii::import('ext.behaviors.SluggableBehavior.Doctrine_Inflector');
+        $ret = Doctrine_Inflector::urlize($name);
+        $ret = strtr($ret, array('-' => '_'));
+        $i = 0;
+
+        $ret2 = $ret;
+        while ($i <= 11) {
+            $user = self::model()->findByAttributes(array('username' => $ret2));
+            if (!$user)
+                break;
+            $i += 2;
+            $ret2 = $ret . $i;
+        }
+
+        return $ret2;
     }
 }
