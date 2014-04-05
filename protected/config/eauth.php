@@ -11,10 +11,11 @@ return array(
           ),*/
           'twitter' => array(
               // register your app here: https://dev.twitter.com/apps/new
-              'class' => 'application.components.eauth_custom.TwitterService',
+              'class' => 'CustomTwitterService',
               'key' => '6Ae8XbMXBb93KDmTG6kaQ',
               'secret' => 'hjq4QWIaZOCeuYFv3DjxWTDTr9dN0HId7iZETKkY',
           ),
+
 //        'google' => array(
 //            'class' => 'GoogleOpenIDService',
 //            'title' => 'OpenID',
@@ -40,7 +41,7 @@ return array(
         ),
         'yandex_oauth' => array(
             // register your app here: https://oauth.yandex.ru/client/my
-            'class' => 'YandexOAuthService',
+            'class' => 'application.components.eauth_custom.MyYandexService',
             'client_id' => '82343d009b4a48cab6a5832e17a7ffa3',
             'client_secret' => 'bc40e6991b4b4e368af6ce2c55d0e8a9',
             'title' => 'Yandex',
@@ -83,7 +84,7 @@ return array(
         'odnoklassniki' => array(
             // register your app here: http://dev.odnoklassniki.ru/wiki/pages/viewpage.action?pageId=13992188
             // ... or here: http://www.odnoklassniki.ru/dk?st.cmd=appsInfoMyDevList&st._aid=Apps_Info_MyDev
-            'class' => 'OdnoklassnikiOAuthService',
+            'class' => 'application.components.eauth_custom.MyOdnoklassnikiService',
             'client_id' => '194586624',
             'client_public' => 'CBAJCKJMABABABABA',
             'client_secret' => '894AF535396533C8D40374B0',

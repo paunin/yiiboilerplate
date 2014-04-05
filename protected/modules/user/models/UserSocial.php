@@ -21,11 +21,13 @@ class UserSocial extends BaseUserSocial
      *
      * @param $user_social_id
      * @param $service
+     * @param array $data
      * @param bool $force_create
-     * @return self
+     * @return CActiveRecord|UserSocial
      */
-    public static function getByService($user_social_id, $service, $force_create = true)
+    public static function getByService($user_social_id, $service, $data = array(), $force_create = true)
     {
+
         $user_social = self::model()->findByAttributes(array('user_social_id' => "$user_social_id", 'social_service' => "$service"));
         if(!$user_social && $force_create) {
             //need User for UserSocial to link them
@@ -33,7 +35,12 @@ class UserSocial extends BaseUserSocial
             if(!$user) {
                 $user = new User();
                 $user->is_active = true;
-                $user->username = "U_{$service}_{$user_social_id}";
+
+                $try_name = isset($data['name'])?
+                    $data['name']:
+                    (isset($data['email'])?$data['email']:"U_{$service}_{$user_social_id}");
+
+                $user->username = User::constructName($try_name);
                 $user->save();
             }
 
@@ -41,6 +48,12 @@ class UserSocial extends BaseUserSocial
             $user_social->user_id = $user->id;
             $user_social->social_service = $service;
             $user_social->user_social_id = $user_social_id;
+
+            if(isset($data['url'])) $user_social->url = $data['url'];
+            if(isset($data['name'])) $user_social->name = $data['name'];
+            if(isset($data['email'])) $user_social->email = $data['email'];
+            $user_social->additional_data = json_encode($data);
+
             $user_social->save();
         }
         return $user_social;

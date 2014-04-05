@@ -14,6 +14,9 @@
  * @property string $social_service
  * @property string $user_social_id
  * @property string $additional_data
+ * @property string $url
+ * @property string $name
+ * @property string $email
  *
  * @property User $user
  */
@@ -39,9 +42,11 @@ abstract class BaseUserSocial extends GxActiveRecord {
 		return array(
 			array('user_id, social_service, user_social_id', 'required'),
 			array('user_id', 'numerical', 'integerOnly'=>true),
+			array('url, email', 'length', 'max'=>256),
+			array('name', 'length', 'max'=>64),
 			array('additional_data', 'safe'),
-			array('additional_data', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, user_id, social_service, user_social_id, additional_data', 'safe', 'on'=>'search'),
+			array('additional_data, url, name, email', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, user_id, social_service, user_social_id, additional_data, url, name, email', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,6 +68,9 @@ abstract class BaseUserSocial extends GxActiveRecord {
 			'social_service' => Yii::t('app', 'Social Service'),
 			'user_social_id' => Yii::t('app', 'User Social'),
 			'additional_data' => Yii::t('app', 'Additional Data'),
+			'url' => Yii::t('app', 'Url'),
+			'name' => Yii::t('app', 'Name'),
+			'email' => Yii::t('app', 'Email'),
 			'user' => null,
 		);
 	}
@@ -75,6 +83,9 @@ abstract class BaseUserSocial extends GxActiveRecord {
 		$criteria->compare('social_service', $this->social_service, true);
 		$criteria->compare('user_social_id', $this->user_social_id, true);
 		$criteria->compare('additional_data', $this->additional_data, true);
+		$criteria->compare('url', $this->url, true);
+		$criteria->compare('name', $this->name, true);
+		$criteria->compare('email', $this->email, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
