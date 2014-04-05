@@ -2,9 +2,9 @@
 require_once(dirname(__FILE__).'/../../../../norun.php');
 if(!Yii::app()->user->checkAccess('filemanager'))
     die('<br><br><br><br><br><br><br><br><p style="text-align:center;">К сожалению у вас нет доступа к файловому хранилищу сайта.<br/>Для получения прав обратитесь по адресу <a href="mailto:'.Yii::app()->params['adminEmail'].'">'.Yii::app()->params['adminEmail'].'</a></p>');
-session_start();
+@session_start();
 
-session_start();
+
 
 //------------------------------------------------------------------------------
 // DON'T COPY THIS VARIABLES IN FOLDERS config.php FILES
