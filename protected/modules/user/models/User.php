@@ -100,6 +100,17 @@ class User extends BaseUser
             $token->save();
         }
 
+        if(Yii::app()->params['app_token_need_renew']){
+            $now_plus_renew = date("Y-m-d H:i:s", strtotime("+" . Yii::app()->params['app_token_renew_ttl']));
+
+
+            if($now_plus_renew > $token->expire_at){
+                $exp_date = date("Y-m-d H:i:s", strtotime("+" . Yii::app()->params['app_token_ttl']));
+                $token->expire_at = $exp_date;
+                $token->save();
+            }
+        }
+
         return $token;
     }
 
