@@ -1,3 +1,4 @@
+AddDefaultCharset utf-8
 RewriteEngine on
 #RewriteBase /
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
