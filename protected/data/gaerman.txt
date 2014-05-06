@@ -1,0 +1,22 @@
+http://habrahabr.ru/post/142210/
+http://www.ebrueggeman.com/blog/install-gearman-php-debian
+http://gearman.org/getting-started
+
+//Server
+<?php
+$worker= new GearmanWorker();
+$worker->addServer('127.0.0.1', 4730); #!!!
+$worker->addFunction("reverse", "my_reverse_function");
+while ($worker->work());
+
+function my_reverse_function($job)
+{
+  return strrev($job->workload());
+}
+?>
+//Client
+<?php
+$client= new GearmanClient();
+$client->addServer('127.0.0.1', 4730); #!!!
+print $client->do("reverse", "Hello World!");
+?>

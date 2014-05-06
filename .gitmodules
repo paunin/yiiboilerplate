@@ -1,0 +1,38 @@
+[submodule "protected/extensions/yii2-debug"]
+	path = protected/extensions/yii2-debug
+	url = https://github.com/zhuravljov/yii2-debug.git
+[submodule "protected/extensions/eoauth"]
+	path = protected/extensions/eoauth
+	url = https://github.com/jorgebg/yii-eoauth.git
+[submodule "yii"]
+	path = yii
+	url = https://github.com/yiisoft/yii.git
+[submodule "protected/extensions/eauth"]
+	path = protected/extensions/eauth
+	url = https://github.com/Nodge/yii-eauth
+[submodule "protected/extensions/behaviors/SolrBehavior"]
+	path = protected/extensions/behaviors/SolrBehavior
+	url = https://github.com/paunin/YiiSolrBehavior.git
+[submodule "protected/packages/solr"]
+	path = protected/packages/solr
+	url = https://github.com/phpnode/YiiSolr.git
+[submodule "web/bootstrap_helpers"]
+	path = web/bootstrap_helpers
+	url = https://github.com/vlamanna/BootstrapFormHelpers.git
+[submodule "web/tipsy"]
+	path = web/tipsy
+	url = https://github.com/jaz303/tipsy.git
+[submodule "web/flot"]
+        path = web/flot
+	url = https://github.com/flot/flot.git
+
+[submodule "stat/gearman_monitor"]
+	path = stat/gearman_monitor
+	url = https://github.com/yugene/Gearman-Monitor.git
+
+[submodule "protected/vendors/restler"]
+	path = protected/vendors/restler
+	url = https://github.com/Luracast/Restler.git
+[submodule "web/swagger"]
+	path = web/swagger
+	url = https://github.com/wordnik/swagger-ui
