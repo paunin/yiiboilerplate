@@ -9,7 +9,37 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET escape_string_warning = off;
 
+--
+-- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: -
+--
+
+CREATE PROCEDURAL LANGUAGE plpgsql;
+
+
 SET search_path = public, pg_catalog;
+
+--
+-- Name: next_guid(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION next_guid(OUT result bigint) RETURNS bigint
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    our_epoch bigint := 1314220021721;
+    seq_id bigint;
+    now_millis bigint;
+    shard_id int := 1;
+BEGIN
+    SELECT nextval('table_guid_sequence') % 1024 INTO seq_id;
+
+    SELECT FLOOR(EXTRACT(EPOCH FROM clock_timestamp()) * 1000) INTO now_millis;
+    result := (now_millis - our_epoch) << 23;
+    result := result | (shard_id << 10);
+    result := result | (seq_id);
+END;
+$$;
+
 
 SET default_tablespace = '';
 
