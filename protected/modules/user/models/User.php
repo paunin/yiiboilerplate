@@ -3,6 +3,9 @@
 Yii::import('application.modules.user.models._base.BaseUser');
 /**
  * @method array toArray
+ * @method string errorsAgg
+ * @method User findByGuid
+ *
  */
 class User extends BaseUser
 {
@@ -25,6 +28,12 @@ class User extends BaseUser
                 'fields' => array(
                     'id', 'username', 'email', 'created_at', 'role', 'last_login'
                 )
+            ),
+            'error_agg' => array(
+                'class' => 'ext.behaviors.ErrorsAggBehavior',
+            ),
+            'pg_search' => array(
+                'class' => 'ext.behaviors.PgSearchBehavior'
             )
 
         );
@@ -80,18 +89,20 @@ class User extends BaseUser
 
 
     /**
-     * @param Application $app
+     * @param Application|NULL $app
      * @param bool $force_create
      * @return Token
      */
-    public function getToken(Application $app, $force_create = false)
+    public function getToken(Application $app = null, $force_create = false)
     {
+        if(!$app)
+            $app = Application::model()->findByAttributes(array('id' => Yii::app()->params['app_own_id']));
         $now = date('Y-m-d H:i:s');
         $token = Token::model()->find(
             "user_id = :user_id AND application_id = :application_id AND expire_at > :now",
             array(':user_id' => $this->id, ':application_id' => $app->id, ':now' => $now)
         );
-        if (!$token && $force_create) {
+        if(!$token && $force_create) {
             $token = new Token();
             $token->user_id = $this->id;
             $token->application_id = $app->id;
@@ -100,11 +111,11 @@ class User extends BaseUser
             $token->save();
         }
 
-        if(Yii::app()->params['app_token_need_renew']){
+        if(Yii::app()->params['app_token_need_renew']) {
             $now_plus_renew = date("Y-m-d H:i:s", strtotime("+" . Yii::app()->params['app_token_renew_ttl']));
 
 
-            if($now_plus_renew > $token->expire_at){
+            if($now_plus_renew > $token->expire_at) {
                 $exp_date = date("Y-m-d H:i:s", strtotime("+" . Yii::app()->params['app_token_ttl']));
                 $token->expire_at = $exp_date;
                 $token->save();
