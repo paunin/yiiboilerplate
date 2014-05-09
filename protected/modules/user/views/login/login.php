@@ -63,7 +63,7 @@ $this->breadcrumbs = false;
         </br>
         </br>
 
-        <?php echo CHtml::link('Register', Yii::app()->createUrl('/user/register/register'), array('class' => 'btn btn-lg btn-primary btn-block')); ?>
+        <?php echo CHtml::link(Yii::t('c_app','Register'), Yii::app()->createUrl('/user/register/register'), array('class' => 'btn btn-lg btn-primary btn-block')); ?>
 
 
     </div>

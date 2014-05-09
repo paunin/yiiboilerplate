@@ -94,8 +94,8 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
                             array('label' => Yii::t('c_app','Change email'), 'url' => array('/user/profile/changemail')),
 //                            array('label' => Yii::t('с_app', 'Changed email verify'), 'url' => array('/user/profile/endchangemail')),
 //                            array(),
-                            array('label' => Yii::t('c_app','Changed username'), 'url' => array('/user/profile/changeusername')),
-                            array('label' => Yii::t('c_app','Changed password'), 'url' => array('/user/profile/changepassword')),
+                            array('label' => Yii::t('c_app','Change username'), 'url' => array('/user/profile/changeusername')),
+                            array('label' => Yii::t('c_app','Change password'), 'url' => array('/user/profile/changepassword')),
                         )
 
                     )

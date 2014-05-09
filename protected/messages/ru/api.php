@@ -17,9 +17,8 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
-  'An error occurred' => '',
-  'Check REST method, and parameters' => '',
+  'Can\'t get id' => '',
+  'Can\'t get token' => '',
   'Token required/expired/incorrect' => '',
-  'You are not authorized to perform this action' => '',
-  'Wellcome to API' => 'Добро пожаловать в API'
+  'Wellcome to API' => 'Добро пожаловать в API',
 );

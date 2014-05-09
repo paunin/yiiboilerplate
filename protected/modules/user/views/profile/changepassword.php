@@ -3,9 +3,9 @@
 /* @var $model ChangePasswordForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - ' . Yii::t('c_app','Changed password');
+$this->pageTitle=Yii::app()->name . ' - ' . Yii::t('c_app','Change password');
 $this->breadcrumbs=array(
-    Yii::t('c_app','Changed password'),
+    Yii::t('c_app','Change password'),
 );
 ?>
 <div class="form  bs3-form">

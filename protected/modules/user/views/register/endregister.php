@@ -3,9 +3,9 @@
 /* @var $model EndRegisterForm */
 /* @var $form CActiveForm */
 
-$this->pageTitle = Yii::app()->name . ' - '.Yii::t('c_app','Registration(Verify email)');
+$this->pageTitle = Yii::app()->name . ' - '.Yii::t('c_app','Registration (Verify email)');
 $this->breadcrumbs = array(
-    Yii::t('c_app','Registration(Verify email)'),
+    Yii::t('c_app','Registration (Verify email)'),
 );
 ?>
 

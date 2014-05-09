@@ -3,9 +3,9 @@
 /* @var $model ChangeUsernameForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - ' . Yii::t('c_app','Changed username');
+$this->pageTitle=Yii::app()->name . ' - ' . Yii::t('c_app','Change username');
 $this->breadcrumbs=array(
-    Yii::t('c_app','Changed username'),
+    Yii::t('c_app','Change username'),
 );
 ?>
 <div class="form  bs3-form">

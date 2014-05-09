@@ -124,9 +124,9 @@ class LoginController extends Controller
         /* @var $social_account UserSocial */
         $social_account = UserSocial::model()->findByPk($bind_id);
         if(empty($social_account))
-            throw new CHttpException(404,Yii::t('c_app','social_account not found'));
+            throw new CHttpException(404,Yii::t('c_app','social account not found'));
         if($social_account->user_id != Yii::app()->user->getId())
-            throw new CHttpException(403,Yii::t('c_app','social_account not for current user'));
+            throw new CHttpException(403,Yii::t('c_app','social account not for current user'));
         try{
             $social_account->unbind();
             Cut::setFlash(Yii::t('c_app','Account has been unbound'), 'success');

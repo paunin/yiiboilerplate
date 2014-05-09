@@ -27,7 +27,9 @@ class ChangeUsernameForm extends CFormModel
     {
         return array_merge(
             parent::attributeLabels(),
-            array()
+            array(
+                'username' => Yii::t('c_app','Username')
+            )
         );
     }
 

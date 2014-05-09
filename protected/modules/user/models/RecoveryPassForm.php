@@ -25,7 +25,10 @@ class RecoveryPassForm extends User
 	{
 		return array_merge(
             parent::attributeLabels(),
-            array()
+            array(
+                'email' => Yii::t('c_app','Email'),
+                'validacion' => Yii::t('c_app','Validation'),
+            )
         );
 	}
 

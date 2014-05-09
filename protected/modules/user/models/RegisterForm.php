@@ -35,6 +35,7 @@ class RegisterForm extends User
             parent::attributeLabels(),
             array(
                 'password2' => Yii::t('c_app', 'Password again'),
+                'validacion' => Yii::t('c_app', 'Validation'),
 
             )
         );

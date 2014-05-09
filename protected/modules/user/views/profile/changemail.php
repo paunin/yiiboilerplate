@@ -3,9 +3,9 @@
 /* @var $model ChangeMailForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - '. Yii::t('c_app','Changed email');
+$this->pageTitle=Yii::app()->name . ' - '. Yii::t('c_app','Change email');
 $this->breadcrumbs=array(
-    Yii::t('c_app','Changed email'),
+    Yii::t('c_app','Change email'),
 );
 ?>
 <div class="form  bs3-form">
