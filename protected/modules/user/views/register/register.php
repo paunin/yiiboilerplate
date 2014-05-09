@@ -5,7 +5,7 @@
 
 $this->pageTitle=Yii::app()->name . ' - '.Yii::t('c_app','Registration');
 $this->breadcrumbs=array(
-    'Registration',
+    Yii::t('c_app','Registration'),
 );
 ?>
  <div class="form bs3-form">

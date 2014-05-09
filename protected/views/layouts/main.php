@@ -120,7 +120,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
     <?php if (isset($this->breadcrumbs)): ?>
         <?php $this->widget('zii.widgets.CBreadcrumbs', array(
             'tagName'=>'ol',
-            'homeLink'=>'<li><a href="'.Yii::app()->homeUrl.'">Home</a></li>',
+            'homeLink'=>'<li><a href="'.Yii::app()->homeUrl.'">'.Yii::t('c_app','Home').'</a></li>',
             'htmlOptions'=>array('class'=>'breadcrumb'),
             'activeLinkTemplate'=>'<li><a href="{url}">{label}</a></li>',
             'inactiveLinkTemplate'=>'<li>{label}</li>',
