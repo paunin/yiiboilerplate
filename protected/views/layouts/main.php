@@ -29,7 +29,7 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/web/bootstrap_300/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/web/bootstrap_300/css/bootstrap-theme.min.css"/>
+<!--    <link rel="stylesheet" type="text/css" href="--><?php //echo Yii::app()->request->baseUrl; ?><!--/web/bootstrap_300/css/bootstrap-theme.min.css"/>-->
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -138,12 +138,13 @@ Asse::addJs('bootstrap.min.js', Yii::getPathOfAlias('webroot.web.bootstrap_300.j
 
 
     <?php
+    
     foreach (Yii::app()->user->getFlashes() as $key => $message) {
         if($key=='error') //bootstrap 3
             $key = 'danger';
         elseif($key=='notice')
             $key = 'warning';
-        echo '<div class="alert alert-' . ($key=='error'?'danger':$key) . '">' . $message . "</div>\n";
+        echo '<div data-dismiss="alert" aria-hidden="true" class="alert alert-' . ($key=='error'?'danger':$key) . '">' . $message . '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' ."</div>\n";
     }
     ?>
 
