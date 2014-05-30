@@ -100,18 +100,18 @@ class HttpRequest extends CHttpRequest
         }
     }
 
-    protected $_baseUrl;
-    /**
-     * @param bool $absolute
-     * @param string $schema
-     * @return string
-     */
-    public function getBaseUrl($absolute=false,$schema = '')
-    {
-        if($this->_baseUrl===null)
-            $this->_baseUrl=rtrim(dirname($this->getScriptUrl()),'\\/');
-        return $absolute ? $this->getHostInfo($schema) . $this->_baseUrl : $this->_baseUrl;
-    }
+//    protected $_baseUrl;
+//    /**
+//     * @param bool $absolute
+//     * @param string $schema
+//     * @return string
+//     */
+//    public function getBaseUrl($absolute=false,$schema = '')
+//    {
+//        if($this->_baseUrl===null)
+//            $this->_baseUrl=rtrim(dirname($this->getScriptUrl()),'\\/');
+//        return $absolute ? $this->getHostInfo($schema) . $this->_baseUrl : $this->_baseUrl;
+//    }
 
      /**
      * Return if the request is sent via secure channel (https).

@@ -26,6 +26,8 @@ class YiiRestler extends Restler {
         $this->setYiiLang();
         $this->extendRestExceptionWithCodes();
         Yii::app()->urlManager->setBaseUrl( preg_replace('%(/api$)%i','',Yii::app()->urlManager->getBaseUrl()));
+        Yii::app()->getRequest()->setBaseUrl( preg_replace('%(/api$)%i','',Yii::app()->getRequest()->getBaseUrl()));
+        Yii::setPathOfAlias('webroot',preg_replace('%(/api$)%i','',Yii::getPathOfAlias('webroot')));
         parent::__construct(!YII_DEBUG, $refreshCache);
 
     }
