@@ -1,6 +1,11 @@
 Yii Boilerplate App
 ==========
 
+## Live Demo
+
+* [Common](http://yiiboilerplate.paunin.com/)
+* [Restler + Swagger integration](http://yiiboilerplate.paunin.com/api/doc/)
+
 ## Requires
 
 * PHP >= 5.3
