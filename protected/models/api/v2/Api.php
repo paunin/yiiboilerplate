@@ -1,10 +1,12 @@
 <?php
 
+namespace v2;
+use Yii,YiiRestler;
 /**
  * Class Api
  */
 class Api {
-    private $api_version = '0.0.1';
+    public  $api_version = '2';
 
     /**
      * Get API versionGet

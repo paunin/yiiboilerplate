@@ -18,6 +18,7 @@ class YiiRestler extends Restler {
         Yii::app()->setComponent('siteUser', Yii::app()->user);
         Yii::app()->setComponent('user', Yii::app()->apiUser);
 
+        Defaults::$useUrlBasedVersioning = true;
         Defaults::$throttle = 20;
         Defaults::$cacheDirectory = Yii::getPathOfAlias('application').'/runtime/cache';
         Defaults::$supportedLanguages = array_keys(Yii::app()->params['translatedLanguages']);

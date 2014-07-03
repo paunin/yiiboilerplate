@@ -17,6 +17,8 @@ $main = array(
         'application.models.raw.*',
         'application.models.virtual.*',
         'application.models.forms.*',
+        'application.models.api.*',
+        //'application.models.api.v2.*',
         'application.components.*',
         'application.components.api.*',
         'application.helpers.*',
